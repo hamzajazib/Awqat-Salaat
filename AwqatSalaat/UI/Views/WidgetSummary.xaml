@@ -51,7 +51,7 @@
                     <MultiDataTrigger.EnterActions>
                         <BeginStoryboard Name="an">
                             <Storyboard RepeatBehavior="Forever">
-                                <ColorAnimation To="{StaticResource ThemeColors.AccentColor}" Duration="0:0:2" Storyboard.TargetProperty="(UserControl.Background).(SolidColorBrush.Color)" AutoReverse="True"/>
+                                <DoubleAnimation To="1" Duration="0:0:2" Storyboard.TargetProperty="Content.Children[0].Content.Children[0].Opacity" AutoReverse="True"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </MultiDataTrigger.EnterActions>
@@ -225,6 +225,7 @@
                 </Style>
             </ToggleButton.Style>
             <Grid>
+                <Border x:Name="alert" Background="{DynamicResource ThemeColors.AccentBrush}" Opacity="0"/>
                 <Grid x:Name="grid" MaxHeight="40" Margin="4" d:Visibility="Visible" Visibility="{Binding WidgetSettings.Settings.IsConfigured, Converter={StaticResource BoolVisConverter}}">
                     <Grid d:Visibility="Visible" Visibility="{Binding HasError, Converter={StaticResource BoolVisInvConverter}}">
                         <Grid HorizontalAlignment="Center" Visibility="{Binding IsRefreshing, Converter={StaticResource BoolVisInvConverter}}">

@@ -549,4 +549,37 @@ Choose the calendar and set the desired year and month then click on Refresh</va
   <data name="UI.Settings.ShowAyahDescription" xml:space="preserve">
     <value>Enable or disable the visibility of the ayah in prayers panel</value>
   </data>
+  <data name="UI.Settings.AccentColor" xml:space="preserve">
+    <value>Accent color</value>
+  </data>
+  <data name="UI.Settings.AccentColorDescription" xml:space="preserve">
+    <value>Select the accent color of the widget</value>
+  </data>
+  <data name="Config.ThemeAccent.Gold" xml:space="preserve">
+    <value>Gold</value>
+  </data>
+  <data name="Config.ThemeAccent.Blue" xml:space="preserve">
+    <value>Blue</value>
+  </data>
+  <data name="Config.ThemeAccent.Green" xml:space="preserve">
+    <value>Green</value>
+  </data>
+  <data name="Config.ThemeAccent.Red" xml:space="preserve">
+    <value>Red</value>
+  </data>
+  <data name="Config.ThemeAccent.Yellow" xml:space="preserve">
+    <value>Yellow</value>
+  </data>
+  <data name="Config.ThemeAccent.Teal" xml:space="preserve">
+    <value>Teal</value>
+  </data>
+  <data name="Config.ThemeAccent.Orange" xml:space="preserve">
+    <value>Orange</value>
+  </data>
+  <data name="Config.ThemeAccent.Purple" xml:space="preserve">
+    <value>Purple</value>
+  </data>
+  <data name="Config.ThemeAccent.Pink" xml:space="preserve">
+    <value>Pink</value>
+  </data>
 </root>

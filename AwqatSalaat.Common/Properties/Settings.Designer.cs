@@ -730,5 +730,17 @@ namespace AwqatSalaat.Properties {
                 this["ShowAyah"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Gold")]
+        public global::AwqatSalaat.Configurations.ThemeAccent ThemeAccent {
+            get {
+                return ((global::AwqatSalaat.Configurations.ThemeAccent)(this["ThemeAccent"]));
+            }
+            set {
+                this["ThemeAccent"] = value;
+            }
+        }
     }
 }

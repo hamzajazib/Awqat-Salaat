@@ -100,6 +100,31 @@ namespace AwqatSalaat.WinUI.Views
             }
         }
 
+        private void ReloadThemes()
+        {
+            ReloadElementTheme(this, this.RequestedTheme);
+
+            var flyoutPresenter = flyout.GetPresenter();
+
+            if (flyoutPresenter?.RequestedTheme is ElementTheme currentTheme)
+            {
+                ReloadElementTheme(flyoutPresenter, currentTheme);
+            }
+        }
+
+        private void ReloadElementTheme(FrameworkElement element, ElementTheme startTheme)
+        {
+            if (element.RequestedTheme == ElementTheme.Dark)
+                element.RequestedTheme = ElementTheme.Light;
+            else if (element.RequestedTheme == ElementTheme.Light)
+                element.RequestedTheme = ElementTheme.Default;
+            else if (element.RequestedTheme == ElementTheme.Default)
+                element.RequestedTheme = ElementTheme.Dark;
+
+            if (element.RequestedTheme != startTheme)
+                ReloadElementTheme(element, startTheme);
+        }
+
         private void WidgetSummary_Loaded(object sender, RoutedEventArgs e)
         {
             Log.Information("Widget summary loaded");
@@ -131,6 +156,13 @@ namespace AwqatSalaat.WinUI.Views
             else if (e.PropertyName is nameof(Properties.Settings.AutoAlignment) or nameof(Properties.Settings.DisplayLanguage))
             {
                 TaskBarManager.InvalidateWidgetElementsAlignment(ViewModel.WidgetSettings.Realtime.AutoAlignment);
+            }
+            else if (e.PropertyName ==  nameof(Properties.Settings.ThemeAccent))
+            {
+                var accent = ViewModel.WidgetSettings.Realtime.ThemeAccent;
+                ((App)Application.Current).OverrideAccentColor(accent.ToString());
+
+                ReloadThemes();
             }
         }
 

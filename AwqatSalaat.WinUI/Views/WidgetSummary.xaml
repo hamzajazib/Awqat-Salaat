@@ -46,8 +46,6 @@
                     <StaticResource x:Key="ToggleButtonBorderBrushCheckedPointerOver" ResourceKey="ControlStrokeColorDefaultBrush" />
                     <StaticResource x:Key="ToggleButtonBorderBrushCheckedPressed" ResourceKey="ControlStrokeColorDefaultBrush" />
                     <StaticResource x:Key="ToggleButtonBorderBrushCheckedDisabled" ResourceKey="ControlFillColorTransparentBrush" />
-
-                    <StaticResource x:Key="NotificationFillColor" ResourceKey="SystemAccentColorDark1"/>
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Default">
                     <StaticResource x:Key="ToggleButtonBackground" ResourceKey="ControlFillColorTransparentBrush" />
@@ -74,8 +72,6 @@
                     <StaticResource x:Key="ToggleButtonBorderBrushCheckedPointerOver" ResourceKey="ControlStrokeColorDefaultBrush" />
                     <StaticResource x:Key="ToggleButtonBorderBrushCheckedPressed" ResourceKey="ControlStrokeColorDefaultBrush" />
                     <StaticResource x:Key="ToggleButtonBorderBrushCheckedDisabled" ResourceKey="ControlFillColorTransparentBrush" />
-
-                    <StaticResource x:Key="NotificationFillColor" ResourceKey="SystemAccentColorLight2"/>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
 
@@ -104,7 +100,7 @@
                         <StateTrigger IsActive="{x:Bind ViewModel.DisplayedTime.State, Converter={StaticResource EnumEqualityConverter}, ConverterParameter=Near}"/>
                     </VisualState.StateTriggers>
                     <Storyboard RepeatBehavior="Forever">
-                        <ColorAnimation To="{ThemeResource NotificationFillColor}" Duration="0:0:2" Storyboard.TargetName="alert" Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" AutoReverse="True"/>
+                        <DoubleAnimation To="1" Duration="0:0:2" Storyboard.TargetName="alert" Storyboard.TargetProperty="Opacity" AutoReverse="True"/>
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="NotificationEntered">
@@ -112,6 +108,7 @@
                         <StateTrigger IsActive="{x:Bind ViewModel.DisplayedTime.State, Converter={StaticResource EnumEqualityConverter}, ConverterParameter=EnteredRecently}"/>
                     </VisualState.StateTriggers>
                     <Storyboard>
+                        <DoubleAnimation To="1" Duration="0:0:0" Storyboard.TargetName="alert" Storyboard.TargetProperty="Opacity"/>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="alert" Storyboard.TargetProperty="Background">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource FillCriticalBrush}" />
                         </ObjectAnimationUsingKeyFrames>
@@ -284,7 +281,7 @@
                         <MenuFlyoutItem Text="{mk:L11n Key=UI.ContextMenu.Quit}" Command="{x:Bind app:App.Quit, Mode=OneTime}"/>
                     </controls:CustomizedMenuFlyout>
                 </Grid.ContextFlyout>
-                <Border x:Name="alert" Background="Transparent" CornerRadius="{ThemeResource ControlCornerRadius}"/>
+                <Border x:Name="alert" Background="{ThemeResource AccentFillColorDefaultBrush}" CornerRadius="{ThemeResource ControlCornerRadius}" Opacity="0"/>
                 <Grid x:Name="grid" MaxHeight="40" Margin="3" Visibility="{x:Bind ViewModel.WidgetSettings.Settings.IsConfigured}">
                     <Grid Visibility="{x:Bind ViewModel.IsRefreshing, Converter={StaticResource BooleanToVisibilityInvertedConverter}}">
                         <Grid HorizontalAlignment="Center" Visibility="{x:Bind ViewModel.HasError, Converter={StaticResource BooleanToVisibilityInvertedConverter}}">

@@ -14,6 +14,7 @@
              xmlns:data="clr-namespace:AwqatSalaat.Data;assembly=AwqatSalaat.Common"
              xmlns:api1="clr-namespace:AwqatSalaat.Services.SalahHour;assembly=AwqatSalaat.Common"
              xmlns:api2="clr-namespace:AwqatSalaat.Services.AlAdhan;assembly=AwqatSalaat.Common"
+             xmlns:config="clr-namespace:AwqatSalaat.Configurations;assembly=AwqatSalaat.Common"
              mc:Ignorable="d"
              d:DesignHeight="1200" d:DesignWidth="800" d:Background="#192025">
     <d:UserControl.DataContext>
@@ -60,7 +61,13 @@
                     <x:Type Type="{x:Type data:AdhanSound}"/>
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
+            <ObjectDataProvider x:Key="ThemeAccentEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type Type="{x:Type config:ThemeAccent}"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
 
+            <converters:ThemeAccentConverter x:Key="ThemeAccentConverter"/>
             <converters:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
             <converters:LocalizedStringConverter x:Key="LocalizedStringConverter"/>
             <converters:BoolInverterConverter x:Key="BoolInverterConverter"/>
@@ -484,6 +491,45 @@
                     <StackPanel DataContext="{Binding Realtime}" Margin="8,16,8,8">
                         <controls:SettingsItem Header="{mk:L11n UI.Settings.ShowAyah}" Description="{mk:L11n UI.Settings.ShowAyahDescription}" Margin="0">
                             <CheckBox IsChecked="{Binding ShowAyah}"/>
+                        </controls:SettingsItem>
+                        <controls:SettingsItem Header="{mk:L11n UI.Settings.AccentColor}" Description="{mk:L11n UI.Settings.AccentColorDescription}">
+                            <ListBox ItemsSource="{Binding Source={StaticResource ThemeAccentEnum}}" SelectedItem="{Binding ThemeAccent}" Background="{x:Null}" BorderThickness="0">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Rectangle Width="20" Height="20" Fill="{Binding Converter={StaticResource ThemeAccentConverter}}" ToolTip="{Binding Converter={StaticResource LocalizedStringConverter}, ConverterParameter='Config.ThemeAccent.{0}'}"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Setter Property="Margin" Value="0,0,4,0"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ListBoxItem">
+                                                    <Border x:Name="border" BorderBrush="Transparent" BorderThickness="1">
+                                                        <Grid>
+                                                            <ContentPresenter/>
+                                                            <Ellipse x:Name="mark" Width="5" Height="5" Fill="{DynamicResource ThemeColors.TextOnAccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
+                                                        </Grid>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource ThemeColors.ControlHoverBorderBrush}"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsSelected" Value="True">
+                                                            <Setter TargetName="mark" Property="Visibility" Value="Visible"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                            </ListBox>
                         </controls:SettingsItem>
                     </StackPanel>
                 </ScrollViewer>

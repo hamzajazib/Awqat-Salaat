@@ -46,6 +46,8 @@ namespace AwqatSalaat.WinUI.Controls
             }
         }
 
+        public Control GetPresenter() => flyoutPresenter;
+
         protected override Control CreatePresenter()
         {
             var presenter = base.CreatePresenter();

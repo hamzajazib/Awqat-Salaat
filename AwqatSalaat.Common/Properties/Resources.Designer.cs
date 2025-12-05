@@ -61,6 +61,87 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Blue.
+        /// </summary>
+        public static string Config_ThemeAccent_Blue {
+            get {
+                return ResourceManager.GetString("Config.ThemeAccent.Blue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gold.
+        /// </summary>
+        public static string Config_ThemeAccent_Gold {
+            get {
+                return ResourceManager.GetString("Config.ThemeAccent.Gold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Green.
+        /// </summary>
+        public static string Config_ThemeAccent_Green {
+            get {
+                return ResourceManager.GetString("Config.ThemeAccent.Green", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orange.
+        /// </summary>
+        public static string Config_ThemeAccent_Orange {
+            get {
+                return ResourceManager.GetString("Config.ThemeAccent.Orange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pink.
+        /// </summary>
+        public static string Config_ThemeAccent_Pink {
+            get {
+                return ResourceManager.GetString("Config.ThemeAccent.Pink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purple.
+        /// </summary>
+        public static string Config_ThemeAccent_Purple {
+            get {
+                return ResourceManager.GetString("Config.ThemeAccent.Purple", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Red.
+        /// </summary>
+        public static string Config_ThemeAccent_Red {
+            get {
+                return ResourceManager.GetString("Config.ThemeAccent.Red", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teal.
+        /// </summary>
+        public static string Config_ThemeAccent_Teal {
+            get {
+                return ResourceManager.GetString("Config.ThemeAccent.Teal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yellow.
+        /// </summary>
+        public static string Config_ThemeAccent_Yellow {
+            get {
+                return ResourceManager.GetString("Config.ThemeAccent.Yellow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Alternative.
         /// </summary>
         public static string Config_WidgetPanelStyle_Alt {
@@ -593,6 +674,24 @@ namespace AwqatSalaat.Properties {
         public static string UI_Panel_StopSound {
             get {
                 return ResourceManager.GetString("UI.Panel.StopSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accent color.
+        /// </summary>
+        public static string UI_Settings_AccentColor {
+            get {
+                return ResourceManager.GetString("UI.Settings.AccentColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the accent color of the widget.
+        /// </summary>
+        public static string UI_Settings_AccentColorDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.AccentColorDescription", resourceCulture);
             }
         }
         

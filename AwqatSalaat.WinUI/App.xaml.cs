@@ -55,6 +55,29 @@ namespace AwqatSalaat.WinUI
             DispatcherShutdownMode = DispatcherShutdownMode.OnExplicitShutdown;
         }
 
+        public void OverrideAccentColor(string accent)
+        {
+            var dict = (ResourceDictionary)Resources[accent];
+
+            foreach (var item in dict)
+            {
+                Resources[item.Key] = item.Value;
+            }
+
+            foreach (var kv in dict.ThemeDictionaries)
+            {
+                if (Resources.ThemeDictionaries.ContainsKey(kv.Key))
+                {
+                    var thDict = (ResourceDictionary)Resources.ThemeDictionaries[kv.Key];
+
+                    foreach (var item in (ResourceDictionary)kv.Value)
+                    {
+                        thDict[item.Key] = item.Value;
+                    }
+                }
+            }
+        }
+
         private static void ExitIfOtherInstanceIsRunning()
         {
             const string mutexId = @"C790179C-7492-4CCE-B377-5F48F394B2CB";
@@ -106,6 +129,8 @@ namespace AwqatSalaat.WinUI
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
+            OverrideAccentColor(Properties.Settings.Default.ThemeAccent.ToString());
+
 #if DEBUG
             m_window = new MainWindow();
             m_window.Activate();

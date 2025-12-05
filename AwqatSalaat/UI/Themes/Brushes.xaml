@@ -1,0 +1,35 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <SolidColorBrush x:Key="ThemeColors.AccentBrush" Color="{DynamicResource ThemeColors.AccentColor}"/>
+    <SolidColorBrush x:Key="ThemeColors.AccentLightBrush" Color="{DynamicResource ThemeColors.AccentLightColor}"/>
+    <SolidColorBrush x:Key="ThemeColors.AccentDarkBrush" Color="{DynamicResource ThemeColors.AccentDarkColor}"/>
+
+    <SolidColorBrush x:Key="ThemeColors.FillCriticalBrush" Color="{DynamicResource ThemeColors.FillCriticalColor}"/>
+
+    <SolidColorBrush x:Key="ThemeColors.TextPrimaryBrush" Color="{DynamicResource ThemeColors.TextPrimaryColor}"/>
+    <SolidColorBrush x:Key="ThemeColors.TextSecondaryBrush" Color="{DynamicResource ThemeColors.TextSecondaryColor}"/>
+    <SolidColorBrush x:Key="ThemeColors.TextTertiaryBrush" Color="{DynamicResource ThemeColors.TextTertiaryColor}"/>
+
+    <SolidColorBrush x:Key="ThemeColors.TextOnAccentBrush" Color="{DynamicResource ThemeColors.TextOnAccentColor}"/>
+    <SolidColorBrush x:Key="ThemeColors.TextOnAccentDarkBrush" Color="{DynamicResource ThemeColors.TextOnAccentDarkColor}"/>
+
+    <SolidColorBrush x:Key="ThemeColors.TextHighlightBrush" Color="{DynamicResource ThemeColors.TextHighlightColor}"/>
+
+    <SolidColorBrush x:Key="ThemeColors.ControlBackgroundBrush" Color="{DynamicResource ThemeColors.ControlBackgroundColor}"/>
+    <SolidColorBrush x:Key="ThemeColors.ControlForegroundBrush" Color="{DynamicResource ThemeColors.ControlForegroundColor}"/>
+    <SolidColorBrush x:Key="ThemeColors.ControlBorderBrush" Color="{DynamicResource ThemeColors.ControlBorderColor}"/>
+
+    <SolidColorBrush x:Key="ThemeColors.ControlHoverBackgroundBrush" Color="{DynamicResource ThemeColors.ControlHoverBackgroundColor}"/>
+    <SolidColorBrush x:Key="ThemeColors.ControlHoverBorderBrush" Color="{DynamicResource ThemeColors.ControlHoverBorderColor}"/>
+
+    <SolidColorBrush x:Key="ThemeColors.ControlPressedBackgroundBrush" Color="{DynamicResource ThemeColors.ControlPressedBackgroundColor}"/>
+
+    <SolidColorBrush x:Key="ThemeColors.ControlDisabledBackgroundBrush" Color="{DynamicResource ThemeColors.ControlDisabledBackgroundColor}"/>
+    <SolidColorBrush x:Key="ThemeColors.ControlDisabledForegroundBrush" Color="{DynamicResource ThemeColors.ControlDisabledForegroundColor}"/>
+
+    <SolidColorBrush x:Key="ThemeColors.GlyphForegroundBrush" Color="{DynamicResource ThemeColors.GlyphForegroundColor}"/>
+
+    <SolidColorBrush x:Key="ThemeColors.DefaultAcrylicTintBrush" Color="{DynamicResource ThemeColors.DefaultAcrylicTintColor}"/>
+    <SolidColorBrush x:Key="ThemeColors.WindowAcrylicOverlayBrush" Color="{DynamicResource ThemeColors.WindowAcrylicOverlayColor}"/>
+</ResourceDictionary>

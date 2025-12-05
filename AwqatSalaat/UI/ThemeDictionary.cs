@@ -12,18 +12,40 @@ namespace AwqatSalaat.UI
             [ThemeKey.Light] = new Uri("/AwqatSalaat;component/UI/Themes/Light.xaml", UriKind.RelativeOrAbsolute)
         };
         private static readonly Uri StylesUri = new Uri("/AwqatSalaat;component/UI/Themes/Styles.xaml", UriKind.RelativeOrAbsolute);
+        private static readonly Uri BrushesUri = new Uri("/AwqatSalaat;component/UI/Themes/Brushes.xaml", UriKind.RelativeOrAbsolute);
+        private static readonly ResourceDictionary AccentsDictionary = new ResourceDictionary()
+        {
+            Source = new Uri("/AwqatSalaat;component/UI/Themes/Accents.xaml", UriKind.RelativeOrAbsolute)
+        };
 
         public ThemeDictionary() : base()
         {
-            Source = Sources[ThemeManager.Current];
-            MergedDictionaries.Add(new ResourceDictionary() { Source = StylesUri });
+            Source = BrushesUri;
+            MergedDictionaries.Add(new ResourceDictionary { Source = StylesUri });
             ThemeManager.Changed += ThemeSource_Changed;
+            ThemeSource_Changed();
+        }
+
+        public static ResourceDictionary GetAccentDictionary(ThemeKey theme, string accent)
+        {
+            return AccentsDictionary[$"{accent}{theme}"] as ResourceDictionary;
         }
 
         private void ThemeSource_Changed()
         {
-            Source = Sources[ThemeManager.Current];
-            MergedDictionaries.Add(new ResourceDictionary() { Source = StylesUri });
+            var dictionary = new ResourceDictionary() { Source = Sources[ThemeManager.Current] };
+
+            foreach (var key in dictionary.Keys)
+            {
+                this[key] = dictionary[key];
+            }
+
+            dictionary = GetAccentDictionary(ThemeManager.Current, ThemeManager.Accent);
+
+            foreach (var key in dictionary.Keys)
+            {
+                this[key] = dictionary[key];
+            }
         }
 
         ~ThemeDictionary()

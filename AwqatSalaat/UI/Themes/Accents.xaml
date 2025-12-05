@@ -1,0 +1,191 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <ResourceDictionary x:Key="GoldDark">
+        <Color x:Key="ThemeColors.AccentColor">#BAA272</Color>
+        <Color x:Key="ThemeColors.AccentLightColor">#D1BA8C</Color>
+        <Color x:Key="ThemeColors.AccentDarkColor">#BC9055</Color>
+
+        <Color x:Key="ThemeColors.TextHighlightColor">#F2CC80</Color>
+
+        <Color x:Key="ThemeColors.ControlHoverBorderColor">#D1BA8C</Color>
+    </ResourceDictionary>
+    
+    <ResourceDictionary x:Key="GoldLight">
+        <Color x:Key="ThemeColors.AccentColor">#BAA272</Color>
+        <Color x:Key="ThemeColors.AccentLightColor">#D1BA8C</Color>
+        <Color x:Key="ThemeColors.AccentDarkColor">#BC9055</Color>
+
+        <Color x:Key="ThemeColors.TextHighlightColor">#9C6D17</Color>
+
+        <Color x:Key="ThemeColors.ControlHoverBorderColor">#BAA272</Color>
+    </ResourceDictionary>
+    
+    <ResourceDictionary x:Key="BlueDark">
+        <Color x:Key="ThemeColors.AccentColor">#5ca3d6</Color>
+        <Color x:Key="ThemeColors.AccentLightColor">#99c6e6</Color>
+        <Color x:Key="ThemeColors.AccentDarkColor">#4798d1</Color>
+
+        <Color x:Key="ThemeColors.TextHighlightColor">#83c9fc</Color>
+
+        <Color x:Key="ThemeColors.ControlHoverBorderColor">#99c6e6</Color>
+    </ResourceDictionary>
+    
+    <ResourceDictionary x:Key="BlueLight">
+        <Color x:Key="ThemeColors.AccentColor">#338ccc</Color>
+        <Color x:Key="ThemeColors.AccentLightColor">#4898d1</Color>
+        <Color x:Key="ThemeColors.AccentDarkColor">#2970a3</Color>
+
+        <Color x:Key="ThemeColors.TextHighlightColor">#0f578a</Color>
+
+        <Color x:Key="ThemeColors.ControlHoverBorderColor">#338ccc</Color>
+    </ResourceDictionary>
+    
+    <ResourceDictionary x:Key="GreenDark">
+        <Color x:Key="ThemeColors.AccentColor">#53ac53</Color>
+        <Color x:Key="ThemeColors.AccentLightColor">#6bc76b</Color>
+        <Color x:Key="ThemeColors.AccentDarkColor">#4b9b4b</Color>
+
+        <Color x:Key="ThemeColors.TextHighlightColor">#93ec93</Color>
+
+        <Color x:Key="ThemeColors.ControlHoverBorderColor">#6bc76b</Color>
+    </ResourceDictionary>
+    
+    <ResourceDictionary x:Key="GreenLight">
+        <Color x:Key="ThemeColors.AccentColor">#53ac53</Color>
+        <Color x:Key="ThemeColors.AccentLightColor">#6bc76b</Color>
+        <Color x:Key="ThemeColors.AccentDarkColor">#428a42</Color>
+
+        <Color x:Key="ThemeColors.TextHighlightColor">#1b981b</Color>
+
+        <Color x:Key="ThemeColors.ControlHoverBorderColor">#53ac53</Color>
+    </ResourceDictionary>
+    
+    <ResourceDictionary x:Key="OrangeDark">
+        <Color x:Key="ThemeColors.AccentColor">#d2802d</Color>
+        <Color x:Key="ThemeColors.AccentLightColor">#e6994c</Color>
+        <Color x:Key="ThemeColors.AccentDarkColor">#a86624</Color>
+
+        <Color x:Key="ThemeColors.TextHighlightColor">#ffa64d</Color>
+
+        <Color x:Key="ThemeColors.ControlHoverBorderColor">#e6994c</Color>
+    </ResourceDictionary>
+    
+    <ResourceDictionary x:Key="OrangeLight">
+        <Color x:Key="ThemeColors.AccentColor">#d2802d</Color>
+        <Color x:Key="ThemeColors.AccentLightColor">#e6994c</Color>
+        <Color x:Key="ThemeColors.AccentDarkColor">#a86624</Color>
+
+        <Color x:Key="ThemeColors.TextHighlightColor">#b35900</Color>
+
+        <Color x:Key="ThemeColors.ControlHoverBorderColor">#d2802d</Color>
+    </ResourceDictionary>
+    
+    <ResourceDictionary x:Key="PinkDark">
+        <Color x:Key="ThemeColors.AccentColor">#c98293</Color>
+        <Color x:Key="ThemeColors.AccentLightColor">#df9fae</Color>
+        <Color x:Key="ThemeColors.AccentDarkColor">#bb818f</Color>
+
+        <Color x:Key="ThemeColors.FillCriticalColor">#ba8c5e</Color>
+
+        <Color x:Key="ThemeColors.TextHighlightColor">#f4a4b7</Color>
+
+        <Color x:Key="ThemeColors.ControlHoverBorderColor">#df9fae</Color>
+    </ResourceDictionary>
+    
+    <ResourceDictionary x:Key="PinkLight">
+        <Color x:Key="ThemeColors.AccentColor">#cb768b</Color>
+        <Color x:Key="ThemeColors.AccentLightColor">#df9fae</Color>
+        <Color x:Key="ThemeColors.AccentDarkColor">#a6596c</Color>
+
+        <Color x:Key="ThemeColors.FillCriticalColor">#ba8c5e</Color>
+
+        <Color x:Key="ThemeColors.TextHighlightColor">#bf406a</Color>
+
+        <Color x:Key="ThemeColors.ControlHoverBorderColor">#cb768b</Color>
+    </ResourceDictionary>
+    
+    <ResourceDictionary x:Key="PurpleDark">
+        <Color x:Key="ThemeColors.AccentColor">#a566cc</Color>
+        <Color x:Key="ThemeColors.AccentLightColor">#bc85e0</Color>
+        <Color x:Key="ThemeColors.AccentDarkColor">#8e40bf</Color>
+
+        <Color x:Key="ThemeColors.TextHighlightColor">#d899ff</Color>
+
+        <Color x:Key="ThemeColors.ControlHoverBorderColor">#c8a3e0</Color>
+    </ResourceDictionary>
+    
+    <ResourceDictionary x:Key="PurpleLight">
+        <Color x:Key="ThemeColors.AccentColor">#9a53c6</Color>
+        <Color x:Key="ThemeColors.AccentLightColor">#a566cc</Color>
+        <Color x:Key="ThemeColors.AccentDarkColor">#723399</Color>
+
+        <Color x:Key="ThemeColors.TextHighlightColor">#6c0ba8</Color>
+
+        <Color x:Key="ThemeColors.ControlHoverBorderColor">#9a53c6</Color>
+    </ResourceDictionary>
+    
+    <ResourceDictionary x:Key="RedDark">
+        <Color x:Key="ThemeColors.AccentColor">#cc6666</Color>
+        <Color x:Key="ThemeColors.AccentLightColor">#db7070</Color>
+        <Color x:Key="ThemeColors.AccentDarkColor">#c85b5b</Color>
+
+        <Color x:Key="ThemeColors.FillCriticalColor">#ba8c5e</Color>
+
+        <Color x:Key="ThemeColors.TextHighlightColor">#ff9999</Color>
+
+        <Color x:Key="ThemeColors.ControlHoverBorderColor">#db7070</Color>
+    </ResourceDictionary>
+    
+    <ResourceDictionary x:Key="RedLight">
+        <Color x:Key="ThemeColors.AccentColor">#c65353</Color>
+        <Color x:Key="ThemeColors.AccentLightColor">#db7070</Color>
+        <Color x:Key="ThemeColors.AccentDarkColor">#ac3939</Color>
+
+        <Color x:Key="ThemeColors.FillCriticalColor">#ba8c5e</Color>
+
+        <Color x:Key="ThemeColors.TextHighlightColor">#981b1b</Color>
+
+        <Color x:Key="ThemeColors.ControlHoverBorderColor">#c65353</Color>
+    </ResourceDictionary>
+    
+    <ResourceDictionary x:Key="TealDark">
+        <Color x:Key="ThemeColors.AccentColor">#39ac99</Color>
+        <Color x:Key="ThemeColors.AccentLightColor">#4dcbb6</Color>
+        <Color x:Key="ThemeColors.AccentDarkColor">#36a18f</Color>
+
+        <Color x:Key="ThemeColors.TextHighlightColor">#67e4cf</Color>
+
+        <Color x:Key="ThemeColors.ControlHoverBorderColor">#4dcbb6</Color>
+    </ResourceDictionary>
+    
+    <ResourceDictionary x:Key="TealLight">
+        <Color x:Key="ThemeColors.AccentColor">#339988</Color>
+        <Color x:Key="ThemeColors.AccentLightColor">#4dcbb6</Color>
+        <Color x:Key="ThemeColors.AccentDarkColor">#267366</Color>
+
+        <Color x:Key="ThemeColors.TextHighlightColor">#0f8a76</Color>
+
+        <Color x:Key="ThemeColors.ControlHoverBorderColor">#339988</Color>
+    </ResourceDictionary>
+    
+    <ResourceDictionary x:Key="YellowDark">
+        <Color x:Key="ThemeColors.AccentColor">#b3b04d</Color>
+        <Color x:Key="ThemeColors.AccentLightColor">#d1cd61</Color>
+        <Color x:Key="ThemeColors.AccentDarkColor">#a8a548</Color>
+
+        <Color x:Key="ThemeColors.TextHighlightColor">#f0ec75</Color>
+
+        <Color x:Key="ThemeColors.ControlHoverBorderColor">#d1cd61</Color>
+    </ResourceDictionary>
+    
+    <ResourceDictionary x:Key="YellowLight">
+        <Color x:Key="ThemeColors.AccentColor">#b3b04d</Color>
+        <Color x:Key="ThemeColors.AccentLightColor">#d1cd61</Color>
+        <Color x:Key="ThemeColors.AccentDarkColor">#a8a548</Color>
+
+        <Color x:Key="ThemeColors.TextHighlightColor">#999400</Color>
+
+        <Color x:Key="ThemeColors.ControlHoverBorderColor">#b3b04d</Color>
+    </ResourceDictionary>
+</ResourceDictionary>

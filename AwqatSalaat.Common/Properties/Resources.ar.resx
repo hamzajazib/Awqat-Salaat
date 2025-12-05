@@ -560,4 +560,37 @@
   <data name="UI.Settings.ShowAyahDescription" xml:space="preserve">
     <value>تمكين أو تعطيل ظهور الآية في لوحة الصلوات</value>
   </data>
+  <data name="UI.Settings.AccentColor" xml:space="preserve">
+    <value>اللون المميز</value>
+  </data>
+  <data name="UI.Settings.AccentColorDescription" xml:space="preserve">
+    <value>اختر اللون المميز للأداة</value>
+  </data>
+  <data name="Config.ThemeAccent.Gold" xml:space="preserve">
+    <value>ذهبي</value>
+  </data>
+  <data name="Config.ThemeAccent.Blue" xml:space="preserve">
+    <value>أزرق</value>
+  </data>
+  <data name="Config.ThemeAccent.Green" xml:space="preserve">
+    <value>أخضر</value>
+  </data>
+  <data name="Config.ThemeAccent.Red" xml:space="preserve">
+    <value>أحمر</value>
+  </data>
+  <data name="Config.ThemeAccent.Yellow" xml:space="preserve">
+    <value>أصفر</value>
+  </data>
+  <data name="Config.ThemeAccent.Teal" xml:space="preserve">
+    <value>فيروزي</value>
+  </data>
+  <data name="Config.ThemeAccent.Orange" xml:space="preserve">
+    <value>برتقالي</value>
+  </data>
+  <data name="Config.ThemeAccent.Purple" xml:space="preserve">
+    <value>بنفسجي</value>
+  </data>
+  <data name="Config.ThemeAccent.Pink" xml:space="preserve">
+    <value>وردي</value>
+  </data>
 </root>

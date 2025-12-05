@@ -1,4 +1,5 @@
 ﻿using AwqatSalaat.Helpers;
+using AwqatSalaat.Properties;
 using Serilog;
 using System;
 
@@ -13,6 +14,7 @@ namespace AwqatSalaat.UI
     public static class ThemeManager
     {
         private static ThemeKey _current = ThemeKey.Dark;
+        private static string _accent = "Gold";
 
         public static ThemeKey Current
         {
@@ -24,11 +26,31 @@ namespace AwqatSalaat.UI
             }
         }
 
+        public static string Accent
+        {
+            get => _accent;
+            private set
+            {
+                _accent = value;
+                Changed?.Invoke();
+            }
+        }
+
         public static event Action Changed;
 
         static ThemeManager()
         {
             SyncWithSystemTheme();
+            Accent = Settings.Default.ThemeAccent.ToString();
+            Settings.Realtime.PropertyChanged += Realtime_PropertyChanged;
+        }
+
+        private static void Realtime_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Settings.ThemeAccent))
+            {
+                Accent = Settings.Realtime.ThemeAccent.ToString();
+            }
         }
 
         public static void SetTheme(ThemeKey theme)

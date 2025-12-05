@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <ResourceDictionary x:Key="Blue">
+        <ResourceDictionary.ThemeDictionaries>
+            <ResourceDictionary x:Key="Default">
+                <Color x:Key="TextHighlightColor">#83c9fc</Color>
+                <Color x:Key="FillCriticalColor">#BA5D5D</Color>
+
+                <SolidColorBrush x:Key="TextHighlightBrush" Color="{StaticResource TextHighlightColor}"/>
+                <SolidColorBrush x:Key="FillCriticalBrush" Color="{StaticResource FillCriticalColor}"/>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="Light">
+                <Color x:Key="TextHighlightColor">#0f578a</Color>
+                <Color x:Key="FillCriticalColor">#BA5D5D</Color>
+
+                <SolidColorBrush x:Key="TextHighlightBrush" Color="{StaticResource TextHighlightColor}"/>
+                <SolidColorBrush x:Key="FillCriticalBrush" Color="{StaticResource FillCriticalColor}"/>
+            </ResourceDictionary>
+        </ResourceDictionary.ThemeDictionaries>
+
+        <Color x:Key="SystemAccentColor">#4898d1</Color>
+        <Color x:Key="SystemAccentColorLight1">#4798d1</Color>
+        <Color x:Key="SystemAccentColorLight2">#5ca3d6</Color>
+        <Color x:Key="SystemAccentColorLight3">#99c6e6</Color>
+        <Color x:Key="SystemAccentColorDark1">#338ccc</Color>
+        <Color x:Key="SystemAccentColorDark2">#2970a3</Color>
+        <Color x:Key="SystemAccentColorDark3">#1f547a</Color>
+    </ResourceDictionary>
+
+    <ResourceDictionary x:Key="Green">
+        <ResourceDictionary.ThemeDictionaries>
+            <ResourceDictionary x:Key="Default">
+                <Color x:Key="TextHighlightColor">#93ec93</Color>
+                <Color x:Key="FillCriticalColor">#BA5D5D</Color>
+
+                <SolidColorBrush x:Key="TextHighlightBrush" Color="{StaticResource TextHighlightColor}"/>
+                <SolidColorBrush x:Key="FillCriticalBrush" Color="{StaticResource FillCriticalColor}"/>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="Light">
+                <Color x:Key="TextHighlightColor">#1b981b</Color>
+                <Color x:Key="FillCriticalColor">#BA5D5D</Color>
+
+                <SolidColorBrush x:Key="TextHighlightBrush" Color="{StaticResource TextHighlightColor}"/>
+                <SolidColorBrush x:Key="FillCriticalBrush" Color="{StaticResource FillCriticalColor}"/>
+            </ResourceDictionary>
+        </ResourceDictionary.ThemeDictionaries>
+
+        <Color x:Key="SystemAccentColor">#53ac53</Color>
+        <Color x:Key="SystemAccentColorLight1">#4b9b4b</Color>
+        <Color x:Key="SystemAccentColorLight2">#53ac53</Color>
+        <Color x:Key="SystemAccentColorLight3">#90d590</Color>
+        <Color x:Key="SystemAccentColorDark1">#53ac53</Color>
+        <Color x:Key="SystemAccentColorDark2">#428a42</Color>
+        <Color x:Key="SystemAccentColorDark3">#295629</Color>
+    </ResourceDictionary>
+
+    <ResourceDictionary x:Key="Gold">
+        <ResourceDictionary.ThemeDictionaries>
+            <ResourceDictionary x:Key="Default">
+                <Color x:Key="TextHighlightColor">#F2CC80</Color>
+                <Color x:Key="FillCriticalColor">#BA5D5D</Color>
+
+                <SolidColorBrush x:Key="TextHighlightBrush" Color="{StaticResource TextHighlightColor}"/>
+                <SolidColorBrush x:Key="FillCriticalBrush" Color="{StaticResource FillCriticalColor}"/>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="Light">
+                <Color x:Key="TextHighlightColor">#9C6D17</Color>
+                <Color x:Key="FillCriticalColor">#BA5D5D</Color>
+
+                <SolidColorBrush x:Key="TextHighlightBrush" Color="{StaticResource TextHighlightColor}"/>
+                <SolidColorBrush x:Key="FillCriticalBrush" Color="{StaticResource FillCriticalColor}"/>
+            </ResourceDictionary>
+        </ResourceDictionary.ThemeDictionaries>
+
+        <Color x:Key="SystemAccentColor">#BAA272</Color>
+        <Color x:Key="SystemAccentColorLight1">#BC9055</Color>
+        <Color x:Key="SystemAccentColorLight2">#BAA272</Color>
+        <Color x:Key="SystemAccentColorLight3">#D1BA8C</Color>
+        <Color x:Key="SystemAccentColorDark1">#BAA272</Color>
+        <Color x:Key="SystemAccentColorDark2">#BC9055</Color>
+        <Color x:Key="SystemAccentColorDark3">#997D51</Color>
+    </ResourceDictionary>
+
+    <ResourceDictionary x:Key="Pink">
+        <ResourceDictionary.ThemeDictionaries>
+            <ResourceDictionary x:Key="Default">
+                <Color x:Key="TextHighlightColor">#f4a4b7</Color>
+                <Color x:Key="FillCriticalColor">#ba8c5e</Color>
+
+                <SolidColorBrush x:Key="TextHighlightBrush" Color="{StaticResource TextHighlightColor}"/>
+                <SolidColorBrush x:Key="FillCriticalBrush" Color="{StaticResource FillCriticalColor}"/>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="Light">
+                <Color x:Key="TextHighlightColor">#bf406a</Color>
+                <Color x:Key="FillCriticalColor">#ba8c5e</Color>
+
+                <SolidColorBrush x:Key="TextHighlightBrush" Color="{StaticResource TextHighlightColor}"/>
+                <SolidColorBrush x:Key="FillCriticalBrush" Color="{StaticResource FillCriticalColor}"/>
+            </ResourceDictionary>
+        </ResourceDictionary.ThemeDictionaries>
+
+        <Color x:Key="SystemAccentColor">#cb768b</Color>
+        <Color x:Key="SystemAccentColorLight1">#bb818f</Color>
+        <Color x:Key="SystemAccentColorLight2">#c98293</Color>
+        <Color x:Key="SystemAccentColorLight3">#df9fae</Color>
+        <Color x:Key="SystemAccentColorDark1">#c27085</Color>
+        <Color x:Key="SystemAccentColorDark2">#a6596c</Color>
+        <Color x:Key="SystemAccentColorDark3">#854757</Color>
+    </ResourceDictionary>
+
+    <ResourceDictionary x:Key="Red">
+        <ResourceDictionary.ThemeDictionaries>
+            <ResourceDictionary x:Key="Default">
+                <Color x:Key="TextHighlightColor">#ff9999</Color>
+                <Color x:Key="FillCriticalColor">#ba8c5e</Color>
+
+                <SolidColorBrush x:Key="TextHighlightBrush" Color="{StaticResource TextHighlightColor}"/>
+                <SolidColorBrush x:Key="FillCriticalBrush" Color="{StaticResource FillCriticalColor}"/>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="Light">
+                <Color x:Key="TextHighlightColor">#981b1b</Color>
+                <Color x:Key="FillCriticalColor">#ba8c5e</Color>
+
+                <SolidColorBrush x:Key="TextHighlightBrush" Color="{StaticResource TextHighlightColor}"/>
+                <SolidColorBrush x:Key="FillCriticalBrush" Color="{StaticResource FillCriticalColor}"/>
+            </ResourceDictionary>
+        </ResourceDictionary.ThemeDictionaries>
+
+        <Color x:Key="SystemAccentColor">#c95d5d</Color>
+        <Color x:Key="SystemAccentColorLight1">#c85b5b</Color>
+        <Color x:Key="SystemAccentColorLight2">#cc6666</Color>
+        <Color x:Key="SystemAccentColorLight3">#ec9393</Color>
+        <Color x:Key="SystemAccentColorDark1">#c65353</Color>
+        <Color x:Key="SystemAccentColorDark2">#ac3939</Color>
+        <Color x:Key="SystemAccentColorDark3">#8a2828</Color>
+    </ResourceDictionary>
+
+    <ResourceDictionary x:Key="Teal">
+        <ResourceDictionary.ThemeDictionaries>
+            <ResourceDictionary x:Key="Default">
+                <Color x:Key="TextHighlightColor">#67e4cf</Color>
+                <Color x:Key="FillCriticalColor">#BA5D5D</Color>
+
+                <SolidColorBrush x:Key="TextHighlightBrush" Color="{StaticResource TextHighlightColor}"/>
+                <SolidColorBrush x:Key="FillCriticalBrush" Color="{StaticResource FillCriticalColor}"/>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="Light">
+                <Color x:Key="TextHighlightColor">#0f8a76</Color>
+                <Color x:Key="FillCriticalColor">#BA5D5D</Color>
+
+                <SolidColorBrush x:Key="TextHighlightBrush" Color="{StaticResource TextHighlightColor}"/>
+                <SolidColorBrush x:Key="FillCriticalBrush" Color="{StaticResource FillCriticalColor}"/>
+            </ResourceDictionary>
+        </ResourceDictionary.ThemeDictionaries>
+
+        <Color x:Key="SystemAccentColor">#36a391</Color>
+        <Color x:Key="SystemAccentColorLight1">#36a18f</Color>
+        <Color x:Key="SystemAccentColorLight2">#39ac99</Color>
+        <Color x:Key="SystemAccentColorLight3">#61d1be</Color>
+        <Color x:Key="SystemAccentColorDark1">#339988</Color>
+        <Color x:Key="SystemAccentColorDark2">#267366</Color>
+        <Color x:Key="SystemAccentColorDark3">#174f46</Color>
+    </ResourceDictionary>
+
+    <ResourceDictionary x:Key="Yellow">
+        <ResourceDictionary.ThemeDictionaries>
+            <ResourceDictionary x:Key="Default">
+                <Color x:Key="TextHighlightColor">#f0ec75</Color>
+                <Color x:Key="FillCriticalColor">#BA5D5D</Color>
+
+                <SolidColorBrush x:Key="TextHighlightBrush" Color="{StaticResource TextHighlightColor}"/>
+                <SolidColorBrush x:Key="FillCriticalBrush" Color="{StaticResource FillCriticalColor}"/>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="Light">
+                <Color x:Key="TextHighlightColor">#999400</Color>
+                <Color x:Key="FillCriticalColor">#BA5D5D</Color>
+
+                <SolidColorBrush x:Key="TextHighlightBrush" Color="{StaticResource TextHighlightColor}"/>
+                <SolidColorBrush x:Key="FillCriticalBrush" Color="{StaticResource FillCriticalColor}"/>
+            </ResourceDictionary>
+        </ResourceDictionary.ThemeDictionaries>
+
+        <Color x:Key="SystemAccentColor">#adaa46</Color>
+        <Color x:Key="SystemAccentColorLight1">#a8a548</Color>
+        <Color x:Key="SystemAccentColorLight2">#b3b04d</Color>
+        <Color x:Key="SystemAccentColorLight3">#d1cd61</Color>
+        <Color x:Key="SystemAccentColorDark1">#a6a33f</Color>
+        <Color x:Key="SystemAccentColorDark2">#918a3b</Color>
+        <Color x:Key="SystemAccentColorDark3">#605520</Color>
+    </ResourceDictionary>
+
+    <ResourceDictionary x:Key="Orange">
+        <ResourceDictionary.ThemeDictionaries>
+            <ResourceDictionary x:Key="Default">
+                <Color x:Key="TextHighlightColor">#ffa64d</Color>
+                <Color x:Key="FillCriticalColor">#BA5D5D</Color>
+
+                <SolidColorBrush x:Key="TextHighlightBrush" Color="{StaticResource TextHighlightColor}"/>
+                <SolidColorBrush x:Key="FillCriticalBrush" Color="{StaticResource FillCriticalColor}"/>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="Light">
+                <Color x:Key="TextHighlightColor">#b35900</Color>
+                <Color x:Key="FillCriticalColor">#BA5D5D</Color>
+
+                <SolidColorBrush x:Key="TextHighlightBrush" Color="{StaticResource TextHighlightColor}"/>
+                <SolidColorBrush x:Key="FillCriticalBrush" Color="{StaticResource FillCriticalColor}"/>
+            </ResourceDictionary>
+        </ResourceDictionary.ThemeDictionaries>
+
+        <Color x:Key="SystemAccentColor">#d2802d</Color>
+        <Color x:Key="SystemAccentColorLight1">#a86624</Color>
+        <Color x:Key="SystemAccentColorLight2">#d2802d</Color>
+        <Color x:Key="SystemAccentColorLight3">#e6994c</Color>
+        <Color x:Key="SystemAccentColorDark1">#d2802d</Color>
+        <Color x:Key="SystemAccentColorDark2">#a86624</Color>
+        <Color x:Key="SystemAccentColorDark3">#6c4013</Color>
+    </ResourceDictionary>
+
+    <ResourceDictionary x:Key="Purple">
+        <ResourceDictionary.ThemeDictionaries>
+            <ResourceDictionary x:Key="Default">
+                <Color x:Key="TextHighlightColor">#cc87f7</Color>
+                <Color x:Key="FillCriticalColor">#BA5D5D</Color>
+
+                <SolidColorBrush x:Key="TextHighlightBrush" Color="{StaticResource TextHighlightColor}"/>
+                <SolidColorBrush x:Key="FillCriticalBrush" Color="{StaticResource FillCriticalColor}"/>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="Light">
+                <Color x:Key="TextHighlightColor">#6c0ba8</Color>
+                <Color x:Key="FillCriticalColor">#BA5D5D</Color>
+
+                <SolidColorBrush x:Key="TextHighlightBrush" Color="{StaticResource TextHighlightColor}"/>
+                <SolidColorBrush x:Key="FillCriticalBrush" Color="{StaticResource FillCriticalColor}"/>
+            </ResourceDictionary>
+        </ResourceDictionary.ThemeDictionaries>
+
+        <Color x:Key="SystemAccentColor">#9a53c6</Color>
+        <Color x:Key="SystemAccentColorLight1">#8e40bf</Color>
+        <Color x:Key="SystemAccentColorLight2">#a566cc</Color>
+        <Color x:Key="SystemAccentColorLight3">#c8a3e0</Color>
+        <Color x:Key="SystemAccentColorDark1">#9a53c6</Color>
+        <Color x:Key="SystemAccentColorDark2">#723399</Color>
+        <Color x:Key="SystemAccentColorDark3">#571f7a</Color>
+    </ResourceDictionary>
+</ResourceDictionary>
