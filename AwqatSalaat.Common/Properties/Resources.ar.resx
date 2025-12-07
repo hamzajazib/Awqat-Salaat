@@ -593,4 +593,10 @@
   <data name="Config.ThemeAccent.Pink" xml:space="preserve">
     <value>وردي</value>
   </data>
+  <data name="UI.Settings.NotificationIndicatorOpacity" xml:space="preserve">
+    <value>شفافية مؤشر الإشعار</value>
+  </data>
+  <data name="UI.Settings.NotificationIndicatorOpacityDescription" xml:space="preserve">
+    <value>تعديل شفافية مؤشر الإشعار في زر الأداة على شريط المهام</value>
+  </data>
 </root>

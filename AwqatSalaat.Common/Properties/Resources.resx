@@ -582,4 +582,10 @@ Choose the calendar and set the desired year and month then click on Refresh</va
   <data name="Config.ThemeAccent.Pink" xml:space="preserve">
     <value>Pink</value>
   </data>
+  <data name="UI.Settings.NotificationIndicatorOpacity" xml:space="preserve">
+    <value>Notification indicator opacity</value>
+  </data>
+  <data name="UI.Settings.NotificationIndicatorOpacityDescription" xml:space="preserve">
+    <value>Adjust the opacity of the notification indicator in widget's button on the taskbar</value>
+  </data>
 </root>

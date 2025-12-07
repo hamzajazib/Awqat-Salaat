@@ -281,7 +281,9 @@
                         <MenuFlyoutItem Text="{mk:L11n Key=UI.ContextMenu.Quit}" Command="{x:Bind app:App.Quit, Mode=OneTime}"/>
                     </controls:CustomizedMenuFlyout>
                 </Grid.ContextFlyout>
-                <Border x:Name="alert" Background="{ThemeResource AccentFillColorDefaultBrush}" CornerRadius="{ThemeResource ControlCornerRadius}" Opacity="0"/>
+                <Grid x:Name="notificationIndicator" Opacity="{x:Bind ViewModel.WidgetSettings.Realtime.NotificationIndicatorOpacity}">
+                    <Border x:Name="alert" Background="{ThemeResource AccentFillColorDefaultBrush}" CornerRadius="{ThemeResource ControlCornerRadius}" Opacity="0"/>
+                </Grid>
                 <Grid x:Name="grid" MaxHeight="40" Margin="3" Visibility="{x:Bind ViewModel.WidgetSettings.Settings.IsConfigured}">
                     <Grid Visibility="{x:Bind ViewModel.IsRefreshing, Converter={StaticResource BooleanToVisibilityInvertedConverter}}">
                         <Grid HorizontalAlignment="Center" Visibility="{x:Bind ViewModel.HasError, Converter={StaticResource BooleanToVisibilityInvertedConverter}}">

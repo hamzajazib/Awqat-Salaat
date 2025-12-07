@@ -531,6 +531,12 @@
                                 </ListBox.ItemContainerStyle>
                             </ListBox>
                         </controls:SettingsItem>
+                        <controls:SettingsItem Header="{mk:L11n UI.Settings.NotificationIndicatorOpacity}" Description="{mk:L11n UI.Settings.NotificationIndicatorOpacityDescription}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Slider Minimum="0" Maximum="1" SmallChange="0.1" LargeChange="0.2" Value="{Binding NotificationIndicatorOpacity}" Width="200" VerticalAlignment="Center" d:Value="0.5"/>
+                                <TextBlock Text="{Binding NotificationIndicatorOpacity, StringFormat=p0}" Margin="4,0,0,0" MinWidth="50" TextAlignment="Center"/>
+                            </StackPanel>
+                        </controls:SettingsItem>
                     </StackPanel>
                 </ScrollViewer>
             </controls:TabItemEx>

@@ -182,5 +182,8 @@
     <Setting Name="ThemeAccent" Type="AwqatSalaat.Configurations.ThemeAccent" Scope="User">
       <Value Profile="(Default)">Gold</Value>
     </Setting>
+    <Setting Name="NotificationIndicatorOpacity" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -40,6 +40,7 @@
             <converters:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
             <converters:EnumEqualityConverter x:Key="EnumEqualityConverter"/>
             <converters:EnumEqualityToVisibilityConverter x:Key="EnumEqualityToVisibilityConverter"/>
+            <converters:PercentageConverter x:Key="PercentageConverter"/>
 
             <!-- This doesn't work at the moment, binding in style setters isn't supported yet :( -->
             <Style TargetType="ToggleSwitch" BasedOn="{StaticResource DefaultToggleSwitchStyle}">
@@ -508,6 +509,12 @@
                                         </Style>
                                     </ListBox.ItemContainerStyle>
                                 </ListBox>
+                            </ctrl:SettingsItem>
+                            <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.NotificationIndicatorOpacity}" Description="{mk:L11n Key=UI.Settings.NotificationIndicatorOpacityDescription}">
+                                <Slider Minimum="0" Maximum="1" SmallChange="0.1" LargeChange="0.2" SnapsTo="StepValues" StepFrequency="0.1"
+                                        Value="{x:Bind ViewModel.Realtime.NotificationIndicatorOpacity}"
+                                        ThumbToolTipValueConverter="{StaticResource PercentageConverter}"
+                                        Width="200" HorizontalAlignment="Left"/>
                             </ctrl:SettingsItem>
                         </StackPanel>
                     </NavigationViewItem.Tag>

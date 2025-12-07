@@ -44,28 +44,10 @@
             <Style.Triggers>
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding DisplayedTime.State}" Value="Near"/>
-                        <Condition Binding="{Binding IsRefreshing}" Value="False"/>
-                        <Condition Binding="{Binding HasError}" Value="False"/>
-                    </MultiDataTrigger.Conditions>
-                    <MultiDataTrigger.EnterActions>
-                        <BeginStoryboard Name="an">
-                            <Storyboard RepeatBehavior="Forever">
-                                <DoubleAnimation To="1" Duration="0:0:2" Storyboard.TargetProperty="Content.Children[0].Content.Children[0].Opacity" AutoReverse="True"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </MultiDataTrigger.EnterActions>
-                    <MultiDataTrigger.ExitActions>
-                        <StopStoryboard BeginStoryboardName="an"/>
-                    </MultiDataTrigger.ExitActions>
-                </MultiDataTrigger>
-                <MultiDataTrigger>
-                    <MultiDataTrigger.Conditions>
                         <Condition Binding="{Binding DisplayedTime.State}" Value="EnteredRecently"/>
                         <Condition Binding="{Binding IsRefreshing}" Value="False"/>
                         <Condition Binding="{Binding HasError}" Value="False"/>
                     </MultiDataTrigger.Conditions>
-                    <Setter Property="Background" Value="{DynamicResource ThemeColors.FillCriticalBrush}"/>
                     <Setter Property="Foreground" Value="{DynamicResource ThemeColors.TextOnAccentBrush}"/>
                 </MultiDataTrigger>
             </Style.Triggers>
@@ -225,7 +207,44 @@
                 </Style>
             </ToggleButton.Style>
             <Grid>
-                <Border x:Name="alert" Background="{DynamicResource ThemeColors.AccentBrush}" Opacity="0"/>
+                <Grid x:Name="notificationIndicator" Opacity="{Binding WidgetSettings.Realtime.NotificationIndicatorOpacity}">
+                    <Border>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Background" Value="{DynamicResource ThemeColors.AccentBrush}"/>
+                                <Setter Property="Opacity" Value="0"/>
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding DisplayedTime.State}" Value="Near"/>
+                                            <Condition Binding="{Binding IsRefreshing}" Value="False"/>
+                                            <Condition Binding="{Binding HasError}" Value="False"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.EnterActions>
+                                            <BeginStoryboard Name="an">
+                                                <Storyboard RepeatBehavior="Forever">
+                                                    <DoubleAnimation To="1" Duration="0:0:2" Storyboard.TargetProperty="Opacity" AutoReverse="True"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </MultiDataTrigger.EnterActions>
+                                        <MultiDataTrigger.ExitActions>
+                                            <StopStoryboard BeginStoryboardName="an"/>
+                                        </MultiDataTrigger.ExitActions>
+                                    </MultiDataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding DisplayedTime.State}" Value="EnteredRecently"/>
+                                            <Condition Binding="{Binding IsRefreshing}" Value="False"/>
+                                            <Condition Binding="{Binding HasError}" Value="False"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="Background" Value="{DynamicResource ThemeColors.FillCriticalBrush}"/>
+                                        <Setter Property="Opacity" Value="1"/>
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+                </Grid>
                 <Grid x:Name="grid" MaxHeight="40" Margin="4" d:Visibility="Visible" Visibility="{Binding WidgetSettings.Settings.IsConfigured, Converter={StaticResource BoolVisConverter}}">
                     <Grid d:Visibility="Visible" Visibility="{Binding HasError, Converter={StaticResource BoolVisInvConverter}}">
                         <Grid HorizontalAlignment="Center" Visibility="{Binding IsRefreshing, Converter={StaticResource BoolVisInvConverter}}">

@@ -1146,6 +1146,24 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notification indicator opacity.
+        /// </summary>
+        public static string UI_Settings_NotificationIndicatorOpacity {
+            get {
+                return ResourceManager.GetString("UI.Settings.NotificationIndicatorOpacity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adjust the opacity of the notification indicator in widget&apos;s button on the taskbar.
+        /// </summary>
+        public static string UI_Settings_NotificationIndicatorOpacityDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.NotificationIndicatorOpacityDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notification sound.
         /// </summary>
         public static string UI_Settings_NotificationSound {
