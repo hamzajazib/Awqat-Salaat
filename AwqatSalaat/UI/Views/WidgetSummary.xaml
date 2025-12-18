@@ -17,7 +17,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ui:ThemeDictionary>
+                <ui:ThemeDictionary ApplyToButton="True" d:ApplyToButton="False">
                     <d:ResourceDictionary.MergedDictionaries>
                         <ResourceDictionary Source="../Themes/Dark.xaml"/>
                     </d:ResourceDictionary.MergedDictionaries>
@@ -345,6 +345,13 @@
             IsOpen="{Binding ElementName=toggle, Path=IsChecked, Mode=TwoWay}"
             PopupAnimation="Fade"
             Placement="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:WidgetSummary}, Path=PanelPlacement}">
+            <Popup.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ui:ThemeDictionary/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </Popup.Resources>
             <Grid Background="#01000000" MaxHeight="700" TextElement.FontSize="14" TextElement.Foreground="{DynamicResource ThemeColors.TextPrimaryBrush}">
                 <local:WidgetPanel MinWidth="200" Visibility="{Binding WidgetSettings.IsOpen, Converter={StaticResource BoolVisInvConverter}}"/>
                 <Grid DataContext="{Binding WidgetSettings}" Visibility="{Binding IsOpen, Converter={StaticResource BoolVisConverter}}" MinWidth="300" MaxWidth="800" MinHeight="300" Margin="0,8,0,0">

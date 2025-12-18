@@ -43,11 +43,6 @@ namespace AwqatSalaat.WinUI
         /// </summary>
         public App()
         {
-            if (SystemInfos.IsWindows10)
-            {
-                this.RequestedTheme = SystemInfos.IsLightThemeUsed() == true ? ApplicationTheme.Light : ApplicationTheme.Dark;
-            }
-
             this.InitializeComponent();
             UnhandledException += App_UnhandledException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;

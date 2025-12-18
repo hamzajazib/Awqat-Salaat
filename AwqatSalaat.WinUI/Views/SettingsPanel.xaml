@@ -293,7 +293,7 @@
                 <NavigationViewItem x:Name="serviceTab" Content="{mk:L11n Key=UI.Settings.Tabs.Service}">
                     <NavigationViewItem.Tag>
                         <StackPanel>
-                            <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.ServiceProvider}" Description="{mk:L11n Key=UI.Settings.ServiceProviderDescription}">
+                            <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.ServiceProvider}" Description="{mk:L11n Key=UI.Settings.ServiceProviderDescription}" Margin="0,8,0,0">
                                 <StackPanel>
                                     <ComboBox PlaceholderText="Pick a service"
                                               ItemsSource="{mk:Enums Type=dt:PrayerTimesService}"
@@ -475,17 +475,23 @@
                 <NavigationViewItem x:Name="appearanceTab" Content="{mk:L11n Key=UI.Settings.Tabs.Appearance}">
                     <NavigationViewItem.Tag>
                         <StackPanel>
+                            <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.Theme}" Description="{mk:L11n Key=UI.Settings.ThemeDescription}" Margin="0,8,0,0">
+                                <ComboBox ItemsSource="{mk:Enums Type=cfg:ThemeKey}" SelectedItem="{Binding Realtime.Theme, Mode=TwoWay}" Width="170">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <ctrl:LocalizedStringPresenter Value="{Binding}" KeyFormat="Config.ThemeKey.{0}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </ctrl:SettingsItem>
                             <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.PanelStyle}" Description="{mk:L11n Key=UI.Settings.PanelStyleDescription}">
-                                <ComboBox ItemsSource="{mk:Enums Type=cfg:WidgetPanelStyle}" SelectedItem="{Binding Realtime.TimesPanelStyle, Mode=TwoWay}" Width="300">
+                                <ComboBox ItemsSource="{mk:Enums Type=cfg:WidgetPanelStyle}" SelectedItem="{Binding Realtime.TimesPanelStyle, Mode=TwoWay}" Width="200">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <ctrl:LocalizedStringPresenter Value="{Binding}" KeyFormat="Config.WidgetPanelStyle.{0}"/>
                                         </DataTemplate>
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
-                            </ctrl:SettingsItem>
-                            <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.ShowAyah}" Description="{mk:L11n Key=UI.Settings.ShowAyahDescription}">
-                                <ToggleSwitch IsOn="{x:Bind ViewModel.Realtime.ShowAyah}" OnContent="{mk:L11n Key=UI.Controls.Toggle.On}" OffContent="{mk:L11n Key=UI.Controls.Toggle.Off}"/>
                             </ctrl:SettingsItem>
                             <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.AccentColor}" Description="{mk:L11n Key=UI.Settings.AccentColorDescription}">
                                 <ListBox ItemsSource="{mk:Enums Type=cfg:ThemeAccent}" SelectedItem="{x:Bind ViewModel.Realtime.ThemeAccent}" Background="{x:Null}">
@@ -515,6 +521,9 @@
                                         Value="{x:Bind ViewModel.Realtime.NotificationIndicatorOpacity}"
                                         ThumbToolTipValueConverter="{StaticResource PercentageConverter}"
                                         Width="200" HorizontalAlignment="Left"/>
+                            </ctrl:SettingsItem>
+                            <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.ShowAyah}" Description="{mk:L11n Key=UI.Settings.ShowAyahDescription}">
+                                <ToggleSwitch IsOn="{x:Bind ViewModel.Realtime.ShowAyah}" OnContent="{mk:L11n Key=UI.Controls.Toggle.On}" OffContent="{mk:L11n Key=UI.Controls.Toggle.Off}"/>
                             </ctrl:SettingsItem>
                         </StackPanel>
                     </NavigationViewItem.Tag>

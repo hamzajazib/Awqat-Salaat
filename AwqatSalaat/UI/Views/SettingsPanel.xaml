@@ -21,15 +21,18 @@
         <vm:WidgetSettingsViewModel/>
     </d:UserControl.DataContext>
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
+        <ui:ThemeDictionaryDesignTime>
+            <d:ResourceDictionary.MergedDictionaries>
                 <ui:ThemeDictionary>
-                    <d:ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary.MergedDictionaries>
                         <ResourceDictionary Source="../Themes/Dark.xaml"/>
-                    </d:ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary.MergedDictionaries>
                 </ui:ThemeDictionary>
                 <ResourceDictionary Source="../Assets/Vectors.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
+            </d:ResourceDictionary.MergedDictionaries>
+            <ui:ThemeDictionaryDesignTime.MergedDictionaries>
+                <ResourceDictionary Source="../Assets/Vectors.xaml"/>
+            </ui:ThemeDictionaryDesignTime.MergedDictionaries>
 
             <ObjectDataProvider x:Key="SalahHourMethodEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
                 <ObjectDataProvider.MethodParameters>
@@ -61,6 +64,11 @@
                     <x:Type Type="{x:Type data:AdhanSound}"/>
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
+            <ObjectDataProvider x:Key="ThemeKeyEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type Type="{x:Type config:ThemeKey}"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
             <ObjectDataProvider x:Key="ThemeAccentEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
                 <ObjectDataProvider.MethodParameters>
                     <x:Type Type="{x:Type config:ThemeAccent}"/>
@@ -73,10 +81,6 @@
             <converters:BoolInverterConverter x:Key="BoolInverterConverter"/>
             <converters:BoolToVisibilityInvertedConverter x:Key="BoolToVisibilityInvertedConverter"/>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-
-            <Style TargetType="controls:SettingsItem" BasedOn="{StaticResource DefaultSettingsItemStyle}">
-                <Setter Property="Margin" Value="0,16,0,0"/>
-            </Style>
 
             <DataTemplate x:Key="MethodParameterValueTemplate" DataType="methods:CalculationMethodParameter">
                 <StackPanel Orientation="Horizontal">
@@ -113,7 +117,7 @@
             <DataTemplate x:Key="CalculationMethodDisplayTemplate" DataType="methods:CalculationMethod">
                 <TextBlock Text="{Binding Name}"/>
             </DataTemplate>
-        </ResourceDictionary>
+        </ui:ThemeDictionaryDesignTime>
     </UserControl.Resources>
     <Grid>
         <TabControl x:Name="tabControl">
@@ -489,8 +493,14 @@
             <controls:TabItemEx Header="{mk:L11n UI.Settings.Tabs.Appearance}">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel DataContext="{Binding Realtime}" Margin="8,16,8,8">
-                        <controls:SettingsItem Header="{mk:L11n UI.Settings.ShowAyah}" Description="{mk:L11n UI.Settings.ShowAyahDescription}" Margin="0">
-                            <CheckBox IsChecked="{Binding ShowAyah}"/>
+                        <controls:SettingsItem Header="{mk:L11n UI.Settings.Theme}" Description="{mk:L11n UI.Settings.ThemeDescription}" Margin="0">
+                            <ComboBox ItemsSource="{Binding Source={StaticResource ThemeKeyEnum}}" SelectedItem="{Binding Theme}" Width="150" HorizontalAlignment="Left">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Converter={StaticResource LocalizedStringConverter}, ConverterParameter='Config.ThemeKey.{0}'}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
                         </controls:SettingsItem>
                         <controls:SettingsItem Header="{mk:L11n UI.Settings.AccentColor}" Description="{mk:L11n UI.Settings.AccentColorDescription}">
                             <ListBox ItemsSource="{Binding Source={StaticResource ThemeAccentEnum}}" SelectedItem="{Binding ThemeAccent}" Background="{x:Null}" BorderThickness="0">
@@ -536,6 +546,9 @@
                                 <Slider Minimum="0" Maximum="1" SmallChange="0.1" LargeChange="0.2" Value="{Binding NotificationIndicatorOpacity}" Width="200" VerticalAlignment="Center" d:Value="0.5"/>
                                 <TextBlock Text="{Binding NotificationIndicatorOpacity, StringFormat=p0}" Margin="4,0,0,0" MinWidth="50" TextAlignment="Center"/>
                             </StackPanel>
+                        </controls:SettingsItem>
+                        <controls:SettingsItem Header="{mk:L11n UI.Settings.ShowAyah}" Description="{mk:L11n UI.Settings.ShowAyahDescription}">
+                            <CheckBox IsChecked="{Binding ShowAyah}"/>
                         </controls:SettingsItem>
                     </StackPanel>
                 </ScrollViewer>

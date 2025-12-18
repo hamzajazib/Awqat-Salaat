@@ -1,6 +1,7 @@
 using AwqatSalaat.Helpers;
 using AwqatSalaat.ViewModels;
 using AwqatSalaat.WinUI.Controls;
+using AwqatSalaat.WinUI.Helpers;
 using AwqatSalaat.WinUI.Media;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -19,8 +20,6 @@ namespace AwqatSalaat.WinUI.Views
     {
         private const string NearNotificationTag = "NearNotification";
         private const string AdhanSoundTag = "Adhan";
-
-        private static readonly UISettings uiSettings = new UISettings();
 
 #if DEBUG
         public static WidgetSummary Current { get; private set; }
@@ -61,74 +60,39 @@ namespace AwqatSalaat.WinUI.Views
             ViewModel.NearNotificationStopped += ViewModel_NearNotificationStopped;
             ViewModel.AdhanRequested += ViewModel_AdhanRequested;
             LocaleManager.Default.CurrentChanged += LocaleManager_CurrentChanged;
-            uiSettings.ColorValuesChanged += UISettings_ColorValuesChanged;
+            ThemeHelper.ThemeChanged += ThemeHelper_ThemeChanged;
 
             UpdateDirection();
             UpdateNotificationSound();
         }
 
-        private void UISettings_ColorValuesChanged(UISettings sender, object args)
+        private void ThemeHelper_ThemeChanged()
         {
-            DispatcherQueue.TryEnqueue(UpdateThemes);
+            DispatcherQueue.TryEnqueue(UpdateTheme);
         }
 
-        private void UpdateThemes()
+        private void UpdateTheme()
         {
-            if (SystemInfos.IsAccentColorOnTaskBar() == true)
-            {
-                // When accent color is used, we have to figure out the theme based on the color
-                var accent = uiSettings.GetColorValue(UIColorType.Accent);
-                Log.Information($"Accent color on taskbar: R={accent.R}, G={accent.G}, B={accent.B}");
-                bool colorIsDark = (5 * accent.G + 2 * accent.R + accent.B) <= 8 * 200;
-                this.RequestedTheme = colorIsDark ? ElementTheme.Dark : ElementTheme.Light;
-            }
-            else
-            {
-                // We use "system theme" instead of "apps theme" because the taskbar uses the former
-                this.RequestedTheme = SystemInfos.IsLightThemeUsed() == true ? ElementTheme.Light : ElementTheme.Dark;
-            }
-
+            this.RequestedTheme = ThemeHelper.ButtonTheme;
             Log.Information($"Updated theme: {this.RequestedTheme}");
-
-            if (Parent is FrameworkElement parent)
-            {
-                // The flyouts are independent of the taskbar so they should respect "apps theme" (we get it from the parent)
-                var theme = parent.ActualTheme == this.ActualTheme ? ElementTheme.Default : parent.ActualTheme;
-                flyout.SetPresenterTheme(theme);
-                (btngrid.ContextFlyout as CustomizedMenuFlyout)?.SetPresenterTheme(theme);
-                Log.Information($"Updated flyouts theme: {theme}");
-            }
         }
 
         private void ReloadThemes()
         {
-            ReloadElementTheme(this, this.RequestedTheme);
+            ThemeHelper.ReloadElementTheme(this, this.RequestedTheme);
 
             var flyoutPresenter = flyout.GetPresenter();
 
             if (flyoutPresenter?.RequestedTheme is ElementTheme currentTheme)
             {
-                ReloadElementTheme(flyoutPresenter, currentTheme);
+                ThemeHelper.ReloadElementTheme(flyoutPresenter, currentTheme);
             }
-        }
-
-        private void ReloadElementTheme(FrameworkElement element, ElementTheme startTheme)
-        {
-            if (element.RequestedTheme == ElementTheme.Dark)
-                element.RequestedTheme = ElementTheme.Light;
-            else if (element.RequestedTheme == ElementTheme.Light)
-                element.RequestedTheme = ElementTheme.Default;
-            else if (element.RequestedTheme == ElementTheme.Default)
-                element.RequestedTheme = ElementTheme.Dark;
-
-            if (element.RequestedTheme != startTheme)
-                ReloadElementTheme(element, startTheme);
         }
 
         private void WidgetSummary_Loaded(object sender, RoutedEventArgs e)
         {
             Log.Information("Widget summary loaded");
-            UpdateThemes();
+            UpdateTheme();
             UpdateDisplayMode();
         }
 
@@ -141,7 +105,7 @@ namespace AwqatSalaat.WinUI.Views
             ViewModel.NearNotificationStopped -= ViewModel_NearNotificationStopped;
             ViewModel.AdhanRequested -= ViewModel_AdhanRequested;
             LocaleManager.Default.CurrentChanged -= LocaleManager_CurrentChanged;
-            uiSettings.ColorValuesChanged -= UISettings_ColorValuesChanged;
+            ThemeHelper.ThemeChanged -= ThemeHelper_ThemeChanged;
 
             currentAudioSession?.End();
         }
@@ -159,9 +123,6 @@ namespace AwqatSalaat.WinUI.Views
             }
             else if (e.PropertyName ==  nameof(Properties.Settings.ThemeAccent))
             {
-                var accent = ViewModel.WidgetSettings.Realtime.ThemeAccent;
-                ((App)Application.Current).OverrideAccentColor(accent.ToString());
-
                 ReloadThemes();
             }
         }

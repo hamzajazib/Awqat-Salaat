@@ -1,5 +1,6 @@
 using AwqatSalaat.Helpers;
 using AwqatSalaat.Interop;
+using AwqatSalaat.WinUI.Xaml;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
@@ -9,15 +10,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using WinRT.Interop;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace AwqatSalaat.WinUI.Views
 {
-    /// <summary>
-    /// An empty window that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class MoreInfoWindow : Window
+    public sealed partial class MoreInfoWindow : WindowEx
     {
         private static MoreInfoWindow current;
 
@@ -48,14 +43,7 @@ namespace AwqatSalaat.WinUI.Views
 
             UpdateDirection();
             SetImageSource();
-#if DEBUG
-            root.RequestedTheme = ElementTheme.Light;
 
-            if (WidgetSummary.Current is not null)
-            {
-                WidgetSummary.Current.ActualThemeChanged += (s, e) => root.RequestedTheme = s.RequestedTheme;
-            }
-#endif
             Closed += MoreInfoWindow_Closed;
             contentFrame.Navigated += ContentFrame_Navigated;
         }

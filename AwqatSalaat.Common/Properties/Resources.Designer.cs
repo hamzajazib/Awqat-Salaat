@@ -142,6 +142,33 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auto (System).
+        /// </summary>
+        public static string Config_ThemeKey_Auto {
+            get {
+                return ResourceManager.GetString("Config.ThemeKey.Auto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dark.
+        /// </summary>
+        public static string Config_ThemeKey_Dark {
+            get {
+                return ResourceManager.GetString("Config.ThemeKey.Dark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Light.
+        /// </summary>
+        public static string Config_ThemeKey_Light {
+            get {
+                return ResourceManager.GetString("Config.ThemeKey.Light", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Alternative.
         /// </summary>
         public static string Config_WidgetPanelStyle_Alt {
@@ -1367,6 +1394,24 @@ namespace AwqatSalaat.Properties {
         public static string UI_Settings_Tabs_Times {
             get {
                 return ResourceManager.GetString("UI.Settings.Tabs.Times", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Theme.
+        /// </summary>
+        public static string UI_Settings_Theme {
+            get {
+                return ResourceManager.GetString("UI.Settings.Theme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the general theme of the widget. (Not applied to taskbar button).
+        /// </summary>
+        public static string UI_Settings_ThemeDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.ThemeDescription", resourceCulture);
             }
         }
         

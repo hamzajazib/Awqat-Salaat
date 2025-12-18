@@ -588,4 +588,19 @@ Choose the calendar and set the desired year and month then click on Refresh</va
   <data name="UI.Settings.NotificationIndicatorOpacityDescription" xml:space="preserve">
     <value>Adjust the opacity of the notification indicator in widget's button on the taskbar</value>
   </data>
+  <data name="UI.Settings.Theme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="UI.Settings.ThemeDescription" xml:space="preserve">
+    <value>Select the general theme of the widget. (Not applied to taskbar button)</value>
+  </data>
+  <data name="Config.ThemeKey.Auto" xml:space="preserve">
+    <value>Auto (System)</value>
+  </data>
+  <data name="Config.ThemeKey.Dark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="Config.ThemeKey.Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
 </root>

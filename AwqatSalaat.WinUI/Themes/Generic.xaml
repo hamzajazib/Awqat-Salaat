@@ -176,9 +176,11 @@
                                     <VisualState.StateTriggers>
                                         <StateTrigger IsActive="{Binding IsEnabled, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanInvertedConverter}}"/>
                                     </VisualState.StateTriggers>
-                                    <VisualState.Setters>
-                                        <Setter Target="contentpresenter.Foreground" Value="{ThemeResource TextFillColorTertiaryBrush}"/>
-                                    </VisualState.Setters>
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="contentpresenter" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextFillColorTertiaryBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>

@@ -754,5 +754,17 @@ namespace AwqatSalaat.Properties {
                 this["NotificationIndicatorOpacity"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Auto")]
+        public global::AwqatSalaat.Configurations.ThemeKey Theme {
+            get {
+                return ((global::AwqatSalaat.Configurations.ThemeKey)(this["Theme"]));
+            }
+            set {
+                this["Theme"] = value;
+            }
+        }
     }
 }

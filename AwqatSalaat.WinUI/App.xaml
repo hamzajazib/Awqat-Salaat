@@ -42,6 +42,12 @@
             <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <converters:BooleanToVisibilityInvertedConverter x:Key="BooleanToVisibilityInvertedConverter"/>
             <converters:BooleanInvertedConverter x:Key="BooleanInvertedConverter"/>
+
+            <!-- Should be removed after upgrading WASDK version since the issue is fixed in v1.6 -->
+            <Style TargetType="NumberBox">
+                <Setter Property="Background" Value="{ThemeResource TextControlBackground}" />
+                <Setter Property="Foreground" Value="{ThemeResource TextControlForeground}" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

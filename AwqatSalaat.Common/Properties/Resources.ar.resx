@@ -599,4 +599,19 @@
   <data name="UI.Settings.NotificationIndicatorOpacityDescription" xml:space="preserve">
     <value>تعديل شفافية مؤشر الإشعار في زر الأداة على شريط المهام</value>
   </data>
+  <data name="UI.Settings.Theme" xml:space="preserve">
+    <value>المظهر</value>
+  </data>
+  <data name="UI.Settings.ThemeDescription" xml:space="preserve">
+    <value>اختر المظهر العام للأداة. (لا ينطبق على زر شريط المهام)</value>
+  </data>
+  <data name="Config.ThemeKey.Auto" xml:space="preserve">
+    <value>تلقائي (من النظام)</value>
+  </data>
+  <data name="Config.ThemeKey.Dark" xml:space="preserve">
+    <value>داكن</value>
+  </data>
+  <data name="Config.ThemeKey.Light" xml:space="preserve">
+    <value>فاتح</value>
+  </data>
 </root>

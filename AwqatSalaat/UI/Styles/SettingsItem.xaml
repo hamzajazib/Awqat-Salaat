@@ -24,5 +24,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style TargetType="{x:Type ctrl:SettingsItem}" BasedOn="{StaticResource DefaultSettingsItemStyle}"/>
+    <Style TargetType="{x:Type ctrl:SettingsItem}" BasedOn="{StaticResource DefaultSettingsItemStyle}">
+        <Setter Property="Margin" Value="0,16,0,0"/>
+    </Style>
 </ResourceDictionary>

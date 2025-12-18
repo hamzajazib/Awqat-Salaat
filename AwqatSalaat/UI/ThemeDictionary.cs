@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AwqatSalaat.Configurations;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 
@@ -18,12 +19,27 @@ namespace AwqatSalaat.UI
             Source = new Uri("/AwqatSalaat;component/UI/Themes/Accents.xaml", UriKind.RelativeOrAbsolute)
         };
 
+        private bool _applyToButton;
+
+        public bool ApplyToButton
+        {
+            get => _applyToButton;
+            set
+            {
+                if (_applyToButton != value)
+                {
+                    _applyToButton = value;
+                    ThemeSource_Changed(null, null);
+                }
+            }
+        }
+
         public ThemeDictionary() : base()
         {
             Source = BrushesUri;
             MergedDictionaries.Add(new ResourceDictionary { Source = StylesUri });
             ThemeManager.Changed += ThemeSource_Changed;
-            ThemeSource_Changed();
+            ThemeSource_Changed(null, null);
         }
 
         public static ResourceDictionary GetAccentDictionary(ThemeKey theme, string accent)
@@ -31,16 +47,17 @@ namespace AwqatSalaat.UI
             return AccentsDictionary[$"{accent}{theme}"] as ResourceDictionary;
         }
 
-        private void ThemeSource_Changed()
+        private void ThemeSource_Changed(object sender, ThemeChangedEventArgs args)
         {
-            var dictionary = new ResourceDictionary() { Source = Sources[ThemeManager.Current] };
+            var themeKey = ApplyToButton ? ThemeManager.ButtonTheme : ThemeManager.GeneralTheme;
+            var dictionary = new ResourceDictionary() { Source = Sources[themeKey] };
 
             foreach (var key in dictionary.Keys)
             {
                 this[key] = dictionary[key];
             }
 
-            dictionary = GetAccentDictionary(ThemeManager.Current, ThemeManager.Accent);
+            dictionary = GetAccentDictionary(themeKey, ThemeManager.Accent);
 
             foreach (var key in dictionary.Keys)
             {

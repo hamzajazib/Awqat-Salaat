@@ -87,27 +87,6 @@ namespace AwqatSalaat.WinUI.Views
             MoreInfoWindow.Open();
         }
 
-        private void LocationPanel_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            Log.Information("Location panel's size changed");
-            // if Height changed then the size has changed because of orientation change
-            if (e.PreviousSize.Height != e.NewSize.Height && e.PreviousSize.Height > 0)
-            {
-                return;
-            }
-
-            StackPanel stackPanel = (StackPanel)sender;
-
-            if (stackPanel.Orientation == Orientation.Horizontal && e.NewSize.Width > 200)
-            {
-                stackPanel.Orientation = Orientation.Vertical;
-            }
-            else
-            {
-                stackPanel.Orientation = Orientation.Horizontal;
-            }
-        }
-
         private void ErrorBounds_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             errorMessage.MaxHeight = e.NewSize.Height;

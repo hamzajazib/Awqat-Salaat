@@ -15,7 +15,7 @@ namespace AwqatSalaat.UI.Converters
             {
                 try
                 {
-                    var dictionary = ThemeDictionary.GetAccentDictionary(ThemeManager.Current, accent.ToString());
+                    var dictionary = ThemeDictionary.GetAccentDictionary(ThemeManager.GeneralTheme, accent.ToString());
                     var color = (Color)dictionary["ThemeColors.AccentColor"];
                     return new SolidColorBrush(color);
                 }

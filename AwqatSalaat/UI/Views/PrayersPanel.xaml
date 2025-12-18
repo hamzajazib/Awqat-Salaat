@@ -12,22 +12,25 @@
              d:Background="#444" d:TextElement.Foreground="White" d:TextElement.FontSize="14"
              d:DesignHeight="240" d:DesignWidth="200">
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
+        <ui:ThemeDictionaryDesignTime>
+            <d:ResourceDictionary.MergedDictionaries>
                 <ui:ThemeDictionary>
                     <!-- Just to make IntelliSense work :) -->
-                    <d:ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary.MergedDictionaries>
                         <ResourceDictionary Source="../Themes/Dark.xaml" />
                         <ResourceDictionary Source="../Themes/Styles.xaml" />
-                    </d:ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary.MergedDictionaries>
                 </ui:ThemeDictionary>
                 <ResourceDictionary Source="../Assets/Vectors.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
+            </d:ResourceDictionary.MergedDictionaries>
+            <ui:ThemeDictionaryDesignTime.MergedDictionaries>
+                <ResourceDictionary Source="../Assets/Vectors.xaml"/>
+            </ui:ThemeDictionaryDesignTime.MergedDictionaries>
 
             <BooleanToVisibilityConverter x:Key="BoolVisConverter"/>
             <converters:HijriDateConverter x:Key="HijriDateConverter"/>
             <converters:ShortTimeConverter x:Key="ShortTimeConverter"/>
-        </ResourceDictionary>
+        </ui:ThemeDictionaryDesignTime>
     </UserControl.Resources>
     <d:UserControl.DataContext>
         <vm:WidgetViewModel />

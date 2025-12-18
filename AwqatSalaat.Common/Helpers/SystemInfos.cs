@@ -66,6 +66,23 @@ namespace AwqatSalaat.Helpers
             return null;
         }
 
+        public static bool? IsAppsLightThemeUsed()
+        {
+            if (IsWindows10_19H1_OrLater)
+            {
+                using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize"))
+                {
+                    if (key != null)
+                    {
+                        int value = Convert.ToInt32(key.GetValue("AppsUseLightTheme", 0));
+                        return value != 0;
+                    }
+                }
+            }
+
+            return null;
+        }
+
         public static bool? IsAccentColorOnTaskBar()
         {
             if (IsWindows10_19H1_OrLater)

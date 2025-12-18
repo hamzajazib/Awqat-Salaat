@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Windowing;
+﻿using AwqatSalaat.WinUI.Helpers;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -10,11 +11,34 @@ namespace AwqatSalaat.WinUI.Controls
     {
         private bool isFirstTime = true;
         private Control flyoutPresenter;
-        private ElementTheme? requestedTheme;
+        private Popup popup;
 
         public CustomizedFlyout()
         {
             this.Opened += CustomizedFlyout_Opened;
+            this.Opening += CustomizedFlyout_Opening;
+            ThemeHelper.ThemeChanged += ThemeHelper_ThemeChanged;
+        }
+
+        private void ThemeHelper_ThemeChanged()
+        {
+            if (DispatcherQueue.HasThreadAccess)
+            {
+                UpdateTheme();
+            }
+            else
+            {
+                DispatcherQueue.TryEnqueue(UpdateTheme);
+            }
+        }
+        
+        private void UpdateTheme()
+        {
+            if (popup is not null)
+            {
+                popup.RequestedTheme = ThemeHelper.GeneralTheme;
+                flyoutPresenter.RequestedTheme = popup.ActualTheme;
+            }
         }
 
         public void DisableLightDismissTemporarily()
@@ -31,18 +55,6 @@ namespace AwqatSalaat.WinUI.Controls
                     }
                 },
                 this);
-            }
-        }
-
-        public void SetPresenterTheme(ElementTheme theme)
-        {
-            if (flyoutPresenter is not null)
-            {
-                flyoutPresenter.RequestedTheme = theme;
-            }
-            else
-            {
-                requestedTheme = theme;
             }
         }
 
@@ -66,25 +78,25 @@ namespace AwqatSalaat.WinUI.Controls
                 presenter.MaxWidth = maxPresenterWidth;
             }
 
-            if (requestedTheme.HasValue)
-            {
-                presenter.RequestedTheme = requestedTheme.Value;
-                requestedTheme = null;
-            }
-
             flyoutPresenter = presenter;
 
             return presenter;
         }
 
+        private void CustomizedFlyout_Opening(object sender, object e)
+        {
+            ThemeHelper_ThemeChanged();
+        }
+        
         private void CustomizedFlyout_Opened(object sender, object e)
         {
-            var popup = flyoutPresenter.Parent as Popup;
-
             if (isFirstTime)
             {
+                popup = flyoutPresenter.Parent as Popup;
                 popup.GotFocus += (_, _) => flyoutPresenter?.Focus(FocusState.Programmatic);
                 isFirstTime = false;
+
+                ThemeHelper_ThemeChanged();
             }
         }
     }
