@@ -620,4 +620,7 @@
   <data name="UI.Settings.ShowGregorianDateDescription" xml:space="preserve">
     <value>تمكين أو تعطيل إظهار التاريخ الميلادي في لوحة الصلوات</value>
   </data>
+  <data name="UI.Settings.RepeatNotificationSound" xml:space="preserve">
+    <value>تكرار</value>
+  </data>
 </root>

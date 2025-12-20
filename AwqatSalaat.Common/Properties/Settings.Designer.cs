@@ -778,5 +778,17 @@ namespace AwqatSalaat.Properties {
                 this["ShowGregorianDate"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool RepeatNotificationSound {
+            get {
+                return ((bool)(this["RepeatNotificationSound"]));
+            }
+            set {
+                this["RepeatNotificationSound"] = value;
+            }
+        }
     }
 }

@@ -1254,6 +1254,15 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Repeat.
+        /// </summary>
+        public static string UI_Settings_RepeatNotificationSound {
+            get {
+                return ResourceManager.GetString("UI.Settings.RepeatNotificationSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Searching....
         /// </summary>
         public static string UI_Settings_Searching {

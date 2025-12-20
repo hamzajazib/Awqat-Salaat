@@ -159,7 +159,8 @@ namespace AwqatSalaat.UI.Views
             Dispatcher.BeginInvoke(new Action(() =>
             {
                 var file = ViewModel.WidgetSettings.Settings.NotificationSoundFilePath;
-                var session = new AudioPlayerSession(file, tag: NearNotificationTag, loop: true);
+                bool repeat = ViewModel.WidgetSettings.Settings.RepeatNotificationSound;
+                var session = new AudioPlayerSession(file, tag: NearNotificationTag, loop: repeat);
                 PlaySound(session);
             }));
         }

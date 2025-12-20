@@ -130,10 +130,6 @@
                                 <ComboBoxItem Content="English" Tag="en" FlowDirection="LeftToRight"/>
                                 <ComboBoxItem Content="Türkçe" Tag="tr" FlowDirection="LeftToRight"/>
                             </ComboBox>
-                            <!--<StackPanel Orientation="Horizontal" DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext}" FlowDirection="LeftToRight" HorizontalAlignment="Left">
-                                <RadioButton Content="English" IsChecked="{Binding UseEnglish}" d:IsChecked="True" Margin="0,0,64,0"/>
-                                <RadioButton Content="العربية" IsChecked="{Binding UseArabic}" FlowDirection="RightToLeft"/>
-                            </StackPanel>-->
                         </controls:SettingsItem>
                         <controls:SettingsItem Header="{mk:L11n UI.Settings.ShowCountdown}" Description="{mk:L11n UI.Settings.ShowCountdownDescription}">
                             <CheckBox IsChecked="{Binding ShowCountdown}"/>
@@ -221,12 +217,26 @@
                         <controls:SettingsItem Header="{mk:L11n UI.Settings.NotificationSound}" Description="{mk:L11n UI.Settings.NotificationSoundDescription}">
                             <StackPanel>
                                 <CheckBox IsChecked="{Binding EnableNotificationSound}"/>
-                                <DockPanel Margin="8,8,0,0" IsEnabled="{Binding EnableNotificationSound}" d:IsEnabled="True">
+                                <Grid Margin="8,8,0,0" IsEnabled="{Binding EnableNotificationSound}" d:IsEnabled="True">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="8"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
                                     <TextBlock Text="{mk:L11n UI.Settings.File}" VerticalAlignment="Center"/>
-                                    <Button Content="{mk:L11n UI.Settings.Browse}" DockPanel.Dock="Right" Click="BrowseNotificationSound_Click" Margin="8,0,0,0"/>
-                                    <controls:SoundPreviewButton File="{Binding NotificationSoundFilePath}" DockPanel.Dock="Right"/>
-                                    <TextBox Text="{Binding NotificationSoundFile}" Margin="8,0" FlowDirection="LeftToRight"/>
-                                </DockPanel>
+                                    <TextBox Text="{Binding NotificationSoundFile}" Margin="8,0" FlowDirection="LeftToRight" Grid.Column="1"/>
+                                    <controls:SoundPreviewButton File="{Binding NotificationSoundFilePath}" Grid.Column="2"/>
+                                    <Button Content="{mk:L11n UI.Settings.Browse}" Click="BrowseNotificationSound_Click" Grid.Column="3" Margin="8,0,0,0"/>
+
+                                    <TextBlock Text="{mk:L11n UI.Settings.RepeatNotificationSound}" VerticalAlignment="Center" Grid.Row="2"/>
+                                    <CheckBox IsChecked="{Binding RepeatNotificationSound}" Margin="8,0" Grid.Column="1" Grid.Row="2"/>
+                                </Grid>
                             </StackPanel>
                         </controls:SettingsItem>
                         <controls:SettingsItem Header="{mk:L11n UI.Settings.EnableLogs}" Description="{mk:L11n UI.Settings.EnableLogsDescription}">

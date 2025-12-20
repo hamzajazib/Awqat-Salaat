@@ -226,11 +226,25 @@
                                 <StackPanel>
                                     <ToggleSwitch IsOn="{x:Bind ViewModel.Realtime.EnableNotificationSound}" OnContent="{mk:L11n Key=UI.Controls.Toggle.On}" OffContent="{mk:L11n Key=UI.Controls.Toggle.Off}"/>
                                     <ContentControl Margin="8,8,0,0" HorizontalContentAlignment="Stretch" IsEnabled="{x:Bind ViewModel.Realtime.EnableNotificationSound, Mode=OneWay}" IsTabStop="False">
-                                        <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition Height="8"/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
                                             <TextBlock Text="{mk:L11n Key=UI.Settings.File}" VerticalAlignment="Center"/>
                                             <TextBox Text="{x:Bind ViewModel.Realtime.NotificationSoundFile, UpdateSourceTrigger=PropertyChanged}" Margin="8,0" FlowDirection="LeftToRight" Grid.Column="1"/>
-                                            <ctrl:SoundPreviewButton File="{x:Bind ViewModel.Realtime.NotificationSoundFilePath, Mode=OneWay}" IdleToolTip="{mk:L11n Key=UI.Controls.SoundPreview.ToolTipIdle}" PlayingToolTip="{mk:L11n Key=UI.Controls.SoundPreview.ToolTipPlaying}" Grid.Column="2" Grid.Row="3"/>
+                                            <ctrl:SoundPreviewButton File="{x:Bind ViewModel.Realtime.NotificationSoundFilePath, Mode=OneWay}" IdleToolTip="{mk:L11n Key=UI.Controls.SoundPreview.ToolTipIdle}" PlayingToolTip="{mk:L11n Key=UI.Controls.SoundPreview.ToolTipPlaying}" Grid.Column="2"/>
                                             <Button Content="{mk:L11n Key=UI.Settings.Browse}" Click="BrowseNotificationSound_Click" VerticalAlignment="Center" Grid.Column="3" Margin="8,0,0,0"/>
+
+                                            <TextBlock Text="{mk:L11n Key=UI.Settings.RepeatNotificationSound}" VerticalAlignment="Center" Grid.Row="2"/>
+                                            <ToggleSwitch IsOn="{x:Bind ViewModel.Realtime.RepeatNotificationSound}" OnContent="{mk:L11n Key=UI.Controls.Toggle.On}" OffContent="{mk:L11n Key=UI.Controls.Toggle.Off}" Margin="8,0" Grid.Column="1" Grid.Row="2"/>
                                         </Grid>
                                     </ContentControl>
                                 </StackPanel>

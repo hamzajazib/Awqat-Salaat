@@ -609,4 +609,7 @@ Choose the calendar and set the desired year and month then click on Refresh</va
   <data name="UI.Settings.ShowGregorianDateDescription" xml:space="preserve">
     <value>Enable or disable the visibility of the Gregorian date in prayers panel</value>
   </data>
+  <data name="UI.Settings.RepeatNotificationSound" xml:space="preserve">
+    <value>Repeat</value>
+  </data>
 </root>

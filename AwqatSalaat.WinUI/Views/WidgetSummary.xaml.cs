@@ -148,11 +148,12 @@ namespace AwqatSalaat.WinUI.Views
         {
             DispatcherQueue.TryEnqueue(() =>
             {
+                bool repeat = ViewModel.WidgetSettings.Settings.RepeatNotificationSound;
                 var file = ViewModel.WidgetSettings.Settings.NotificationSoundFilePath;
                 var session = new AudioPlayerSession
                 {
                     File = file,
-                    Loop = true,
+                    Loop = repeat,
                     Tag = NearNotificationTag,
                 };
                 PlaySound(session);
