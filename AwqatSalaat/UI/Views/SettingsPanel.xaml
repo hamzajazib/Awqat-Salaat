@@ -550,6 +550,9 @@
                         <controls:SettingsItem Header="{mk:L11n UI.Settings.ShowAyah}" Description="{mk:L11n UI.Settings.ShowAyahDescription}">
                             <CheckBox IsChecked="{Binding ShowAyah}"/>
                         </controls:SettingsItem>
+                        <controls:SettingsItem Header="{mk:L11n UI.Settings.ShowGregorianDate}" Description="{mk:L11n UI.Settings.ShowGregorianDateDescription}">
+                            <CheckBox IsChecked="{Binding ShowGregorianDate}"/>
+                        </controls:SettingsItem>
                     </StackPanel>
                 </ScrollViewer>
             </controls:TabItemEx>

@@ -188,5 +188,8 @@
     <Setting Name="Theme" Type="AwqatSalaat.Configurations.ThemeKey" Scope="User">
       <Value Profile="(Default)">Auto</Value>
     </Setting>
+    <Setting Name="ShowGregorianDate" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

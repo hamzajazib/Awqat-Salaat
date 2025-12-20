@@ -42,13 +42,15 @@
                 </controls:StackPanelEx>
             </Grid>
         </Border>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Margin="0,0,0,16">
-            <TextBlock Text="{x:Bind converters:CustomDateTimeConverter.Format(ViewModel.DisplayedDate, 'ddd', ash:LocaleManager.Default.Current)}" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" Margin="0,4" HorizontalAlignment="Center"/>
-            <Rectangle Height="1" Width="8" Fill="{ThemeResource ControlElevationBorderBrush}" Margin="8,5,8,3"/>
-            <TextBlock Text="{x:Bind ash:HijriDateHelper.Format(ViewModel.DisplayedDate, 'dd MMMM yyyy', ash:LocaleManager.Default.Current)}" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" FlowDirection="RightToLeft" Margin="0,4" HorizontalAlignment="Center"/>
-            <StackPanel Orientation="Horizontal" Margin="0,4" HorizontalAlignment="Center" Visibility="Collapsed">
-                <TextBlock Text="{mk:L11n Key=UI.Panel.CorrespondTo}" Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
-                <TextBlock Text="{x:Bind ViewModel.DisplayedDate.ToString('dd/MM/yyyy', x:Null)}" Foreground="{ThemeResource TextFillColorTertiaryBrush}" Margin="4,0,0,0"/>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Margin="0,0,0,16">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="{x:Bind converters:CustomDateTimeConverter.Format(ViewModel.DisplayedDate, 'ddd', ash:LocaleManager.Default.Current)}" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" Margin="0,4" HorizontalAlignment="Center"/>
+                <Rectangle Height="1" Width="8" Fill="{ThemeResource ControlElevationBorderBrush}" Margin="8,5,8,3"/>
+                <TextBlock Text="{x:Bind ash:HijriDateHelper.Format(ViewModel.DisplayedDate, 'dd MMMM yyyy', ash:LocaleManager.Default.Current)}" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" FlowDirection="RightToLeft" Margin="0,4" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,4" HorizontalAlignment="Center" Visibility="{x:Bind ViewModel.WidgetSettings.Settings.ShowGregorianDate}">
+                <TextBlock Text="{mk:L11n Key=UI.Panel.CorrespondTo}" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
+                <TextBlock Text="{x:Bind ViewModel.DisplayedDate.ToString('dd/MM/yyyy', x:Null)}" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" Margin="4,0,0,0"/>
             </StackPanel>
         </StackPanel>
         <ItemsControl ItemsSource="{x:Bind ViewModel.Items}" Grid.Row="2">

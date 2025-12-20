@@ -614,4 +614,10 @@
   <data name="Config.ThemeKey.Light" xml:space="preserve">
     <value>فاتح</value>
   </data>
+  <data name="UI.Settings.ShowGregorianDate" xml:space="preserve">
+    <value>إظهار التاريخ الميلادي</value>
+  </data>
+  <data name="UI.Settings.ShowGregorianDateDescription" xml:space="preserve">
+    <value>تمكين أو تعطيل إظهار التاريخ الميلادي في لوحة الصلوات</value>
+  </data>
 </root>

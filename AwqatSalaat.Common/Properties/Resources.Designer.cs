@@ -1317,6 +1317,24 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show Gregorian date.
+        /// </summary>
+        public static string UI_Settings_ShowGregorianDate {
+            get {
+                return ResourceManager.GetString("UI.Settings.ShowGregorianDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable or disable the visibility of the Gregorian date in prayers panel.
+        /// </summary>
+        public static string UI_Settings_ShowGregorianDateDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.ShowGregorianDateDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show logs file.
         /// </summary>
         public static string UI_Settings_ShowLogsFile {
