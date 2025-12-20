@@ -307,6 +307,22 @@ namespace AwqatSalaat.ViewModels
             return Update();
         }
 
+        private bool SwitchToNextDay(Dictionary<DateTime, PrayerTimes> data)
+        {
+            var ishaConfig = WidgetSettings.Settings.GetPrayerConfig(nameof(PrayerTimes.Isha));
+            var ishaTime = data[DisplayedDate].Max(t => t.Value).AddMinutes(ishaConfig.Adjustment + ishaConfig.EffectiveElapsedTime());
+            // If Isha has already entered, then we look for the next day
+            if (DisplayedDate == TimeStamp.Date && TimeStamp.Now > ishaTime)
+            {
+                Log.Information("Switching to next day");
+                DisplayedDate = TimeStamp.NextDate;
+
+                return true;
+            }
+
+            return false;
+        }
+
         private async Task RefreshData()
         {
             if (isRefreshing)
@@ -324,14 +340,9 @@ namespace AwqatSalaat.ViewModels
 
                 var apiResponse = await serviceClient.GetDataAsync(request);
 
-                var ishaConfig = WidgetSettings.Settings.GetPrayerConfig(nameof(PrayerTimes.Isha));
-                var ishaTime = apiResponse.Times[DisplayedDate].Max(t => t.Value).AddMinutes(ishaConfig.Adjustment + ishaConfig.EffectiveElapsedTime());
-                // If Isha has already entered, then we look for the next day
-                if (DisplayedDate == TimeStamp.Date && TimeStamp.Now > ishaTime)
+                // We switch to next day when Isha has entered
+                if (SwitchToNextDay(apiResponse.Times))
                 {
-                    Log.Information("Switching to next day");
-                    DisplayedDate = TimeStamp.NextDate;
-
                     if (TimeStamp.Date.Month != TimeStamp.NextDate.Month)
                     {
                         Log.Information("Fetching data for next month");
@@ -357,6 +368,25 @@ namespace AwqatSalaat.ViewModels
                 if (!WidgetSettings.Settings.IsConfigured || latestData is null)
                 {
                     ErrorMessage = nex.Message;
+                }
+                else if (!(latestData is null))
+                {
+                    // If the widget failed to get data for the next day, then we try to use the cache.
+                    // If the next day is the start of a new month, then the cache won't help, so we show the error.
+                    try
+                    {
+                        SwitchToNextDay(latestData);
+
+                        if (!Update())
+                        {
+                            // Let's show the error message of the original exception
+                            throw new Exception();
+                        }
+                    }
+                    catch
+                    {
+                        ErrorMessage = nex.Message;
+                    }
                 }
             }
             catch (Exception ex)
