@@ -14,6 +14,7 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using WinRT.Interop;
@@ -88,12 +89,46 @@ namespace AwqatSalaat.WinUI.Views
                 if (!ViewModel.Settings.IsConfigured)
                 {
                     nav.SelectedItem = locationTab;
+
+                    TrySetGeolocation();
                 }
             }
 
 #if PACKAGED
             StartupSettings.VerifyStartupTask();
 #endif
+        }
+
+        private async Task TrySetGeolocation()
+        {
+            try
+            {
+                Log.Information("Trying auto-geolocation...");
+                var access = await Geolocator.RequestAccessAsync();
+
+                if (access == GeolocationAccessStatus.Allowed)
+                {
+                    ViewModel.Realtime.LocationDetection = Data.LocationDetectionMode.ByCoordinates;
+
+                    var geolocator = new Geolocator();
+                    geolocator.AllowFallbackToConsentlessPositions();
+
+                    var geoposition = await geolocator.GetGeopositionAsync();
+
+                    ViewModel.Realtime.Latitude = (decimal)geoposition.Coordinate.Point.Position.Latitude;
+                    ViewModel.Realtime.Longitude = (decimal)geoposition.Coordinate.Point.Position.Longitude;
+
+                    ViewModel.Locator.Check.Execute(null);
+                }
+                else
+                {
+                    Log.Information("Auto-geolocation: Access denied");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Warning(ex, $"Auto-geolocation failed: {ex.Message}");
+            }
         }
 
         // Workaround for a bug https://github.com/microsoft/microsoft-ui-xaml/issues/4035

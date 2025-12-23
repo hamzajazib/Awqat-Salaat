@@ -4,6 +4,7 @@ using AwqatSalaat.ViewModels;
 using Microsoft.Win32;
 using Serilog;
 using System;
+using System.Device.Location;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace AwqatSalaat.UI.Views
 
         private OpenFileDialog openFileDialog;
         private CancellationTokenSource checkingUpdatesCancellationTokenSource;
+        private bool loadedFirstTime;
 
         private WidgetSettingsViewModel ViewModel => DataContext as WidgetSettingsViewModel;
 
@@ -48,6 +50,64 @@ namespace AwqatSalaat.UI.Views
             IsVisibleChanged += SettingsPanel_IsVisibleChanged;
             version.Text = "v" + (Version ?? "{ERROR}");
             architecture.Text = Architecture;
+            Loaded += SettingsPanel_Loaded;
+        }
+
+        private void SettingsPanel_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!loadedFirstTime)
+            {
+                loadedFirstTime = true;
+                
+                if (!ViewModel.Settings.IsConfigured)
+                {
+                    TrySetGeolocation();
+                }
+            }
+        }
+
+        private void TrySetGeolocation()
+        {
+            try
+            {
+                Log.Information("Trying auto-geolocation...");
+                var watcher = new GeoCoordinateWatcher();
+                bool started = watcher.TryStart(false, TimeSpan.FromMilliseconds(2000));
+
+                if (started && watcher.Permission == GeoPositionPermission.Granted)
+                {
+                    watcher.PositionChanged += Watcher_PositionChanged;
+                }
+                else
+                {
+                    Log.Information("Auto-geolocation: " + (started ? "Access denied" : "Watcher not started"));
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Warning(ex, $"Auto-geolocation failed: {ex.Message}");
+            }
+        }
+
+        private void Watcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
+        {
+            try
+            {
+                var watcher = (GeoCoordinateWatcher)sender;
+                watcher.PositionChanged -= Watcher_PositionChanged;
+                watcher.Stop();
+                watcher.Dispose();
+
+                ViewModel.Realtime.LocationDetection = Data.LocationDetectionMode.ByCoordinates;
+                ViewModel.Realtime.Latitude = (decimal)e.Position.Location.Latitude;
+                ViewModel.Realtime.Longitude = (decimal)e.Position.Location.Longitude;
+
+                ViewModel.Locator.Check.Execute(null);
+            }
+            catch (Exception ex)
+            {
+                Log.Warning(ex, $"Auto-geolocation failed in PositionChanged: {ex.Message}");
+            }
         }
 
         private void SettingsPanel_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)

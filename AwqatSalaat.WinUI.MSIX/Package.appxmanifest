@@ -53,5 +53,6 @@
     <rescap:Capability Name="runFullTrust" />
     <Capability Name="internetClient"/>
     <uap3:Capability Name="backgroundMediaPlayback"/>
+    <DeviceCapability Name="location"/>
   </Capabilities>
 </Package>
