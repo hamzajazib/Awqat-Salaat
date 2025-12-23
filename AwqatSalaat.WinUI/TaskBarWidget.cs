@@ -236,7 +236,7 @@ namespace AwqatSalaat.WinUI
             UpdatePositionImpl(changeReason, isCentered, isWidgetsEnabled);
         }
 
-        private void UpdatePositionImpl(TaskbarChangeReason changeReason, bool isCentered, bool isWidgetsEnabled)
+        private async Task UpdatePositionImpl(TaskbarChangeReason changeReason, bool isCentered, bool isWidgetsEnabled)
         {
             Log.Information($"Updating widget position. Reason={changeReason}, Taskbar centered={isCentered}, Widgets enabled={isWidgetsEnabled}");
             int offsetX = Properties.Settings.Default.CustomPosition;
@@ -248,7 +248,7 @@ namespace AwqatSalaat.WinUI
             if (offsetX == -1)
             {
                 Log.Debug("Updating position in auto mode");
-                var widgetsButton = isWidgetsEnabled ? taskbarWatcher.GetAutomationElement(WidgetsButtonAutomationId) : null;
+                var widgetsButton = isWidgetsEnabled ? await taskbarWatcher.GetAutomationElementAsync(WidgetsButtonAutomationId) : null;
                 var widgetsButtonBoundingRectangle = widgetsButton?.CurrentBoundingRectangle;
                 User32.GetWindowRect(hwndTrayNotify, out RECT trayNotifyRect);
                 Log.Debug("System tray rect: {@trayRect}", trayNotifyRect);
