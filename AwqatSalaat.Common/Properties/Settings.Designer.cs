@@ -790,5 +790,29 @@ namespace AwqatSalaat.Properties {
                 this["RepeatNotificationSound"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableReminderToast {
+            get {
+                return ((bool)(this["EnableReminderToast"]));
+            }
+            set {
+                this["EnableReminderToast"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnablePrayerTimeToast {
+            get {
+                return ((bool)(this["EnablePrayerTimeToast"]));
+            }
+            set {
+                this["EnablePrayerTimeToast"] = value;
+            }
+        }
     }
 }

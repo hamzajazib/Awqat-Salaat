@@ -69,7 +69,7 @@ namespace AwqatSalaat.ViewModels
 
         public event Action NearNotificationStarted;
         public event Action NearNotificationStopped;
-        public event Action<bool> AdhanRequested;
+        public event Action<PrayerTimeViewModel, bool> PrayerTimeEntered;
 
         public WidgetViewModel()
         {
@@ -148,10 +148,10 @@ namespace AwqatSalaat.ViewModels
             if (!prayerTime.IsShuruq
                 && prayerTime.Time.Date == TimeStamp.Date
                 && prayerTime.Time.Hour == TimeStamp.Now.Hour
-                && prayerTime.Time.Minute == TimeStamp.Now.Minute
-                && WidgetSettings.Settings.AdhanSound != AdhanSound.None)
+                && prayerTime.Time.Minute == TimeStamp.Now.Minute)
             {
-                AdhanRequested?.Invoke(prayerTime.Key == nameof(PrayerTimes.Fajr));
+                bool requestAdhan = WidgetSettings.Settings.AdhanSound != AdhanSound.None;
+                PrayerTimeEntered?.Invoke(prayerTime, requestAdhan);
             }
         }
 

@@ -161,6 +161,12 @@
                                            Maximum="720"
                                            HorizontalAlignment="Left"/>
                             </ctrl:SettingsItem>
+                            <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.ReminderNotificationToast}" Description="{mk:L11n Key=UI.Settings.ReminderNotificationToastDescription}">
+                                <ToggleSwitch IsOn="{x:Bind ViewModel.Realtime.EnableReminderToast}" OnContent="{mk:L11n Key=UI.Controls.Toggle.On}" OffContent="{mk:L11n Key=UI.Controls.Toggle.Off}"/>
+                            </ctrl:SettingsItem>
+                            <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.PrayerTimeNotificationToast}" Description="{mk:L11n Key=UI.Settings.PrayerTimeNotificationToastDescription}">
+                                <ToggleSwitch IsOn="{x:Bind ViewModel.Realtime.EnablePrayerTimeToast}" OnContent="{mk:L11n Key=UI.Controls.Toggle.On}" OffContent="{mk:L11n Key=UI.Controls.Toggle.Off}"/>
+                            </ctrl:SettingsItem>
                             <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.ElapsedPeriod}" Description="{mk:L11n Key=UI.Settings.ElapsedPeriodDescription}">
                                 <NumberBox SpinButtonPlacementMode="Inline"
                                            Value="{x:Bind ViewModel.Realtime.NotificationDistanceElapsed}"

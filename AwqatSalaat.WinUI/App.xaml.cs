@@ -7,9 +7,6 @@ using System.Threading;
 using System.Windows.Input;
 using WinRT.Interop;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace AwqatSalaat.WinUI
 {
     /// <summary>
@@ -18,6 +15,7 @@ namespace AwqatSalaat.WinUI
     public partial class App : Application
     {
         private static Mutex appMutex;
+        private static readonly string appDirPath = AppDomain.CurrentDomain.BaseDirectory;
 
         public static event Action Quitting;
 
@@ -46,6 +44,7 @@ namespace AwqatSalaat.WinUI
             this.InitializeComponent();
             UnhandledException += App_UnhandledException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            AppDomain.CurrentDomain.ProcessExit += CurrentDomain_ProcessExit;
 
             DispatcherShutdownMode = DispatcherShutdownMode.OnExplicitShutdown;
         }
@@ -73,6 +72,11 @@ namespace AwqatSalaat.WinUI
             }
         }
 
+        public static string GetFullPathToAsset(string assetName)
+        {
+            return System.IO.Path.Combine(appDirPath, "Assets", assetName);
+        }
+
         private static void ExitIfOtherInstanceIsRunning()
         {
             const string mutexId = @"C790179C-7492-4CCE-B377-5F48F394B2CB";
@@ -85,6 +89,12 @@ namespace AwqatSalaat.WinUI
                 ShowError(Properties.Resources.Dialog_AppAlreadyRunning);
                 Environment.Exit(ExitCodes.AlreadyRunning);
             }
+        }
+
+        private void CurrentDomain_ProcessExit(object sender, EventArgs e)
+        {
+            Log.Information("Process exiting...");
+            Notification.NotificationManager.Unregister();
         }
 
         private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
@@ -124,6 +134,7 @@ namespace AwqatSalaat.WinUI
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
+            Log.Information($"App has launched");
             OverrideAccentColor(Properties.Settings.Default.ThemeAccent.ToString());
 
 #if DEBUG
@@ -136,6 +147,8 @@ namespace AwqatSalaat.WinUI
             var dispatcher = Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();
 
             InitializeWidget(dispatcher);
+
+            Notification.NotificationManager.Init();
         }
 
         private void InitializeWidget(Microsoft.UI.Dispatching.DispatcherQueue dispatcherQueue)

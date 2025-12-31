@@ -623,4 +623,28 @@
   <data name="UI.Settings.RepeatNotificationSound" xml:space="preserve">
     <value>تكرار</value>
   </data>
+  <data name="Notification.Dismiss" xml:space="preserve">
+    <value>تجاهل</value>
+  </data>
+  <data name="Notification.StopSound" xml:space="preserve">
+    <value>إيقاف الصوت</value>
+  </data>
+  <data name="Notification.PrayerTimeEnteredFormat" xml:space="preserve">
+    <value>حان الآن وقت صلاة {0}</value>
+  </data>
+  <data name="Notification.PrayerTimeSoonFormat" xml:space="preserve">
+    <value>وقت صلاة {0} أصبح قريبا</value>
+  </data>
+  <data name="UI.Settings.ReminderNotificationToast" xml:space="preserve">
+    <value>إشعار ويندوز لوقت التنبيه</value>
+  </data>
+  <data name="UI.Settings.ReminderNotificationToastDescription" xml:space="preserve">
+    <value>إظهار إشعار ويندوز عند اقتراب وقت الصلاة القادمة.</value>
+  </data>
+  <data name="UI.Settings.PrayerTimeNotificationToast" xml:space="preserve">
+    <value>إشعار ويندوز لدخول الوقت</value>
+  </data>
+  <data name="UI.Settings.PrayerTimeNotificationToastDescription" xml:space="preserve">
+    <value>إظهار إشعار ويندوز عند دخول وقت الصلاة.</value>
+  </data>
 </root>

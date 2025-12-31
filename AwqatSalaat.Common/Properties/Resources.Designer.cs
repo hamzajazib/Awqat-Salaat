@@ -406,6 +406,42 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dismiss.
+        /// </summary>
+        public static string Notification_Dismiss {
+            get {
+                return ResourceManager.GetString("Notification.Dismiss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} time has entered now.
+        /// </summary>
+        public static string Notification_PrayerTimeEnteredFormat {
+            get {
+                return ResourceManager.GetString("Notification.PrayerTimeEnteredFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} time is coming soon.
+        /// </summary>
+        public static string Notification_PrayerTimeSoonFormat {
+            get {
+                return ResourceManager.GetString("Notification.PrayerTimeSoonFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop Sound.
+        /// </summary>
+        public static string Notification_StopSound {
+            get {
+                return ResourceManager.GetString("Notification.StopSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check for Updates.
         /// </summary>
         public static string UI_About_CheckForUpdates {
@@ -1232,6 +1268,42 @@ namespace AwqatSalaat.Properties {
         public static string UI_Settings_PoweredBy {
             get {
                 return ResourceManager.GetString("UI.Settings.PoweredBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prayer time Windows notification.
+        /// </summary>
+        public static string UI_Settings_PrayerTimeNotificationToast {
+            get {
+                return ResourceManager.GetString("UI.Settings.PrayerTimeNotificationToast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show a Windows notification when prayer time enter..
+        /// </summary>
+        public static string UI_Settings_PrayerTimeNotificationToastDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.PrayerTimeNotificationToastDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reminder Windows notification.
+        /// </summary>
+        public static string UI_Settings_ReminderNotificationToast {
+            get {
+                return ResourceManager.GetString("UI.Settings.ReminderNotificationToast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show a Windows notification for next prayer reminder..
+        /// </summary>
+        public static string UI_Settings_ReminderNotificationToastDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.ReminderNotificationToastDescription", resourceCulture);
             }
         }
         

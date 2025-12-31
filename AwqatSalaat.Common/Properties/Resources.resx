@@ -612,4 +612,28 @@ Choose the calendar and set the desired year and month then click on Refresh</va
   <data name="UI.Settings.RepeatNotificationSound" xml:space="preserve">
     <value>Repeat</value>
   </data>
+  <data name="Notification.Dismiss" xml:space="preserve">
+    <value>Dismiss</value>
+  </data>
+  <data name="Notification.StopSound" xml:space="preserve">
+    <value>Stop Sound</value>
+  </data>
+  <data name="Notification.PrayerTimeEnteredFormat" xml:space="preserve">
+    <value>{0} time has entered now</value>
+  </data>
+  <data name="Notification.PrayerTimeSoonFormat" xml:space="preserve">
+    <value>{0} time is coming soon</value>
+  </data>
+  <data name="UI.Settings.ReminderNotificationToast" xml:space="preserve">
+    <value>Reminder Windows notification</value>
+  </data>
+  <data name="UI.Settings.ReminderNotificationToastDescription" xml:space="preserve">
+    <value>Show a Windows notification for next prayer reminder.</value>
+  </data>
+  <data name="UI.Settings.PrayerTimeNotificationToast" xml:space="preserve">
+    <value>Prayer time Windows notification</value>
+  </data>
+  <data name="UI.Settings.PrayerTimeNotificationToastDescription" xml:space="preserve">
+    <value>Show a Windows notification when prayer time enter.</value>
+  </data>
 </root>
