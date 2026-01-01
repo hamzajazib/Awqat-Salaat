@@ -102,7 +102,7 @@ namespace AwqatSalaat.UI.Views
             ViewModel.WidgetSettings.Updated += WidgetSettings_Updated;
             ViewModel.NearNotificationStarted += ViewModel_NearNotificationStarted;
             ViewModel.NearNotificationStopped += ViewModel_NearNotificationStopped;
-            ViewModel.AdhanRequested += ViewModel_AdhanRequested;
+            ViewModel.PrayerTimeEntered += ViewModel_PrayerTimeEntered;
             LocaleManager.Default.CurrentChanged += LocaleManager_CurrentChanged;
 
             UpdateDirection();
@@ -123,7 +123,7 @@ namespace AwqatSalaat.UI.Views
             ViewModel.WidgetSettings.Updated -= WidgetSettings_Updated;
             ViewModel.NearNotificationStarted -= ViewModel_NearNotificationStarted;
             ViewModel.NearNotificationStopped -= ViewModel_NearNotificationStopped;
-            ViewModel.AdhanRequested -= ViewModel_AdhanRequested;
+            ViewModel.PrayerTimeEntered -= ViewModel_PrayerTimeEntered;
             LocaleManager.Default.CurrentChanged -= LocaleManager_CurrentChanged;
 
             currentAudioSession?.End();
@@ -141,17 +141,21 @@ namespace AwqatSalaat.UI.Views
             }
         }
 
-        private void ViewModel_AdhanRequested(bool isFajrTime)
+        private void ViewModel_PrayerTimeEntered(PrayerTimeViewModel prayerTime, bool adhanRequested)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            if (adhanRequested)
             {
-                Log.Information("Adhan requested" + (isFajrTime ? " for fajr" : ""));
-                var file = isFajrTime
-                        ? ViewModel.WidgetSettings.Settings.AdhanFajrSoundFilePath
-                        : ViewModel.WidgetSettings.Settings.AdhanSoundFilePath;
-                var session = new AudioPlayerSession(file, tag: AdhanSoundTag);
-                PlaySound(session);
-            }));
+                bool isFajrTime = prayerTime.Key == nameof(Data.PrayerTimes.Fajr);
+                Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    Log.Information("Adhan requested" + (isFajrTime ? " for fajr" : ""));
+                    var file = isFajrTime
+                            ? ViewModel.WidgetSettings.Settings.AdhanFajrSoundFilePath
+                            : ViewModel.WidgetSettings.Settings.AdhanSoundFilePath;
+                    var session = new AudioPlayerSession(file, tag: AdhanSoundTag);
+                    PlaySound(session);
+                }));
+            }
         }
 
         private void ViewModel_NearNotificationStarted()
