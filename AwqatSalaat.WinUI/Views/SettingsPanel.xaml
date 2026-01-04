@@ -6,6 +6,7 @@
     xmlns:sys="using:System"
     xmlns:dt="using:AwqatSalaat.Data"
     xmlns:methods="using:AwqatSalaat.Services.Methods"
+    xmlns:qch="using:AwqatSalaat.Services.QCH"
     xmlns:cfg="using:AwqatSalaat.Configurations"
     xmlns:vm="using:AwqatSalaat.ViewModels"
     xmlns:mk="using:AwqatSalaat.WinUI.Markup"
@@ -331,7 +332,23 @@
                                     </StackPanel>
                                 </StackPanel>
                             </ctrl:SettingsItem>
-                            <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.JuristicSchool}" Description="{mk:L11n Key=UI.Settings.JuristicSchoolDescription}">
+                            <ctrl:SettingsItem x:Name="qchCitySetting" Header="{mk:L11n Key=UI.Settings.QchCity}" Description="{mk:L11n Key=UI.Settings.QchCityDescription}">
+                                <ComboBox x:Name="qchCityComboBox"
+                                          ItemsSource="{x:Bind qch:QchCities.Cities, Mode=OneTime}"
+                                          SelectedValue="{Binding Realtime.QchCity, Mode=TwoWay}"
+                                          SelectedValuePath="CityId" HorizontalAlignment="Left" MinWidth="300" FlowDirection="LeftToRight">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Name}"/>
+                                                <TextBlock Text=", " Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                                <TextBlock Text="{Binding Country}" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </ctrl:SettingsItem>
+                            <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.JuristicSchool}" Description="{mk:L11n Key=UI.Settings.JuristicSchoolDescription}" Visibility="{x:Bind locationTab.Visibility, Mode=OneWay}">
                                 <ComboBox ItemsSource="{mk:Enums Type=dt:School}" SelectedItem="{Binding Realtime.School, Mode=TwoWay}" Width="300">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
@@ -340,7 +357,7 @@
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
                             </ctrl:SettingsItem>
-                            <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.Method}" Description="{mk:L11n Key=UI.Settings.MethodDescription}">
+                            <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.Method}" Description="{mk:L11n Key=UI.Settings.MethodDescription}" Visibility="{x:Bind locationTab.Visibility, Mode=OneWay}">
                                 <ComboBox PlaceholderText="Pick a method"
                                           ItemsSource="{x:Bind methods:CalculationMethod.AvailableMethods, Mode=OneTime}"
                                           SelectedItem="{Binding Realtime.CalculationMethod, Mode=TwoWay}"

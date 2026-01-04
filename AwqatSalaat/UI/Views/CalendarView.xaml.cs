@@ -25,7 +25,50 @@ namespace AwqatSalaat.UI.Views
         public CalendarView()
         {
             InitializeComponent();
+            Loaded += CalendarView_Loaded;
+            Unloaded += CalendarView_Unloaded;
             ViewModel.Result.PropertyChanged += Result_PropertyChanged;
+        }
+
+        private void CalendarView_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.PropertyChanged -= Settings_PropertyChanged;
+        }
+
+        private void CalendarView_Loaded(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.PropertyChanged -= Settings_PropertyChanged;
+            Properties.Settings.Default.PropertyChanged += Settings_PropertyChanged;
+
+            InvalidateService();
+        }
+
+        private void Settings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Properties.Settings.Service))
+            {
+                InvalidateService();
+            }
+        }
+
+        object oldContent;
+
+        private void InvalidateService()
+        {
+            if (Properties.Settings.Default.Service == Data.PrayerTimesService.QCH)
+            {
+                if (oldContent is null)
+                {
+                    oldContent = Content;
+                }
+
+                Content = Resources["ServiceNotSupportedNotice"];
+            }
+            else if (oldContent != null)
+            {
+                Content = oldContent;
+                oldContent = null;
+            }
         }
 
         private void Result_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

@@ -53,6 +53,8 @@
                 <Setter Property="Foreground" Value="{DynamicResource ThemeColors.TextHighlightBrush}"/>
             </Style>
 
+            <TextBlock x:Key="ServiceNotSupportedNotice" Text="{mk:L11n UI.Calendar.ServiceNotSupported}" Foreground="{DynamicResource ThemeColors.TextTertiaryBrush}" TextAlignment="Center"/>
+
             <local:RecordContainerStyleSelector x:Key="StyleSelector" Standard="{StaticResource StandardRecordContainerStyle}" Today="{StaticResource TodayRecordContainerStyle}"/>
         </ResourceDictionary>
     </UserControl.Resources>

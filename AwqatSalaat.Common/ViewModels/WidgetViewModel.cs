@@ -5,6 +5,7 @@ using AwqatSalaat.Services;
 using AwqatSalaat.Services.AlAdhan;
 using AwqatSalaat.Services.SalahHour;
 using AwqatSalaat.Services.Local;
+using AwqatSalaat.Services.QCH;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -101,6 +102,16 @@ namespace AwqatSalaat.ViewModels
                     OnDataLoaded(cached);
                 }
 
+                RefreshData();
+            }
+
+            TimeStamp.DateChanged += TimeStamp_DateChanged;
+        }
+
+        private void TimeStamp_DateChanged()
+        {
+            if (WidgetSettings.Settings.IsConfigured && WidgetSettings.Settings.Service == PrayerTimesService.QCH)
+            {
                 RefreshData();
             }
         }
@@ -309,15 +320,18 @@ namespace AwqatSalaat.ViewModels
 
         private bool SwitchToNextDay(Dictionary<DateTime, PrayerTimes> data)
         {
-            var ishaConfig = WidgetSettings.Settings.GetPrayerConfig(nameof(PrayerTimes.Isha));
-            var ishaTime = data[DisplayedDate].Max(t => t.Value).AddMinutes(ishaConfig.Adjustment + ishaConfig.EffectiveElapsedTime());
-            // If Isha has already entered, then we look for the next day
-            if (DisplayedDate == TimeStamp.Date && TimeStamp.Now > ishaTime)
+            if (DisplayedDate == TimeStamp.Date)
             {
-                Log.Information("Switching to next day");
-                DisplayedDate = TimeStamp.NextDate;
+                var ishaConfig = WidgetSettings.Settings.GetPrayerConfig(nameof(PrayerTimes.Isha));
+                var ishaTime = data[DisplayedDate].Max(t => t.Value).AddMinutes(ishaConfig.Adjustment + ishaConfig.EffectiveElapsedTime());
+                // If Isha has already entered, then we look for the next day
+                if (TimeStamp.Now > ishaTime)
+                {
+                    Log.Information("Switching to next day");
+                    DisplayedDate = TimeStamp.NextDate;
 
-                return true;
+                    return true;
+                }
             }
 
             return false;
@@ -341,7 +355,7 @@ namespace AwqatSalaat.ViewModels
                 var apiResponse = await serviceClient.GetDataAsync(request);
 
                 // We switch to next day when Isha has entered
-                if (SwitchToNextDay(apiResponse.Times))
+                if (serviceClient.SupportMonthlyData && SwitchToNextDay(apiResponse.Times))
                 {
                     if (TimeStamp.Date.Month != TimeStamp.NextDate.Month)
                     {
@@ -349,6 +363,10 @@ namespace AwqatSalaat.ViewModels
                         request = BuildRequest(TimeStamp.NextDate, true);
                         apiResponse = await serviceClient.GetDataAsync(request);
                     }
+                }
+                else if (!serviceClient.SupportMonthlyData && apiResponse?.Times?.Count == 1)
+                {
+                    DisplayedDate = apiResponse.Times.Keys.First();
                 }
 
                 OnDataLoaded(apiResponse);
@@ -444,7 +462,7 @@ namespace AwqatSalaat.ViewModels
             string country = null;
             string city = null;
 
-            if (WidgetSettings.Settings.Service == PrayerTimesService.SalahHour)
+            if (WidgetSettings.Settings.Service == PrayerTimesService.SalahHour || WidgetSettings.Settings.Service == PrayerTimesService.QCH)
             {
                 country = responseLocation?.Country;
                 city = responseLocation?.City;
@@ -473,6 +491,9 @@ namespace AwqatSalaat.ViewModels
                     break;
                 case PrayerTimesService.Local:
                     serviceClient = new LocalClient();
+                    break;
+                case PrayerTimesService.QCH:
+                    serviceClient = new QchClient();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -505,12 +526,18 @@ namespace AwqatSalaat.ViewModels
                 case PrayerTimesService.Local:
                     request = new LocalRequest();
                     break;
+                case PrayerTimesService.QCH:
+                    request = new QchRequest()
+                    {
+                        CityId = settings.QchCity,
+                    };
+                    break;
                 default:
                     return null;
             }
 
             request.Date = date;
-            request.GetEntireMonth = getEntireMonth;
+            request.GetEntireMonth = getEntireMonth && settings.Service != PrayerTimesService.QCH;
             request.Method = settings.CalculationMethod;
             request.JuristicSchool = settings.School;
 

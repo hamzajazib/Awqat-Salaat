@@ -52,10 +52,12 @@ namespace AwqatSalaat.WinUI.Views
         {
             this.InitializeComponent();
             this.Loaded += SettingsPanel_Loaded;
+            this.Unloaded += SettingsPanel_Unloaded;
             this.RegisterPropertyChangedCallback(VisibilityProperty, OnVisibilityChanged);
 
             // Workaround for a bug https://github.com/microsoft/microsoft-ui-xaml/issues/4035
             countryComboBox.RegisterPropertyChangedCallback(ComboBox.ItemsSourceProperty, OnItemsSourceChanged);
+            qchCityComboBox.RegisterPropertyChangedCallback(ComboBox.ItemsSourceProperty, OnItemsSourceChanged);
 
             version.Text = "v" + (Version ?? "{ERROR}");
             architecture.Text = Architecture;
@@ -97,6 +99,31 @@ namespace AwqatSalaat.WinUI.Views
 #if PACKAGED
             StartupSettings.VerifyStartupTask();
 #endif
+
+            ViewModel.Realtime.PropertyChanged -= Realtime_PropertyChanged;
+            ViewModel.Realtime.PropertyChanged += Realtime_PropertyChanged;
+
+            OnServiceChanged();
+        }
+
+        private void SettingsPanel_Unloaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Realtime.PropertyChanged -= Realtime_PropertyChanged;
+        }
+
+        private void Realtime_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Properties.Settings.Service))
+            {
+                OnServiceChanged();
+            }
+        }
+
+        private void OnServiceChanged()
+        {
+            bool isQch = ViewModel.Realtime.Service == Data.PrayerTimesService.QCH;
+            qchCitySetting.Visibility = isQch ? Visibility.Visible : Visibility.Collapsed;
+            locationTab.Visibility = isQch ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private async Task TrySetGeolocation()
@@ -138,8 +165,9 @@ namespace AwqatSalaat.WinUI.Views
 
             if (comboBox.ItemsSource is not null)
             {
+                var tempPath = comboBox.SelectedValuePath;
                 comboBox.SelectedValuePath = null;
-                comboBox.SelectedValuePath = "Code";
+                comboBox.SelectedValuePath = tempPath;
             }
         }
 

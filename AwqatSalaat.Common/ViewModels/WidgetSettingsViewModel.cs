@@ -140,7 +140,8 @@ namespace AwqatSalaat.ViewModels
                     Realtime.ZipCode,
                     Realtime.Latitude,
                     Realtime.Longitude,
-                    Realtime.LocationDetection
+                    Realtime.LocationDetection,
+                    Realtime.QchCity
                     );
             var previousServiceSettings = (
                     Settings.Service,
@@ -151,7 +152,8 @@ namespace AwqatSalaat.ViewModels
                     Settings.ZipCode,
                     Settings.Latitude,
                     Settings.Longitude,
-                    Settings.LocationDetection
+                    Settings.LocationDetection,
+                    Settings.QchCity
                     );
             bool serviceSettingsChanged = previousServiceSettings != currentServiceSettings;
             Realtime.IsConfigured = true;

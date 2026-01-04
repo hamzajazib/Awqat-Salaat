@@ -10,6 +10,8 @@ namespace AwqatSalaat.Services.SalahHour
 {
     public class SalahHourClient : IServiceClient
     {
+        public bool SupportMonthlyData => true;
+
         public async Task<ServiceData> GetDataAsync(IRequest request)
         {
             var req = (SalahHourRequest)request;

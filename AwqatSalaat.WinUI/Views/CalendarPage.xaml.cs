@@ -31,10 +31,58 @@ namespace AwqatSalaat.WinUI.Views
             this.InitializeComponent();
             ViewModel.Result.PropertyChanged += Result_PropertyChanged;
             listBox.Loaded += ListBox_Loaded;
+            Loaded += CalendarPage_Loaded;
+            Unloaded += CalendarPage_Unloaded;
 
             // Workaround for a bug https://github.com/microsoft/microsoft-ui-xaml/issues/4035
             gregorianCombobox.RegisterPropertyChangedCallback(ComboBox.ItemsSourceProperty, OnItemsSourceChanged);
             hijriCombobox.RegisterPropertyChangedCallback(ComboBox.ItemsSourceProperty, OnItemsSourceChanged);
+        }
+
+        private void CalendarPage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.PropertyChanged -= Settings_PropertyChanged;
+        }
+
+        private void CalendarPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.PropertyChanged -= Settings_PropertyChanged;
+            Properties.Settings.Default.PropertyChanged += Settings_PropertyChanged;
+
+            InvalidateService();
+        }
+
+        private void Settings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Properties.Settings.Service))
+            {
+                InvalidateService();
+            }
+        }
+
+        UIElement oldContent;
+
+        private void InvalidateService()
+        {
+            if (Properties.Settings.Default.Service == Data.PrayerTimesService.QCH)
+            {
+                if (oldContent is null)
+                {
+                    oldContent = Content;
+                }
+
+                var template = (DataTemplate)Resources["ServiceNotSupportedNotice"];
+                Content = new ContentControl
+                {
+                    ContentTemplate = template,
+                    HorizontalContentAlignment = HorizontalAlignment.Stretch
+                };
+            }
+            else if (oldContent != null)
+            {
+                Content = oldContent;
+                oldContent = null;
+            }
         }
 
         private void ListBox_Loaded(object sender, RoutedEventArgs e)

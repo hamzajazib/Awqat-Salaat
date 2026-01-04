@@ -636,4 +636,16 @@ Choose the calendar and set the desired year and month then click on Refresh</va
   <data name="UI.Settings.PrayerTimeNotificationToastDescription" xml:space="preserve">
     <value>Show a Windows notification when prayer time enter.</value>
   </data>
+  <data name="Data.PrayerTimesService.QCH" xml:space="preserve">
+    <value>Qatar Calendar House</value>
+  </data>
+  <data name="UI.Calendar.ServiceNotSupported" xml:space="preserve">
+    <value>The configured service does not support monthly data.</value>
+  </data>
+  <data name="UI.Settings.QchCity" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="UI.Settings.QchCityDescription" xml:space="preserve">
+    <value>Select a city supported by Qatar Calendar House</value>
+  </data>
 </root>

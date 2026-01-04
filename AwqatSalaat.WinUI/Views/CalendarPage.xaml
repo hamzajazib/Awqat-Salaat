@@ -35,6 +35,10 @@
         </Style>
 
         <local:RecordContainerStyleSelector x:Key="StyleSelector" Standard="{StaticResource StandardRecordContainerStyle}" Today="{StaticResource TodayRecordContainerStyle}"/>
+
+        <DataTemplate x:Key="ServiceNotSupportedNotice">
+            <TextBlock Text="{mk:L11n Key=UI.Calendar.ServiceNotSupported}" Foreground="{ThemeResource TextFillColorTertiaryBrush}" TextAlignment="Center"/>
+        </DataTemplate>
     </Page.Resources>
     <Page.DataContext>
         <vm:CalendarViewModel/>

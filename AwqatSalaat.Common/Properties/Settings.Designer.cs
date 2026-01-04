@@ -814,5 +814,17 @@ namespace AwqatSalaat.Properties {
                 this["EnablePrayerTimeToast"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int QchCity {
+            get {
+                return ((int)(this["QchCity"]));
+            }
+            set {
+                this["QchCity"] = value;
+            }
+        }
     }
 }

@@ -295,6 +295,15 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Qatar Calendar House.
+        /// </summary>
+        public static string Data_PrayerTimesService_QCH {
+            get {
+                return ResourceManager.GetString("Data.PrayerTimesService.QCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Salah Hour.
         /// </summary>
         public static string Data_PrayerTimesService_SalahHour {
@@ -547,6 +556,15 @@ namespace AwqatSalaat.Properties {
         public static string UI_Calendar_Print {
             get {
                 return ResourceManager.GetString("UI.Calendar.Print", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The configured service does not support monthly data..
+        /// </summary>
+        public static string UI_Calendar_ServiceNotSupported {
+            get {
+                return ResourceManager.GetString("UI.Calendar.ServiceNotSupported", resourceCulture);
             }
         }
         
@@ -1286,6 +1304,24 @@ namespace AwqatSalaat.Properties {
         public static string UI_Settings_PrayerTimeNotificationToastDescription {
             get {
                 return ResourceManager.GetString("UI.Settings.PrayerTimeNotificationToastDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City.
+        /// </summary>
+        public static string UI_Settings_QchCity {
+            get {
+                return ResourceManager.GetString("UI.Settings.QchCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a city supported by Qatar Calendar House.
+        /// </summary>
+        public static string UI_Settings_QchCityDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.QchCityDescription", resourceCulture);
             }
         }
         

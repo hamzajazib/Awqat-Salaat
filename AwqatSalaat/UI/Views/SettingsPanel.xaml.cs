@@ -51,6 +51,7 @@ namespace AwqatSalaat.UI.Views
             version.Text = "v" + (Version ?? "{ERROR}");
             architecture.Text = Architecture;
             Loaded += SettingsPanel_Loaded;
+            Unloaded += SettingsPanel_Unloaded;
         }
 
         private void SettingsPanel_Loaded(object sender, RoutedEventArgs e)
@@ -64,6 +65,31 @@ namespace AwqatSalaat.UI.Views
                     TrySetGeolocation();
                 }
             }
+
+            ViewModel.Realtime.PropertyChanged -= Realtime_PropertyChanged;
+            ViewModel.Realtime.PropertyChanged += Realtime_PropertyChanged;
+
+            OnServiceChanged();
+        }
+
+        private void SettingsPanel_Unloaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Realtime.PropertyChanged -= Realtime_PropertyChanged;
+        }
+
+        private void Realtime_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Properties.Settings.Service))
+            {
+                OnServiceChanged();
+            }
+        }
+
+        private void OnServiceChanged()
+        {
+            bool isQch = ViewModel.Realtime.Service == Data.PrayerTimesService.QCH;
+            qchCitySetting.Visibility = isQch ? Visibility.Visible : Visibility.Collapsed;
+            locationTab.Visibility = isQch ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void TrySetGeolocation()

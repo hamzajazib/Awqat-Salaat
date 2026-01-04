@@ -9,6 +9,8 @@ namespace AwqatSalaat.Services.Local
 {
     public class LocalClient : IServiceClient
     {
+        public bool SupportMonthlyData => true;
+
         public Task<ServiceData> GetDataAsync(IRequest request)
         {
             var req = (LocalRequest)request;

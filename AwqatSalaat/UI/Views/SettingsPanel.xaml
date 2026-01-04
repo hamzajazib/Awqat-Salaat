@@ -15,6 +15,7 @@
              xmlns:api1="clr-namespace:AwqatSalaat.Services.SalahHour;assembly=AwqatSalaat.Common"
              xmlns:api2="clr-namespace:AwqatSalaat.Services.AlAdhan;assembly=AwqatSalaat.Common"
              xmlns:config="clr-namespace:AwqatSalaat.Configurations;assembly=AwqatSalaat.Common"
+             xmlns:qch="clr-namespace:AwqatSalaat.Services.QCH;assembly=AwqatSalaat.Common"
              mc:Ignorable="d"
              d:DesignHeight="1200" d:DesignWidth="800" d:Background="#192025">
     <d:UserControl.DataContext>
@@ -319,7 +320,20 @@
                                 </StackPanel>
                             </StackPanel>
                         </controls:SettingsItem>
-                        <controls:SettingsItem Header="{mk:L11n UI.Settings.JuristicSchool}" Description="{mk:L11n UI.Settings.JuristicSchoolDescription}">
+                        <controls:SettingsItem x:Name="qchCitySetting" Header="{mk:L11n UI.Settings.QchCity}" Description="{mk:L11n UI.Settings.QchCityDescription}">
+                            <ComboBox ItemsSource="{Binding Source={x:Static qch:QchCities.Cities}}" SelectedValue="{Binding QchCity}" SelectedValuePath="CityId" HorizontalAlignment="Left" MinWidth="300" FlowDirection="LeftToRight">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Name}"/>
+                                            <TextBlock Text=", " Foreground="{DynamicResource ThemeColors.TextSecondaryBrush}"/>
+                                            <TextBlock Text="{Binding Country}" Foreground="{DynamicResource ThemeColors.TextSecondaryBrush}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </controls:SettingsItem>
+                        <controls:SettingsItem Header="{mk:L11n UI.Settings.JuristicSchool}" Description="{mk:L11n UI.Settings.JuristicSchoolDescription}" Visibility="{Binding ElementName=locationTab, Path=Visibility}">
                             <ComboBox ItemsSource="{Binding Source={StaticResource SchoolEnum}}" SelectedItem="{Binding School}" Width="300" HorizontalAlignment="Left">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
@@ -328,7 +342,7 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                         </controls:SettingsItem>
-                        <controls:SettingsItem Header="{mk:L11n UI.Settings.Method}" Description="{mk:L11n UI.Settings.MethodDescription}">
+                        <controls:SettingsItem Header="{mk:L11n UI.Settings.Method}" Description="{mk:L11n UI.Settings.MethodDescription}" Visibility="{Binding ElementName=locationTab, Path=Visibility}">
                             <ComboBox ItemsSource="{Binding Source={x:Static methods:CalculationMethod.AvailableMethods}, Mode=OneTime}" SelectedItem="{Binding CalculationMethod}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
@@ -345,7 +359,7 @@
                     </StackPanel>
                 </ScrollViewer>
             </controls:TabItemEx>
-            <controls:TabItemEx Header="{mk:L11n UI.Settings.Tabs.Location}">
+            <controls:TabItemEx x:Name="locationTab" Header="{mk:L11n UI.Settings.Tabs.Location}">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel Margin="8,16,8,8">
                         <RadioButton IsChecked="{Binding Locator.DetectByCountryCode}" VerticalContentAlignment="Top">

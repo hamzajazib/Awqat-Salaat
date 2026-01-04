@@ -647,4 +647,16 @@
   <data name="UI.Settings.PrayerTimeNotificationToastDescription" xml:space="preserve">
     <value>إظهار إشعار ويندوز عند دخول وقت الصلاة.</value>
   </data>
+  <data name="Data.PrayerTimesService.QCH" xml:space="preserve">
+    <value>دار التقويم القطري</value>
+  </data>
+  <data name="UI.Calendar.ServiceNotSupported" xml:space="preserve">
+    <value>الخدمة التي ضبطها لا تدعم البيانات الشهرية.</value>
+  </data>
+  <data name="UI.Settings.QchCity" xml:space="preserve">
+    <value>المدينة</value>
+  </data>
+  <data name="UI.Settings.QchCityDescription" xml:space="preserve">
+    <value>قم بتحديد المدينة المدعومة من طرف دار التقويم القطري</value>
+  </data>
 </root>
