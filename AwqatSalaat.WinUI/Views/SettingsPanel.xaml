@@ -539,7 +539,7 @@
                                     </ListBox.ItemsPanel>
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <Rectangle Width="20" Height="20" Fill="{Binding Converter={StaticResource ThemeAccentConverter}}">
+                                            <Rectangle Width="20" Height="20" Fill="{Binding Converter={StaticResource ThemeAccentConverter}}" RadiusX="2" RadiusY="2">
                                                 <ToolTipService.ToolTip>
                                                     <ctrl:LocalizedStringPresenter Value="{Binding}" KeyFormat="Config.ThemeAccent.{0}"/>
                                                 </ToolTipService.ToolTip>
