@@ -131,6 +131,7 @@ namespace AwqatSalaat.WinUI.Views
             try
             {
                 Log.Information("Trying auto-geolocation...");
+                keepFlyoutOpen = true;
                 var access = await Geolocator.RequestAccessAsync();
 
                 if (access == GeolocationAccessStatus.Allowed)
@@ -155,6 +156,10 @@ namespace AwqatSalaat.WinUI.Views
             catch (Exception ex)
             {
                 Log.Warning(ex, $"Auto-geolocation failed: {ex.Message}");
+            }
+            finally
+            {
+                keepFlyoutOpen = false;
             }
         }
 
