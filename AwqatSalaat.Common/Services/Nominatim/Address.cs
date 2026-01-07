@@ -5,8 +5,17 @@ namespace AwqatSalaat.Services.Nominatim
 {
     public class Address
     {
+        [JsonProperty("municipality")]
+        public string Municipality { get; private set; }
+
+        [JsonProperty("village")]
+        public string Village { get; private set; }
+
         [JsonProperty("city")]
         public string City { get; private set; }
+
+        [JsonProperty("county")]
+        public string County { get; private set; }
 
         [JsonProperty("town")]
         public string Town { get; private set; }
@@ -26,7 +35,7 @@ namespace AwqatSalaat.Services.Nominatim
         [OnDeserialized]
         private void CityFallback(StreamingContext context)
         {
-            City = City ?? Province ?? Town;
+            City = City ?? Town ?? Village ?? Municipality ?? County ?? Province;
         }
     }
 }

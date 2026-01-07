@@ -45,7 +45,7 @@ namespace AwqatSalaat.Services.Nominatim
         {
             string lat = latitude.ToString(System.Globalization.CultureInfo.InvariantCulture);
             string lon = longitude.ToString(System.Globalization.CultureInfo.InvariantCulture);
-            string path = $"reverse?lat={lat}&lon={lon}&format=json&addressdetails=1&zoom=10";
+            string path = $"reverse?lat={lat}&lon={lon}&format=json&addressdetails=1&zoom=13";
 
             var httpResponse = await _httpClient.GetAsync(path, cancellationToken);
 

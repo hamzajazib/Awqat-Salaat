@@ -189,9 +189,8 @@ namespace AwqatSalaat.ViewModels
             Realtime.IsConfigured = true;
             CopySettings(fromOriginal: false);
             Settings.Save();
-            IsOpen = false;
             LogManager.InvalidateLogger();
-            Cancel.RaiseCanExecuteChanged();
+            Cleanup();
             Updated?.Invoke(serviceSettingsChanged);
         }
 
@@ -199,8 +198,14 @@ namespace AwqatSalaat.ViewModels
         {
             Log.Information("[Settings] Cancel invoked");
             CopySettings(fromOriginal: true);
-            Locator.SearchQuery = null;
+            Cleanup();
+        }
+
+        private void Cleanup()
+        {
             IsOpen = false;
+            Locator.SearchQuery = null;
+            Locator.CancelCheck.Execute(null);
             Cancel.RaiseCanExecuteChanged();
         }
     }
