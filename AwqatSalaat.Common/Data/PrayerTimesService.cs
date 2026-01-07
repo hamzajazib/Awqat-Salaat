@@ -6,5 +6,6 @@
         AlAdhan = 1,
         Local = 2,
         QCH = 3,
+        CSV = 4,
     }
 }

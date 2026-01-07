@@ -88,8 +88,10 @@ namespace AwqatSalaat.UI.Views
         private void OnServiceChanged()
         {
             bool isQch = ViewModel.Realtime.Service == Data.PrayerTimesService.QCH;
+            bool isCSV = ViewModel.Realtime.Service == Data.PrayerTimesService.CSV;
             qchCitySetting.Visibility = isQch ? Visibility.Visible : Visibility.Collapsed;
-            locationTab.Visibility = isQch ? Visibility.Collapsed : Visibility.Visible;
+            locationTab.Visibility = isQch || isCSV ? Visibility.Collapsed : Visibility.Visible;
+            csvSettings.Visibility = isCSV ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void TrySetGeolocation()
@@ -295,6 +297,35 @@ namespace AwqatSalaat.UI.Views
             }
 
             Process.Start("explorer.exe", $"/select,\"{LogManager.LogsPath}\"");
+        }
+
+        private void BrowseCsvFile_Click(object sender, RoutedEventArgs e)
+        {
+            Log.Information("Clicked on Browse for CSV file");
+
+            if (openFileDialog is null)
+            {
+                openFileDialog = new OpenFileDialog()
+                {
+                    Filter = "CSV Files(*.csv)|*.csv;"
+                };
+            }
+
+            ParentPopup.StaysOpen = true;
+            ParentPopup.IsTopMost = false;
+
+            try
+            {
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    ViewModel.Realtime.CSV_FilePath = openFileDialog.FileName;
+                }
+            }
+            finally
+            {
+                ParentPopup.StaysOpen = false;
+                ParentPopup.IsTopMost = true;
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ using AwqatSalaat.Services;
 using AwqatSalaat.Services.AlAdhan;
 using AwqatSalaat.Services.SalahHour;
 using AwqatSalaat.Services.Local;
+using AwqatSalaat.Services.CSV;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -154,6 +155,8 @@ namespace AwqatSalaat.ViewModels
                     return new AlAdhanClient();
                 case PrayerTimesService.Local:
                     return new LocalClient();
+                case PrayerTimesService.CSV:
+                    return new CsvClient();
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -187,6 +190,9 @@ namespace AwqatSalaat.ViewModels
                         HijriCalendar = GetHijriCalendar()
                     };
                     break;
+                case PrayerTimesService.CSV:
+                    request = BuildCsvRequest();
+                    break;
                 default:
                     return null;
             }
@@ -208,6 +214,41 @@ namespace AwqatSalaat.ViewModels
 
             Log.Debug("[Calendar] Request built: {@request}", request);
             return request;
+        }
+
+        private CsvRequest BuildCsvRequest()
+        {
+            var map = new Dictionary<string, int>
+            {
+                [nameof(CsvTimes.Fajr)] = Settings.CSV_Map_Fajr,
+                [nameof(CsvTimes.Shuruq)] = Settings.CSV_Map_Shuruq,
+                [nameof(CsvTimes.Dhuhr)] = Settings.CSV_Map_Dhuhr,
+                [nameof(CsvTimes.Asr)] = Settings.CSV_Map_Asr,
+                [nameof(CsvTimes.Maghrib)] = Settings.CSV_Map_Maghrib,
+                [nameof(CsvTimes.Isha)] = Settings.CSV_Map_Isha,
+            };
+
+            if (Settings.CSV_HasDateColumn)
+            {
+                if (Settings.CSV_DateColumnSchema == Configurations.CsvImportDateColumnSchema.Single)
+                {
+                    map.Add(nameof(CsvTimes.Date), Settings.CSV_Map_Date);
+                }
+                else
+                {
+                    map.Add(nameof(CsvTimes.Day), Settings.CSV_Map_Day);
+                    map.Add(nameof(CsvTimes.Month), Settings.CSV_Map_Month);
+                }
+            }
+
+            return new CsvRequest
+            {
+                FilePath = Settings.CSV_FilePath,
+                HasHeader = Settings.CSV_HasHeader,
+                HasDateColumn = Settings.CSV_HasDateColumn,
+                Range = Settings.CSV_Range,
+                ColumnsMap = map,
+            };
         }
 
         public Calendar GetHijriCalendar()

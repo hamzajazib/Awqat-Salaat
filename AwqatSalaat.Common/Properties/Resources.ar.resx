@@ -659,4 +659,67 @@
   <data name="UI.Settings.QchCityDescription" xml:space="preserve">
     <value>قم بتحديد المدينة المدعومة من طرف دار التقويم القطري</value>
   </data>
+  <data name="Data.PrayerTimesService.CSV" xml:space="preserve">
+    <value>ملف CSV</value>
+  </data>
+  <data name="UI.Settings.Load" xml:space="preserve">
+    <value>تحميل</value>
+  </data>
+  <data name="UI.Settings.CsvFilePath" xml:space="preserve">
+    <value>مسار الملف</value>
+  </data>
+  <data name="UI.Settings.CsvFilePathDescription" xml:space="preserve">
+    <value>المسار الكامل لملف CSV</value>
+  </data>
+  <data name="UI.Settings.CsvHasHeader" xml:space="preserve">
+    <value>يوجد رأس</value>
+  </data>
+  <data name="UI.Settings.CsvHasHeaderDescription" xml:space="preserve">
+    <value>قم بتحديد ما إذا كان ملف CSV يحتوي على صف رأس</value>
+  </data>
+  <data name="UI.Settings.CsvHasDateColumn" xml:space="preserve">
+    <value>يوجد عمود/أعمدة للتاريخ</value>
+  </data>
+  <data name="UI.Settings.CsvHasDateColumnDescription" xml:space="preserve">
+    <value>قم بتحديد ما إذا كان ملف CSV يحتوي على عمود أو أعمدة للتاريخ</value>
+  </data>
+  <data name="UI.Settings.CsvDateColumnSchema" xml:space="preserve">
+    <value>مخطط عمود/أعمدة التاريخ</value>
+  </data>
+  <data name="UI.Settings.CsvDateColumnSchemaDescription" xml:space="preserve">
+    <value>قم بتحديد طريقة تخزين التاريخ في ملف CSV</value>
+  </data>
+  <data name="UI.Settings.CsvRange" xml:space="preserve">
+    <value>مجال الأوقات</value>
+  </data>
+  <data name="UI.Settings.CsvRangeDescription" xml:space="preserve">
+    <value>قم بتحديد المجال الزمني للصفوف في ملف CSV</value>
+  </data>
+  <data name="UI.Settings.CsvColumnsMap" xml:space="preserve">
+    <value>خريطة الأعمدة</value>
+  </data>
+  <data name="UI.Settings.CsvColumnsMapDescription" xml:space="preserve">
+    <value>قم بربط كل معلومة بالعمود الموافق لها</value>
+  </data>
+  <data name="Config.CsvDateColumnSchema.Single" xml:space="preserve">
+    <value>فردي</value>
+  </data>
+  <data name="Config.CsvDateColumnSchema.Dual" xml:space="preserve">
+    <value>ثنائي (عمود الشهر + عمود اليوم)</value>
+  </data>
+  <data name="Config.CsvRange.Year" xml:space="preserve">
+    <value>العام الحالي</value>
+  </data>
+  <data name="Config.CsvRange.Month" xml:space="preserve">
+    <value>الشهر الحالي</value>
+  </data>
+  <data name="UI.Settings.Date" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+  <data name="UI.Settings.Day" xml:space="preserve">
+    <value>اليوم</value>
+  </data>
+  <data name="UI.Settings.Month" xml:space="preserve">
+    <value>الشهر</value>
+  </data>
 </root>

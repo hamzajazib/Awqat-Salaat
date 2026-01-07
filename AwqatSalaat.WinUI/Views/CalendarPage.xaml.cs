@@ -33,10 +33,6 @@ namespace AwqatSalaat.WinUI.Views
             listBox.Loaded += ListBox_Loaded;
             Loaded += CalendarPage_Loaded;
             Unloaded += CalendarPage_Unloaded;
-
-            // Workaround for a bug https://github.com/microsoft/microsoft-ui-xaml/issues/4035
-            gregorianCombobox.RegisterPropertyChangedCallback(ComboBox.ItemsSourceProperty, OnItemsSourceChanged);
-            hijriCombobox.RegisterPropertyChangedCallback(ComboBox.ItemsSourceProperty, OnItemsSourceChanged);
         }
 
         private void CalendarPage_Unloaded(object sender, RoutedEventArgs e)
@@ -54,7 +50,7 @@ namespace AwqatSalaat.WinUI.Views
 
         private void Settings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Properties.Settings.Service))
+            if (e.PropertyName is nameof(Properties.Settings.Service) or nameof(Properties.Settings.CSV_Range))
             {
                 InvalidateService();
             }
@@ -83,6 +79,12 @@ namespace AwqatSalaat.WinUI.Views
                 Content = oldContent;
                 oldContent = null;
             }
+
+            bool isCSV = Properties.Settings.Default.Service == Data.PrayerTimesService.CSV;
+            bool isMonthly = Properties.Settings.Default.CSV_Range == Configurations.CsvImportRange.Month;
+            hijriRadioButton.IsEnabled = !isCSV;
+            gregorianYear.IsEnabled = !isCSV;
+            gregorianMonth.IsEnabled = !isCSV || !isMonthly;
         }
 
         private void ListBox_Loaded(object sender, RoutedEventArgs e)
@@ -96,18 +98,6 @@ namespace AwqatSalaat.WinUI.Views
         {
             Log.Debug("[Calendar] Scroll changed");
             UpdateInViewDate(listBox);
-        }
-
-        // Workaround for a bug https://github.com/microsoft/microsoft-ui-xaml/issues/4035
-        private static void OnItemsSourceChanged(DependencyObject sender, DependencyProperty dp)
-        {
-            ComboBox comboBox = sender as ComboBox;
-
-            if (comboBox.ItemsSource is not null)
-            {
-                comboBox.SelectedValuePath = null;
-                comboBox.SelectedValuePath = "Id";
-            }
         }
 
         private void Result_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

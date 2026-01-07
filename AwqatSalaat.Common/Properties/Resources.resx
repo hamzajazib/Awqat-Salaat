@@ -648,4 +648,67 @@ Choose the calendar and set the desired year and month then click on Refresh</va
   <data name="UI.Settings.QchCityDescription" xml:space="preserve">
     <value>Select a city supported by Qatar Calendar House</value>
   </data>
+  <data name="Data.PrayerTimesService.CSV" xml:space="preserve">
+    <value>CSV File</value>
+  </data>
+  <data name="UI.Settings.Load" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="UI.Settings.CsvFilePath" xml:space="preserve">
+    <value>File path</value>
+  </data>
+  <data name="UI.Settings.CsvFilePathDescription" xml:space="preserve">
+    <value>The full path to the CSV file</value>
+  </data>
+  <data name="UI.Settings.CsvHasHeader" xml:space="preserve">
+    <value>Has header</value>
+  </data>
+  <data name="UI.Settings.CsvHasHeaderDescription" xml:space="preserve">
+    <value>Specify whether the CSV file has a header row</value>
+  </data>
+  <data name="UI.Settings.CsvHasDateColumn" xml:space="preserve">
+    <value>Has date column(s)</value>
+  </data>
+  <data name="UI.Settings.CsvHasDateColumnDescription" xml:space="preserve">
+    <value>Specify whether the CSV file has column(s) for the date</value>
+  </data>
+  <data name="UI.Settings.CsvDateColumnSchema" xml:space="preserve">
+    <value>Date column(s) schema</value>
+  </data>
+  <data name="UI.Settings.CsvDateColumnSchemaDescription" xml:space="preserve">
+    <value>Specify how the date is stored in the CSV file</value>
+  </data>
+  <data name="UI.Settings.CsvRange" xml:space="preserve">
+    <value>Times range</value>
+  </data>
+  <data name="UI.Settings.CsvRangeDescription" xml:space="preserve">
+    <value>Specify the time range of the rows in the CSV file</value>
+  </data>
+  <data name="UI.Settings.CsvColumnsMap" xml:space="preserve">
+    <value>Columns map</value>
+  </data>
+  <data name="UI.Settings.CsvColumnsMapDescription" xml:space="preserve">
+    <value>Map each information to its corresponding column</value>
+  </data>
+  <data name="Config.CsvDateColumnSchema.Single" xml:space="preserve">
+    <value>Single</value>
+  </data>
+  <data name="Config.CsvDateColumnSchema.Dual" xml:space="preserve">
+    <value>Dual (Month column + Day column)</value>
+  </data>
+  <data name="Config.CsvRange.Year" xml:space="preserve">
+    <value>Current year</value>
+  </data>
+  <data name="Config.CsvRange.Month" xml:space="preserve">
+    <value>Current month</value>
+  </data>
+  <data name="UI.Settings.Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="UI.Settings.Day" xml:space="preserve">
+    <value>Day</value>
+  </data>
+  <data name="UI.Settings.Month" xml:space="preserve">
+    <value>Month</value>
+  </data>
 </root>

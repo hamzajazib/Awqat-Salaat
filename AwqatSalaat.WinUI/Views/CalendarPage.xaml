@@ -61,31 +61,31 @@
             </Grid.ColumnDefinitions>
             <RadioButton Content="{mk:L11n Key=UI.Calendar.Gregorian}" IsChecked="{Binding UseGregorianCalendar, Mode=TwoWay}"/>
             <StackPanel Orientation="Horizontal" Grid.Column="1">
-                <NumberBox Minimum="2000" Maximum="2070" Value="{Binding GregorianYear, Mode=TwoWay}" SpinButtonPlacementMode="Inline" Width="150" Margin="16,0,0,0" IsEnabled="{Binding UseGregorianCalendar}"/>
-                <ComboBox x:Name="gregorianCombobox" ItemsSource="{x:Bind ash:GregorianDateHelper.GregorianMonths}" SelectedValuePath="Id" SelectedValue="{Binding GregorianMonth, Mode=TwoWay}" Width="150" Margin="16,0,0,0" IsEnabled="{Binding UseGregorianCalendar}">
-                    <ComboBox.ItemTemplate>
+                <NumberBox x:Name="gregorianYear" Minimum="2000" Maximum="2070" Value="{Binding GregorianYear, Mode=TwoWay}" SpinButtonPlacementMode="Inline" Width="150" Margin="16,0,0,0" IsEnabled="{Binding UseGregorianCalendar}"/>
+                <controls:ComboBoxEx x:Name="gregorianMonth" ItemsSource="{x:Bind ash:GregorianDateHelper.GregorianMonths}" SelectedValuePath="Id" SelectedValue="{Binding GregorianMonth, Mode=TwoWay}" Width="150" Margin="16,0,0,0" IsEnabled="{Binding UseGregorianCalendar}">
+                    <controls:ComboBoxEx.ItemTemplate>
                         <DataTemplate x:DataType="ash:MonthRecord">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{x:Bind Id.ToString('00', x:Null)}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Width="20"/>
                                 <TextBlock Text="{x:Bind ash:GregorianDateHelper.Format(Sample, 'MMMM', ash:LocaleManager.Default.Current)}" Margin="8,0,0,0"/>
                             </StackPanel>
                         </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                    </controls:ComboBoxEx.ItemTemplate>
+                </controls:ComboBoxEx>
             </StackPanel>
-            <RadioButton Content="{mk:L11n Key=UI.Calendar.Hijri}" IsChecked="{Binding UseHijriCalendar, Mode=TwoWay}" Grid.Row="2"/>
+            <RadioButton x:Name="hijriRadioButton" Content="{mk:L11n Key=UI.Calendar.Hijri}" IsChecked="{Binding UseHijriCalendar, Mode=TwoWay}" Grid.Row="2"/>
             <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
                 <NumberBox Minimum="1430" Maximum="1470" Value="{Binding HijriYear, Mode=TwoWay}" SpinButtonPlacementMode="Inline" Width="150" Margin="16,0,0,0" IsEnabled="{Binding UseHijriCalendar}"/>
-                <ComboBox x:Name="hijriCombobox" ItemsSource="{x:Bind ash:HijriDateHelper.HijriMonths}" SelectedValuePath="Id" SelectedValue="{Binding HijriMonth, Mode=TwoWay}" Width="150" Margin="16,0,0,0" IsEnabled="{Binding UseHijriCalendar}">
-                    <ComboBox.ItemTemplate>
+                <controls:ComboBoxEx ItemsSource="{x:Bind ash:HijriDateHelper.HijriMonths}" SelectedValuePath="Id" SelectedValue="{Binding HijriMonth, Mode=TwoWay}" Width="150" Margin="16,0,0,0" IsEnabled="{Binding UseHijriCalendar}">
+                    <controls:ComboBoxEx.ItemTemplate>
                         <DataTemplate x:DataType="ash:MonthRecord">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{x:Bind Id.ToString('00', x:Null)}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Width="20"/>
                                 <TextBlock Text="{x:Bind ash:HijriDateHelper.Format(Sample, 'MMMM', ash:LocaleManager.Default.Current)}" Margin="8,0,0,0"/>
                             </StackPanel>
                         </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                    </controls:ComboBoxEx.ItemTemplate>
+                </controls:ComboBoxEx>
             </StackPanel>
             <Button Command="{Binding Refresh}" Margin="16,0" VerticalAlignment="Center" HorizontalAlignment="Left" MinWidth="94" Grid.Column="2" Grid.Row="0">
                 <StackPanel Orientation="Horizontal">

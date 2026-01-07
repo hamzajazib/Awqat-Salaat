@@ -61,6 +61,42 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dual (Month column + Day column).
+        /// </summary>
+        public static string Config_CsvDateColumnSchema_Dual {
+            get {
+                return ResourceManager.GetString("Config.CsvDateColumnSchema.Dual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Single.
+        /// </summary>
+        public static string Config_CsvDateColumnSchema_Single {
+            get {
+                return ResourceManager.GetString("Config.CsvDateColumnSchema.Single", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current month.
+        /// </summary>
+        public static string Config_CsvRange_Month {
+            get {
+                return ResourceManager.GetString("Config.CsvRange.Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current year.
+        /// </summary>
+        public static string Config_CsvRange_Year {
+            get {
+                return ResourceManager.GetString("Config.CsvRange.Year", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Blue.
         /// </summary>
         public static string Config_ThemeAccent_Blue {
@@ -282,6 +318,15 @@ namespace AwqatSalaat.Properties {
         public static string Data_PrayerTimesService_AlAdhan {
             get {
                 return ResourceManager.GetString("Data.PrayerTimesService.AlAdhan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CSV File.
+        /// </summary>
+        public static string Data_PrayerTimesService_CSV {
+            get {
+                return ResourceManager.GetString("Data.PrayerTimesService.CSV", resourceCulture);
             }
         }
         
@@ -930,6 +975,132 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Columns map.
+        /// </summary>
+        public static string UI_Settings_CsvColumnsMap {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvColumnsMap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Map each information to its corresponding column.
+        /// </summary>
+        public static string UI_Settings_CsvColumnsMapDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvColumnsMapDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date column(s) schema.
+        /// </summary>
+        public static string UI_Settings_CsvDateColumnSchema {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvDateColumnSchema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify how the date is stored in the CSV file.
+        /// </summary>
+        public static string UI_Settings_CsvDateColumnSchemaDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvDateColumnSchemaDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File path.
+        /// </summary>
+        public static string UI_Settings_CsvFilePath {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvFilePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The full path to the CSV file.
+        /// </summary>
+        public static string UI_Settings_CsvFilePathDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvFilePathDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Has date column(s).
+        /// </summary>
+        public static string UI_Settings_CsvHasDateColumn {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvHasDateColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify whether the CSV file has column(s) for the date.
+        /// </summary>
+        public static string UI_Settings_CsvHasDateColumnDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvHasDateColumnDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Has header.
+        /// </summary>
+        public static string UI_Settings_CsvHasHeader {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvHasHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify whether the CSV file has a header row.
+        /// </summary>
+        public static string UI_Settings_CsvHasHeaderDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvHasHeaderDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Times range.
+        /// </summary>
+        public static string UI_Settings_CsvRange {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify the time range of the rows in the CSV file.
+        /// </summary>
+        public static string UI_Settings_CsvRangeDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvRangeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string UI_Settings_Date {
+            get {
+                return ResourceManager.GetString("UI.Settings.Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Day.
+        /// </summary>
+        public static string UI_Settings_Day {
+            get {
+                return ResourceManager.GetString("UI.Settings.Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Debug logs may contain personal data such as the entered location..
         /// </summary>
         public static string UI_Settings_DebugLogsNote {
@@ -1101,6 +1272,15 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Load.
+        /// </summary>
+        public static string UI_Settings_Load {
+            get {
+                return ResourceManager.GetString("UI.Settings.Load", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The local service require coordinates. Make sure to set them in Location settings.
         /// </summary>
         public static string UI_Settings_LocalServiceNote {
@@ -1214,6 +1394,15 @@ namespace AwqatSalaat.Properties {
         public static string UI_Settings_MinutesShort {
             get {
                 return ResourceManager.GetString("UI.Settings.MinutesShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Month.
+        /// </summary>
+        public static string UI_Settings_Month {
+            get {
+                return ResourceManager.GetString("UI.Settings.Month", resourceCulture);
             }
         }
         

@@ -30,6 +30,7 @@ namespace AwqatSalaat.ViewModels
         public RelayCommand Save { get; }
         public RelayCommand Cancel { get; }
         public LocatorViewModel Locator { get; }
+        public CsvImporterViewModel CsvImporter { get; }
         public ObservableCollection<PrayerConfig> PrayerConfigs { get; }
 
         public event Action<bool> Updated;
@@ -52,6 +53,7 @@ namespace AwqatSalaat.ViewModels
             CopySettings(fromOriginal: true);
 
             Locator = new LocatorViewModel(Realtime);
+            CsvImporter = new CsvImporterViewModel(Realtime);
 
             Realtime.PropertyChanged += (s, e) =>
             {
@@ -141,7 +143,21 @@ namespace AwqatSalaat.ViewModels
                     Realtime.Latitude,
                     Realtime.Longitude,
                     Realtime.LocationDetection,
-                    Realtime.QchCity
+                    Realtime.QchCity,
+                    Realtime.CSV_FilePath,
+                    Realtime.CSV_Range,
+                    Realtime.CSV_HasHeader,
+                    Realtime.CSV_HasDateColumn,
+                    Realtime.CSV_DateColumnSchema,
+                    Realtime.CSV_Map_Fajr,
+                    Realtime.CSV_Map_Shuruq,
+                    Realtime.CSV_Map_Dhuhr,
+                    Realtime.CSV_Map_Asr,
+                    Realtime.CSV_Map_Maghrib,
+                    Realtime.CSV_Map_Isha,
+                    Realtime.CSV_Map_Date,
+                    Realtime.CSV_Map_Day,
+                    Realtime.CSV_Map_Month
                     );
             var previousServiceSettings = (
                     Settings.Service,
@@ -153,7 +169,21 @@ namespace AwqatSalaat.ViewModels
                     Settings.Latitude,
                     Settings.Longitude,
                     Settings.LocationDetection,
-                    Settings.QchCity
+                    Settings.QchCity,
+                    Settings.CSV_FilePath,
+                    Settings.CSV_Range,
+                    Settings.CSV_HasHeader,
+                    Settings.CSV_HasDateColumn,
+                    Settings.CSV_DateColumnSchema,
+                    Settings.CSV_Map_Fajr,
+                    Settings.CSV_Map_Shuruq,
+                    Settings.CSV_Map_Dhuhr,
+                    Settings.CSV_Map_Asr,
+                    Settings.CSV_Map_Maghrib,
+                    Settings.CSV_Map_Isha,
+                    Settings.CSV_Map_Date,
+                    Settings.CSV_Map_Day,
+                    Settings.CSV_Map_Month
                     );
             bool serviceSettingsChanged = previousServiceSettings != currentServiceSettings;
             Realtime.IsConfigured = true;

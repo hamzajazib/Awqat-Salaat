@@ -55,10 +55,6 @@ namespace AwqatSalaat.WinUI.Views
             this.Unloaded += SettingsPanel_Unloaded;
             this.RegisterPropertyChangedCallback(VisibilityProperty, OnVisibilityChanged);
 
-            // Workaround for a bug https://github.com/microsoft/microsoft-ui-xaml/issues/4035
-            countryComboBox.RegisterPropertyChangedCallback(ComboBox.ItemsSourceProperty, OnItemsSourceChanged);
-            qchCityComboBox.RegisterPropertyChangedCallback(ComboBox.ItemsSourceProperty, OnItemsSourceChanged);
-
             version.Text = "v" + (Version ?? "{ERROR}");
             architecture.Text = Architecture;
             SetImageSource();
@@ -122,8 +118,10 @@ namespace AwqatSalaat.WinUI.Views
         private void OnServiceChanged()
         {
             bool isQch = ViewModel.Realtime.Service == Data.PrayerTimesService.QCH;
+            bool isCSV = ViewModel.Realtime.Service == Data.PrayerTimesService.CSV;
             qchCitySetting.Visibility = isQch ? Visibility.Visible : Visibility.Collapsed;
-            locationTab.Visibility = isQch ? Visibility.Collapsed : Visibility.Visible;
+            locationTab.Visibility = isQch || isCSV ? Visibility.Collapsed : Visibility.Visible;
+            csvSettings.Visibility = isCSV ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private async Task TrySetGeolocation()
@@ -160,19 +158,6 @@ namespace AwqatSalaat.WinUI.Views
             finally
             {
                 keepFlyoutOpen = false;
-            }
-        }
-
-        // Workaround for a bug https://github.com/microsoft/microsoft-ui-xaml/issues/4035
-        private static void OnItemsSourceChanged(DependencyObject sender, DependencyProperty dp)
-        {
-            ComboBox comboBox = sender as ComboBox;
-
-            if (comboBox.ItemsSource is not null)
-            {
-                var tempPath = comboBox.SelectedValuePath;
-                comboBox.SelectedValuePath = null;
-                comboBox.SelectedValuePath = tempPath;
             }
         }
 
@@ -366,6 +351,36 @@ namespace AwqatSalaat.WinUI.Views
             }
         }
 
+        private async void BrowseCsvFile_Click(object sender, RoutedEventArgs e)
+        {
+            Log.Information("Clicked on Browse for CSV file");
+
+            try
+            {
+                FileOpenPicker fileOpenPicker = new()
+                {
+                    FileTypeFilter = { ".csv" },
+                };
+
+                InitializeWithWindow.Initialize(fileOpenPicker, App.MainHandle);
+
+                keepFlyoutOpen = true;
+                IsHitTestVisible = false;
+
+                StorageFile file = await fileOpenPicker.PickSingleFileAsync();
+
+                if (file != null)
+                {
+                    ViewModel.Realtime.CSV_FilePath = file.Path;
+                }
+            }
+            finally
+            {
+                keepFlyoutOpen = false;
+                IsHitTestVisible = true;
+            }
+        }
+
         private void Expander_Expanding(Expander sender, ExpanderExpandingEventArgs args)
         {
             CollapseExpanders(sender);
@@ -399,5 +414,7 @@ namespace AwqatSalaat.WinUI.Views
 
             Process.Start("explorer.exe", $"/select,\"{LogManager.LogsPath}\"");
         }
+
+        private bool AND(bool left, bool right) => left && right;
     }
 }

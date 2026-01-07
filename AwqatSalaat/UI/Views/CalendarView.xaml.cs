@@ -45,7 +45,7 @@ namespace AwqatSalaat.UI.Views
 
         private void Settings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Properties.Settings.Service))
+            if (e.PropertyName == nameof(Properties.Settings.Service) || e.PropertyName == nameof(Properties.Settings.CSV_Range))
             {
                 InvalidateService();
             }
@@ -69,6 +69,12 @@ namespace AwqatSalaat.UI.Views
                 Content = oldContent;
                 oldContent = null;
             }
+
+            bool isCSV = Properties.Settings.Default.Service == Data.PrayerTimesService.CSV;
+            bool isMonthly = Properties.Settings.Default.CSV_Range == Configurations.CsvImportRange.Month;
+            hijriRadioButton.IsEnabled = !isCSV;
+            gregorianYear.IsEnabled = !isCSV;
+            gregorianMonth.IsEnabled = !isCSV || !isMonthly;
         }
 
         private void Result_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

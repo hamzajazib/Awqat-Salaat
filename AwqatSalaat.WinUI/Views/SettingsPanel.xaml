@@ -42,6 +42,7 @@
             <converters:EnumEqualityConverter x:Key="EnumEqualityConverter"/>
             <converters:EnumEqualityToVisibilityConverter x:Key="EnumEqualityToVisibilityConverter"/>
             <converters:PercentageConverter x:Key="PercentageConverter"/>
+            <converters:NullToIntConverter x:Key="NullToIntConverter"/>
 
             <!-- This doesn't work at the moment, binding in style setters isn't supported yet :( -->
             <Style TargetType="ToggleSwitch" BasedOn="{StaticResource DefaultToggleSwitchStyle}">
@@ -333,11 +334,10 @@
                                 </StackPanel>
                             </ctrl:SettingsItem>
                             <ctrl:SettingsItem x:Name="qchCitySetting" Header="{mk:L11n Key=UI.Settings.QchCity}" Description="{mk:L11n Key=UI.Settings.QchCityDescription}">
-                                <ComboBox x:Name="qchCityComboBox"
-                                          ItemsSource="{x:Bind qch:QchCities.Cities, Mode=OneTime}"
-                                          SelectedValue="{Binding Realtime.QchCity, Mode=TwoWay}"
-                                          SelectedValuePath="CityId" HorizontalAlignment="Left" MinWidth="300" FlowDirection="LeftToRight">
-                                    <ComboBox.ItemTemplate>
+                                <ctrl:ComboBoxEx ItemsSource="{x:Bind qch:QchCities.Cities, Mode=OneTime}"
+                                                 SelectedValue="{Binding Realtime.QchCity, Mode=TwoWay}"
+                                                 SelectedValuePath="CityId" HorizontalAlignment="Left" MinWidth="300" FlowDirection="LeftToRight">
+                                    <ctrl:ComboBoxEx.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="{Binding Name}"/>
@@ -345,31 +345,145 @@
                                                 <TextBlock Text="{Binding Country}" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
                                             </StackPanel>
                                         </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
+                                    </ctrl:ComboBoxEx.ItemTemplate>
+                                </ctrl:ComboBoxEx>
                             </ctrl:SettingsItem>
-                            <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.JuristicSchool}" Description="{mk:L11n Key=UI.Settings.JuristicSchoolDescription}" Visibility="{x:Bind locationTab.Visibility, Mode=OneWay}">
-                                <ComboBox ItemsSource="{mk:Enums Type=dt:School}" SelectedItem="{Binding Realtime.School, Mode=TwoWay}" Width="300">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <ctrl:LocalizedStringPresenter Value="{Binding}" KeyFormat="Data.JuristicSchool.{0}"/>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
-                            </ctrl:SettingsItem>
-                            <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.Method}" Description="{mk:L11n Key=UI.Settings.MethodDescription}" Visibility="{x:Bind locationTab.Visibility, Mode=OneWay}">
-                                <ComboBox PlaceholderText="Pick a method"
-                                          ItemsSource="{x:Bind methods:CalculationMethod.AvailableMethods, Mode=OneTime}"
-                                          SelectedItem="{Binding Realtime.CalculationMethod, Mode=TwoWay}"
-                                          HorizontalAlignment="Stretch">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <ctrl:ComboBoxItemPresenter PopupItemTemplate="{StaticResource CalculationMethodTemplate}"
-                                                                        SelectedItemTemplate="{StaticResource CalculationMethodDisplayTemplate}"/>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
-                            </ctrl:SettingsItem>
+                            <StackPanel Visibility="{x:Bind locationTab.Visibility, Mode=OneWay}">
+                                <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.JuristicSchool}" Description="{mk:L11n Key=UI.Settings.JuristicSchoolDescription}">
+                                    <ComboBox ItemsSource="{mk:Enums Type=dt:School}" SelectedItem="{Binding Realtime.School, Mode=TwoWay}" Width="300">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <ctrl:LocalizedStringPresenter Value="{Binding}" KeyFormat="Data.JuristicSchool.{0}"/>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                </ctrl:SettingsItem>
+                                <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.Method}" Description="{mk:L11n Key=UI.Settings.MethodDescription}">
+                                    <ComboBox PlaceholderText="Pick a method"
+                                              ItemsSource="{x:Bind methods:CalculationMethod.AvailableMethods, Mode=OneTime}"
+                                              SelectedItem="{Binding Realtime.CalculationMethod, Mode=TwoWay}"
+                                              HorizontalAlignment="Stretch">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <ctrl:ComboBoxItemPresenter PopupItemTemplate="{StaticResource CalculationMethodTemplate}"
+                                                                            SelectedItemTemplate="{StaticResource CalculationMethodDisplayTemplate}"/>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                </ctrl:SettingsItem>
+                            </StackPanel>
+                            <Grid x:Name="csvSettings" Margin="0,16,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.CountryCode}" Description="{mk:L11n Key=UI.Settings.CountryCodeDescription}" Margin="0,0,8,0">
+                                    <ctrl:ComboBoxEx x:Name="countryComboBox2"
+                                              ItemsSource="{x:Bind vm:WidgetSettingsViewModel.AvailableCountries, Mode=OneTime}"
+                                              SelectedValuePath="Code"
+                                              SelectedValue="{x:Bind ViewModel.Realtime.CountryCode, Mode=TwoWay}"
+                                              HorizontalAlignment="Stretch"
+                                              FlowDirection="LeftToRight">
+                                        <ctrl:ComboBoxEx.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Code}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Width="24"/>
+                                                    <TextBlock Text="{Binding Name}" Margin="8,0,0,0"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ctrl:ComboBoxEx.ItemTemplate>
+                                    </ctrl:ComboBoxEx>
+                                </ctrl:SettingsItem>
+                                <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.City}" Description="{mk:L11n Key=UI.Settings.CityDescription}" Grid.Column="1" Margin="8,0,0,0">
+                                    <TextBox Text="{x:Bind ViewModel.Realtime.City, UpdateSourceTrigger=PropertyChanged}" FlowDirection="LeftToRight"/>
+                                </ctrl:SettingsItem>
+                                <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
+                                    <Rectangle Fill="{ThemeResource DividerStrokeColorDefaultBrush}" Height="1" Margin="0,16,0,0"/>
+                                    <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.CsvFilePath}" Description="{mk:L11n Key=UI.Settings.CsvFilePathDescription}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox Text="{x:Bind ViewModel.Realtime.CSV_FilePath, UpdateSourceTrigger=PropertyChanged}" FlowDirection="LeftToRight"/>
+                                            <Button Content="{mk:L11n Key=UI.Settings.Browse}" Grid.Column="1" Margin="8,0,0,0" Click="BrowseCsvFile_Click"/>
+                                        </Grid>
+                                    </ctrl:SettingsItem>
+                                    <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.CsvHasHeader}" Description="{mk:L11n Key=UI.Settings.CsvHasHeaderDescription}">
+                                        <ToggleSwitch IsOn="{x:Bind ViewModel.Realtime.CSV_HasHeader}" OnContent="{mk:L11n Key=UI.Controls.Toggle.On}" OffContent="{mk:L11n Key=UI.Controls.Toggle.Off}"/>
+                                    </ctrl:SettingsItem>
+                                    <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.CsvHasDateColumn}" Description="{mk:L11n Key=UI.Settings.CsvHasDateColumnDescription}">
+                                        <ToggleSwitch IsOn="{x:Bind ViewModel.Realtime.CSV_HasDateColumn}" OnContent="{mk:L11n Key=UI.Controls.Toggle.On}" OffContent="{mk:L11n Key=UI.Controls.Toggle.Off}"/>
+                                    </ctrl:SettingsItem>
+                                    <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.CsvDateColumnSchema}" Description="{mk:L11n Key=UI.Settings.CsvDateColumnSchemaDescription}" IsEnabled="{x:Bind ViewModel.Realtime.CSV_HasDateColumn}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <RadioButton GroupName="csvdatecolumn" Content="{mk:L11n Key=Config.CsvDateColumnSchema.Single}" IsChecked="{x:Bind ViewModel.CsvImporter.HasSingleDateColumn}"/>
+                                            <RadioButton GroupName="csvdatecolumn" Content="{mk:L11n Key=Config.CsvDateColumnSchema.Dual}" IsChecked="{x:Bind ViewModel.CsvImporter.HasDualDateColumn}" Margin="32,0,0,0"/>
+                                        </StackPanel>
+                                    </ctrl:SettingsItem>
+                                    <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.CsvRange}" Description="{mk:L11n Key=UI.Settings.CsvRangeDescription}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <RadioButton GroupName="csvperiod" Content="{mk:L11n Key=Config.CsvRange.Year}" IsChecked="{x:Bind ViewModel.CsvImporter.RangeInYear}"/>
+                                            <RadioButton GroupName="csvperiod" Content="{mk:L11n Key=Config.CsvRange.Month}" IsChecked="{x:Bind ViewModel.CsvImporter.RangeInMonth}" Margin="32,0,0,0"/>
+                                        </StackPanel>
+                                    </ctrl:SettingsItem>
+                                    <Button Command="{x:Bind ViewModel.CsvImporter.Load, Mode=OneWay}" HorizontalAlignment="Left" Width="150" Margin="0,24,0,8">
+                                        <StackPanel Orientation="Horizontal">
+                                            <FontIcon Glyph="&#xE8E5;" FontSize="16" VerticalAlignment="Center"/>
+                                            <TextBlock Text="{mk:L11n Key=UI.Settings.Load}" Margin="4,0,0,0"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.CsvColumnsMap}" Description="{mk:L11n Key=UI.Settings.CsvColumnsMapDescription}" IsEnabled="{x:Bind ViewModel.CsvImporter.AreColumnsLoaded, Mode=OneWay}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="8"/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="8"/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="8"/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="8"/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="8"/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="8"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="8"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="8"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="{mk:L11n Key=Data.Salaat.Fajr}" Grid.Column="0"/>
+                                            <TextBlock Text="{mk:L11n Key=Data.Salaat.Shuruq}" Grid.Column="2"/>
+                                            <TextBlock Text="{mk:L11n Key=Data.Salaat.Dhuhr}" Grid.Column="4"/>
+                                            <TextBlock Text="{mk:L11n Key=Data.Salaat.Asr}" Grid.Column="6"/>
+                                            <TextBlock Text="{mk:L11n Key=Data.Salaat.Maghrib}" Grid.Column="8"/>
+                                            <TextBlock Text="{mk:L11n Key=Data.Salaat.Isha}" Grid.Column="10"/>
+                                            <ctrl:ComboBoxEx ItemsSource="{x:Bind ViewModel.CsvImporter.Columns, Mode=OneWay}" SelectedValue="{x:Bind ViewModel.Realtime.CSV_Map_Fajr, Converter={StaticResource NullToIntConverter}}" SelectedValuePath="Key" DisplayMemberPath="Value" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="2"/>
+                                            <ctrl:ComboBoxEx ItemsSource="{x:Bind ViewModel.CsvImporter.Columns, Mode=OneWay}" SelectedValue="{x:Bind ViewModel.Realtime.CSV_Map_Shuruq, Converter={StaticResource NullToIntConverter}}" SelectedValuePath="Key" DisplayMemberPath="Value" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="2"/>
+                                            <ctrl:ComboBoxEx ItemsSource="{x:Bind ViewModel.CsvImporter.Columns, Mode=OneWay}" SelectedValue="{x:Bind ViewModel.Realtime.CSV_Map_Dhuhr, Converter={StaticResource NullToIntConverter}}" SelectedValuePath="Key" DisplayMemberPath="Value" HorizontalAlignment="Stretch"  Grid.Column="4" Grid.Row="2"/>
+                                            <ctrl:ComboBoxEx ItemsSource="{x:Bind ViewModel.CsvImporter.Columns, Mode=OneWay}" SelectedValue="{x:Bind ViewModel.Realtime.CSV_Map_Asr, Converter={StaticResource NullToIntConverter}}" SelectedValuePath="Key" DisplayMemberPath="Value" HorizontalAlignment="Stretch"  Grid.Column="6" Grid.Row="2"/>
+                                            <ctrl:ComboBoxEx ItemsSource="{x:Bind ViewModel.CsvImporter.Columns, Mode=OneWay}" SelectedValue="{x:Bind ViewModel.Realtime.CSV_Map_Maghrib, Converter={StaticResource NullToIntConverter}}" SelectedValuePath="Key" DisplayMemberPath="Value" HorizontalAlignment="Stretch"  Grid.Column="8" Grid.Row="2"/>
+                                            <ctrl:ComboBoxEx ItemsSource="{x:Bind ViewModel.CsvImporter.Columns, Mode=OneWay}" SelectedValue="{x:Bind ViewModel.Realtime.CSV_Map_Isha, Converter={StaticResource NullToIntConverter}}" SelectedValuePath="Key" DisplayMemberPath="Value" HorizontalAlignment="Stretch"  Grid.Column="10" Grid.Row="2"/>
+
+                                            <TextBlock Text="{mk:L11n Key=UI.Settings.Date}" Grid.Row="4" Grid.Column="0"/>
+                                            <TextBlock Text="{mk:L11n Key=UI.Settings.Day}" Grid.Row="4" Grid.Column="2"/>
+                                            <TextBlock Text="{mk:L11n Key=UI.Settings.Month}" Grid.Row="4" Grid.Column="4"/>
+                                            <ctrl:ComboBoxEx ItemsSource="{x:Bind ViewModel.CsvImporter.Columns, Mode=OneWay}" SelectedValue="{x:Bind ViewModel.Realtime.CSV_Map_Date, Converter={StaticResource NullToIntConverter}}" SelectedValuePath="Key" DisplayMemberPath="Value" HorizontalAlignment="Stretch"  Grid.Column="0" Grid.Row="6" IsEnabled="{x:Bind AND(ViewModel.Realtime.CSV_HasDateColumn, ViewModel.CsvImporter.HasSingleDateColumn), Mode=OneWay}"/>
+                                            <ctrl:ComboBoxEx ItemsSource="{x:Bind ViewModel.CsvImporter.Columns, Mode=OneWay}" SelectedValue="{x:Bind ViewModel.Realtime.CSV_Map_Day, Converter={StaticResource NullToIntConverter}}" SelectedValuePath="Key" DisplayMemberPath="Value" HorizontalAlignment="Stretch"  Grid.Column="2" Grid.Row="6" IsEnabled="{x:Bind AND(ViewModel.Realtime.CSV_HasDateColumn, ViewModel.CsvImporter.HasDualDateColumn), Mode=OneWay}"/>
+                                            <ctrl:ComboBoxEx ItemsSource="{x:Bind ViewModel.CsvImporter.Columns, Mode=OneWay}" SelectedValue="{x:Bind ViewModel.Realtime.CSV_Map_Month, Converter={StaticResource NullToIntConverter}}" SelectedValuePath="Key" DisplayMemberPath="Value" HorizontalAlignment="Stretch"  Grid.Column="4" Grid.Row="6" IsEnabled="{x:Bind AND(ViewModel.Realtime.CSV_HasDateColumn, ViewModel.CsvImporter.HasDualDateColumn), Mode=OneWay}"/>
+                                        </Grid>
+                                    </ctrl:SettingsItem>
+                                </StackPanel>
+                            </Grid>
                         </StackPanel>
                     </NavigationViewItem.Tag>
                 </NavigationViewItem>
@@ -391,22 +505,21 @@
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
                                         <TextBlock Text="{mk:L11n Key=UI.Settings.CountryCode}"/>
-                                        <ComboBox x:Name="countryComboBox"
-                                                  ItemsSource="{x:Bind vm:WidgetSettingsViewModel.AvailableCountries, Mode=OneTime}"
-                                                  SelectedValuePath="Code"
-                                                  SelectedValue="{x:Bind ViewModel.Realtime.CountryCode, Mode=TwoWay}"
-                                                  HorizontalAlignment="Stretch"
-                                                  FlowDirection="LeftToRight"
-                                                  Grid.Column="1">
-                                            <ComboBox.ItemTemplate>
+                                        <ctrl:ComboBoxEx ItemsSource="{x:Bind vm:WidgetSettingsViewModel.AvailableCountries, Mode=OneTime}"
+                                                         SelectedValuePath="Code"
+                                                         SelectedValue="{x:Bind ViewModel.Realtime.CountryCode, Mode=TwoWay}"
+                                                         HorizontalAlignment="Stretch"
+                                                         FlowDirection="LeftToRight"
+                                                         Grid.Column="1">
+                                            <ctrl:ComboBoxEx.ItemTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
                                                         <TextBlock Text="{Binding Code}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Width="24"/>
                                                         <TextBlock Text="{Binding Name}" Margin="8,0,0,0"/>
                                                     </StackPanel>
                                                 </DataTemplate>
-                                            </ComboBox.ItemTemplate>
-                                        </ComboBox>
+                                            </ctrl:ComboBoxEx.ItemTemplate>
+                                        </ctrl:ComboBoxEx>
                                         <TextBlock Text="{mk:L11n Key=UI.Settings.City}" Grid.Row="2"/>
                                         <TextBox Text="{x:Bind ViewModel.Realtime.City, UpdateSourceTrigger=PropertyChanged}" Width="200" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1"/>
                                         <TextBlock Text="{mk:L11n Key=UI.Settings.ZipCode}" Grid.Row="4"/>

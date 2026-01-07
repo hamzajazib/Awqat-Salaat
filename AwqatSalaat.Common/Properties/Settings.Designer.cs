@@ -826,5 +826,173 @@ namespace AwqatSalaat.Properties {
                 this["QchCity"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CSV_FilePath {
+            get {
+                return ((string)(this["CSV_FilePath"]));
+            }
+            set {
+                this["CSV_FilePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CSV_HasHeader {
+            get {
+                return ((bool)(this["CSV_HasHeader"]));
+            }
+            set {
+                this["CSV_HasHeader"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Year")]
+        public global::AwqatSalaat.Configurations.CsvImportRange CSV_Range {
+            get {
+                return ((global::AwqatSalaat.Configurations.CsvImportRange)(this["CSV_Range"]));
+            }
+            set {
+                this["CSV_Range"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CSV_HasDateColumn {
+            get {
+                return ((bool)(this["CSV_HasDateColumn"]));
+            }
+            set {
+                this["CSV_HasDateColumn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Single")]
+        public global::AwqatSalaat.Configurations.CsvImportDateColumnSchema CSV_DateColumnSchema {
+            get {
+                return ((global::AwqatSalaat.Configurations.CsvImportDateColumnSchema)(this["CSV_DateColumnSchema"]));
+            }
+            set {
+                this["CSV_DateColumnSchema"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int CSV_Map_Fajr {
+            get {
+                return ((int)(this["CSV_Map_Fajr"]));
+            }
+            set {
+                this["CSV_Map_Fajr"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int CSV_Map_Shuruq {
+            get {
+                return ((int)(this["CSV_Map_Shuruq"]));
+            }
+            set {
+                this["CSV_Map_Shuruq"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int CSV_Map_Dhuhr {
+            get {
+                return ((int)(this["CSV_Map_Dhuhr"]));
+            }
+            set {
+                this["CSV_Map_Dhuhr"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int CSV_Map_Asr {
+            get {
+                return ((int)(this["CSV_Map_Asr"]));
+            }
+            set {
+                this["CSV_Map_Asr"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int CSV_Map_Maghrib {
+            get {
+                return ((int)(this["CSV_Map_Maghrib"]));
+            }
+            set {
+                this["CSV_Map_Maghrib"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int CSV_Map_Isha {
+            get {
+                return ((int)(this["CSV_Map_Isha"]));
+            }
+            set {
+                this["CSV_Map_Isha"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int CSV_Map_Date {
+            get {
+                return ((int)(this["CSV_Map_Date"]));
+            }
+            set {
+                this["CSV_Map_Date"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int CSV_Map_Day {
+            get {
+                return ((int)(this["CSV_Map_Day"]));
+            }
+            set {
+                this["CSV_Map_Day"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int CSV_Map_Month {
+            get {
+                return ((int)(this["CSV_Map_Month"]));
+            }
+            set {
+                this["CSV_Map_Month"] = value;
+            }
+        }
     }
 }

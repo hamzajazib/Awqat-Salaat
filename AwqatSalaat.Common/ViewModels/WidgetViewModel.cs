@@ -6,6 +6,7 @@ using AwqatSalaat.Services.AlAdhan;
 using AwqatSalaat.Services.SalahHour;
 using AwqatSalaat.Services.Local;
 using AwqatSalaat.Services.QCH;
+using AwqatSalaat.Services.CSV;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -495,6 +496,9 @@ namespace AwqatSalaat.ViewModels
                 case PrayerTimesService.QCH:
                     serviceClient = new QchClient();
                     break;
+                case PrayerTimesService.CSV:
+                    serviceClient = new CsvClient();
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -532,6 +536,9 @@ namespace AwqatSalaat.ViewModels
                         CityId = settings.QchCity,
                     };
                     break;
+                case PrayerTimesService.CSV:
+                    request = BuildCsvRequest();
+                    break;
                 default:
                     return null;
             }
@@ -550,6 +557,42 @@ namespace AwqatSalaat.ViewModels
 
             Log.Debug("Request built: {@request}", request);
             return request;
+        }
+
+        private CsvRequest BuildCsvRequest()
+        {
+            var settings = WidgetSettings.Settings;
+            var map = new Dictionary<string, int>
+            {
+                [nameof(CsvTimes.Fajr)] = settings.CSV_Map_Fajr,
+                [nameof(CsvTimes.Shuruq)] = settings.CSV_Map_Shuruq,
+                [nameof(CsvTimes.Dhuhr)] = settings.CSV_Map_Dhuhr,
+                [nameof(CsvTimes.Asr)] = settings.CSV_Map_Asr,
+                [nameof(CsvTimes.Maghrib)] = settings.CSV_Map_Maghrib,
+                [nameof(CsvTimes.Isha)] = settings.CSV_Map_Isha,
+            };
+
+            if (settings.CSV_HasDateColumn)
+            {
+                if (settings.CSV_DateColumnSchema == Configurations.CsvImportDateColumnSchema.Single)
+                {
+                    map.Add(nameof(CsvTimes.Date), settings.CSV_Map_Date);
+                }
+                else
+                {
+                    map.Add(nameof(CsvTimes.Day), settings.CSV_Map_Day);
+                    map.Add(nameof(CsvTimes.Month), settings.CSV_Map_Month);
+                }
+            }
+
+            return new CsvRequest
+            {
+                FilePath = settings.CSV_FilePath,
+                HasHeader = settings.CSV_HasHeader,
+                HasDateColumn = settings.CSV_HasDateColumn,
+                Range = settings.CSV_Range,
+                ColumnsMap = map,
+            };
         }
     }
 }
