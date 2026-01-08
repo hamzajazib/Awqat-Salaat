@@ -994,5 +994,17 @@ namespace AwqatSalaat.Properties {
                 this["CSV_Map_Month"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ShortTimePattern {
+            get {
+                return ((string)(this["ShortTimePattern"]));
+            }
+            set {
+                this["ShortTimePattern"] = value;
+            }
+        }
     }
 }

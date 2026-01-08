@@ -858,6 +858,15 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auto (System).
+        /// </summary>
+        public static string UI_Settings_Auto_System {
+            get {
+                return ResourceManager.GetString("UI.Settings.Auto_System", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Auto-alignment.
         /// </summary>
         public static string UI_Settings_AutoAlignment {
@@ -1754,6 +1763,24 @@ namespace AwqatSalaat.Properties {
         public static string UI_Settings_TimeAdjustmentDescription {
             get {
                 return ResourceManager.GetString("UI.Settings.TimeAdjustmentDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time format.
+        /// </summary>
+        public static string UI_Settings_TimeFormat {
+            get {
+                return ResourceManager.GetString("UI.Settings.TimeFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The format in which the time is displayed.
+        /// </summary>
+        public static string UI_Settings_TimeFormatDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.TimeFormatDescription", resourceCulture);
             }
         }
         

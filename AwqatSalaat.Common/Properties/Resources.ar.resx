@@ -722,4 +722,13 @@
   <data name="UI.Settings.Month" xml:space="preserve">
     <value>الشهر</value>
   </data>
+  <data name="UI.Settings.Auto_System" xml:space="preserve">
+    <value>تلقائي (من النظام)</value>
+  </data>
+  <data name="UI.Settings.TimeFormat" xml:space="preserve">
+    <value>تنسيق الوقت</value>
+  </data>
+  <data name="UI.Settings.TimeFormatDescription" xml:space="preserve">
+    <value>التنسيق المستخدم لعرض الوقت</value>
+  </data>
 </root>

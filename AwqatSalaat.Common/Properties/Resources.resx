@@ -711,4 +711,13 @@ Choose the calendar and set the desired year and month then click on Refresh</va
   <data name="UI.Settings.Month" xml:space="preserve">
     <value>Month</value>
   </data>
+  <data name="UI.Settings.Auto_System" xml:space="preserve">
+    <value>Auto (System)</value>
+  </data>
+  <data name="UI.Settings.TimeFormat" xml:space="preserve">
+    <value>Time format</value>
+  </data>
+  <data name="UI.Settings.TimeFormatDescription" xml:space="preserve">
+    <value>The format in which the time is displayed</value>
+  </data>
 </root>

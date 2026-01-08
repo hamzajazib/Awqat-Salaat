@@ -14,10 +14,24 @@ namespace AwqatSalaat.WinUI.Converters
             return dateTime.ToString(format, culture);
         }
 
+        private static string GetShortPattern()
+        {
+            var shortPattern = Properties.Settings.Realtime.ShortTimePattern;
+
+            if (string.IsNullOrEmpty(shortPattern))
+            {
+                shortPattern = CultureInfo.InstalledUICulture.DateTimeFormat.ShortTimePattern;
+            }
+
+            return shortPattern;
+        }
+
         public static string FormatShortTime(DateTime dateTime, CultureInfo culture)
         {
             culture ??= CultureInfo.CurrentUICulture;
-            return dateTime.ToString(CultureInfo.InstalledUICulture.DateTimeFormat.ShortTimePattern, culture);
+            var shortPattern = GetShortPattern();
+
+            return dateTime.ToString(shortPattern, culture);
         }
 
         private static readonly Dictionary<string, string> s_cacheWithoutAMPM = new Dictionary<string, string>();
@@ -25,7 +39,7 @@ namespace AwqatSalaat.WinUI.Converters
         public static string FormatShortTimeWithoutAMPM(DateTime dateTime, CultureInfo culture)
         {
             culture ??= CultureInfo.CurrentUICulture;
-            var shortPattern = CultureInfo.InstalledUICulture.DateTimeFormat.ShortTimePattern;
+            var shortPattern = GetShortPattern();
 
             if (!s_cacheWithoutAMPM.TryGetValue(shortPattern, out var value))
             {
@@ -40,7 +54,7 @@ namespace AwqatSalaat.WinUI.Converters
         public static string FormatShortTimeAMPM(DateTime dateTime, CultureInfo culture)
         {
             culture ??= CultureInfo.CurrentUICulture;
-            var shortPattern = CultureInfo.InstalledUICulture.DateTimeFormat.ShortTimePattern;
+            var shortPattern = GetShortPattern();
 
             if (!shortPattern.Contains('t'))
             {

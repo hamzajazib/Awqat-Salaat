@@ -139,6 +139,10 @@ namespace AwqatSalaat.UI.Views
             {
                 UpdateCountdownState(); 
             }
+            else if (e.PropertyName == nameof(Properties.Settings.ShortTimePattern))
+            {
+                timeTB.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
+            }
         }
 
         private void ViewModel_PrayerTimeEntered(PrayerTimeViewModel prayerTime, bool adhanRequested)

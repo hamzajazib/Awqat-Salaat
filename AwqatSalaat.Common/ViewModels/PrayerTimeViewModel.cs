@@ -81,6 +81,11 @@ namespace AwqatSalaat.ViewModels
             IsVisible = config.IsVisible;
         }
 
+        public void RaiseTimePropertyChanged()
+        {
+            OnPropertyChanged(nameof(Time));
+        }
+
         private void Activate(bool active)
         {
             Log.Debug($"Updating time activation for: {Key}. From={isActive}, To={active}");

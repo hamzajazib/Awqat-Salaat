@@ -76,6 +76,9 @@
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
 
+            <sys:DateTime x:Key="SampleDate">2026-01-08T18:45</sys:DateTime>
+
+            <converters:ShortTimeConverter x:Key="ShortTimeConverter"/>
             <converters:ThemeAccentConverter x:Key="ThemeAccentConverter"/>
             <converters:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
             <converters:LocalizedStringConverter x:Key="LocalizedStringConverter"/>
@@ -147,6 +150,14 @@
                         </controls:SettingsItem>
                         <controls:SettingsItem Header="{mk:L11n UI.Settings.ElapsedPeriod}" Description="{mk:L11n UI.Settings.ElapsedPeriodDescription}">
                             <controls:NumericUpDown Value="{Binding NotificationDistanceElapsed}" Maximum="30" Width="100" HorizontalAlignment="Left"/>
+                        </controls:SettingsItem>
+                        <controls:SettingsItem Header="{mk:L11n UI.Settings.TimeFormat}" Description="{mk:L11n UI.Settings.TimeFormatDescription}">
+                            <ComboBox SelectedValue="{Binding ShortTimePattern}" SelectedValuePath="Tag" Width="150" HorizontalAlignment="Left">
+                                <ComboBoxItem Content="{mk:L11n UI.Settings.Auto_System}"/>
+                                <ComboBoxItem Content="{Binding Source={StaticResource SampleDate}, Converter={StaticResource ShortTimeConverter}, ConverterParameter='HH:mm'}" Tag="HH:mm"/>
+                                <ComboBoxItem Content="{Binding Source={StaticResource SampleDate}, Converter={StaticResource ShortTimeConverter}, ConverterParameter='hh:mm tt'}" Tag="hh:mm tt"/>
+                                <ComboBoxItem Content="{Binding Source={StaticResource SampleDate}, Converter={StaticResource ShortTimeConverter}, ConverterParameter='h:mm tt'}" Tag="h:mm tt"/>
+                            </ComboBox>
                         </controls:SettingsItem>
                         <controls:SettingsItem Header="{mk:L11n UI.Settings.Calendar}" Description="{mk:L11n UI.Settings.CalendarDescription}">
                             <StackPanel Orientation="Horizontal">

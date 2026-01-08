@@ -130,6 +130,7 @@ namespace AwqatSalaat.ViewModels
             foreach (var time in Items)
             {
                 time.InvalidateConfig();
+                time.RaiseTimePropertyChanged();
             }
 
             if (hasServiceSettingsChanged)

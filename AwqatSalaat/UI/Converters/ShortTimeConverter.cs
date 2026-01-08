@@ -15,7 +15,13 @@ namespace AwqatSalaat.UI.Converters
         {
             if (value is DateTime dateTime)
             {
-                var shortPattern = CultureInfo.InstalledUICulture.DateTimeFormat.ShortTimePattern;
+                var shortPattern = Properties.Settings.Realtime.ShortTimePattern;
+
+                if (string.IsNullOrEmpty(shortPattern))
+                {
+                    shortPattern = CultureInfo.InstalledUICulture.DateTimeFormat.ShortTimePattern;
+                }
+
                 var pattern = shortPattern;
 
                 if (parameter is string format && !string.IsNullOrEmpty(format))
@@ -38,6 +44,10 @@ namespace AwqatSalaat.UI.Converters
                         {
                             s_cacheAMPMOnly[shortPattern] = pattern = new string(shortPattern.Where(c => c == 't').ToArray());
                         }
+                    }
+                    else
+                    {
+                        pattern = format;
                     }
                 }
 

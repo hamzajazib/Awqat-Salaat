@@ -167,6 +167,10 @@ namespace AwqatSalaat.WinUI.Views
             {
                 ReloadThemes();
             }
+            else if (e.PropertyName == nameof(Properties.Settings.ShortTimePattern))
+            {
+                Bindings.Update();
+            }
         }
 
         private void ViewModel_PrayerTimeEntered(PrayerTimeViewModel prayerTime, bool adhanRequested)

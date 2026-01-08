@@ -31,6 +31,9 @@ namespace AwqatSalaat.WinUI.Views
             .Version;
         public static readonly string Architecture = Environment.Is64BitProcess ? "64-bit" : "32-bit";
 
+        public static readonly DateTime SampleTime = new DateTime(2026, 1, 8, 18, 45, 0);
+        public static readonly string[] TimePatterns = { "", "HH:mm", "hh:mm tt", "h:mm tt" };
+
 #if PACKAGED
         static SettingsPanel()
         {
