@@ -49,8 +49,8 @@
                 <TextBlock Text="{x:Bind ash:HijriDateHelper.Format(ViewModel.DisplayedDate, 'dd MMMM yyyy', ash:LocaleManager.Default.Current)}" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" FlowDirection="RightToLeft" Margin="0,4" HorizontalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,4" HorizontalAlignment="Center" Visibility="{x:Bind ViewModel.WidgetSettings.Settings.ShowGregorianDate}">
-                <TextBlock Text="{mk:L11n Key=UI.Panel.CorrespondTo}" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
-                <TextBlock Text="{x:Bind ViewModel.DisplayedDate.ToString('dd/MM/yyyy', x:Null)}" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" Margin="4,0,0,0"/>
+                <!--<TextBlock Text="{mk:L11n Key=UI.Panel.CorrespondTo}" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>-->
+                <TextBlock Text="{x:Bind ViewModel.DisplayedDate.ToString('dd MMMM yyyy', ash:LocaleManager.Default.CurrentCulture)}" FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}" Margin="0,0,0,0"/>
             </StackPanel>
         </StackPanel>
         <ItemsControl ItemsSource="{x:Bind ViewModel.Items}" Grid.Row="2">

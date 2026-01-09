@@ -29,6 +29,7 @@
 
             <BooleanToVisibilityConverter x:Key="BoolVisConverter"/>
             <converters:HijriDateConverter x:Key="HijriDateConverter"/>
+            <converters:GregorianDateConverter x:Key="GregorianDateConverter"/>
             <converters:ShortTimeConverter x:Key="ShortTimeConverter"/>
         </ui:ThemeDictionaryDesignTime>
     </UserControl.Resources>
@@ -45,8 +46,8 @@
             <TextBlock Text="{Binding DisplayedDate, StringFormat='dddd'}" Margin="0,4" HorizontalAlignment="Center"/>
             <TextBlock Text="{Binding DisplayedDate, Converter={StaticResource HijriDateConverter}, ConverterParameter='dd MMMM yyyy'}" d:Text="28 صفر 1445" d:FlowDirection="RightToLeft" Margin="0,4" HorizontalAlignment="Center"/>
             <StackPanel Orientation="Horizontal" Margin="0,4" HorizontalAlignment="Center" Visibility="{Binding WidgetSettings.Settings.ShowGregorianDate, Converter={StaticResource BoolVisConverter}}" d:Visibility="Visible">
-                <TextBlock Text="{mk:L11n UI.Panel.CorrespondTo}"/>
-                <TextBlock Text="{Binding DisplayedDate, StringFormat=dd/MM/yyyy}" Language="en" Margin="4,0,0,0"/>
+                <!--<TextBlock Text="{mk:L11n UI.Panel.CorrespondTo}"/>-->
+                <TextBlock Text="{Binding DisplayedDate, Converter={StaticResource GregorianDateConverter}, ConverterParameter='dd MMMM yyyy'}" Language="en" Margin="0,0,0,0"/>
             </StackPanel>
         </StackPanel>
         <StackPanel x:Name="locationPanel" Orientation="Horizontal" TextBlock.Foreground="{DynamicResource ThemeColors.TextTertiaryBrush}" Margin="0,4" MaxWidth="200" HorizontalAlignment="Center" Grid.Row="1" FlowDirection="LeftToRight" SizeChanged="LocationPanel_SizeChanged">

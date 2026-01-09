@@ -30,8 +30,8 @@
             <TextBlock Text="{x:Bind converters:CustomDateTimeConverter.Format(ViewModel.DisplayedDate, 'dddd', ash:LocaleManager.Default.Current)}" Foreground="{ThemeResource TextFillColorTertiaryBrush}" Margin="0,4" HorizontalAlignment="Center"/>
             <TextBlock Text="{x:Bind ash:HijriDateHelper.Format(ViewModel.DisplayedDate, 'dd MMMM yyyy', ash:LocaleManager.Default.Current)}" Foreground="{ThemeResource TextFillColorTertiaryBrush}" FlowDirection="RightToLeft" Margin="0,4" HorizontalAlignment="Center"/>
             <StackPanel Orientation="Horizontal" Margin="0,4" HorizontalAlignment="Center" Visibility="{x:Bind ViewModel.WidgetSettings.Settings.ShowGregorianDate}">
-                <TextBlock Text="{mk:L11n Key=UI.Panel.CorrespondTo}" Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
-                <TextBlock Text="{x:Bind ViewModel.DisplayedDate.ToString('dd/MM/yyyy', x:Null)}" Foreground="{ThemeResource TextFillColorTertiaryBrush}" Margin="4,0,0,0"/>
+                <!--<TextBlock Text="{mk:L11n Key=UI.Panel.CorrespondTo}" Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>-->
+                <TextBlock Text="{x:Bind ViewModel.DisplayedDate.ToString('dd MMMM yyyy', ash:LocaleManager.Default.CurrentCulture)}" Foreground="{ThemeResource TextFillColorTertiaryBrush}" Margin="0,0,0,0"/>
             </StackPanel>
         </StackPanel>
         <controls:StackPanelEx Orientation="Horizontal" MaxWidth="200" Margin="0,4" HorizontalAlignment="Center" Grid.Row="1" FlowDirection="LeftToRight">
