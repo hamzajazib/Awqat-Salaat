@@ -223,6 +223,15 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Abdul Majeed Al-Suraihi.
+        /// </summary>
+        public static string Data_AdhanSound_AbdulMajeedAlSuraihi {
+            get {
+                return ResourceManager.GetString("Data.AdhanSound.AbdulMajeedAlSuraihi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adhan 1.
         /// </summary>
         public static string Data_AdhanSound_Adhan1 {
@@ -246,6 +255,15 @@ namespace AwqatSalaat.Properties {
         public static string Data_AdhanSound_Custom {
             get {
                 return ResourceManager.GetString("Data.AdhanSound.Custom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sheikh Nasser Al-Qatami.
+        /// </summary>
+        public static string Data_AdhanSound_NasserAlQatami {
+            get {
+                return ResourceManager.GetString("Data.AdhanSound.NasserAlQatami", resourceCulture);
             }
         }
         

@@ -731,4 +731,10 @@
   <data name="UI.Settings.TimeFormatDescription" xml:space="preserve">
     <value>التنسيق المستخدم لعرض الوقت</value>
   </data>
+  <data name="Data.AdhanSound.NasserAlQatami" xml:space="preserve">
+    <value>الشيخ ناصر القطامي</value>
+  </data>
+  <data name="Data.AdhanSound.AbdulMajeedAlSuraihi" xml:space="preserve">
+    <value>عبد المجيد السريحي</value>
+  </data>
 </root>

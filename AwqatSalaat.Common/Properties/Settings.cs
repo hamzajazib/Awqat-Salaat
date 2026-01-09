@@ -277,6 +277,14 @@ namespace AwqatSalaat.Properties
                     AdhanSoundFile = @"Sounds\kholafa_08041446.mp3";
                     AdhanFajrSoundFile = @"Sounds\kholafa_08041446_full.mp3";
                     break;
+                case Data.AdhanSound.NasserAlQatami:
+                    AdhanSoundFile = @"Sounds\Sheikh Nasser Al-Qatami.mp3";
+                    AdhanFajrSoundFile = @"Sounds\Sheikh Nasser Al-Qatami Fajr.mp3";
+                    break;
+                case Data.AdhanSound.AbdulMajeedAlSuraihi:
+                    AdhanSoundFile = @"Sounds\Abdul Majeed Al-Suraihi.mp3";
+                    AdhanFajrSoundFile = @"Sounds\Abdul Majeed Al-Suraihi.mp3";
+                    break;
             }
         }
 

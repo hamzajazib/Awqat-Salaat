@@ -720,4 +720,10 @@ Choose the calendar and set the desired year and month then click on Refresh</va
   <data name="UI.Settings.TimeFormatDescription" xml:space="preserve">
     <value>The format in which the time is displayed</value>
   </data>
+  <data name="Data.AdhanSound.NasserAlQatami" xml:space="preserve">
+    <value>Sheikh Nasser Al-Qatami</value>
+  </data>
+  <data name="Data.AdhanSound.AbdulMajeedAlSuraihi" xml:space="preserve">
+    <value>Abdul Majeed Al-Suraihi</value>
+  </data>
 </root>
