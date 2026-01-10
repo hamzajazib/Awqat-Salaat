@@ -737,4 +737,7 @@
   <data name="Data.AdhanSound.AbdulMajeedAlSuraihi" xml:space="preserve">
     <value>عبد المجيد السريحي</value>
   </data>
+  <data name="UI.Settings.UseStandardAdhan" xml:space="preserve">
+    <value>استعمال صوت الأذان القياسي</value>
+  </data>
 </root>

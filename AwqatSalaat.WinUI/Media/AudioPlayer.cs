@@ -1,4 +1,5 @@
-﻿using Serilog;
+﻿using AwqatSalaat.Helpers;
+using Serilog;
 using System;
 using System.IO;
 using Windows.Media.Core;
@@ -23,13 +24,15 @@ namespace AwqatSalaat.WinUI.Media
             Log.Information($"Requested to play an audio (tag: {session.Tag})");
             Log.Debug("Audio session: {@session}", session);
 
-            if (File.Exists(session.File))
+            var absolutePath = FileHelper.AbsolutePath(session.File);
+
+            if (File.Exists(absolutePath))
             {
                 s_mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
                 s_mediaPlayer.MediaFailed += MediaPlayer_MediaFailed;
                 s_mediaPlayer.Position = TimeSpan.Zero;
                 s_mediaPlayer.IsLoopingEnabled = session.Loop;
-                s_mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(session.File));
+                s_mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(absolutePath));
                 s_mediaPlayer.Play();
                 s_currentSession = session;
                 s_currentSession.Ended += Session_Ended;

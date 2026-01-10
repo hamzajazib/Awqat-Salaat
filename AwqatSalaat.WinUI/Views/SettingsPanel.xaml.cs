@@ -1,3 +1,4 @@
+using AwqatSalaat.Configurations;
 using AwqatSalaat.Helpers;
 using AwqatSalaat.Interop;
 using AwqatSalaat.Services.Nominatim;
@@ -316,8 +317,25 @@ namespace AwqatSalaat.WinUI.Views
 
         private async void BrowseAdhanSound_Click(object sender, RoutedEventArgs e)
         {
-            Log.Information("Clicked on Browse for adhan sound");
-            await BrowseSoundFileAsync((s, f) => s.AdhanSoundFile = f);
+            if (sender is Button button && button.DataContext is PrayerConfig prayerConfig)
+            {
+                Log.Information($"Clicked on Browse for {prayerConfig.Key} adhan sound");
+
+                if (prayerConfig.CanChangeAdhan && !prayerConfig.StandardAdhan)
+                {
+                    var path = await BrowseSoundFileAsync(null);
+
+                    if (path is not null)
+                    {
+                        prayerConfig.AdhanFile = path;
+                    }
+                }
+            }
+            else
+            {
+                Log.Information("Clicked on Browse for adhan sound");
+                await BrowseSoundFileAsync((s, f) => s.AdhanSoundFile = f); 
+            }
         }
 
         private async void BrowseAdhanFajrSound_Click(object sender, RoutedEventArgs e)
@@ -326,7 +344,7 @@ namespace AwqatSalaat.WinUI.Views
             await BrowseSoundFileAsync((s, f) => s.AdhanFajrSoundFile = f);
         }
 
-        private async Task BrowseSoundFileAsync(Action<Properties.Settings, string> fileSetter)
+        private async Task<string> BrowseSoundFileAsync(Action<Properties.Settings, string> fileSetter)
         {
             try
             {
@@ -342,9 +360,11 @@ namespace AwqatSalaat.WinUI.Views
 
                 StorageFile file = await fileOpenPicker.PickSingleFileAsync();
 
-                if (file != null)
+                if (file is not null)
                 {
-                    fileSetter(ViewModel.Realtime, file.Path);
+                    fileSetter?.Invoke(ViewModel.Realtime, file.Path);
+
+                    return file.Path;
                 }
             }
             finally
@@ -352,6 +372,8 @@ namespace AwqatSalaat.WinUI.Views
                 keepFlyoutOpen = false;
                 IsHitTestVisible = true;
             }
+
+            return null;
         }
 
         private async void BrowseCsvFile_Click(object sender, RoutedEventArgs e)

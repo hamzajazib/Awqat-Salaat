@@ -79,8 +79,10 @@
             <sys:DateTime x:Key="SampleDate">2026-01-08T18:45</sys:DateTime>
 
             <converters:ShortTimeConverter x:Key="ShortTimeConverter"/>
+            <converters:AdhanFileConverter x:Key="AdhanFileConverter"/>
             <converters:ThemeAccentConverter x:Key="ThemeAccentConverter"/>
             <converters:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
+            <converters:StringEqualityConverter x:Key="StringEqualityConverter"/>
             <converters:LocalizedStringConverter x:Key="LocalizedStringConverter"/>
             <converters:BoolInverterConverter x:Key="BoolInverterConverter"/>
             <converters:BoolToVisibilityInvertedConverter x:Key="BoolToVisibilityInvertedConverter"/>
@@ -292,6 +294,32 @@
                                             <StackPanel>
                                                 <CheckBox Content="{mk:L11n UI.Settings.UseGlobal}" IsChecked="{Binding GlobalElapsedTime}"/>
                                                 <controls:NumericUpDown Value="{Binding ElapsedTime}" Maximum="30" Width="100" HorizontalAlignment="Left" Margin="0,10,0,0" IsEnabled="{Binding GlobalElapsedTime, Converter={StaticResource BoolInverterConverter}}"/>
+                                            </StackPanel>
+                                        </controls:SettingsItem>
+                                        <controls:SettingsItem Header="{mk:L11n UI.Settings.AdhanSound}" Description="{mk:L11n UI.Settings.AdhanSoundDescription}" Visibility="{Binding CanChangeAdhan, Converter={StaticResource BooleanToVisibilityConverter}}" d:Visibility="Visible">
+                                            <StackPanel>
+                                                <CheckBox Content="{mk:L11n UI.Settings.UseStandardAdhan}" IsChecked="{Binding StandardAdhan}"/>
+                                                <Grid Margin="0,10,0,0" IsEnabled="{Binding StandardAdhan, Converter={StaticResource BoolInverterConverter}}">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition/>
+                                                    </Grid.RowDefinitions>
+                                                    <ComboBox x:Name="cmb" ItemsSource="{Binding Source={StaticResource AdhanSoundEnum}}" SelectedItem="{Binding AdhanFile, Converter={StaticResource AdhanFileConverter}}" Width="200">
+                                                        <ComboBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Converter={StaticResource LocalizedStringConverter}, ConverterParameter='Data.AdhanSound.{0}'}"/>
+                                                            </DataTemplate>
+                                                        </ComboBox.ItemTemplate>
+                                                    </ComboBox>
+                                                    <TextBox Text="{Binding AdhanFile}" Margin="8,0" FlowDirection="LeftToRight" Grid.Column="1" IsEnabled="{Binding ElementName=cmb, Path=SelectedItem, Converter={StaticResource StringEqualityConverter}, ConverterParameter=Custom}"/>
+                                                    <controls:SoundPreviewButton File="{Binding AdhanFile}" Grid.Column="2"/>
+                                                    <Button Content="{mk:L11n UI.Settings.Browse}" Click="BrowseAdhanSound_Click" Grid.Column="3" Margin="8,0,0,0" IsEnabled="{Binding ElementName=cmb, Path=SelectedItem, Converter={StaticResource StringEqualityConverter}, ConverterParameter=Custom}" d:Content="Browse..."/>
+                                                </Grid>
                                             </StackPanel>
                                         </controls:SettingsItem>
                                         <controls:SettingsItem Header="{mk:L11n UI.Settings.TimeVisibility}" Description="{mk:L11n UI.Settings.TimeVisibilityDescription}" Visibility="{Binding IsPrincipal, Converter={StaticResource BoolToVisibilityInvertedConverter}}">

@@ -71,7 +71,7 @@ namespace AwqatSalaat.ViewModels
 
         public event Action NearNotificationStarted;
         public event Action NearNotificationStopped;
-        public event Action<PrayerTimeViewModel, bool> PrayerTimeEntered;
+        public event Action<PrayerTimeViewModel> PrayerTimeEntered;
 
         public WidgetViewModel()
         {
@@ -163,8 +163,7 @@ namespace AwqatSalaat.ViewModels
                 && prayerTime.Time.Hour == TimeStamp.Now.Hour
                 && prayerTime.Time.Minute == TimeStamp.Now.Minute)
             {
-                bool requestAdhan = WidgetSettings.Settings.AdhanSound != AdhanSound.None;
-                PrayerTimeEntered?.Invoke(prayerTime, requestAdhan);
+                PrayerTimeEntered?.Invoke(prayerTime);
             }
         }
 

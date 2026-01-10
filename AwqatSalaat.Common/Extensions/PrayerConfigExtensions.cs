@@ -2,7 +2,7 @@
 
 namespace AwqatSalaat.Extensions
 {
-    internal static class PrayerConfigExtensions
+    public static class PrayerConfigExtensions
     {
         public static ushort EffectiveReminderOffset(this PrayerConfig config)
         {
@@ -16,6 +16,15 @@ namespace AwqatSalaat.Extensions
             return config.GlobalElapsedTime
                 ? Properties.Settings.Default.NotificationDistanceElapsed
                 : config.ElapsedTime;
+        }
+
+        public static string EffectiveAdhanFile(this PrayerConfig config)
+        {
+            return !config.StandardAdhan
+                ? config.AdhanFile
+                : config.Key == nameof(Data.PrayerTimes.Fajr)
+                    ? Properties.Settings.Default.AdhanFajrSoundFilePath
+                    : Properties.Settings.Default.AdhanSoundFilePath;
         }
     }
 }

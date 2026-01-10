@@ -726,4 +726,7 @@ Choose the calendar and set the desired year and month then click on Refresh</va
   <data name="Data.AdhanSound.AbdulMajeedAlSuraihi" xml:space="preserve">
     <value>Abdul Majeed Al-Suraihi</value>
   </data>
+  <data name="UI.Settings.UseStandardAdhan" xml:space="preserve">
+    <value>Use standard adhan sound</value>
+  </data>
 </root>

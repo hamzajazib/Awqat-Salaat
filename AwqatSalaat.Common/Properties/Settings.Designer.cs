@@ -1006,5 +1006,101 @@ namespace AwqatSalaat.Properties {
                 this["ShortTimePattern"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Config_Dhuhr_StandardAdhan {
+            get {
+                return ((bool)(this["Config_Dhuhr_StandardAdhan"]));
+            }
+            set {
+                this["Config_Dhuhr_StandardAdhan"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Config_Dhuhr_AdhanFile {
+            get {
+                return ((string)(this["Config_Dhuhr_AdhanFile"]));
+            }
+            set {
+                this["Config_Dhuhr_AdhanFile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Config_Asr_StandardAdhan {
+            get {
+                return ((bool)(this["Config_Asr_StandardAdhan"]));
+            }
+            set {
+                this["Config_Asr_StandardAdhan"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Config_Asr_AdhanFile {
+            get {
+                return ((string)(this["Config_Asr_AdhanFile"]));
+            }
+            set {
+                this["Config_Asr_AdhanFile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Config_Maghrib_StandardAdhan {
+            get {
+                return ((bool)(this["Config_Maghrib_StandardAdhan"]));
+            }
+            set {
+                this["Config_Maghrib_StandardAdhan"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Config_Maghrib_AdhanFile {
+            get {
+                return ((string)(this["Config_Maghrib_AdhanFile"]));
+            }
+            set {
+                this["Config_Maghrib_AdhanFile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Config_Isha_StandardAdhan {
+            get {
+                return ((bool)(this["Config_Isha_StandardAdhan"]));
+            }
+            set {
+                this["Config_Isha_StandardAdhan"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Config_Isha_AdhanFile {
+            get {
+                return ((string)(this["Config_Isha_AdhanFile"]));
+            }
+            set {
+                this["Config_Isha_AdhanFile"] = value;
+            }
+        }
     }
 }

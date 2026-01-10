@@ -37,9 +37,9 @@
                 <ResourceDictionary Source="../Assets/Vectors.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+            <converters:AdhanFileConverter x:Key="AdhanFileConverter"/>
             <converters:ThemeAccentConverter x:Key="ThemeAccentConverter"/>
             <converters:DecimalConverter x:Key="DecimalConverter"/>
-            <converters:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
             <converters:EnumEqualityConverter x:Key="EnumEqualityConverter"/>
             <converters:EnumEqualityToVisibilityConverter x:Key="EnumEqualityToVisibilityConverter"/>
             <converters:PercentageConverter x:Key="PercentageConverter"/>
@@ -212,7 +212,7 @@
                             </ctrl:SettingsItem>
                             <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.AdhanSound}" Description="{mk:L11n Key=UI.Settings.AdhanSoundDescription}">
                                 <StackPanel>
-                                    <ComboBox ItemsSource="{mk:Enums Type=dt:AdhanSound}" SelectedItem="{Binding Realtime.AdhanSound, Mode=TwoWay}" Width="280">
+                                    <ComboBox ItemsSource="{mk:Enums Type=dt:AdhanSound}" SelectedItem="{Binding Realtime.AdhanSound, Mode=TwoWay}" Width="220">
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate>
                                                 <ctrl:LocalizedStringPresenter Value="{Binding}" KeyFormat="Data.AdhanSound.{0}"/>
@@ -313,6 +313,36 @@
                                                 <StackPanel>
                                                     <ToggleSwitch IsOn="{x:Bind GlobalElapsedTime, Mode=TwoWay}" OnContent="{mk:L11n Key=UI.Settings.UseGlobal}" OffContent="{mk:L11n Key=UI.Settings.UseGlobal}"/>
                                                     <NumberBox Value="{x:Bind ElapsedTime}" Minimum="0" Maximum="30" SpinButtonPlacementMode="Inline" HorizontalAlignment="Left" Margin="0,10,0,0" IsEnabled="{x:Bind GlobalElapsedTime, Converter={StaticResource BooleanInvertedConverter}, Mode=OneWay}"/>
+                                                </StackPanel>
+                                            </ctrl:SettingsItem>
+                                            <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.AdhanSound}" Description="{mk:L11n Key=UI.Settings.AdhanSoundDescription}" Visibility="{x:Bind CanChangeAdhan, Mode=OneWay}">
+                                                <StackPanel>
+                                                    <ToggleSwitch IsOn="{x:Bind StandardAdhan, Mode=TwoWay}" OnContent="{mk:L11n Key=UI.Settings.UseStandardAdhan}" OffContent="{mk:L11n Key=UI.Settings.UseStandardAdhan}"/>
+                                                    <UserControl Margin="0,10,0,0" IsEnabled="{x:Bind StandardAdhan, Converter={StaticResource BooleanInvertedConverter}, Mode=OneWay}">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition/>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition/>
+                                                                <RowDefinition Height="8"/>
+                                                                <RowDefinition/>
+                                                            </Grid.RowDefinitions>
+                                                            <ComboBox x:Name="cmb" ItemsSource="{mk:Enums Type=dt:AdhanSound}" SelectedItem="{Binding AdhanFile, Converter={StaticResource AdhanFileConverter}, Mode=TwoWay}" Width="220">
+                                                                <ComboBox.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <ctrl:LocalizedStringPresenter Value="{Binding}" KeyFormat="Data.AdhanSound.{0}"/>
+                                                                    </DataTemplate>
+                                                                </ComboBox.ItemTemplate>
+                                                            </ComboBox>
+                                                            <TextBox Text="{x:Bind AdhanFile}" Margin="8,0" FlowDirection="LeftToRight" Grid.Column="1" IsEnabled="{Binding ElementName=cmb, Path=SelectedItem, Converter={StaticResource EnumEqualityConverter}, ConverterParameter=Custom, Mode=OneWay}"/>
+                                                            <ctrl:SoundPreviewButton File="{x:Bind AdhanFile, Mode=OneWay}" IdleToolTip="{mk:L11n Key=UI.Controls.SoundPreview.ToolTipIdle}" PlayingToolTip="{mk:L11n Key=UI.Controls.SoundPreview.ToolTipPlaying}" Grid.Column="2"/>
+                                                            <Button Content="{mk:L11n Key=UI.Settings.Browse}" Click="BrowseAdhanSound_Click" Grid.Column="3" Margin="8,0,0,0" IsEnabled="{Binding ElementName=cmb, Path=SelectedItem, Converter={StaticResource EnumEqualityConverter}, ConverterParameter=Custom, Mode=OneWay}"/>
+                                                        </Grid>
+                                                    </UserControl>
                                                 </StackPanel>
                                             </ctrl:SettingsItem>
                                             <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.TimeVisibility}" Description="{mk:L11n Key=UI.Settings.TimeVisibilityDescription}" Visibility="{x:Bind IsPrincipal, Converter={StaticResource BooleanToVisibilityInvertedConverter}, Mode=OneWay}">

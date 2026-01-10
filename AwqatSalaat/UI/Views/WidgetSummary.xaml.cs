@@ -1,4 +1,5 @@
-﻿using AwqatSalaat.Helpers;
+﻿using AwqatSalaat.Extensions;
+using AwqatSalaat.Helpers;
 using AwqatSalaat.Media;
 using AwqatSalaat.ViewModels;
 using Serilog;
@@ -145,21 +146,20 @@ namespace AwqatSalaat.UI.Views
             }
         }
 
-        private void ViewModel_PrayerTimeEntered(PrayerTimeViewModel prayerTime, bool adhanRequested)
+        private void ViewModel_PrayerTimeEntered(PrayerTimeViewModel prayerTime)
         {
-            if (adhanRequested)
+            Dispatcher.BeginInvoke(new Action(() =>
             {
-                bool isFajrTime = prayerTime.Key == nameof(Data.PrayerTimes.Fajr);
-                Dispatcher.BeginInvoke(new Action(() =>
+                var config = ViewModel.WidgetSettings.Settings.GetPrayerConfig(prayerTime.Key);
+                var file = config.EffectiveAdhanFile();
+
+                if (!string.IsNullOrEmpty(file))
                 {
-                    Log.Information("Adhan requested" + (isFajrTime ? " for fajr" : ""));
-                    var file = isFajrTime
-                            ? ViewModel.WidgetSettings.Settings.AdhanFajrSoundFilePath
-                            : ViewModel.WidgetSettings.Settings.AdhanSoundFilePath;
+                    Log.Information("Adhan requested for " + prayerTime.Key);
                     var session = new AudioPlayerSession(file, tag: AdhanSoundTag);
                     PlaySound(session);
-                }));
-            }
+                }
+            }));
         }
 
         private void ViewModel_NearNotificationStarted()

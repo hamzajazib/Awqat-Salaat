@@ -1,3 +1,4 @@
+using AwqatSalaat.Extensions;
 using AwqatSalaat.Helpers;
 using AwqatSalaat.ViewModels;
 using AwqatSalaat.WinUI.Helpers;
@@ -173,28 +174,25 @@ namespace AwqatSalaat.WinUI.Views
             }
         }
 
-        private void ViewModel_PrayerTimeEntered(PrayerTimeViewModel prayerTime, bool adhanRequested)
+        private void ViewModel_PrayerTimeEntered(PrayerTimeViewModel prayerTime)
         {
-            if (adhanRequested)
+            DispatcherQueue.TryEnqueue(() =>
             {
-                bool isFajrTime = prayerTime.Key == nameof(Data.PrayerTimes.Fajr);
-                DispatcherQueue.TryEnqueue(() =>
+                var config = ViewModel.WidgetSettings.Settings.GetPrayerConfig(prayerTime.Key);
+                var file = config.EffectiveAdhanFile();
+                var adhanRequested = !string.IsNullOrEmpty(file);
+
+                if (adhanRequested)
                 {
-                    Log.Information("Adhan requested" + (isFajrTime ? " for fajr" : ""));
-                    var file = isFajrTime
-                            ? ViewModel.WidgetSettings.Settings.AdhanFajrSoundFilePath
-                            : ViewModel.WidgetSettings.Settings.AdhanSoundFilePath;
+                    Log.Information("Adhan requested for " + prayerTime.Key);
                     var session = new AudioPlayerSession
                     {
                         File = file,
                         Tag = AdhanSoundTag,
                     };
-                    PlaySound(session);
-                });
-            }
+                    PlaySound(session); 
+                }
 
-            DispatcherQueue.TryEnqueue(() =>
-            {
                 if (prayerTime.Key != nameof(Data.PrayerTimes.Shuruq) && ViewModel.WidgetSettings.Settings.EnablePrayerTimeToast)
                 {
                     Notification.NotificationManager.SendTimeEnteredToast(prayerTime.Key, adhanRequested);

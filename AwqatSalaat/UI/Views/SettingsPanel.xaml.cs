@@ -1,4 +1,5 @@
-﻿using AwqatSalaat.Helpers;
+﻿using AwqatSalaat.Configurations;
+using AwqatSalaat.Helpers;
 using AwqatSalaat.UI.Controls;
 using AwqatSalaat.ViewModels;
 using Microsoft.Win32;
@@ -226,8 +227,25 @@ namespace AwqatSalaat.UI.Views
 
         private void BrowseAdhanSound_Click(object sender, RoutedEventArgs e)
         {
-            Log.Information("Clicked on Browse for adhan sound");
-            BrowseSoundFile(ViewModel.Realtime.AdhanSoundFilePath, (s, f) => s.AdhanSoundFile = f);
+            if (sender is Button button && button.DataContext is PrayerConfig prayerConfig)
+            {
+                Log.Information($"Clicked on Browse for {prayerConfig.Key} adhan sound");
+
+                if (prayerConfig.CanChangeAdhan && !prayerConfig.StandardAdhan)
+                {
+                    var path = BrowseSoundFile(prayerConfig.AdhanFile, null);
+
+                    if (path != null)
+                    {
+                        prayerConfig.AdhanFile = path;
+                    }
+                }
+            }
+            else
+            {
+                Log.Information("Clicked on Browse for adhan sound");
+                BrowseSoundFile(ViewModel.Realtime.AdhanSoundFilePath, (s, f) => s.AdhanSoundFile = f); 
+            }
         }
 
         private void BrowseAdhanFajrSound_Click(object sender, RoutedEventArgs e)
@@ -236,7 +254,7 @@ namespace AwqatSalaat.UI.Views
             BrowseSoundFile(ViewModel.Realtime.AdhanFajrSoundFilePath, (s, f) => s.AdhanFajrSoundFile = f);
         }
 
-        private void BrowseSoundFile(string initialPath, Action<Properties.Settings, string> fileSetter)
+        private string BrowseSoundFile(string initialPath, Action<Properties.Settings, string> fileSetter)
         {
             if (openFileDialog is null)
             {
@@ -246,16 +264,23 @@ namespace AwqatSalaat.UI.Views
                 };
             }
 
+            if (initialPath == string.Empty)
+            {
+                initialPath = null;
+            }
+
             ParentPopup.StaysOpen = true;
             ParentPopup.IsTopMost = false;
 
             try
             {
-                openFileDialog.InitialDirectory = System.IO.Path.GetDirectoryName(initialPath);
+                openFileDialog.InitialDirectory = Path.GetDirectoryName(initialPath);
 
                 if (openFileDialog.ShowDialog() == true)
                 {
-                    fileSetter(ViewModel.Realtime, openFileDialog.FileName);
+                    fileSetter?.Invoke(ViewModel.Realtime, openFileDialog.FileName);
+
+                    return openFileDialog.FileName;
                 }
             }
             finally
@@ -263,6 +288,8 @@ namespace AwqatSalaat.UI.Views
                 ParentPopup.StaysOpen = false;
                 ParentPopup.IsTopMost = true;
             }
+
+            return null;
         }
 
         private void Expander_Expanded(object sender, RoutedEventArgs e)

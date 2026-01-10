@@ -1830,6 +1830,15 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use standard adhan sound.
+        /// </summary>
+        public static string UI_Settings_UseStandardAdhan {
+            get {
+                return ResourceManager.GetString("UI.Settings.UseStandardAdhan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zip code.
         /// </summary>
         public static string UI_Settings_ZipCode {
