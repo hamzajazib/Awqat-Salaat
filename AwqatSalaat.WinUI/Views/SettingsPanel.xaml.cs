@@ -82,6 +82,7 @@ namespace AwqatSalaat.WinUI.Views
                 Bindings.Update();
 
                 this.ViewModel.Updated += _ => StartupSettings.Commit();
+                this.ViewModel.SaveRejected += ViewModel_SaveRejected;
 
                 if (ParentFlyout is not null)
                 {
@@ -104,6 +105,14 @@ namespace AwqatSalaat.WinUI.Views
             ViewModel.Realtime.PropertyChanged += Realtime_PropertyChanged;
 
             OnServiceChanged();
+        }
+
+        private void ViewModel_SaveRejected(string error)
+        {
+            keepFlyoutOpen = true;
+            var localizedError = LocaleManager.Default.Get("Dialog." + error);
+            MessageBox.Error(Properties.Resources.Dialog_InvalidServiceSettings + "\n" + localizedError);
+            keepFlyoutOpen = false;
         }
 
         private void SettingsPanel_Unloaded(object sender, RoutedEventArgs e)

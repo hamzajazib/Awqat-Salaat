@@ -740,4 +740,28 @@
   <data name="UI.Settings.UseStandardAdhan" xml:space="preserve">
     <value>استعمال صوت الأذان القياسي</value>
   </data>
+  <data name="Dialog.InvalidServiceSettings" xml:space="preserve">
+    <value>بعض الإعدادات الخاصة بالخدمة غير صالحة.</value>
+  </data>
+  <data name="Dialog.MissingZipCode" xml:space="preserve">
+    <value>الرمز البريدي مفقود.</value>
+  </data>
+  <data name="Dialog.MissingCity" xml:space="preserve">
+    <value>اسم المدينة مفقود.</value>
+  </data>
+  <data name="Dialog.MissingCoordinates" xml:space="preserve">
+    <value>إحداثيات الطول و/أو العرض مفقودة.</value>
+  </data>
+  <data name="Dialog.InvalidCsvFile" xml:space="preserve">
+    <value>ملف CSV غير صالح.</value>
+  </data>
+  <data name="Dialog.MissingCsvDateColumn" xml:space="preserve">
+    <value>الربط الخاص بعمود التاريخ مفقود.</value>
+  </data>
+  <data name="Dialog.MissingCsvDayOrMonthColumn" xml:space="preserve">
+    <value>الربط الخاص بعمود اليوم أو الشهر مفقود.</value>
+  </data>
+  <data name="Dialog.MissingCsvTimeColumn" xml:space="preserve">
+    <value>الربط الخاص بأحد أعمدة الوقت مفقود.</value>
+  </data>
 </root>

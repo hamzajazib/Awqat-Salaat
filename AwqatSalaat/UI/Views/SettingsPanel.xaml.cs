@@ -60,6 +60,7 @@ namespace AwqatSalaat.UI.Views
             if (!loadedFirstTime)
             {
                 loadedFirstTime = true;
+                ViewModel.SaveRejected += ViewModel_SaveRejected;
                 
                 if (!ViewModel.Settings.IsConfigured)
                 {
@@ -71,6 +72,16 @@ namespace AwqatSalaat.UI.Views
             ViewModel.Realtime.PropertyChanged += Realtime_PropertyChanged;
 
             OnServiceChanged();
+        }
+
+        private void ViewModel_SaveRejected(string error)
+        {
+            ParentPopup.StaysOpen = true;
+            ParentPopup.IsTopMost = false;
+            var localizedError = LocaleManager.Default.Get("Dialog." + error);
+            MessageBoxEx.Error(Properties.Resources.Dialog_InvalidServiceSettings + "\n" + localizedError);
+            ParentPopup.StaysOpen = false;
+            ParentPopup.IsTopMost = true;
         }
 
         private void SettingsPanel_Unloaded(object sender, RoutedEventArgs e)

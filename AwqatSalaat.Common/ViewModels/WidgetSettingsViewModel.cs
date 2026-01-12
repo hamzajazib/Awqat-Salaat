@@ -33,6 +33,7 @@ namespace AwqatSalaat.ViewModels
         public CsvImporterViewModel CsvImporter { get; }
         public ObservableCollection<PrayerConfig> PrayerConfigs { get; }
 
+        public event Action<string> SaveRejected;
         public event Action<bool> Updated;
 
         public WidgetSettingsViewModel()
@@ -113,6 +114,66 @@ namespace AwqatSalaat.ViewModels
             }
         }
 
+        private bool ValidateServiceSettings(out ServiceValdiationError error)
+        {
+            error = ServiceValdiationError.None;
+            var locationMode = Realtime.LocationDetection;
+
+            switch (Realtime.Service)
+            {
+                case PrayerTimesService.SalahHour:
+                    if (locationMode == LocationDetectionMode.ByCountryCode && string.IsNullOrEmpty(Realtime.ZipCode))
+                    {
+                        error = ServiceValdiationError.MissingZipCode;
+                    }
+                    break;
+                case PrayerTimesService.AlAdhan:
+                    if (locationMode == LocationDetectionMode.ByCountryCode && string.IsNullOrEmpty(Realtime.City))
+                    {
+                        error = ServiceValdiationError.MissingCity;
+                    }
+                    break;
+                case PrayerTimesService.Local:
+                    if (locationMode == LocationDetectionMode.ByCountryCode)
+                    {
+                        error = ServiceValdiationError.MissingCoordinates;
+                    }
+                    break;
+                case PrayerTimesService.CSV:
+                    if (string.IsNullOrEmpty(Realtime.City))
+                    {
+                        error = ServiceValdiationError.MissingCity;
+                    }
+                    else if (!System.IO.File.Exists(Realtime.CSV_FilePath))
+                    {
+                        error = ServiceValdiationError.InvalidCsvFile;
+                    }
+                    else if (Realtime.CSV_HasDateColumn)
+                    {
+                        if (Realtime.CSV_DateColumnSchema == CsvImportDateColumnSchema.Single && Realtime.CSV_Map_Date == -1)
+                        {
+                            error = ServiceValdiationError.MissingCsvDateColumn;
+                        }
+                        else if (Realtime.CSV_DateColumnSchema == CsvImportDateColumnSchema.Dual && (Realtime.CSV_Map_Day == -1 || Realtime.CSV_Map_Month == -1))
+                        {
+                            error = ServiceValdiationError.MissingCsvDayOrMonthColumn;
+                        }
+                    }
+                    else if (Realtime.CSV_Map_Fajr == -1
+                        || Realtime.CSV_Map_Shuruq == -1
+                        || Realtime.CSV_Map_Dhuhr == -1
+                        || Realtime.CSV_Map_Asr == -1
+                        || Realtime.CSV_Map_Maghrib == -1
+                        || Realtime.CSV_Map_Isha == -1)
+                    {
+                        error = ServiceValdiationError.MissingCsvTimeColumn;
+                    }
+                    break;
+            }
+
+            return error == ServiceValdiationError.None;
+        }
+
         private void CopySettings(bool fromOriginal)
         {
             Settings source = fromOriginal ? Settings : Realtime;
@@ -133,6 +194,15 @@ namespace AwqatSalaat.ViewModels
         private void SaveExecute(object obj)
         {
             Log.Information("[Settings] Save invoked");
+            bool validServiceSettings = ValidateServiceSettings(out var error);
+
+            if (!validServiceSettings)
+            {
+                Log.Information($"Service settings are invalid. Error={error}");
+                SaveRejected?.Invoke(error.ToString());
+                return;
+            }
+
             var currentServiceSettings = (
                     Realtime.Service,
                     Realtime.School,
@@ -207,6 +277,18 @@ namespace AwqatSalaat.ViewModels
             Locator.SearchQuery = null;
             Locator.CancelCheck.Execute(null);
             Cancel.RaiseCanExecuteChanged();
+        }
+
+        private enum ServiceValdiationError
+        {
+            None,
+            MissingZipCode,
+            MissingCity,
+            MissingCoordinates,
+            MissingCsvDateColumn,
+            MissingCsvDayOrMonthColumn,
+            MissingCsvTimeColumn,
+            InvalidCsvFile
         }
     }
 }

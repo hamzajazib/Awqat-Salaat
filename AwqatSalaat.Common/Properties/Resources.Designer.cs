@@ -448,11 +448,83 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid CSV file..
+        /// </summary>
+        public static string Dialog_InvalidCsvFile {
+            get {
+                return ResourceManager.GetString("Dialog.InvalidCsvFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Some service-related settings are invalid..
+        /// </summary>
+        public static string Dialog_InvalidServiceSettings {
+            get {
+                return ResourceManager.GetString("Dialog.InvalidServiceSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The logs file does not exist. It may not be created yet..
         /// </summary>
         public static string Dialog_LogsFileNotFound {
             get {
                 return ResourceManager.GetString("Dialog.LogsFileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing city name..
+        /// </summary>
+        public static string Dialog_MissingCity {
+            get {
+                return ResourceManager.GetString("Dialog.MissingCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing latitude and/or longitude coordinates..
+        /// </summary>
+        public static string Dialog_MissingCoordinates {
+            get {
+                return ResourceManager.GetString("Dialog.MissingCoordinates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing mapping for Date column..
+        /// </summary>
+        public static string Dialog_MissingCsvDateColumn {
+            get {
+                return ResourceManager.GetString("Dialog.MissingCsvDateColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing mapping for Day or Month column..
+        /// </summary>
+        public static string Dialog_MissingCsvDayOrMonthColumn {
+            get {
+                return ResourceManager.GetString("Dialog.MissingCsvDayOrMonthColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing mapping for one or more time column(s)..
+        /// </summary>
+        public static string Dialog_MissingCsvTimeColumn {
+            get {
+                return ResourceManager.GetString("Dialog.MissingCsvTimeColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing zip code..
+        /// </summary>
+        public static string Dialog_MissingZipCode {
+            get {
+                return ResourceManager.GetString("Dialog.MissingZipCode", resourceCulture);
             }
         }
         
