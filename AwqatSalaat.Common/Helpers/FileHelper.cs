@@ -15,6 +15,11 @@ namespace AwqatSalaat.Helpers
 
         public static string AbsolutePath(string file)
         {
+            if (string.IsNullOrWhiteSpace(file))
+            {
+                return null;
+            }
+
             try
             {
                 if (Path.IsPathRooted(file))
