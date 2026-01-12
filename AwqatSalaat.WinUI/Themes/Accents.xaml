@@ -168,14 +168,14 @@
     <ResourceDictionary x:Key="Yellow">
         <ResourceDictionary.ThemeDictionaries>
             <ResourceDictionary x:Key="Default">
-                <Color x:Key="TextHighlightColor">#f0ec75</Color>
+                <Color x:Key="TextHighlightColor">#f0e675</Color>
                 <Color x:Key="FillCriticalColor">#BA5D5D</Color>
 
                 <SolidColorBrush x:Key="TextHighlightBrush" Color="{StaticResource TextHighlightColor}"/>
                 <SolidColorBrush x:Key="FillCriticalBrush" Color="{StaticResource FillCriticalColor}"/>
             </ResourceDictionary>
             <ResourceDictionary x:Key="Light">
-                <Color x:Key="TextHighlightColor">#999400</Color>
+                <Color x:Key="TextHighlightColor">#998c00</Color>
                 <Color x:Key="FillCriticalColor">#BA5D5D</Color>
 
                 <SolidColorBrush x:Key="TextHighlightBrush" Color="{StaticResource TextHighlightColor}"/>
@@ -183,11 +183,11 @@
             </ResourceDictionary>
         </ResourceDictionary.ThemeDictionaries>
 
-        <Color x:Key="SystemAccentColor">#adaa46</Color>
-        <Color x:Key="SystemAccentColorLight1">#a8a548</Color>
-        <Color x:Key="SystemAccentColorLight2">#b3b04d</Color>
-        <Color x:Key="SystemAccentColorLight3">#d1cd61</Color>
-        <Color x:Key="SystemAccentColorDark1">#a6a33f</Color>
+        <Color x:Key="SystemAccentColor">#aea547</Color>
+        <Color x:Key="SystemAccentColorLight1">#a8a048</Color>
+        <Color x:Key="SystemAccentColorLight2">#b3aa4d</Color>
+        <Color x:Key="SystemAccentColorLight3">#d1c861</Color>
+        <Color x:Key="SystemAccentColorDark1">#a69d3f</Color>
         <Color x:Key="SystemAccentColorDark2">#918a3b</Color>
         <Color x:Key="SystemAccentColorDark3">#605520</Color>
     </ResourceDictionary>

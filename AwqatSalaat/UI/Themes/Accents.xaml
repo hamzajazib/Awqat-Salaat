@@ -170,22 +170,22 @@
     </ResourceDictionary>
     
     <ResourceDictionary x:Key="YellowDark">
-        <Color x:Key="ThemeColors.AccentColor">#b3b04d</Color>
-        <Color x:Key="ThemeColors.AccentLightColor">#d1cd61</Color>
-        <Color x:Key="ThemeColors.AccentDarkColor">#a8a548</Color>
+        <Color x:Key="ThemeColors.AccentColor">#b3aa4d</Color>
+        <Color x:Key="ThemeColors.AccentLightColor">#d1c861</Color>
+        <Color x:Key="ThemeColors.AccentDarkColor">#a8a048</Color>
 
-        <Color x:Key="ThemeColors.TextHighlightColor">#f0ec75</Color>
+        <Color x:Key="ThemeColors.TextHighlightColor">#f0e675</Color>
 
-        <Color x:Key="ThemeColors.ControlHoverBorderColor">#d1cd61</Color>
+        <Color x:Key="ThemeColors.ControlHoverBorderColor">#d1c861</Color>
     </ResourceDictionary>
     
     <ResourceDictionary x:Key="YellowLight">
-        <Color x:Key="ThemeColors.AccentColor">#b3b04d</Color>
-        <Color x:Key="ThemeColors.AccentLightColor">#d1cd61</Color>
-        <Color x:Key="ThemeColors.AccentDarkColor">#a8a548</Color>
+        <Color x:Key="ThemeColors.AccentColor">#b3aa4d</Color>
+        <Color x:Key="ThemeColors.AccentLightColor">#d1c861</Color>
+        <Color x:Key="ThemeColors.AccentDarkColor">#a8a048</Color>
 
-        <Color x:Key="ThemeColors.TextHighlightColor">#999400</Color>
+        <Color x:Key="ThemeColors.TextHighlightColor">#998c00</Color>
 
-        <Color x:Key="ThemeColors.ControlHoverBorderColor">#b3b04d</Color>
+        <Color x:Key="ThemeColors.ControlHoverBorderColor">#b3aa4d</Color>
     </ResourceDictionary>
 </ResourceDictionary>
