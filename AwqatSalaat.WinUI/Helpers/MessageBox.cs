@@ -140,8 +140,13 @@ namespace AwqatSalaat.WinUI.Helpers
             return Show(IntPtr.Zero, message, caption, button, icon, defaultResult);
         }
 
-        private static MessageBoxResult Show(IntPtr HWND, string message, string caption, MessageBoxButtons button, MessageBoxIcon icon, MessageBoxResult defaultResult)
+        private static MessageBoxResult Show(IntPtr owner, string message, string caption, MessageBoxButtons button, MessageBoxIcon icon, MessageBoxResult defaultResult)
         {
+            if (owner == IntPtr.Zero)
+            {
+                owner = App.MainHandle;
+            }
+
             var options = MessageBoxOptions.NONE;
 
             if (LocaleManager.Default.CurrentCulture.TextInfo.IsRightToLeft)
@@ -151,7 +156,7 @@ namespace AwqatSalaat.WinUI.Helpers
 
             uint type = (uint)button | (uint)icon | DefaultResultToButtonNumber(defaultResult, button) | (uint)options;
 
-            return (MessageBoxResult)User32.MessageBox(HWND, message, caption, type);
+            return (MessageBoxResult)User32.MessageBox(owner, message, caption, type);
         }
 
         private static uint DefaultResultToButtonNumber(MessageBoxResult result, MessageBoxButtons button)
