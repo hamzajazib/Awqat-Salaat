@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Threading;
 
 namespace AwqatSalaat.Helpers
@@ -40,6 +41,7 @@ namespace AwqatSalaat.Helpers
 
                 if (!skipEvent)
                 {
+                    Log.Information($"Date changed to {today:dd/MM/yyyy}");
                     DateChanged?.Invoke();
                 }
             }

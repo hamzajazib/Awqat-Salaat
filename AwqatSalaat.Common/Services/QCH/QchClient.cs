@@ -1,6 +1,7 @@
 ﻿using AwqatSalaat.Data;
 using AwqatSalaat.Helpers;
 using Newtonsoft.Json;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,6 +20,7 @@ namespace AwqatSalaat.Services.QCH
         public async Task<ServiceData> GetDataAsync(IRequest request)
         {
             var req = (QchRequest)request;
+            Log.Debug("[QCH] Getting data for request: {@request}", req);
 
             if (req.GetEntireMonth)
             {

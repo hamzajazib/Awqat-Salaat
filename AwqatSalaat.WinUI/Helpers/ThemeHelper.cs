@@ -46,8 +46,11 @@ namespace AwqatSalaat.WinUI.Helpers
 
         private static void OnThemeChanged(ThemeKey themeKey)
         {
+            Log.Information($"Changing theme to {themeKey}");
             ButtonTheme = GetButtonTheme();
             GeneralTheme = GetElementTheme(themeKey);
+            Log.Information($"Determined button theme: {ButtonTheme}");
+            Log.Information($"Determined general theme: {GeneralTheme}");
 
             ThemeChanged?.Invoke();
         }

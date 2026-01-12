@@ -1,6 +1,7 @@
 ﻿using AwqatSalaat.Configurations;
 using CsvHelper;
 using CsvHelper.Configuration;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -16,6 +17,7 @@ namespace AwqatSalaat.Services.CSV
         public Task<ServiceData> GetDataAsync(IRequest request)
         {
             var req = (CsvRequest)request;
+            Log.Debug("[CSV] Getting data for request: {@request}", req);
 
             try
             {

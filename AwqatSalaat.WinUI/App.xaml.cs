@@ -51,6 +51,7 @@ namespace AwqatSalaat.WinUI
 
         public void OverrideAccentColor(string accent)
         {
+            Log.Information($"Changing accent colot to {accent}");
             var dict = (ResourceDictionary)Resources[accent];
 
             foreach (var item in dict)

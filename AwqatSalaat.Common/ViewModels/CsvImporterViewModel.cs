@@ -1,6 +1,7 @@
 ﻿using AwqatSalaat.Helpers;
 using AwqatSalaat.Properties;
 using CsvHelper;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -92,6 +93,8 @@ namespace AwqatSalaat.ViewModels
 
         private void LoadExecute(object obj)
         {
+            Log.Debug($"Loading CSV file: {settings.CSV_FilePath}");
+
             try
             {
                 if (Columns.Count > 0)
@@ -108,7 +111,9 @@ namespace AwqatSalaat.ViewModels
 
                         if (settings.CSV_HasHeader)
                         {
+                            Log.Debug("Reading header");
                             csv.ReadHeader();
+                            Log.Debug($"Header record length: {csv.HeaderRecord.Length} {{@header}}", csv.HeaderRecord);
 
                             for (int i = 0; i < csv.HeaderRecord.Length; i++)
                             {
@@ -118,6 +123,8 @@ namespace AwqatSalaat.ViewModels
                         }
                         else
                         {
+                            Log.Debug($"Column count: {csv.ColumnCount}");
+
                             for (int i = 0; i < csv.ColumnCount; i++)
                             {
                                 Columns.Add(new KeyValuePair<int, string>(i, "#" + (i + 1)));
@@ -128,6 +135,7 @@ namespace AwqatSalaat.ViewModels
             }
             catch (Exception ex)
             {
+                Log.Error(ex, $"Loading CSV file failed: {ex.Message}");
 #if DEBUG
                 throw;
 #endif

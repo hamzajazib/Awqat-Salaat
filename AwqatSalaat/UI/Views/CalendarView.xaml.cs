@@ -57,6 +57,8 @@ namespace AwqatSalaat.UI.Views
         {
             if (Properties.Settings.Default.Service == Data.PrayerTimesService.QCH)
             {
+                Log.Information("Hiding content in Calendar view");
+
                 if (oldContent is null)
                 {
                     oldContent = Content;
@@ -66,12 +68,19 @@ namespace AwqatSalaat.UI.Views
             }
             else if (oldContent != null)
             {
+                Log.Information("Showing content in Calendar view");
                 Content = oldContent;
                 oldContent = null;
             }
 
             bool isCSV = Properties.Settings.Default.Service == Data.PrayerTimesService.CSV;
             bool isMonthly = Properties.Settings.Default.CSV_Range == Configurations.CsvImportRange.Month;
+
+            if (isCSV)
+            {
+                Log.Information($"Adapting Calendar view content to CSV service. (Monthly range: {isMonthly})");
+            }
+
             hijriRadioButton.IsEnabled = !isCSV;
             gregorianYear.IsEnabled = !isCSV;
             gregorianMonth.IsEnabled = !isCSV || !isMonthly;
