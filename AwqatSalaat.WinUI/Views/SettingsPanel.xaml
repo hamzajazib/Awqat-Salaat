@@ -15,6 +15,7 @@
     xmlns:local="using:AwqatSalaat.WinUI.Views"
     xmlns:ctrl="using:AwqatSalaat.WinUI.Controls"
     xmlns:behaviors="using:AwqatSalaat.WinUI.Behaviors"
+    xmlns:notif="using:AwqatSalaat.WinUI.Notification"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -164,10 +165,10 @@
                                            Maximum="720"
                                            HorizontalAlignment="Left"/>
                             </ctrl:SettingsItem>
-                            <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.ReminderNotificationToast}" Description="{mk:L11n Key=UI.Settings.ReminderNotificationToastDescription}">
+                            <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.ReminderNotificationToast}" Description="{mk:L11n Key=UI.Settings.ReminderNotificationToastDescription}" IsEnabled="{x:Bind notif:NotificationManager.IsRegistered, Mode=OneTime}">
                                 <ToggleSwitch IsOn="{x:Bind ViewModel.Realtime.EnableReminderToast}" OnContent="{mk:L11n Key=UI.Controls.Toggle.On}" OffContent="{mk:L11n Key=UI.Controls.Toggle.Off}"/>
                             </ctrl:SettingsItem>
-                            <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.PrayerTimeNotificationToast}" Description="{mk:L11n Key=UI.Settings.PrayerTimeNotificationToastDescription}">
+                            <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.PrayerTimeNotificationToast}" Description="{mk:L11n Key=UI.Settings.PrayerTimeNotificationToastDescription}" IsEnabled="{x:Bind notif:NotificationManager.IsRegistered, Mode=OneTime}">
                                 <ToggleSwitch IsOn="{x:Bind ViewModel.Realtime.EnablePrayerTimeToast}" OnContent="{mk:L11n Key=UI.Controls.Toggle.On}" OffContent="{mk:L11n Key=UI.Controls.Toggle.Off}"/>
                             </ctrl:SettingsItem>
                             <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.ElapsedPeriod}" Description="{mk:L11n Key=UI.Settings.ElapsedPeriodDescription}">

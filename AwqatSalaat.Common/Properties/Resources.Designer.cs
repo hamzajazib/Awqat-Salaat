@@ -439,6 +439,16 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not initialize Windows Notification.
+        ///Make sure that Windows App Runtime Singleton v1.5 is installed..
+        /// </summary>
+        public static string Dialog_AppNotificationInitFailed {
+            get {
+                return ResourceManager.GetString("Dialog.AppNotificationInitFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not check for updates..
         /// </summary>
         public static string Dialog_CheckingUpdatesFailed {

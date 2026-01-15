@@ -16,6 +16,8 @@ namespace AwqatSalaat.WinUI.Notification
 
         private static bool m_isRegistered;
 
+        public static bool IsRegistered => m_isRegistered;
+
         public static event Action ShowWidgetRequested;
         public static event Action DismissReminderRequested;
         public static event Action StopReminderSoundRequested;

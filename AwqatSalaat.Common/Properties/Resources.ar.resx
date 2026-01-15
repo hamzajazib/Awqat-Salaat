@@ -764,4 +764,8 @@
   <data name="Dialog.MissingCsvTimeColumn" xml:space="preserve">
     <value>الربط الخاص بأحد أعمدة الوقت مفقود.</value>
   </data>
+  <data name="Dialog.AppNotificationInitFailed" xml:space="preserve">
+    <value>تعذر تهيئة إشعارات ويندوز.
+تأكد من تثبيت Windows App Runtime Singleton نسخة 1.5.</value>
+  </data>
 </root>

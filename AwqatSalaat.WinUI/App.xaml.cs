@@ -149,7 +149,15 @@ namespace AwqatSalaat.WinUI
 
             InitializeWidget(dispatcher);
 
-            Notification.NotificationManager.Init();
+            try
+            {
+                Notification.NotificationManager.Init();
+            }
+            catch (Exception ex)
+            {
+                Log.Warning(ex, $"Could not intialize NotificationManager. Error: {ex.Message}");
+                Helpers.MessageBox.Warning(Properties.Resources.Dialog_AppNotificationInitFailed);
+            }
         }
 
         private void InitializeWidget(Microsoft.UI.Dispatching.DispatcherQueue dispatcherQueue)
