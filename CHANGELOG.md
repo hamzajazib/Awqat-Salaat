@@ -1,3 +1,33 @@
+### 4.1
+
+- Support ARM64 architecture. (Untested!) (WinUI only)
+- Add a new service to import times from a CSV file.
+- Add a new service to scrape times from Qatar Calendar House (QCH) website. (Limited)
+- Add Turkish translation.
+- Implement manual theme selection.
+- Implement manual accent color selection.
+- Implement auto-geolocation at the first use of the widget.
+- Per-prayer-time adhan sound.
+- Implement toast notifications. (WinUI only)
+- Implement auto-alignment for taskbar button elements when placed near the corner. (WinUI only)
+- Add a new style for the prayer times panel. (WinUI only)
+- Control ayah visibility in the prayer times panel.
+- Control the opacity of the notification indicator in the taskbar button.
+- Control the repetition of the notification sound.
+- Control the time format (12h or 24h).
+- Show/hide Gregorian date in prayers panel.
+- Increase the limit of prayer time adjustment to 60 minutes.
+- Make **Location** tab selected when the widget is opened for the first time.
+- Validate service-related settings before saving.
+- Improve the times column in the prayer times panel.
+- Improve searching for places using Nominatim.
+- Keep Settings panel open when changing the settings **Show countdown** and **Compact mode**. (WinUI only)
+- Add two beautiful adhan voices:
+  - Sheikh Nasser Al-Qatami
+  - Abdul Majeed Al-Suraihi
+- Fix a bug in switching to the next day after _Isha_ when offline.
+- Fix hang issue in UIAutomation when the taskbar is hidden and the Widgets button is enabled. (WinUI only)
+
 ### v4.0.1
 
 - Cancel updates checking when closing Settings panel.

@@ -1,25 +1,32 @@
-﻿النسخة العربية متوفرة [هنا](README.ar.md)
+﻿<div align="center">
+	<img alt="hero image" src="images/en.png" />
+</div>
+
+النسخة العربية متوفرة [هنا](README.ar.md)
 # Awqat Salaat Widget [![GitHub Release](https://img.shields.io/github/v/release/Khiro95/Awqat-Salaat?include_prereleases&label=Release)](https://github.com/Khiro95/Awqat-Salaat/releases)
 
-This is a simple Islamic Windows widget that shows the time of the next prayer, alongside a countdown, on the taskbar in order to help the user keep tracking of prayers times.
+This is a simple Islamic Windows widget that shows the time of the next prayer, alongside a countdown, on the taskbar in order to help the user keep tracking of prayer times.
 
-The widget can show the prayers times of the whole day and update automatically, to show times of the next day, when the time of last prayer (Isha) has entered.
+The widget can show the prayer times of the whole day and update automatically, to show times of the next day, when the time of last prayer (Isha) has entered.
 
 This widget support visual notification when the time of the next prayer becomes close to a certain configurable limit.
 
-Actually, the widget uses two services to get the prayers times based on user settings:
+Actually, the widget supports five services to get the prayer times based on user settings:
 - [Salah Hour's Prayer Times API](http://www.salahhour.com/index.php/api)
 - [Al-Adhan's Prayer Times API](https://aladhan.com/prayer-times-api)
+- [Offline service based on Batoul Apps' Adhan library](https://github.com/davidpet86/Adhan-csharp)
+- [Qatar Calendar House (scraping)](https://www.qatarch.com/cal)
+- A service that imports data from a CSV file
 
 > [!caution]
-> The only purpose of this widget is to have an idea whether the next prayer is close or not in a simple way without having to click/open anything.
+> The main purpose of this widget is to have an idea whether the next prayer is close or not in a simple way without having to click/open anything.
 Although most prayers times provided by the APIs are almost precise, there is no guarantee that this will be always the case, especially for Maghrib prayer.
 So **DON'T** rely on the widget to get the exact time, especially for performing rituals such as fasting or establishing prayers right after entering their times.
 
 ## Supported Platforms
 
 Awqat Salaat is a *Windows* widget that is available in two forms: ***Deskband*** (Awqat Salaat) and ***WinUI*** (Awqat Salaat WinUI).
-Here is a quick compatibility comarison between both forms:
+Here is a quick compatibility comparison between both forms:
 
 | Operating System | Awqat Salaat | Awqat Salaat WinUI |
 | --- | --- | --- |
@@ -42,23 +49,23 @@ Also note that if you choose to use the widget on Windows 7/8/8.1 then make sure
 ### Awqat Salaat WinUI ![Awqat Salaat WinUI Icon](images/as_win11_16.png)
 
 This widget is a regular app that can run on Windows 11 and on Windows 10 1809 or later.
-This app bring Awqat Salaat to Windows 11 which wasn't supported in earlier versions of the widget.
+This app brings Awqat Salaat to Windows 11 which wasn't supported in earlier versions of the widget.
 
 > [!note]
-> Although this app can run on Windows 10, it's *not recommended* due to the limitiations listed below, use deskband widget instead.
+> Although this app can run on Windows 10, it's *not recommended* due to the limitiations listed below, it's better to use deskband widget instead.
 
 #### Requirements (NOT necessary for Microsoft Store version)
 
 - [.NET Desktop Runtime 6](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
 - [Windows App Runtime 1.5](https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/downloads-archive#windows-app-sdk-15)
 > [!note]
-> If you get an error about missing Windows App Runtime after installing it, go to the download page and download *Redistributable* instead of Installer, open the zip
-> and install the package `MSIX\win10-x64 (or x86)\Microsoft.WindowsAppRuntime.DDLM.1.5.msix`
+> If you get an error about missing Windows App Runtime after installing it, go to the download page and download *Redistributable* instead of *Installer*, open the zip
+> and install the package `MSIX\win10-x64 (or x86, or arm64)\Microsoft.WindowsAppRuntime.DDLM.1.5.msix`
 
 #### Limitations & known issues
 
 - The widget is *injected* into the taskbar, thus it's not a part of it.
-- The widget overlap the taskbar content which can lead to overlapping issue when the taskbar become full.
+- The widget overlaps the taskbar content which can lead to overlapping issue when the taskbar become full.
 - The widget may not respond to all changes in the taskbar to update its position (can be re-positioned manually).
 - The widget cannot be shown/hidden from the taskbar itself. However, a context-menu and a system tray icon are available to control the widget.
 - Explorer will not manage the widget so it has to be launched externally at Windows startup. This can be configured in Settings.
@@ -77,7 +84,7 @@ Awqat Salaat WinUI is available on Microsoft Store.
 Go to [Releases](https://github.com/Khiro95/Awqat-Salaat/releases) page and download the installer that matches your OS architecture.
 
 > [!warning]
-> If you choose the `x86` version of the installer while your OS is `x64`, then the widget won't install correctly.
+> If you choose the `x86` version of the installer while your OS is `x64`, then the widget may not install correctly.
 
 After downloading the installer, double-click on it to install the widget.
 
@@ -103,32 +110,7 @@ It's expected that the widget will not appear after the installation finish, so 
 
 ## Showcase
 
-### Windows 10 (Deskband)
-
-> [!note]
-> The theme always match system theme on Windows 10.
-
-#### Regular
-![Awqat Salaat widget showing next prayer time](images/regular_win10_en.png)
-![Awqat Salaat widget showing prayers times for the whole day](images/regular_open_win10_en.png)
-
-#### Compact
-![Awqat Salaat compact widget showing next prayer time](images/regular_compact_1_win10_en.png)
-![Awqat Salaat compact widget showing countdown](images/regular_compact_2_win10_en.png)
-
-#### Reminder notification
-![Awqat Salaat widget notification for near prayer time](images/reminder_win10_en.png)
-
-#### Elapsed time notification
-![Awqat Salaat widget notification for entered prayer time](images/elapsed_win10_en.png)
-
-#### Prayers calendar
-![Awqat Salaat widget displaying prayers calendar](images/calendar_win10_en.png)
-
 ### Windows 11 (WinUI)
-
-> [!note]
-> The theme always match system theme.
 
 #### Regular
 ![Awqat Salaat WinUI widget showing next prayer time on center-aligned taskbar](images/regular_win11_center_en.png)
@@ -148,6 +130,25 @@ It's expected that the widget will not appear after the installation finish, so 
 #### Prayers calendar
 ![Awqat Salaat widget displaying prayers calendar](images/calendar_win11_en.png)
 
+### Windows 10 (Deskband)
+
+#### Regular
+![Awqat Salaat widget showing next prayer time](images/regular_win10_en.png)
+![Awqat Salaat widget showing prayers times for the whole day](images/regular_open_win10_en.png)
+
+#### Compact
+![Awqat Salaat compact widget showing next prayer time](images/regular_compact_1_win10_en.png)
+![Awqat Salaat compact widget showing countdown](images/regular_compact_2_win10_en.png)
+
+#### Reminder notification
+![Awqat Salaat widget notification for near prayer time](images/reminder_win10_en.png)
+
+#### Elapsed time notification
+![Awqat Salaat widget notification for entered prayer time](images/elapsed_win10_en.png)
+
+#### Prayers calendar
+![Awqat Salaat widget displaying prayers calendar](images/calendar_win10_en.png)
+
 ## Build
 
 To build Awqat Salaat (Deskband) widget and the preview app, the following is needed:
@@ -166,7 +167,8 @@ For a list of changes, check the changelog [here](CHANGELOG.md).
 
 ## Notes
 
-- The widget cache all the times of the current month, obtained from the API, so that it can work in offline mode.
+- The widget caches all the times of the current month, obtained from the API, so that it can work in offline mode.
+- The fajr adhan in the voice of Sheikh Nasser Al-Qatami is a corrected version of the original recording at **Sharjah Quran**. All rights reserved to [Sharjah Quran](https://www.youtube.com/channel/UCn8lMRYDANs_1yAL3iuw7_g).
 - The preview app is used for development purposes only.
 
 ## Acknowledgement
@@ -177,6 +179,7 @@ For a list of changes, check the changelog [here](CHANGELOG.md).
 - [Al-Adhan:](https://aladhan.com/prayer-times-api) They provide a flexible API for getting the prayers times.
 - [Adhan-csharp:](https://github.com/davidpet86/Adhan-csharp) A C# implementation of [Adhan](https://github.com/batoulapps/Adhan) which is a high precision prayer time library.
 - [Nominatim:](https://nominatim.org/) An open-source geocoding service.
+- [CsvHelper:](https://github.com/JoshClose/CsvHelper) Library to help reading and writing CSV files.
 
 ## Contact
 
@@ -188,4 +191,4 @@ You can find details [here](PRIVACY-POLICY.md).
 
 ## License
 
-This project is licensed under the terms of [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
