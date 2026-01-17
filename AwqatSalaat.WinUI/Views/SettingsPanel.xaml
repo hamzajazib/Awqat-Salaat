@@ -296,7 +296,7 @@
                         <ItemsControl x:Name="timesPanel" ItemsSource="{x:Bind ViewModel.PrayerConfigs, Mode=OneWay}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate x:DataType="cfg:PrayerConfig">
-                                    <Expander HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0,8,0,0" Expanding="Expander_Expanding">
+                                    <Expander HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="0,8,0,0" Expanding="Expander_Expanding">
                                         <Expander.Header>
                                             <ctrl:LocalizedStringPresenter Value="{x:Bind Key, Mode=OneWay}" KeyFormat="Data.Salaat.{0}"/>
                                         </Expander.Header>
