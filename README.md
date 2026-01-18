@@ -18,6 +18,9 @@ Actually, the widget supports five services to get the prayer times based on use
 - [Qatar Calendar House (scraping)](https://www.qatarch.com/cal)
 - A service that imports data from a CSV file
 
+> [!note]
+> Very important changes are planned for the next major update (v5). You can find details in the discussion #59.
+
 > [!caution]
 > The main purpose of this widget is to have an idea whether the next prayer is close or not in a simple way without having to click/open anything.
 Although most prayers times provided by the APIs are almost precise, there is no guarantee that this will be always the case, especially for Maghrib prayer.

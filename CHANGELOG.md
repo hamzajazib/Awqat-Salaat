@@ -1,4 +1,4 @@
-### 4.1
+### v4.1
 
 - Support ARM64 architecture. (Untested!) (WinUI only)
 - Add a new service to import times from a CSV file.
