@@ -19,7 +19,7 @@ Actually, the widget supports five services to get the prayer times based on use
 - A service that imports data from a CSV file
 
 > [!note]
-> Very important changes are planned for the next major update (v5). You can find details in the discussion #59.
+> Very important changes are planned for the next major update (v5). You can find details in the discussion: [Future of Awqat Salaat](https://github.com/Khiro95/Awqat-Salaat/discussions/59).
 
 > [!caution]
 > The main purpose of this widget is to have an idea whether the next prayer is close or not in a simple way without having to click/open anything.
