@@ -53,8 +53,18 @@ namespace AwqatSalaat.WinUI
 
             App.Quitting += App_Quitting;
             LocaleManager.Default.CurrentChanged += (_, _) => UpdateTrayIconLocalization();
+            Notification.NotificationManager.ShowWidgetRequested += NotificationManager_ShowWidgetRequested;
 
             AppIcon = System.Drawing.Icon.ExtractAssociatedIcon(Environment.ProcessPath);
+        }
+
+        private static void NotificationManager_ShowWidgetRequested()
+        {
+            if (taskBarWidget is null)
+            {
+                Log.Information("Showing widget after clicking on toast notification");
+                dispatcher.TryEnqueue(ShowWidgetExecute);
+            }
         }
 
         public static void Initialize(DispatcherQueue dispatcherQueue)
@@ -116,6 +126,8 @@ namespace AwqatSalaat.WinUI
 
             ShowWidgetExecute();
         }
+
+        public static void InvalidateWidgetElementsAlignment(bool autoAlign) => taskBarWidget?.InvalidateElementsAlignment(autoAlign);
 
         private static void TrayIcon_Created(object sender, EventArgs e)
         {

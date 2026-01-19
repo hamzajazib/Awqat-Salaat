@@ -533,4 +533,239 @@
   <data name="Dialog.LogsFileNotFound" xml:space="preserve">
     <value>ملف السجلات غير موجود. قد لا يكون تم إنشاءه بعد.</value>
   </data>
+  <data name="UI.Settings.AutoAlignment" xml:space="preserve">
+    <value>محاذاة تلقائية</value>
+  </data>
+  <data name="UI.Settings.AutoAlignmentDescription" xml:space="preserve">
+    <value>تكييف محاذاة العناصر إذا كانت الأداة قريبة من الحافة اليمنى أو اليسرى للشاشة.</value>
+  </data>
+  <data name="Config.WidgetPanelStyle.Default" xml:space="preserve">
+    <value>افتراضي</value>
+  </data>
+  <data name="Config.WidgetPanelStyle.Alt" xml:space="preserve">
+    <value>بديل</value>
+  </data>
+  <data name="UI.Settings.PanelStyle" xml:space="preserve">
+    <value>نمط اللوحة</value>
+  </data>
+  <data name="UI.Settings.PanelStyleDescription" xml:space="preserve">
+    <value>نمط وتنسيق اللوحة التي تعرض أوقات الصلوات والتاريخ</value>
+  </data>
+  <data name="UI.Settings.Tabs.Appearance" xml:space="preserve">
+    <value>المظهر</value>
+  </data>
+  <data name="UI.Settings.ShowAyah" xml:space="preserve">
+    <value>إظهار الآية</value>
+  </data>
+  <data name="UI.Settings.ShowAyahDescription" xml:space="preserve">
+    <value>تمكين أو تعطيل ظهور الآية في لوحة الصلوات</value>
+  </data>
+  <data name="UI.Settings.AccentColor" xml:space="preserve">
+    <value>اللون المميز</value>
+  </data>
+  <data name="UI.Settings.AccentColorDescription" xml:space="preserve">
+    <value>اختر اللون المميز للأداة</value>
+  </data>
+  <data name="Config.ThemeAccent.Gold" xml:space="preserve">
+    <value>ذهبي</value>
+  </data>
+  <data name="Config.ThemeAccent.Blue" xml:space="preserve">
+    <value>أزرق</value>
+  </data>
+  <data name="Config.ThemeAccent.Green" xml:space="preserve">
+    <value>أخضر</value>
+  </data>
+  <data name="Config.ThemeAccent.Red" xml:space="preserve">
+    <value>أحمر</value>
+  </data>
+  <data name="Config.ThemeAccent.Yellow" xml:space="preserve">
+    <value>أصفر</value>
+  </data>
+  <data name="Config.ThemeAccent.Teal" xml:space="preserve">
+    <value>فيروزي</value>
+  </data>
+  <data name="Config.ThemeAccent.Orange" xml:space="preserve">
+    <value>برتقالي</value>
+  </data>
+  <data name="Config.ThemeAccent.Purple" xml:space="preserve">
+    <value>بنفسجي</value>
+  </data>
+  <data name="Config.ThemeAccent.Pink" xml:space="preserve">
+    <value>وردي</value>
+  </data>
+  <data name="UI.Settings.NotificationIndicatorOpacity" xml:space="preserve">
+    <value>شفافية مؤشر الإشعار</value>
+  </data>
+  <data name="UI.Settings.NotificationIndicatorOpacityDescription" xml:space="preserve">
+    <value>تعديل شفافية مؤشر الإشعار في زر الأداة على شريط المهام</value>
+  </data>
+  <data name="UI.Settings.Theme" xml:space="preserve">
+    <value>المظهر</value>
+  </data>
+  <data name="UI.Settings.ThemeDescription" xml:space="preserve">
+    <value>اختر المظهر العام للأداة. (لا ينطبق على زر شريط المهام)</value>
+  </data>
+  <data name="Config.ThemeKey.Auto" xml:space="preserve">
+    <value>تلقائي (من النظام)</value>
+  </data>
+  <data name="Config.ThemeKey.Dark" xml:space="preserve">
+    <value>داكن</value>
+  </data>
+  <data name="Config.ThemeKey.Light" xml:space="preserve">
+    <value>فاتح</value>
+  </data>
+  <data name="UI.Settings.ShowGregorianDate" xml:space="preserve">
+    <value>إظهار التاريخ الميلادي</value>
+  </data>
+  <data name="UI.Settings.ShowGregorianDateDescription" xml:space="preserve">
+    <value>تمكين أو تعطيل إظهار التاريخ الميلادي في لوحة الصلوات</value>
+  </data>
+  <data name="UI.Settings.RepeatNotificationSound" xml:space="preserve">
+    <value>تكرار</value>
+  </data>
+  <data name="Notification.Dismiss" xml:space="preserve">
+    <value>تجاهل</value>
+  </data>
+  <data name="Notification.StopSound" xml:space="preserve">
+    <value>إيقاف الصوت</value>
+  </data>
+  <data name="Notification.PrayerTimeEnteredFormat" xml:space="preserve">
+    <value>حان الآن وقت صلاة {0}</value>
+  </data>
+  <data name="Notification.PrayerTimeSoonFormat" xml:space="preserve">
+    <value>وقت صلاة {0} أصبح قريبا</value>
+  </data>
+  <data name="UI.Settings.ReminderNotificationToast" xml:space="preserve">
+    <value>إشعار ويندوز لوقت التنبيه</value>
+  </data>
+  <data name="UI.Settings.ReminderNotificationToastDescription" xml:space="preserve">
+    <value>إظهار إشعار ويندوز عند اقتراب وقت الصلاة القادمة.</value>
+  </data>
+  <data name="UI.Settings.PrayerTimeNotificationToast" xml:space="preserve">
+    <value>إشعار ويندوز لدخول الوقت</value>
+  </data>
+  <data name="UI.Settings.PrayerTimeNotificationToastDescription" xml:space="preserve">
+    <value>إظهار إشعار ويندوز عند دخول وقت الصلاة.</value>
+  </data>
+  <data name="Data.PrayerTimesService.QCH" xml:space="preserve">
+    <value>دار التقويم القطري</value>
+  </data>
+  <data name="UI.Calendar.ServiceNotSupported" xml:space="preserve">
+    <value>الخدمة التي ضبطها لا تدعم البيانات الشهرية.</value>
+  </data>
+  <data name="UI.Settings.QchCity" xml:space="preserve">
+    <value>المدينة</value>
+  </data>
+  <data name="UI.Settings.QchCityDescription" xml:space="preserve">
+    <value>قم بتحديد المدينة المدعومة من طرف دار التقويم القطري</value>
+  </data>
+  <data name="Data.PrayerTimesService.CSV" xml:space="preserve">
+    <value>ملف CSV</value>
+  </data>
+  <data name="UI.Settings.Load" xml:space="preserve">
+    <value>تحميل</value>
+  </data>
+  <data name="UI.Settings.CsvFilePath" xml:space="preserve">
+    <value>مسار الملف</value>
+  </data>
+  <data name="UI.Settings.CsvFilePathDescription" xml:space="preserve">
+    <value>المسار الكامل لملف CSV</value>
+  </data>
+  <data name="UI.Settings.CsvHasHeader" xml:space="preserve">
+    <value>يوجد رأس</value>
+  </data>
+  <data name="UI.Settings.CsvHasHeaderDescription" xml:space="preserve">
+    <value>قم بتحديد ما إذا كان ملف CSV يحتوي على صف رأس</value>
+  </data>
+  <data name="UI.Settings.CsvHasDateColumn" xml:space="preserve">
+    <value>يوجد عمود/أعمدة للتاريخ</value>
+  </data>
+  <data name="UI.Settings.CsvHasDateColumnDescription" xml:space="preserve">
+    <value>قم بتحديد ما إذا كان ملف CSV يحتوي على عمود أو أعمدة للتاريخ</value>
+  </data>
+  <data name="UI.Settings.CsvDateColumnSchema" xml:space="preserve">
+    <value>مخطط عمود/أعمدة التاريخ</value>
+  </data>
+  <data name="UI.Settings.CsvDateColumnSchemaDescription" xml:space="preserve">
+    <value>قم بتحديد طريقة تخزين التاريخ في ملف CSV</value>
+  </data>
+  <data name="UI.Settings.CsvRange" xml:space="preserve">
+    <value>مجال الأوقات</value>
+  </data>
+  <data name="UI.Settings.CsvRangeDescription" xml:space="preserve">
+    <value>قم بتحديد المجال الزمني للصفوف في ملف CSV</value>
+  </data>
+  <data name="UI.Settings.CsvColumnsMap" xml:space="preserve">
+    <value>خريطة الأعمدة</value>
+  </data>
+  <data name="UI.Settings.CsvColumnsMapDescription" xml:space="preserve">
+    <value>قم بربط كل معلومة بالعمود الموافق لها</value>
+  </data>
+  <data name="Config.CsvDateColumnSchema.Single" xml:space="preserve">
+    <value>فردي</value>
+  </data>
+  <data name="Config.CsvDateColumnSchema.Dual" xml:space="preserve">
+    <value>ثنائي (عمود الشهر + عمود اليوم)</value>
+  </data>
+  <data name="Config.CsvRange.Year" xml:space="preserve">
+    <value>العام الحالي</value>
+  </data>
+  <data name="Config.CsvRange.Month" xml:space="preserve">
+    <value>الشهر الحالي</value>
+  </data>
+  <data name="UI.Settings.Date" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+  <data name="UI.Settings.Day" xml:space="preserve">
+    <value>اليوم</value>
+  </data>
+  <data name="UI.Settings.Month" xml:space="preserve">
+    <value>الشهر</value>
+  </data>
+  <data name="UI.Settings.Auto_System" xml:space="preserve">
+    <value>تلقائي (من النظام)</value>
+  </data>
+  <data name="UI.Settings.TimeFormat" xml:space="preserve">
+    <value>تنسيق الوقت</value>
+  </data>
+  <data name="UI.Settings.TimeFormatDescription" xml:space="preserve">
+    <value>التنسيق المستخدم لعرض الوقت</value>
+  </data>
+  <data name="Data.AdhanSound.NasserAlQatami" xml:space="preserve">
+    <value>الشيخ ناصر القطامي</value>
+  </data>
+  <data name="Data.AdhanSound.AbdulMajeedAlSuraihi" xml:space="preserve">
+    <value>عبد المجيد السريحي</value>
+  </data>
+  <data name="UI.Settings.UseStandardAdhan" xml:space="preserve">
+    <value>استعمال صوت الأذان القياسي</value>
+  </data>
+  <data name="Dialog.InvalidServiceSettings" xml:space="preserve">
+    <value>بعض الإعدادات الخاصة بالخدمة غير صالحة.</value>
+  </data>
+  <data name="Dialog.MissingZipCode" xml:space="preserve">
+    <value>الرمز البريدي مفقود.</value>
+  </data>
+  <data name="Dialog.MissingCity" xml:space="preserve">
+    <value>اسم المدينة مفقود.</value>
+  </data>
+  <data name="Dialog.MissingCoordinates" xml:space="preserve">
+    <value>إحداثيات الطول و/أو العرض مفقودة.</value>
+  </data>
+  <data name="Dialog.InvalidCsvFile" xml:space="preserve">
+    <value>ملف CSV غير صالح.</value>
+  </data>
+  <data name="Dialog.MissingCsvDateColumn" xml:space="preserve">
+    <value>الربط الخاص بعمود التاريخ مفقود.</value>
+  </data>
+  <data name="Dialog.MissingCsvDayOrMonthColumn" xml:space="preserve">
+    <value>الربط الخاص بعمود اليوم أو الشهر مفقود.</value>
+  </data>
+  <data name="Dialog.MissingCsvTimeColumn" xml:space="preserve">
+    <value>الربط الخاص بأحد أعمدة الوقت مفقود.</value>
+  </data>
+  <data name="Dialog.AppNotificationInitFailed" xml:space="preserve">
+    <value>تعذر تهيئة إشعارات ويندوز.
+تأكد من تثبيت Windows App Runtime Singleton نسخة 1.5.</value>
+  </data>
 </root>

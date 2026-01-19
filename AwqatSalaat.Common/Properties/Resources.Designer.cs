@@ -61,6 +61,177 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dual (Month column + Day column).
+        /// </summary>
+        public static string Config_CsvDateColumnSchema_Dual {
+            get {
+                return ResourceManager.GetString("Config.CsvDateColumnSchema.Dual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Single.
+        /// </summary>
+        public static string Config_CsvDateColumnSchema_Single {
+            get {
+                return ResourceManager.GetString("Config.CsvDateColumnSchema.Single", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current month.
+        /// </summary>
+        public static string Config_CsvRange_Month {
+            get {
+                return ResourceManager.GetString("Config.CsvRange.Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current year.
+        /// </summary>
+        public static string Config_CsvRange_Year {
+            get {
+                return ResourceManager.GetString("Config.CsvRange.Year", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blue.
+        /// </summary>
+        public static string Config_ThemeAccent_Blue {
+            get {
+                return ResourceManager.GetString("Config.ThemeAccent.Blue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gold.
+        /// </summary>
+        public static string Config_ThemeAccent_Gold {
+            get {
+                return ResourceManager.GetString("Config.ThemeAccent.Gold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Green.
+        /// </summary>
+        public static string Config_ThemeAccent_Green {
+            get {
+                return ResourceManager.GetString("Config.ThemeAccent.Green", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orange.
+        /// </summary>
+        public static string Config_ThemeAccent_Orange {
+            get {
+                return ResourceManager.GetString("Config.ThemeAccent.Orange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pink.
+        /// </summary>
+        public static string Config_ThemeAccent_Pink {
+            get {
+                return ResourceManager.GetString("Config.ThemeAccent.Pink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purple.
+        /// </summary>
+        public static string Config_ThemeAccent_Purple {
+            get {
+                return ResourceManager.GetString("Config.ThemeAccent.Purple", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Red.
+        /// </summary>
+        public static string Config_ThemeAccent_Red {
+            get {
+                return ResourceManager.GetString("Config.ThemeAccent.Red", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teal.
+        /// </summary>
+        public static string Config_ThemeAccent_Teal {
+            get {
+                return ResourceManager.GetString("Config.ThemeAccent.Teal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yellow.
+        /// </summary>
+        public static string Config_ThemeAccent_Yellow {
+            get {
+                return ResourceManager.GetString("Config.ThemeAccent.Yellow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto (System).
+        /// </summary>
+        public static string Config_ThemeKey_Auto {
+            get {
+                return ResourceManager.GetString("Config.ThemeKey.Auto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dark.
+        /// </summary>
+        public static string Config_ThemeKey_Dark {
+            get {
+                return ResourceManager.GetString("Config.ThemeKey.Dark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Light.
+        /// </summary>
+        public static string Config_ThemeKey_Light {
+            get {
+                return ResourceManager.GetString("Config.ThemeKey.Light", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alternative.
+        /// </summary>
+        public static string Config_WidgetPanelStyle_Alt {
+            get {
+                return ResourceManager.GetString("Config.WidgetPanelStyle.Alt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default.
+        /// </summary>
+        public static string Config_WidgetPanelStyle_Default {
+            get {
+                return ResourceManager.GetString("Config.WidgetPanelStyle.Default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Abdul Majeed Al-Suraihi.
+        /// </summary>
+        public static string Data_AdhanSound_AbdulMajeedAlSuraihi {
+            get {
+                return ResourceManager.GetString("Data.AdhanSound.AbdulMajeedAlSuraihi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adhan 1.
         /// </summary>
         public static string Data_AdhanSound_Adhan1 {
@@ -84,6 +255,15 @@ namespace AwqatSalaat.Properties {
         public static string Data_AdhanSound_Custom {
             get {
                 return ResourceManager.GetString("Data.AdhanSound.Custom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sheikh Nasser Al-Qatami.
+        /// </summary>
+        public static string Data_AdhanSound_NasserAlQatami {
+            get {
+                return ResourceManager.GetString("Data.AdhanSound.NasserAlQatami", resourceCulture);
             }
         }
         
@@ -160,11 +340,29 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CSV File.
+        /// </summary>
+        public static string Data_PrayerTimesService_CSV {
+            get {
+                return ResourceManager.GetString("Data.PrayerTimesService.CSV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Local (offline).
         /// </summary>
         public static string Data_PrayerTimesService_Local {
             get {
                 return ResourceManager.GetString("Data.PrayerTimesService.Local", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Qatar Calendar House.
+        /// </summary>
+        public static string Data_PrayerTimesService_QCH {
+            get {
+                return ResourceManager.GetString("Data.PrayerTimesService.QCH", resourceCulture);
             }
         }
         
@@ -241,6 +439,16 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not initialize Windows Notification.
+        ///Make sure that Windows App Runtime Singleton v1.5 is installed..
+        /// </summary>
+        public static string Dialog_AppNotificationInitFailed {
+            get {
+                return ResourceManager.GetString("Dialog.AppNotificationInitFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not check for updates..
         /// </summary>
         public static string Dialog_CheckingUpdatesFailed {
@@ -250,11 +458,83 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid CSV file..
+        /// </summary>
+        public static string Dialog_InvalidCsvFile {
+            get {
+                return ResourceManager.GetString("Dialog.InvalidCsvFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Some service-related settings are invalid..
+        /// </summary>
+        public static string Dialog_InvalidServiceSettings {
+            get {
+                return ResourceManager.GetString("Dialog.InvalidServiceSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The logs file does not exist. It may not be created yet..
         /// </summary>
         public static string Dialog_LogsFileNotFound {
             get {
                 return ResourceManager.GetString("Dialog.LogsFileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing city name..
+        /// </summary>
+        public static string Dialog_MissingCity {
+            get {
+                return ResourceManager.GetString("Dialog.MissingCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing latitude and/or longitude coordinates..
+        /// </summary>
+        public static string Dialog_MissingCoordinates {
+            get {
+                return ResourceManager.GetString("Dialog.MissingCoordinates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing mapping for Date column..
+        /// </summary>
+        public static string Dialog_MissingCsvDateColumn {
+            get {
+                return ResourceManager.GetString("Dialog.MissingCsvDateColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing mapping for Day or Month column..
+        /// </summary>
+        public static string Dialog_MissingCsvDayOrMonthColumn {
+            get {
+                return ResourceManager.GetString("Dialog.MissingCsvDayOrMonthColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing mapping for one or more time column(s)..
+        /// </summary>
+        public static string Dialog_MissingCsvTimeColumn {
+            get {
+                return ResourceManager.GetString("Dialog.MissingCsvTimeColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing zip code..
+        /// </summary>
+        public static string Dialog_MissingZipCode {
+            get {
+                return ResourceManager.GetString("Dialog.MissingZipCode", resourceCulture);
             }
         }
         
@@ -276,6 +556,42 @@ namespace AwqatSalaat.Properties {
         public static string Dialog_WidgetUpToDate {
             get {
                 return ResourceManager.GetString("Dialog.WidgetUpToDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dismiss.
+        /// </summary>
+        public static string Notification_Dismiss {
+            get {
+                return ResourceManager.GetString("Notification.Dismiss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} time has entered now.
+        /// </summary>
+        public static string Notification_PrayerTimeEnteredFormat {
+            get {
+                return ResourceManager.GetString("Notification.PrayerTimeEnteredFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} time is coming soon.
+        /// </summary>
+        public static string Notification_PrayerTimeSoonFormat {
+            get {
+                return ResourceManager.GetString("Notification.PrayerTimeSoonFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop Sound.
+        /// </summary>
+        public static string Notification_StopSound {
+            get {
+                return ResourceManager.GetString("Notification.StopSound", resourceCulture);
             }
         }
         
@@ -385,6 +701,15 @@ namespace AwqatSalaat.Properties {
         public static string UI_Calendar_Print {
             get {
                 return ResourceManager.GetString("UI.Calendar.Print", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The configured service does not support monthly data..
+        /// </summary>
+        public static string UI_Calendar_ServiceNotSupported {
+            get {
+                return ResourceManager.GetString("UI.Calendar.ServiceNotSupported", resourceCulture);
             }
         }
         
@@ -579,6 +904,24 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accent color.
+        /// </summary>
+        public static string UI_Settings_AccentColor {
+            get {
+                return ResourceManager.GetString("UI.Settings.AccentColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the accent color of the widget.
+        /// </summary>
+        public static string UI_Settings_AccentColorDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.AccentColorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fajr Adhan file.
         /// </summary>
         public static string UI_Settings_AdhanFileFajr {
@@ -611,6 +954,33 @@ namespace AwqatSalaat.Properties {
         public static string UI_Settings_AdhanSoundDescription {
             get {
                 return ResourceManager.GetString("UI.Settings.AdhanSoundDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto (System).
+        /// </summary>
+        public static string UI_Settings_Auto_System {
+            get {
+                return ResourceManager.GetString("UI.Settings.Auto_System", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto-alignment.
+        /// </summary>
+        public static string UI_Settings_AutoAlignment {
+            get {
+                return ResourceManager.GetString("UI.Settings.AutoAlignment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adapt the alignment of the elements if the widget is near the left or the right edge of the screen..
+        /// </summary>
+        public static string UI_Settings_AutoAlignmentDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.AutoAlignmentDescription", resourceCulture);
             }
         }
         
@@ -710,6 +1080,132 @@ namespace AwqatSalaat.Properties {
         public static string UI_Settings_CountryCodeDescription {
             get {
                 return ResourceManager.GetString("UI.Settings.CountryCodeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Columns map.
+        /// </summary>
+        public static string UI_Settings_CsvColumnsMap {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvColumnsMap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Map each information to its corresponding column.
+        /// </summary>
+        public static string UI_Settings_CsvColumnsMapDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvColumnsMapDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date column(s) schema.
+        /// </summary>
+        public static string UI_Settings_CsvDateColumnSchema {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvDateColumnSchema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify how the date is stored in the CSV file.
+        /// </summary>
+        public static string UI_Settings_CsvDateColumnSchemaDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvDateColumnSchemaDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File path.
+        /// </summary>
+        public static string UI_Settings_CsvFilePath {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvFilePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The full path to the CSV file.
+        /// </summary>
+        public static string UI_Settings_CsvFilePathDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvFilePathDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Has date column(s).
+        /// </summary>
+        public static string UI_Settings_CsvHasDateColumn {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvHasDateColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify whether the CSV file has column(s) for the date.
+        /// </summary>
+        public static string UI_Settings_CsvHasDateColumnDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvHasDateColumnDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Has header.
+        /// </summary>
+        public static string UI_Settings_CsvHasHeader {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvHasHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify whether the CSV file has a header row.
+        /// </summary>
+        public static string UI_Settings_CsvHasHeaderDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvHasHeaderDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Times range.
+        /// </summary>
+        public static string UI_Settings_CsvRange {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify the time range of the rows in the CSV file.
+        /// </summary>
+        public static string UI_Settings_CsvRangeDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.CsvRangeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string UI_Settings_Date {
+            get {
+                return ResourceManager.GetString("UI.Settings.Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Day.
+        /// </summary>
+        public static string UI_Settings_Day {
+            get {
+                return ResourceManager.GetString("UI.Settings.Day", resourceCulture);
             }
         }
         
@@ -885,6 +1381,15 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Load.
+        /// </summary>
+        public static string UI_Settings_Load {
+            get {
+                return ResourceManager.GetString("UI.Settings.Load", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The local service require coordinates. Make sure to set them in Location settings.
         /// </summary>
         public static string UI_Settings_LocalServiceNote {
@@ -1002,11 +1507,38 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Month.
+        /// </summary>
+        public static string UI_Settings_Month {
+            get {
+                return ResourceManager.GetString("UI.Settings.Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No result.
         /// </summary>
         public static string UI_Settings_NoResult {
             get {
                 return ResourceManager.GetString("UI.Settings.NoResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notification indicator opacity.
+        /// </summary>
+        public static string UI_Settings_NotificationIndicatorOpacity {
+            get {
+                return ResourceManager.GetString("UI.Settings.NotificationIndicatorOpacity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adjust the opacity of the notification indicator in widget&apos;s button on the taskbar.
+        /// </summary>
+        public static string UI_Settings_NotificationIndicatorOpacityDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.NotificationIndicatorOpacityDescription", resourceCulture);
             }
         }
         
@@ -1029,11 +1561,83 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Panel style.
+        /// </summary>
+        public static string UI_Settings_PanelStyle {
+            get {
+                return ResourceManager.GetString("UI.Settings.PanelStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Style and layout to be applied to the panel which shows prayer times and date.
+        /// </summary>
+        public static string UI_Settings_PanelStyleDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.PanelStyleDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Powered by.
         /// </summary>
         public static string UI_Settings_PoweredBy {
             get {
                 return ResourceManager.GetString("UI.Settings.PoweredBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prayer time Windows notification.
+        /// </summary>
+        public static string UI_Settings_PrayerTimeNotificationToast {
+            get {
+                return ResourceManager.GetString("UI.Settings.PrayerTimeNotificationToast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show a Windows notification when prayer time enter..
+        /// </summary>
+        public static string UI_Settings_PrayerTimeNotificationToastDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.PrayerTimeNotificationToastDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City.
+        /// </summary>
+        public static string UI_Settings_QchCity {
+            get {
+                return ResourceManager.GetString("UI.Settings.QchCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a city supported by Qatar Calendar House.
+        /// </summary>
+        public static string UI_Settings_QchCityDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.QchCityDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reminder Windows notification.
+        /// </summary>
+        public static string UI_Settings_ReminderNotificationToast {
+            get {
+                return ResourceManager.GetString("UI.Settings.ReminderNotificationToast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show a Windows notification for next prayer reminder..
+        /// </summary>
+        public static string UI_Settings_ReminderNotificationToastDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.ReminderNotificationToastDescription", resourceCulture);
             }
         }
         
@@ -1052,6 +1656,15 @@ namespace AwqatSalaat.Properties {
         public static string UI_Settings_ReminderOffsetDescription {
             get {
                 return ResourceManager.GetString("UI.Settings.ReminderOffsetDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repeat.
+        /// </summary>
+        public static string UI_Settings_RepeatNotificationSound {
+            get {
+                return ResourceManager.GetString("UI.Settings.RepeatNotificationSound", resourceCulture);
             }
         }
         
@@ -1083,6 +1696,24 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show ayah.
+        /// </summary>
+        public static string UI_Settings_ShowAyah {
+            get {
+                return ResourceManager.GetString("UI.Settings.ShowAyah", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable or disable the visibility of the ayah in prayers panel.
+        /// </summary>
+        public static string UI_Settings_ShowAyahDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.ShowAyahDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show countdown.
         /// </summary>
         public static string UI_Settings_ShowCountdown {
@@ -1097,6 +1728,24 @@ namespace AwqatSalaat.Properties {
         public static string UI_Settings_ShowCountdownDescription {
             get {
                 return ResourceManager.GetString("UI.Settings.ShowCountdownDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Gregorian date.
+        /// </summary>
+        public static string UI_Settings_ShowGregorianDate {
+            get {
+                return ResourceManager.GetString("UI.Settings.ShowGregorianDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable or disable the visibility of the Gregorian date in prayers panel.
+        /// </summary>
+        public static string UI_Settings_ShowGregorianDateDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.ShowGregorianDateDescription", resourceCulture);
             }
         }
         
@@ -1137,6 +1786,15 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Appearance.
+        /// </summary>
+        public static string UI_Settings_Tabs_Appearance {
+            get {
+                return ResourceManager.GetString("UI.Settings.Tabs.Appearance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to General.
         /// </summary>
         public static string UI_Settings_Tabs_General {
@@ -1173,6 +1831,24 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Theme.
+        /// </summary>
+        public static string UI_Settings_Theme {
+            get {
+                return ResourceManager.GetString("UI.Settings.Theme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the general theme of the widget. (Not applied to taskbar button).
+        /// </summary>
+        public static string UI_Settings_ThemeDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.ThemeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adjustment.
         /// </summary>
         public static string UI_Settings_TimeAdjustment {
@@ -1187,6 +1863,24 @@ namespace AwqatSalaat.Properties {
         public static string UI_Settings_TimeAdjustmentDescription {
             get {
                 return ResourceManager.GetString("UI.Settings.TimeAdjustmentDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time format.
+        /// </summary>
+        public static string UI_Settings_TimeFormat {
+            get {
+                return ResourceManager.GetString("UI.Settings.TimeFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The format in which the time is displayed.
+        /// </summary>
+        public static string UI_Settings_TimeFormatDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.TimeFormatDescription", resourceCulture);
             }
         }
         
@@ -1214,6 +1908,15 @@ namespace AwqatSalaat.Properties {
         public static string UI_Settings_UseGlobal {
             get {
                 return ResourceManager.GetString("UI.Settings.UseGlobal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use standard adhan sound.
+        /// </summary>
+        public static string UI_Settings_UseStandardAdhan {
+            get {
+                return ResourceManager.GetString("UI.Settings.UseStandardAdhan", resourceCulture);
             }
         }
         

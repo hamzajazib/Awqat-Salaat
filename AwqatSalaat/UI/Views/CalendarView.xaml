@@ -53,6 +53,8 @@
                 <Setter Property="Foreground" Value="{DynamicResource ThemeColors.TextHighlightBrush}"/>
             </Style>
 
+            <TextBlock x:Key="ServiceNotSupportedNotice" Text="{mk:L11n UI.Calendar.ServiceNotSupported}" Foreground="{DynamicResource ThemeColors.TextTertiaryBrush}" TextAlignment="Center"/>
+
             <local:RecordContainerStyleSelector x:Key="StyleSelector" Standard="{StaticResource StandardRecordContainerStyle}" Today="{StaticResource TodayRecordContainerStyle}"/>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -77,8 +79,8 @@
             </Grid.ColumnDefinitions>
             <RadioButton Content="{mk:L11n UI.Calendar.Gregorian}" IsChecked="{Binding UseGregorianCalendar}" VerticalContentAlignment="Center"/>
             <StackPanel Orientation="Horizontal" IsEnabled="{Binding UseGregorianCalendar}" Grid.Column="1">
-                <controls:NumericUpDown Minimum="2000" Maximum="2070" Value="{Binding GregorianYear}" Width="100" Margin="16,0,0,0"/>
-                <ComboBox ItemsSource="{Binding Source={x:Static ash:GregorianDateHelper.GregorianMonths}}" SelectedValuePath="Id" SelectedValue="{Binding GregorianMonth}" Width="150" Margin="16,0,0,0">
+                <controls:NumericUpDown x:Name="gregorianYear" Minimum="2000" Maximum="2070" Value="{Binding GregorianYear}" Width="100" Margin="16,0,0,0"/>
+                <ComboBox x:Name="gregorianMonth" ItemsSource="{Binding Source={x:Static ash:GregorianDateHelper.GregorianMonths}}" SelectedValuePath="Id" SelectedValue="{Binding GregorianMonth}" Width="150" Margin="16,0,0,0">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -89,7 +91,7 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
-            <RadioButton Content="{mk:L11n UI.Calendar.Hijri}" IsChecked="{Binding UseHijriCalendar}" VerticalContentAlignment="Center" Grid.Row="2"/>
+            <RadioButton x:Name="hijriRadioButton" Content="{mk:L11n UI.Calendar.Hijri}" IsChecked="{Binding UseHijriCalendar}" VerticalContentAlignment="Center" Grid.Row="2"/>
             <StackPanel Orientation="Horizontal" IsEnabled="{Binding UseHijriCalendar}" Grid.Row="2" Grid.Column="1">
                 <controls:NumericUpDown Minimum="1430" Maximum="1470" Value="{Binding HijriYear}" Width="100" Margin="16,0,0,0"/>
                 <ComboBox ItemsSource="{Binding Source={x:Static ash:HijriDateHelper.HijriMonths}}" SelectedValuePath="Id" SelectedValue="{Binding HijriMonth}" Width="150" Margin="16,0,0,0">

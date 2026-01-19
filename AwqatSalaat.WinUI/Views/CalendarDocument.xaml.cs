@@ -130,6 +130,7 @@ namespace AwqatSalaat.WinUI.Views
         {
             var doc = (CalendarDocument)d;
             doc.UpdateDisplayedDates();
+            doc.UpdateLocationText();
 
             if (e.OldValue is CalendarResult oldResult)
             {
@@ -174,6 +175,7 @@ namespace AwqatSalaat.WinUI.Views
             if (e.PropertyName == nameof(CalendarResult.HasData))
             {
                 UpdateDisplayedDates();
+                UpdateLocationText();
             }
         }
 
@@ -189,6 +191,13 @@ namespace AwqatSalaat.WinUI.Views
                 hmonthContainer.Visibility = Visibility.Visible;
                 hmonthRTLContainer.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void UpdateLocationText()
+        {
+            Log.Information("[Calendar document] Updating location text");
+
+            LocationText = Source?.Location ?? LocationText;
         }
 
         private void UpdateDisplayedDates()

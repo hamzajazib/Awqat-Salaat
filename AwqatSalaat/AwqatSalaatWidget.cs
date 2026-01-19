@@ -155,7 +155,8 @@ namespace AwqatSalaat
 
             if (msg == WM_WININICHANGE)
             {
-                UI.ThemeManager.SyncWithSystemTheme();
+                UI.ThemeManager.SyncButtonWithSystemTheme();
+                UI.ThemeManager.SyncGeneralWithAppsTheme();
                 handled = true;
                 return IntPtr.Zero;
             }

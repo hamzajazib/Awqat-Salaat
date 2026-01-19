@@ -25,7 +25,65 @@ namespace AwqatSalaat.UI.Views
         public CalendarView()
         {
             InitializeComponent();
+            Loaded += CalendarView_Loaded;
+            Unloaded += CalendarView_Unloaded;
             ViewModel.Result.PropertyChanged += Result_PropertyChanged;
+        }
+
+        private void CalendarView_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.PropertyChanged -= Settings_PropertyChanged;
+        }
+
+        private void CalendarView_Loaded(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.PropertyChanged -= Settings_PropertyChanged;
+            Properties.Settings.Default.PropertyChanged += Settings_PropertyChanged;
+
+            InvalidateService();
+        }
+
+        private void Settings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Properties.Settings.Service) || e.PropertyName == nameof(Properties.Settings.CSV_Range))
+            {
+                InvalidateService();
+            }
+        }
+
+        object oldContent;
+
+        private void InvalidateService()
+        {
+            if (Properties.Settings.Default.Service == Data.PrayerTimesService.QCH)
+            {
+                Log.Information("Hiding content in Calendar view");
+
+                if (oldContent is null)
+                {
+                    oldContent = Content;
+                }
+
+                Content = Resources["ServiceNotSupportedNotice"];
+            }
+            else if (oldContent != null)
+            {
+                Log.Information("Showing content in Calendar view");
+                Content = oldContent;
+                oldContent = null;
+            }
+
+            bool isCSV = Properties.Settings.Default.Service == Data.PrayerTimesService.CSV;
+            bool isMonthly = Properties.Settings.Default.CSV_Range == Configurations.CsvImportRange.Month;
+
+            if (isCSV)
+            {
+                Log.Information($"Adapting Calendar view content to CSV service. (Monthly range: {isMonthly})");
+            }
+
+            hijriRadioButton.IsEnabled = !isCSV;
+            gregorianYear.IsEnabled = !isCSV;
+            gregorianMonth.IsEnabled = !isCSV || !isMonthly;
         }
 
         private void Result_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

@@ -17,7 +17,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ui:ThemeDictionary>
+                <ui:ThemeDictionary ApplyToButton="True" d:ApplyToButton="False">
                     <d:ResourceDictionary.MergedDictionaries>
                         <ResourceDictionary Source="../Themes/Dark.xaml"/>
                     </d:ResourceDictionary.MergedDictionaries>
@@ -44,28 +44,10 @@
             <Style.Triggers>
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding DisplayedTime.State}" Value="Near"/>
-                        <Condition Binding="{Binding IsRefreshing}" Value="False"/>
-                        <Condition Binding="{Binding HasError}" Value="False"/>
-                    </MultiDataTrigger.Conditions>
-                    <MultiDataTrigger.EnterActions>
-                        <BeginStoryboard Name="an">
-                            <Storyboard RepeatBehavior="Forever">
-                                <ColorAnimation To="{StaticResource ThemeColors.AccentColor}" Duration="0:0:2" Storyboard.TargetProperty="(UserControl.Background).(SolidColorBrush.Color)" AutoReverse="True"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </MultiDataTrigger.EnterActions>
-                    <MultiDataTrigger.ExitActions>
-                        <StopStoryboard BeginStoryboardName="an"/>
-                    </MultiDataTrigger.ExitActions>
-                </MultiDataTrigger>
-                <MultiDataTrigger>
-                    <MultiDataTrigger.Conditions>
                         <Condition Binding="{Binding DisplayedTime.State}" Value="EnteredRecently"/>
                         <Condition Binding="{Binding IsRefreshing}" Value="False"/>
                         <Condition Binding="{Binding HasError}" Value="False"/>
                     </MultiDataTrigger.Conditions>
-                    <Setter Property="Background" Value="{DynamicResource ThemeColors.FillCriticalBrush}"/>
                     <Setter Property="Foreground" Value="{DynamicResource ThemeColors.TextOnAccentBrush}"/>
                 </MultiDataTrigger>
             </Style.Triggers>
@@ -225,6 +207,44 @@
                 </Style>
             </ToggleButton.Style>
             <Grid>
+                <Grid x:Name="notificationIndicator" Opacity="{Binding WidgetSettings.Realtime.NotificationIndicatorOpacity}">
+                    <Border>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Background" Value="{DynamicResource ThemeColors.AccentBrush}"/>
+                                <Setter Property="Opacity" Value="0"/>
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding DisplayedTime.State}" Value="Near"/>
+                                            <Condition Binding="{Binding IsRefreshing}" Value="False"/>
+                                            <Condition Binding="{Binding HasError}" Value="False"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.EnterActions>
+                                            <BeginStoryboard Name="an">
+                                                <Storyboard RepeatBehavior="Forever">
+                                                    <DoubleAnimation To="1" Duration="0:0:2" Storyboard.TargetProperty="Opacity" AutoReverse="True"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </MultiDataTrigger.EnterActions>
+                                        <MultiDataTrigger.ExitActions>
+                                            <StopStoryboard BeginStoryboardName="an"/>
+                                        </MultiDataTrigger.ExitActions>
+                                    </MultiDataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding DisplayedTime.State}" Value="EnteredRecently"/>
+                                            <Condition Binding="{Binding IsRefreshing}" Value="False"/>
+                                            <Condition Binding="{Binding HasError}" Value="False"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="Background" Value="{DynamicResource ThemeColors.FillCriticalBrush}"/>
+                                        <Setter Property="Opacity" Value="1"/>
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+                </Grid>
                 <Grid x:Name="grid" MaxHeight="40" Margin="4" d:Visibility="Visible" Visibility="{Binding WidgetSettings.Settings.IsConfigured, Converter={StaticResource BoolVisConverter}}">
                     <Grid d:Visibility="Visible" Visibility="{Binding HasError, Converter={StaticResource BoolVisInvConverter}}">
                         <Grid HorizontalAlignment="Center" Visibility="{Binding IsRefreshing, Converter={StaticResource BoolVisInvConverter}}">
@@ -325,9 +345,16 @@
             IsOpen="{Binding ElementName=toggle, Path=IsChecked, Mode=TwoWay}"
             PopupAnimation="Fade"
             Placement="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:WidgetSummary}, Path=PanelPlacement}">
+            <Popup.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ui:ThemeDictionary/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </Popup.Resources>
             <Grid Background="#01000000" MaxHeight="700" TextElement.FontSize="14" TextElement.Foreground="{DynamicResource ThemeColors.TextPrimaryBrush}">
                 <local:WidgetPanel MinWidth="200" Visibility="{Binding WidgetSettings.IsOpen, Converter={StaticResource BoolVisInvConverter}}"/>
-                <Grid DataContext="{Binding WidgetSettings}" Visibility="{Binding IsOpen, Converter={StaticResource BoolVisConverter}}" MinWidth="300" MaxWidth="760" Margin="0,8,0,0">
+                <Grid DataContext="{Binding WidgetSettings}" Visibility="{Binding IsOpen, Converter={StaticResource BoolVisConverter}}" MinWidth="300" MaxWidth="800" MinHeight="300" Margin="0,8,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>

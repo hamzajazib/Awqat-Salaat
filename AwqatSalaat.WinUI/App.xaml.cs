@@ -7,9 +7,6 @@ using System.Threading;
 using System.Windows.Input;
 using WinRT.Interop;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace AwqatSalaat.WinUI
 {
     /// <summary>
@@ -18,6 +15,7 @@ namespace AwqatSalaat.WinUI
     public partial class App : Application
     {
         private static Mutex appMutex;
+        private static readonly string appDirPath = AppDomain.CurrentDomain.BaseDirectory;
 
         public static event Action Quitting;
 
@@ -43,16 +41,41 @@ namespace AwqatSalaat.WinUI
         /// </summary>
         public App()
         {
-            if (SystemInfos.IsWindows10)
-            {
-                this.RequestedTheme = SystemInfos.IsLightThemeUsed() == true ? ApplicationTheme.Light : ApplicationTheme.Dark;
-            }
-
             this.InitializeComponent();
             UnhandledException += App_UnhandledException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            AppDomain.CurrentDomain.ProcessExit += CurrentDomain_ProcessExit;
 
             DispatcherShutdownMode = DispatcherShutdownMode.OnExplicitShutdown;
+        }
+
+        public void OverrideAccentColor(string accent)
+        {
+            Log.Information($"Changing accent colot to {accent}");
+            var dict = (ResourceDictionary)Resources[accent];
+
+            foreach (var item in dict)
+            {
+                Resources[item.Key] = item.Value;
+            }
+
+            foreach (var kv in dict.ThemeDictionaries)
+            {
+                if (Resources.ThemeDictionaries.ContainsKey(kv.Key))
+                {
+                    var thDict = (ResourceDictionary)Resources.ThemeDictionaries[kv.Key];
+
+                    foreach (var item in (ResourceDictionary)kv.Value)
+                    {
+                        thDict[item.Key] = item.Value;
+                    }
+                }
+            }
+        }
+
+        public static string GetFullPathToAsset(string assetName)
+        {
+            return System.IO.Path.Combine(appDirPath, "Assets", assetName);
         }
 
         private static void ExitIfOtherInstanceIsRunning()
@@ -67,6 +90,12 @@ namespace AwqatSalaat.WinUI
                 ShowError(Properties.Resources.Dialog_AppAlreadyRunning);
                 Environment.Exit(ExitCodes.AlreadyRunning);
             }
+        }
+
+        private void CurrentDomain_ProcessExit(object sender, EventArgs e)
+        {
+            Log.Information("Process exiting...");
+            Notification.NotificationManager.Unregister();
         }
 
         private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
@@ -106,6 +135,9 @@ namespace AwqatSalaat.WinUI
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
+            Log.Information($"App has launched");
+            OverrideAccentColor(Properties.Settings.Default.ThemeAccent.ToString());
+
 #if DEBUG
             m_window = new MainWindow();
             m_window.Activate();
@@ -116,6 +148,16 @@ namespace AwqatSalaat.WinUI
             var dispatcher = Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();
 
             InitializeWidget(dispatcher);
+
+            try
+            {
+                Notification.NotificationManager.Init();
+            }
+            catch (Exception ex)
+            {
+                Log.Warning(ex, $"Could not intialize NotificationManager. Error: {ex.Message}");
+                Helpers.MessageBox.Warning(Properties.Resources.Dialog_AppNotificationInitFailed);
+            }
         }
 
         private void InitializeWidget(Microsoft.UI.Dispatching.DispatcherQueue dispatcherQueue)

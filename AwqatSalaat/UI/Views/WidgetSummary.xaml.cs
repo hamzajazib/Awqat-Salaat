@@ -1,4 +1,5 @@
-﻿using AwqatSalaat.Helpers;
+﻿using AwqatSalaat.Extensions;
+using AwqatSalaat.Helpers;
 using AwqatSalaat.Media;
 using AwqatSalaat.ViewModels;
 using Serilog;
@@ -102,7 +103,7 @@ namespace AwqatSalaat.UI.Views
             ViewModel.WidgetSettings.Updated += WidgetSettings_Updated;
             ViewModel.NearNotificationStarted += ViewModel_NearNotificationStarted;
             ViewModel.NearNotificationStopped += ViewModel_NearNotificationStopped;
-            ViewModel.AdhanRequested += ViewModel_AdhanRequested;
+            ViewModel.PrayerTimeEntered += ViewModel_PrayerTimeEntered;
             LocaleManager.Default.CurrentChanged += LocaleManager_CurrentChanged;
 
             UpdateDirection();
@@ -123,7 +124,7 @@ namespace AwqatSalaat.UI.Views
             ViewModel.WidgetSettings.Updated -= WidgetSettings_Updated;
             ViewModel.NearNotificationStarted -= ViewModel_NearNotificationStarted;
             ViewModel.NearNotificationStopped -= ViewModel_NearNotificationStopped;
-            ViewModel.AdhanRequested -= ViewModel_AdhanRequested;
+            ViewModel.PrayerTimeEntered -= ViewModel_PrayerTimeEntered;
             LocaleManager.Default.CurrentChanged -= LocaleManager_CurrentChanged;
 
             currentAudioSession?.End();
@@ -139,18 +140,25 @@ namespace AwqatSalaat.UI.Views
             {
                 UpdateCountdownState(); 
             }
+            else if (e.PropertyName == nameof(Properties.Settings.ShortTimePattern))
+            {
+                timeTB.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
+            }
         }
 
-        private void ViewModel_AdhanRequested(bool isFajrTime)
+        private void ViewModel_PrayerTimeEntered(PrayerTimeViewModel prayerTime)
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                Log.Information("Adhan requested" + (isFajrTime ? " for fajr" : ""));
-                var file = isFajrTime
-                        ? ViewModel.WidgetSettings.Settings.AdhanFajrSoundFilePath
-                        : ViewModel.WidgetSettings.Settings.AdhanSoundFilePath;
-                var session = new AudioPlayerSession(file, tag: AdhanSoundTag);
-                PlaySound(session);
+                var config = ViewModel.WidgetSettings.Settings.GetPrayerConfig(prayerTime.Key);
+                var file = config.EffectiveAdhanFile();
+
+                if (!string.IsNullOrEmpty(file))
+                {
+                    Log.Information("Adhan requested for " + prayerTime.Key);
+                    var session = new AudioPlayerSession(file, tag: AdhanSoundTag);
+                    PlaySound(session);
+                }
             }));
         }
 
@@ -159,7 +167,8 @@ namespace AwqatSalaat.UI.Views
             Dispatcher.BeginInvoke(new Action(() =>
             {
                 var file = ViewModel.WidgetSettings.Settings.NotificationSoundFilePath;
-                var session = new AudioPlayerSession(file, tag: NearNotificationTag, loop: true);
+                bool repeat = ViewModel.WidgetSettings.Settings.RepeatNotificationSound;
+                var session = new AudioPlayerSession(file, tag: NearNotificationTag, loop: repeat);
                 PlaySound(session);
             }));
         }

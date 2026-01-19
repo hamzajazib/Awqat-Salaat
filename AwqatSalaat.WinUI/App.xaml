@@ -10,13 +10,14 @@
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <!-- Other merged dictionaries here -->
+                <ResourceDictionary Source="/Themes/Accents.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Default">
                     <Color x:Key="TextHighlightColor">#F2CC80</Color>
                     <Color x:Key="FillCriticalColor">#BA5D5D</Color>
-                    
+
                     <SolidColorBrush x:Key="TextHighlightBrush" Color="{StaticResource TextHighlightColor}"/>
                     <SolidColorBrush x:Key="FillCriticalBrush" Color="{StaticResource FillCriticalColor}"/>
                 </ResourceDictionary>
@@ -28,7 +29,8 @@
                     <SolidColorBrush x:Key="FillCriticalBrush" Color="{StaticResource FillCriticalColor}"/>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
-            
+
+            <!-- Default Accent colors -->
             <Color x:Key="SystemAccentColor">#BAA272</Color>
             <Color x:Key="SystemAccentColorLight1">#BC9055</Color>
             <Color x:Key="SystemAccentColorLight2">#BAA272</Color>
@@ -40,6 +42,12 @@
             <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <converters:BooleanToVisibilityInvertedConverter x:Key="BooleanToVisibilityInvertedConverter"/>
             <converters:BooleanInvertedConverter x:Key="BooleanInvertedConverter"/>
+
+            <!-- Should be removed after upgrading WASDK version since the issue is fixed in v1.6 -->
+            <Style TargetType="NumberBox">
+                <Setter Property="Background" Value="{ThemeResource TextControlBackground}" />
+                <Setter Property="Foreground" Value="{ThemeResource TextControlForeground}" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -5,8 +5,8 @@
         <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
         <RootNamespace>AwqatSalaat.WinUI</RootNamespace>
         <ApplicationManifest>app.manifest</ApplicationManifest>
-        <Platforms>x86;x64</Platforms>
-        <RuntimeIdentifiers>win10-x86;win10-x64</RuntimeIdentifiers>
+        <Platforms>x86;x64;ARM64</Platforms>
+        <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
         <PublishProfile>Properties/PublishProfiles/win10-$(Platform).pubxml</PublishProfile>
         <UseWinUI>true</UseWinUI>
         <EnableMsixTooling>true</EnableMsixTooling>
@@ -34,12 +34,15 @@
     </ItemGroup>
 
     <ItemGroup>
+        <None Remove="Themes\Accents.xaml" />
         <None Remove="Themes\Generic.xaml" />
         <None Remove="Views\CalendarDocument.xaml" />
         <None Remove="Views\CalendarExportWindow.xaml" />
         <None Remove="Views\CalendarPage.xaml" />
+        <None Remove="Views\DefaultPanel.xaml" />
         <None Remove="Views\LearnPage.xaml" />
         <None Remove="Views\MoreInfoWindow.xaml" />
+        <None Remove="Views\PanelAlt.xaml" />
     </ItemGroup>
     <ItemGroup>
       <COMReference Include="UIAutomationClient">
@@ -81,6 +84,21 @@
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\AwqatSalaat.Common\AwqatSalaat.Common.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+      <Page Update="Themes\Accents.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+    </ItemGroup>
+    <ItemGroup>
+      <Page Update="Views\PanelAlt.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+    </ItemGroup>
+    <ItemGroup>
+      <Page Update="Views\DefaultPanel.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
     </ItemGroup>
     <ItemGroup>
       <Page Update="Views\CalendarDocument.xaml">

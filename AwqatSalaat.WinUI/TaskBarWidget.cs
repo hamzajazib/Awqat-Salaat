@@ -236,7 +236,7 @@ namespace AwqatSalaat.WinUI
             UpdatePositionImpl(changeReason, isCentered, isWidgetsEnabled);
         }
 
-        private void UpdatePositionImpl(TaskbarChangeReason changeReason, bool isCentered, bool isWidgetsEnabled)
+        private async Task UpdatePositionImpl(TaskbarChangeReason changeReason, bool isCentered, bool isWidgetsEnabled)
         {
             Log.Information($"Updating widget position. Reason={changeReason}, Taskbar centered={isCentered}, Widgets enabled={isWidgetsEnabled}");
             int offsetX = Properties.Settings.Default.CustomPosition;
@@ -248,7 +248,7 @@ namespace AwqatSalaat.WinUI
             if (offsetX == -1)
             {
                 Log.Debug("Updating position in auto mode");
-                var widgetsButton = isWidgetsEnabled ? taskbarWatcher.GetAutomationElement(WidgetsButtonAutomationId) : null;
+                var widgetsButton = isWidgetsEnabled ? await taskbarWatcher.GetAutomationElementAsync(WidgetsButtonAutomationId) : null;
                 var widgetsButtonBoundingRectangle = widgetsButton?.CurrentBoundingRectangle;
                 User32.GetWindowRect(hwndTrayNotify, out RECT trayNotifyRect);
                 Log.Debug("System tray rect: {@trayRect}", trayNotifyRect);
@@ -358,9 +358,11 @@ namespace AwqatSalaat.WinUI
                 currentOffsetX = offsetX;
             }
 
-            // This only to make the widget show an animation :)
             widgetSummary.DispatcherQueue.TryEnqueue(() =>
             {
+                InvalidateElementsAlignment(Properties.Settings.Default.AutoAlignment);
+
+                // This only to make the widget show an animation :)
                 var grid = host.Content as GridEx;
 
                 if (changeReason == TaskbarChangeReason.Alignment || grid.Children.Count == 0)
@@ -474,9 +476,30 @@ namespace AwqatSalaat.WinUI
 
             appWindow.Move(new PointInt32(newX, currentOffsetY));
             lastCursorPositionX = lpPoint.x;
+            InvalidateElementsAlignment(Properties.Settings.Default.AutoAlignment);
 
             // This is necessary to make sure the content can raise keyboard events
             host.Content.Focus(Microsoft.UI.Xaml.FocusState.Programmatic);
+        }
+
+        public void InvalidateElementsAlignment(bool autoAlign)
+        {
+            if (autoAlign)
+            {
+                User32.GetWindowRect(hwndShell, out RECT taskbarRect);
+                int taskbarWidth = taskbarRect.right - taskbarRect.left;
+                int widgetMiddleX = appWindow.Position.X + appWindow.Size.Width / 2;
+                float resolution = 0.15f;
+                bool condition = IsRtlUI ? widgetMiddleX >= taskbarWidth * (1 - resolution) : widgetMiddleX <= taskbarWidth * resolution;
+
+                if (condition && IsRtlUI == LocaleManager.Default.CurrentCulture.TextInfo.IsRightToLeft)
+                {
+                    widgetSummary.ElementsAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Left;
+                    return;
+                }
+            }
+
+            widgetSummary.ElementsAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center;
         }
 
         private void RegisterWindowClass()

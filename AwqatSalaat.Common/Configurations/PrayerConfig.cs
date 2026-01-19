@@ -7,23 +7,30 @@ namespace AwqatSalaat.Configurations
         private bool isVisible = true;
         private bool globalReminderOffset = true;
         private bool globalElapsedTime = true;
+        private bool standardAdhan = true;
         private short adjustment;
         private ushort reminderOffset;
         private byte elapsedTime;
+        private string adhanFile;
 
         public bool IsVisible { get => IsPrincipal || isVisible; set => SetProperty(ref isVisible, value); }
         public bool GlobalReminderOffset { get => globalReminderOffset; set => SetProperty(ref globalReminderOffset, value); }
         public bool GlobalElapsedTime { get => globalElapsedTime; set => SetProperty(ref globalElapsedTime, value); }
+        public bool StandardAdhan { get => standardAdhan; set => SetProperty(ref standardAdhan, value); }
         public short Adjustment { get => adjustment; set => SetProperty(ref adjustment, value); }
         public ushort ReminderOffset { get => reminderOffset; set => SetProperty(ref reminderOffset, value); }
         public byte ElapsedTime { get => elapsedTime; set => SetProperty(ref elapsedTime, value); }
+        public string AdhanFile { get => adhanFile; set => SetProperty(ref adhanFile, value); }
         public string Key { get; }
         public bool IsPrincipal { get; }
+        public bool CanChangeAdhan { get; }
 
         public PrayerConfig(string key)
         {
             Key = key;
             IsPrincipal = key != nameof(Data.PrayerTimes.Shuruq);
+            // Fajr adhan is adjustable in General settings
+            CanChangeAdhan = IsPrincipal && key != nameof(Data.PrayerTimes.Fajr);
         }
 
         // This will be called from the main settings object (Properties.Settings)
@@ -55,6 +62,12 @@ namespace AwqatSalaat.Configurations
                     break;
                 case nameof(GlobalElapsedTime):
                     GlobalElapsedTime = (bool)newValue;
+                    break;
+                case nameof(StandardAdhan):
+                    StandardAdhan = (bool)newValue;
+                    break;
+                case nameof(AdhanFile):
+                    AdhanFile = (string)newValue;
                     break;
             }
         }

@@ -1,9 +1,11 @@
-﻿using AwqatSalaat.Helpers;
+﻿using AwqatSalaat.Configurations;
+using AwqatSalaat.Helpers;
 using AwqatSalaat.UI.Controls;
 using AwqatSalaat.ViewModels;
 using Microsoft.Win32;
 using Serilog;
 using System;
+using System.Device.Location;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -27,6 +29,7 @@ namespace AwqatSalaat.UI.Views
 
         private OpenFileDialog openFileDialog;
         private CancellationTokenSource checkingUpdatesCancellationTokenSource;
+        private bool loadedFirstTime;
 
         private WidgetSettingsViewModel ViewModel => DataContext as WidgetSettingsViewModel;
 
@@ -48,13 +51,116 @@ namespace AwqatSalaat.UI.Views
             IsVisibleChanged += SettingsPanel_IsVisibleChanged;
             version.Text = "v" + (Version ?? "{ERROR}");
             architecture.Text = Architecture;
+            Loaded += SettingsPanel_Loaded;
+            Unloaded += SettingsPanel_Unloaded;
+        }
+
+        private void SettingsPanel_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!loadedFirstTime)
+            {
+                loadedFirstTime = true;
+                ViewModel.SaveRejected += ViewModel_SaveRejected;
+                
+                if (!ViewModel.Settings.IsConfigured)
+                {
+                    TrySetGeolocation();
+                }
+            }
+
+            ViewModel.Realtime.PropertyChanged -= Realtime_PropertyChanged;
+            ViewModel.Realtime.PropertyChanged += Realtime_PropertyChanged;
+
+            OnServiceChanged();
+        }
+
+        private void ViewModel_SaveRejected(string error)
+        {
+            ParentPopup.StaysOpen = true;
+            ParentPopup.IsTopMost = false;
+            var localizedError = LocaleManager.Default.Get("Dialog." + error);
+            MessageBoxEx.Error(Properties.Resources.Dialog_InvalidServiceSettings + "\n" + localizedError);
+            ParentPopup.StaysOpen = false;
+            ParentPopup.IsTopMost = true;
+        }
+
+        private void SettingsPanel_Unloaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Realtime.PropertyChanged -= Realtime_PropertyChanged;
+        }
+
+        private void Realtime_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Properties.Settings.Service))
+            {
+                OnServiceChanged();
+            }
+        }
+
+        private void OnServiceChanged()
+        {
+            bool isQch = ViewModel.Realtime.Service == Data.PrayerTimesService.QCH;
+            bool isCSV = ViewModel.Realtime.Service == Data.PrayerTimesService.CSV;
+
+            if (isQch || isCSV)
+            {
+                Log.Information($"Adjusting Settings panel content to the selected service. (QCH={isQch}, CSV={isCSV})");
+            }
+
+            qchCitySetting.Visibility = isQch ? Visibility.Visible : Visibility.Collapsed;
+            locationTab.Visibility = isQch || isCSV ? Visibility.Collapsed : Visibility.Visible;
+            csvSettings.Visibility = isCSV ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void TrySetGeolocation()
+        {
+            try
+            {
+                Log.Information("Trying auto-geolocation...");
+                var watcher = new GeoCoordinateWatcher();
+                bool started = watcher.TryStart(false, TimeSpan.FromMilliseconds(2000));
+
+                if (started && watcher.Permission == GeoPositionPermission.Granted)
+                {
+                    watcher.PositionChanged += Watcher_PositionChanged;
+                }
+                else
+                {
+                    Log.Information("Auto-geolocation: " + (started ? "Access denied" : "Watcher not started"));
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Warning(ex, $"Auto-geolocation failed: {ex.Message}");
+            }
+        }
+
+        private void Watcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
+        {
+            try
+            {
+                var watcher = (GeoCoordinateWatcher)sender;
+                watcher.PositionChanged -= Watcher_PositionChanged;
+                watcher.Stop();
+                watcher.Dispose();
+
+                ViewModel.Realtime.LocationDetection = Data.LocationDetectionMode.ByCoordinates;
+                ViewModel.Realtime.Latitude = (decimal)e.Position.Location.Latitude;
+                ViewModel.Realtime.Longitude = (decimal)e.Position.Location.Longitude;
+
+                ViewModel.Locator.Check.Execute(null);
+            }
+            catch (Exception ex)
+            {
+                Log.Warning(ex, $"Auto-geolocation failed in PositionChanged: {ex.Message}");
+            }
         }
 
         private void SettingsPanel_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             bool isVisible = (bool)e.NewValue;
             Log.Information("Settings panel became " + (isVisible ? "visible" : "invisible"));
-            tabControl.SelectedIndex = isVisible ? 0 : -1;
+            tabControl.SelectedIndex = isVisible ? ViewModel.Settings.IsConfigured ? 0 : 3 : -1;
 
             if (!isVisible)
             {
@@ -138,8 +244,25 @@ namespace AwqatSalaat.UI.Views
 
         private void BrowseAdhanSound_Click(object sender, RoutedEventArgs e)
         {
-            Log.Information("Clicked on Browse for adhan sound");
-            BrowseSoundFile(ViewModel.Realtime.AdhanSoundFilePath, (s, f) => s.AdhanSoundFile = f);
+            if (sender is Button button && button.DataContext is PrayerConfig prayerConfig)
+            {
+                Log.Information($"Clicked on Browse for {prayerConfig.Key} adhan sound");
+
+                if (prayerConfig.CanChangeAdhan && !prayerConfig.StandardAdhan)
+                {
+                    var path = BrowseSoundFile(prayerConfig.AdhanFile, null);
+
+                    if (path != null)
+                    {
+                        prayerConfig.AdhanFile = path;
+                    }
+                }
+            }
+            else
+            {
+                Log.Information("Clicked on Browse for adhan sound");
+                BrowseSoundFile(ViewModel.Realtime.AdhanSoundFilePath, (s, f) => s.AdhanSoundFile = f); 
+            }
         }
 
         private void BrowseAdhanFajrSound_Click(object sender, RoutedEventArgs e)
@@ -148,7 +271,7 @@ namespace AwqatSalaat.UI.Views
             BrowseSoundFile(ViewModel.Realtime.AdhanFajrSoundFilePath, (s, f) => s.AdhanFajrSoundFile = f);
         }
 
-        private void BrowseSoundFile(string initialPath, Action<Properties.Settings, string> fileSetter)
+        private string BrowseSoundFile(string initialPath, Action<Properties.Settings, string> fileSetter)
         {
             if (openFileDialog is null)
             {
@@ -158,16 +281,23 @@ namespace AwqatSalaat.UI.Views
                 };
             }
 
+            if (initialPath == string.Empty)
+            {
+                initialPath = null;
+            }
+
             ParentPopup.StaysOpen = true;
             ParentPopup.IsTopMost = false;
 
             try
             {
-                openFileDialog.InitialDirectory = System.IO.Path.GetDirectoryName(initialPath);
+                openFileDialog.InitialDirectory = Path.GetDirectoryName(initialPath);
 
                 if (openFileDialog.ShowDialog() == true)
                 {
-                    fileSetter(ViewModel.Realtime, openFileDialog.FileName);
+                    fileSetter?.Invoke(ViewModel.Realtime, openFileDialog.FileName);
+
+                    return openFileDialog.FileName;
                 }
             }
             finally
@@ -175,6 +305,8 @@ namespace AwqatSalaat.UI.Views
                 ParentPopup.StaysOpen = false;
                 ParentPopup.IsTopMost = true;
             }
+
+            return null;
         }
 
         private void Expander_Expanded(object sender, RoutedEventArgs e)
@@ -209,6 +341,35 @@ namespace AwqatSalaat.UI.Views
             }
 
             Process.Start("explorer.exe", $"/select,\"{LogManager.LogsPath}\"");
+        }
+
+        private void BrowseCsvFile_Click(object sender, RoutedEventArgs e)
+        {
+            Log.Information("Clicked on Browse for CSV file");
+
+            if (openFileDialog is null)
+            {
+                openFileDialog = new OpenFileDialog()
+                {
+                    Filter = "CSV Files(*.csv)|*.csv;"
+                };
+            }
+
+            ParentPopup.StaysOpen = true;
+            ParentPopup.IsTopMost = false;
+
+            try
+            {
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    ViewModel.Realtime.CSV_FilePath = openFileDialog.FileName;
+                }
+            }
+            finally
+            {
+                ParentPopup.StaysOpen = false;
+                ParentPopup.IsTopMost = true;
+            }
         }
     }
 }

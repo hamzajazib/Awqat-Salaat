@@ -1,3 +1,4 @@
+using AwqatSalaat.Configurations;
 using AwqatSalaat.Helpers;
 using AwqatSalaat.Interop;
 using AwqatSalaat.Services.Nominatim;
@@ -14,6 +15,7 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using WinRT.Interop;
@@ -29,6 +31,9 @@ namespace AwqatSalaat.WinUI.Views
             .GetCustomAttribute<AssemblyFileVersionAttribute>()?
             .Version;
         public static readonly string Architecture = Environment.Is64BitProcess ? "64-bit" : "32-bit";
+
+        public static readonly DateTime SampleTime = new DateTime(2026, 1, 8, 18, 45, 0);
+        public static readonly string[] TimePatterns = { "", "HH:mm", "hh:mm tt", "h:mm tt" };
 
 #if PACKAGED
         static SettingsPanel()
@@ -51,10 +56,8 @@ namespace AwqatSalaat.WinUI.Views
         {
             this.InitializeComponent();
             this.Loaded += SettingsPanel_Loaded;
+            this.Unloaded += SettingsPanel_Unloaded;
             this.RegisterPropertyChangedCallback(VisibilityProperty, OnVisibilityChanged);
-
-            // Workaround for a bug https://github.com/microsoft/microsoft-ui-xaml/issues/4035
-            countryComboBox.RegisterPropertyChangedCallback(ComboBox.ItemsSourceProperty, OnItemsSourceChanged);
 
             version.Text = "v" + (Version ?? "{ERROR}");
             architecture.Text = Architecture;
@@ -79,27 +82,101 @@ namespace AwqatSalaat.WinUI.Views
                 Bindings.Update();
 
                 this.ViewModel.Updated += _ => StartupSettings.Commit();
+                this.ViewModel.SaveRejected += ViewModel_SaveRejected;
 
                 if (ParentFlyout is not null)
                 {
                     ParentFlyout.Closing += (s, a) => a.Cancel = keepFlyoutOpen;
+                }
+
+                if (!ViewModel.Settings.IsConfigured)
+                {
+                    nav.SelectedItem = locationTab;
+
+                    TrySetGeolocation();
                 }
             }
 
 #if PACKAGED
             StartupSettings.VerifyStartupTask();
 #endif
+
+            ViewModel.Realtime.PropertyChanged -= Realtime_PropertyChanged;
+            ViewModel.Realtime.PropertyChanged += Realtime_PropertyChanged;
+
+            OnServiceChanged();
         }
 
-        // Workaround for a bug https://github.com/microsoft/microsoft-ui-xaml/issues/4035
-        private static void OnItemsSourceChanged(DependencyObject sender, DependencyProperty dp)
+        private void ViewModel_SaveRejected(string error)
         {
-            ComboBox comboBox = sender as ComboBox;
+            keepFlyoutOpen = true;
+            var localizedError = LocaleManager.Default.Get("Dialog." + error);
+            MessageBox.Error(Properties.Resources.Dialog_InvalidServiceSettings + "\n" + localizedError);
+            keepFlyoutOpen = false;
+        }
 
-            if (comboBox.ItemsSource is not null)
+        private void SettingsPanel_Unloaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Realtime.PropertyChanged -= Realtime_PropertyChanged;
+        }
+
+        private void Realtime_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Properties.Settings.Service))
             {
-                comboBox.SelectedValuePath = null;
-                comboBox.SelectedValuePath = "Code";
+                OnServiceChanged();
+            }
+        }
+
+        private void OnServiceChanged()
+        {
+            bool isQch = ViewModel.Realtime.Service == Data.PrayerTimesService.QCH;
+            bool isCSV = ViewModel.Realtime.Service == Data.PrayerTimesService.CSV;
+
+            if (isQch || isCSV)
+            {
+                Log.Information($"Adjusting Settings panel content to the selected service. (QCH={isQch}, CSV={isCSV})");
+            }
+
+            qchCitySetting.Visibility = isQch ? Visibility.Visible : Visibility.Collapsed;
+            locationTab.Visibility = isQch || isCSV ? Visibility.Collapsed : Visibility.Visible;
+            csvSettings.Visibility = isCSV ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private async Task TrySetGeolocation()
+        {
+            try
+            {
+                Log.Information("Trying auto-geolocation...");
+                keepFlyoutOpen = true;
+                var access = await Geolocator.RequestAccessAsync();
+
+                if (access == GeolocationAccessStatus.Allowed)
+                {
+                    ViewModel.Realtime.LocationDetection = Data.LocationDetectionMode.ByCoordinates;
+
+                    var geolocator = new Geolocator();
+                    geolocator.AllowFallbackToConsentlessPositions();
+
+                    var geoposition = await geolocator.GetGeopositionAsync();
+
+                    ViewModel.Realtime.Latitude = (decimal)geoposition.Coordinate.Point.Position.Latitude;
+                    ViewModel.Realtime.Longitude = (decimal)geoposition.Coordinate.Point.Position.Longitude;
+
+                    ViewModel.Locator.Check.Execute(null);
+                }
+                else
+                {
+                    Log.Information("Auto-geolocation: Access denied");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Warning(ex, $"Auto-geolocation failed: {ex.Message}");
+            }
+            finally
+            {
+                keepFlyoutOpen = false;
             }
         }
 
@@ -255,8 +332,25 @@ namespace AwqatSalaat.WinUI.Views
 
         private async void BrowseAdhanSound_Click(object sender, RoutedEventArgs e)
         {
-            Log.Information("Clicked on Browse for adhan sound");
-            await BrowseSoundFileAsync((s, f) => s.AdhanSoundFile = f);
+            if (sender is Button button && button.DataContext is PrayerConfig prayerConfig)
+            {
+                Log.Information($"Clicked on Browse for {prayerConfig.Key} adhan sound");
+
+                if (prayerConfig.CanChangeAdhan && !prayerConfig.StandardAdhan)
+                {
+                    var path = await BrowseSoundFileAsync(null);
+
+                    if (path is not null)
+                    {
+                        prayerConfig.AdhanFile = path;
+                    }
+                }
+            }
+            else
+            {
+                Log.Information("Clicked on Browse for adhan sound");
+                await BrowseSoundFileAsync((s, f) => s.AdhanSoundFile = f); 
+            }
         }
 
         private async void BrowseAdhanFajrSound_Click(object sender, RoutedEventArgs e)
@@ -265,7 +359,7 @@ namespace AwqatSalaat.WinUI.Views
             await BrowseSoundFileAsync((s, f) => s.AdhanFajrSoundFile = f);
         }
 
-        private async Task BrowseSoundFileAsync(Action<Properties.Settings, string> fileSetter)
+        private async Task<string> BrowseSoundFileAsync(Action<Properties.Settings, string> fileSetter)
         {
             try
             {
@@ -281,9 +375,43 @@ namespace AwqatSalaat.WinUI.Views
 
                 StorageFile file = await fileOpenPicker.PickSingleFileAsync();
 
+                if (file is not null)
+                {
+                    fileSetter?.Invoke(ViewModel.Realtime, file.Path);
+
+                    return file.Path;
+                }
+            }
+            finally
+            {
+                keepFlyoutOpen = false;
+                IsHitTestVisible = true;
+            }
+
+            return null;
+        }
+
+        private async void BrowseCsvFile_Click(object sender, RoutedEventArgs e)
+        {
+            Log.Information("Clicked on Browse for CSV file");
+
+            try
+            {
+                FileOpenPicker fileOpenPicker = new()
+                {
+                    FileTypeFilter = { ".csv" },
+                };
+
+                InitializeWithWindow.Initialize(fileOpenPicker, App.MainHandle);
+
+                keepFlyoutOpen = true;
+                IsHitTestVisible = false;
+
+                StorageFile file = await fileOpenPicker.PickSingleFileAsync();
+
                 if (file != null)
                 {
-                    fileSetter(ViewModel.Realtime, file.Path);
+                    ViewModel.Realtime.CSV_FilePath = file.Path;
                 }
             }
             finally
@@ -326,5 +454,7 @@ namespace AwqatSalaat.WinUI.Views
 
             Process.Start("explorer.exe", $"/select,\"{LogManager.LogsPath}\"");
         }
+
+        private bool AND(bool left, bool right) => left && right;
     }
 }

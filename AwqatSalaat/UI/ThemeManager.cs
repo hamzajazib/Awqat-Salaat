@@ -1,47 +1,119 @@
-﻿using AwqatSalaat.Helpers;
+﻿using AwqatSalaat.Configurations;
+using AwqatSalaat.Helpers;
+using AwqatSalaat.Properties;
 using Serilog;
 using System;
 
 namespace AwqatSalaat.UI
 {
-    public enum ThemeKey : byte
+    public class ThemeChangedEventArgs : EventArgs
     {
-        Dark = 0,
-        Light = 1
+        public bool ButtonThemeChanged { get; }
+        public bool GeneralThemeChanged { get; }
+        public bool AccentChanged { get; }
+
+        public ThemeChangedEventArgs(bool buttonThemeChanged = false, bool generalThemeChanged = false, bool accentChanged = false)
+        {
+            if (!(buttonThemeChanged || generalThemeChanged || accentChanged))
+            {
+                throw new InvalidOperationException();
+            }
+
+            ButtonThemeChanged = buttonThemeChanged;
+            GeneralThemeChanged = generalThemeChanged;
+            AccentChanged = accentChanged;
+        }
     }
 
     public static class ThemeManager
     {
-        private static ThemeKey _current = ThemeKey.Dark;
+        private static ThemeKey _generalTheme = ThemeKey.Dark;
+        private static ThemeKey _buttonTheme = ThemeKey.Dark;
+        private static string _accent = "Gold";
 
-        public static ThemeKey Current
+        public static ThemeKey GeneralTheme
         {
-            get => _current;
+            get => _generalTheme;
             private set
             {
-                _current = value;
-                Changed?.Invoke();
+                if (_generalTheme == value) return;
+
+                _generalTheme = value;
+                Changed?.Invoke(null, new ThemeChangedEventArgs(generalThemeChanged: true));
             }
         }
 
-        public static event Action Changed;
+        public static ThemeKey ButtonTheme
+        {
+            get => _buttonTheme;
+            private set
+            {
+                if (_buttonTheme == value) return;
+
+                _buttonTheme = value;
+                Changed?.Invoke(null, new ThemeChangedEventArgs(buttonThemeChanged: true));
+            }
+        }
+
+        public static string Accent
+        {
+            get => _accent;
+            private set
+            {
+                if (_accent == value) return;
+
+                _accent = value;
+                Changed?.Invoke(null, new ThemeChangedEventArgs(accentChanged: true));
+            }
+        }
+
+        public static event EventHandler<ThemeChangedEventArgs> Changed;
 
         static ThemeManager()
         {
-            SyncWithSystemTheme();
+            if (!Designer.IsInDesignMode())
+            {
+                SyncButtonWithSystemTheme();
+                SetGeneralTheme(Settings.Default.Theme);
+            }
+
+            Accent = Settings.Default.ThemeAccent.ToString();
+            Settings.Realtime.PropertyChanged += Realtime_PropertyChanged;
         }
 
-        public static void SetTheme(ThemeKey theme)
+        private static void Realtime_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Current = theme;
+            if (e.PropertyName == nameof(Settings.Theme))
+            {
+                var value = Settings.Realtime.Theme;
+
+                SetGeneralTheme(value);
+            }
+            else if (e.PropertyName == nameof(Settings.ThemeAccent))
+            {
+                Accent = Settings.Realtime.ThemeAccent.ToString();
+            }
         }
 
         public static void ToggleTheme()
         {
-            SetTheme(Current == ThemeKey.Dark ? ThemeKey.Light : ThemeKey.Dark);
+            SetGeneralTheme(_generalTheme == ThemeKey.Dark ? ThemeKey.Light : ThemeKey.Dark);
         }
 
-        public static void SyncWithSystemTheme()
+        public static void SetGeneralTheme(ThemeKey theme)
+        {
+            if (theme == ThemeKey.Auto)
+            {
+                SyncGeneralWithAppsTheme();
+            }
+            else
+            {
+                Log.Information($"Setting general theme: {theme}");
+                GeneralTheme = theme;
+            }
+        }
+
+        public static void SyncButtonWithSystemTheme()
         {
             ThemeKey theme;
 
@@ -59,9 +131,21 @@ namespace AwqatSalaat.UI
                 theme = SystemInfos.IsLightThemeUsed() == true ? ThemeKey.Light : ThemeKey.Dark;
             }
 
-            Log.Information($"Setting theme: {theme}");
+            Log.Information($"Setting button theme: {theme}");
 
-            SetTheme(theme);
+            ButtonTheme = theme;
+        }
+
+        public static void SyncGeneralWithAppsTheme()
+        {
+            if (Settings.Realtime.Theme == ThemeKey.Auto)
+            {
+                ThemeKey theme = SystemInfos.IsAppsLightThemeUsed() == true ? ThemeKey.Light : ThemeKey.Dark;
+
+                Log.Information($"Setting general theme (Auto): {theme}");
+
+                GeneralTheme = theme;
+            }
         }
     }
 }

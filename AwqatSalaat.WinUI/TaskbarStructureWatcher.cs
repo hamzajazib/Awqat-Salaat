@@ -134,7 +134,12 @@ namespace AwqatSalaat.WinUI
             return taskbarRect.bottom > displayArea.OuterBounds.Height;
         }
 
-        public IUIAutomationElement GetAutomationElement(string automationId)
+        public Task<IUIAutomationElement> GetAutomationElementAsync(string automationId)
+        {
+            return Task.Run(() => GetAutomationElement(automationId));
+        }
+
+        private IUIAutomationElement GetAutomationElement(string automationId)
         {
             if (taskbarElement is not null)
             {

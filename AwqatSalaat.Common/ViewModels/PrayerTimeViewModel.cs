@@ -15,7 +15,6 @@ namespace AwqatSalaat.ViewModels
         private bool isNotificationDismissed;
         private bool isVisible = true;
         private PrayerTimeState state;
-        private Timer timer;
         private readonly PrayerConfig config;
 
         private bool IsInEnteredNotificationPeriod => !IsShuruq && IsEntered && DistanceElapsed > 0 && !isNotificationDismissed && Elapsed.TotalMinutes <= DistanceElapsed;
@@ -82,6 +81,11 @@ namespace AwqatSalaat.ViewModels
             IsVisible = config.IsVisible;
         }
 
+        public void RaiseTimePropertyChanged()
+        {
+            OnPropertyChanged(nameof(Time));
+        }
+
         private void Activate(bool active)
         {
             Log.Debug($"Updating time activation for: {Key}. From={isActive}, To={active}");
@@ -89,14 +93,13 @@ namespace AwqatSalaat.ViewModels
 
             if (active)
             {
-                timer = new Timer(TimerTick, null, 0, 1000);
+                TimeStamp.TimerTick += TimerTick;
             }
             else
             {
-                timer?.Dispose();
-                timer = null;
+                TimeStamp.TimerTick -= TimerTick;
                 // Call one more time to notify about any changes
-                TimerTick(null);
+                TimerTick();
             }
         }
 
@@ -104,10 +107,10 @@ namespace AwqatSalaat.ViewModels
         {
             Log.Debug($"Dismiss invoked for: {Key}");
             isNotificationDismissed = true;
-            TimerTick(null);
+            TimerTick();
         }
 
-        private void TimerTick(object arg)
+        private void TimerTick()
         {
             UpdateState();
 
@@ -179,6 +182,11 @@ namespace AwqatSalaat.ViewModels
             {
                 State = IsShuruq ? PrayerTimeState.ShuruqComing : PrayerTimeState.Coming;
             }
+        }
+
+        ~PrayerTimeViewModel()
+        {
+            TimeStamp.TimerTick -= TimerTick;
         }
     }
 

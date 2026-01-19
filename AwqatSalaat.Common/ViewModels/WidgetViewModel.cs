@@ -5,6 +5,8 @@ using AwqatSalaat.Services;
 using AwqatSalaat.Services.AlAdhan;
 using AwqatSalaat.Services.SalahHour;
 using AwqatSalaat.Services.Local;
+using AwqatSalaat.Services.QCH;
+using AwqatSalaat.Services.CSV;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -36,10 +38,21 @@ namespace AwqatSalaat.ViewModels
                 SetProperty(ref isRefreshing, value);
                 Refresh.RaiseCanExecuteChanged();
                 OpenSettings.RaiseCanExecuteChanged();
+                OnPropertyChanged(nameof(IsShowingTimes));
             }
         }
-        public string ErrorMessage { get => error; private set { SetProperty(ref error, value); OnPropertyChanged(nameof(HasError)); } }
+        public string ErrorMessage
+        {
+            get => error;
+            private set
+            {
+                SetProperty(ref error, value);
+                OnPropertyChanged(nameof(HasError));
+                OnPropertyChanged(nameof(IsShowingTimes));
+            }
+        }
         public bool HasError => !string.IsNullOrEmpty(error);
+        public bool IsShowingTimes => !isRefreshing && !HasError;
         public DateTime DisplayedDate { get => displayedDate; private set => SetProperty(ref displayedDate, value); }
         public string Country { get => country; private set => SetProperty(ref country, value); }
         public string City { get => city; private set => SetProperty(ref city, value); }
@@ -58,7 +71,7 @@ namespace AwqatSalaat.ViewModels
 
         public event Action NearNotificationStarted;
         public event Action NearNotificationStopped;
-        public event Action<bool> AdhanRequested;
+        public event Action<PrayerTimeViewModel> PrayerTimeEntered;
 
         public WidgetViewModel()
         {
@@ -92,6 +105,16 @@ namespace AwqatSalaat.ViewModels
 
                 RefreshData();
             }
+
+            TimeStamp.DateChanged += TimeStamp_DateChanged;
+        }
+
+        private void TimeStamp_DateChanged()
+        {
+            if (WidgetSettings.Settings.IsConfigured && WidgetSettings.Settings.Service == PrayerTimesService.QCH)
+            {
+                RefreshData();
+            }
         }
 
         private void OpenSettingsExecute()
@@ -107,6 +130,7 @@ namespace AwqatSalaat.ViewModels
             foreach (var time in Items)
             {
                 time.InvalidateConfig();
+                time.RaiseTimePropertyChanged();
             }
 
             if (hasServiceSettingsChanged)
@@ -137,10 +161,9 @@ namespace AwqatSalaat.ViewModels
             if (!prayerTime.IsShuruq
                 && prayerTime.Time.Date == TimeStamp.Date
                 && prayerTime.Time.Hour == TimeStamp.Now.Hour
-                && prayerTime.Time.Minute == TimeStamp.Now.Minute
-                && WidgetSettings.Settings.AdhanSound != AdhanSound.None)
+                && prayerTime.Time.Minute == TimeStamp.Now.Minute)
             {
-                AdhanRequested?.Invoke(prayerTime.Key == nameof(PrayerTimes.Fajr));
+                PrayerTimeEntered?.Invoke(prayerTime);
             }
         }
 
@@ -296,6 +319,25 @@ namespace AwqatSalaat.ViewModels
             return Update();
         }
 
+        private bool SwitchToNextDay(Dictionary<DateTime, PrayerTimes> data)
+        {
+            if (DisplayedDate == TimeStamp.Date)
+            {
+                var ishaConfig = WidgetSettings.Settings.GetPrayerConfig(nameof(PrayerTimes.Isha));
+                var ishaTime = data[DisplayedDate].Max(t => t.Value).AddMinutes(ishaConfig.Adjustment + ishaConfig.EffectiveElapsedTime());
+                // If Isha has already entered, then we look for the next day
+                if (TimeStamp.Now > ishaTime)
+                {
+                    Log.Information("Switching to next day");
+                    DisplayedDate = TimeStamp.NextDate;
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private async Task RefreshData()
         {
             if (isRefreshing)
@@ -313,20 +355,19 @@ namespace AwqatSalaat.ViewModels
 
                 var apiResponse = await serviceClient.GetDataAsync(request);
 
-                var ishaConfig = WidgetSettings.Settings.GetPrayerConfig(nameof(PrayerTimes.Isha));
-                var ishaTime = apiResponse.Times[DisplayedDate].Max(t => t.Value).AddMinutes(ishaConfig.Adjustment + ishaConfig.EffectiveElapsedTime());
-                // If Isha has already entered, then we look for the next day
-                if (DisplayedDate == TimeStamp.Date && TimeStamp.Now > ishaTime)
+                // We switch to next day when Isha has entered
+                if (serviceClient.SupportMonthlyData && SwitchToNextDay(apiResponse.Times))
                 {
-                    Log.Information("Switching to next day");
-                    DisplayedDate = TimeStamp.NextDate;
-
                     if (TimeStamp.Date.Month != TimeStamp.NextDate.Month)
                     {
                         Log.Information("Fetching data for next month");
                         request = BuildRequest(TimeStamp.NextDate, true);
                         apiResponse = await serviceClient.GetDataAsync(request);
                     }
+                }
+                else if (!serviceClient.SupportMonthlyData && apiResponse?.Times?.Count == 1)
+                {
+                    DisplayedDate = apiResponse.Times.Keys.First();
                 }
 
                 OnDataLoaded(apiResponse);
@@ -346,6 +387,25 @@ namespace AwqatSalaat.ViewModels
                 if (!WidgetSettings.Settings.IsConfigured || latestData is null)
                 {
                     ErrorMessage = nex.Message;
+                }
+                else if (!(latestData is null))
+                {
+                    // If the widget failed to get data for the next day, then we try to use the cache.
+                    // If the next day is the start of a new month, then the cache won't help, so we show the error.
+                    try
+                    {
+                        SwitchToNextDay(latestData);
+
+                        if (!Update())
+                        {
+                            // Let's show the error message of the original exception
+                            throw new Exception();
+                        }
+                    }
+                    catch
+                    {
+                        ErrorMessage = nex.Message;
+                    }
                 }
             }
             catch (Exception ex)
@@ -403,7 +463,7 @@ namespace AwqatSalaat.ViewModels
             string country = null;
             string city = null;
 
-            if (WidgetSettings.Settings.Service == PrayerTimesService.SalahHour)
+            if (WidgetSettings.Settings.Service == PrayerTimesService.SalahHour || WidgetSettings.Settings.Service == PrayerTimesService.QCH)
             {
                 country = responseLocation?.Country;
                 city = responseLocation?.City;
@@ -432,6 +492,12 @@ namespace AwqatSalaat.ViewModels
                     break;
                 case PrayerTimesService.Local:
                     serviceClient = new LocalClient();
+                    break;
+                case PrayerTimesService.QCH:
+                    serviceClient = new QchClient();
+                    break;
+                case PrayerTimesService.CSV:
+                    serviceClient = new CsvClient();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -464,12 +530,21 @@ namespace AwqatSalaat.ViewModels
                 case PrayerTimesService.Local:
                     request = new LocalRequest();
                     break;
+                case PrayerTimesService.QCH:
+                    request = new QchRequest()
+                    {
+                        CityId = settings.QchCity,
+                    };
+                    break;
+                case PrayerTimesService.CSV:
+                    request = BuildCsvRequest();
+                    break;
                 default:
                     return null;
             }
 
             request.Date = date;
-            request.GetEntireMonth = getEntireMonth;
+            request.GetEntireMonth = getEntireMonth && settings.Service != PrayerTimesService.QCH;
             request.Method = settings.CalculationMethod;
             request.JuristicSchool = settings.School;
 
@@ -482,6 +557,42 @@ namespace AwqatSalaat.ViewModels
 
             Log.Debug("Request built: {@request}", request);
             return request;
+        }
+
+        private CsvRequest BuildCsvRequest()
+        {
+            var settings = WidgetSettings.Settings;
+            var map = new Dictionary<string, int>
+            {
+                [nameof(CsvTimes.Fajr)] = settings.CSV_Map_Fajr,
+                [nameof(CsvTimes.Shuruq)] = settings.CSV_Map_Shuruq,
+                [nameof(CsvTimes.Dhuhr)] = settings.CSV_Map_Dhuhr,
+                [nameof(CsvTimes.Asr)] = settings.CSV_Map_Asr,
+                [nameof(CsvTimes.Maghrib)] = settings.CSV_Map_Maghrib,
+                [nameof(CsvTimes.Isha)] = settings.CSV_Map_Isha,
+            };
+
+            if (settings.CSV_HasDateColumn)
+            {
+                if (settings.CSV_DateColumnSchema == Configurations.CsvImportDateColumnSchema.Single)
+                {
+                    map.Add(nameof(CsvTimes.Date), settings.CSV_Map_Date);
+                }
+                else
+                {
+                    map.Add(nameof(CsvTimes.Day), settings.CSV_Map_Day);
+                    map.Add(nameof(CsvTimes.Month), settings.CSV_Map_Month);
+                }
+            }
+
+            return new CsvRequest
+            {
+                FilePath = settings.CSV_FilePath,
+                HasHeader = settings.CSV_HasHeader,
+                HasDateColumn = settings.CSV_HasDateColumn,
+                Range = settings.CSV_Range,
+                ColumnsMap = map,
+            };
         }
     }
 }

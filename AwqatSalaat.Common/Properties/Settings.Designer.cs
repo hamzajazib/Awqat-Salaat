@@ -12,7 +12,7 @@ namespace AwqatSalaat.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.12.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.14.0.0")]
     public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -692,6 +692,414 @@ namespace AwqatSalaat.Properties {
             }
             set {
                 this["EnableDebugLogs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoAlignment {
+            get {
+                return ((bool)(this["AutoAlignment"]));
+            }
+            set {
+                this["AutoAlignment"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Default")]
+        public global::AwqatSalaat.Configurations.WidgetPanelStyle TimesPanelStyle {
+            get {
+                return ((global::AwqatSalaat.Configurations.WidgetPanelStyle)(this["TimesPanelStyle"]));
+            }
+            set {
+                this["TimesPanelStyle"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowAyah {
+            get {
+                return ((bool)(this["ShowAyah"]));
+            }
+            set {
+                this["ShowAyah"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Gold")]
+        public global::AwqatSalaat.Configurations.ThemeAccent ThemeAccent {
+            get {
+                return ((global::AwqatSalaat.Configurations.ThemeAccent)(this["ThemeAccent"]));
+            }
+            set {
+                this["ThemeAccent"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double NotificationIndicatorOpacity {
+            get {
+                return ((double)(this["NotificationIndicatorOpacity"]));
+            }
+            set {
+                this["NotificationIndicatorOpacity"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Auto")]
+        public global::AwqatSalaat.Configurations.ThemeKey Theme {
+            get {
+                return ((global::AwqatSalaat.Configurations.ThemeKey)(this["Theme"]));
+            }
+            set {
+                this["Theme"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowGregorianDate {
+            get {
+                return ((bool)(this["ShowGregorianDate"]));
+            }
+            set {
+                this["ShowGregorianDate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool RepeatNotificationSound {
+            get {
+                return ((bool)(this["RepeatNotificationSound"]));
+            }
+            set {
+                this["RepeatNotificationSound"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableReminderToast {
+            get {
+                return ((bool)(this["EnableReminderToast"]));
+            }
+            set {
+                this["EnableReminderToast"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnablePrayerTimeToast {
+            get {
+                return ((bool)(this["EnablePrayerTimeToast"]));
+            }
+            set {
+                this["EnablePrayerTimeToast"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int QchCity {
+            get {
+                return ((int)(this["QchCity"]));
+            }
+            set {
+                this["QchCity"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CSV_FilePath {
+            get {
+                return ((string)(this["CSV_FilePath"]));
+            }
+            set {
+                this["CSV_FilePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CSV_HasHeader {
+            get {
+                return ((bool)(this["CSV_HasHeader"]));
+            }
+            set {
+                this["CSV_HasHeader"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Year")]
+        public global::AwqatSalaat.Configurations.CsvImportRange CSV_Range {
+            get {
+                return ((global::AwqatSalaat.Configurations.CsvImportRange)(this["CSV_Range"]));
+            }
+            set {
+                this["CSV_Range"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CSV_HasDateColumn {
+            get {
+                return ((bool)(this["CSV_HasDateColumn"]));
+            }
+            set {
+                this["CSV_HasDateColumn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Single")]
+        public global::AwqatSalaat.Configurations.CsvImportDateColumnSchema CSV_DateColumnSchema {
+            get {
+                return ((global::AwqatSalaat.Configurations.CsvImportDateColumnSchema)(this["CSV_DateColumnSchema"]));
+            }
+            set {
+                this["CSV_DateColumnSchema"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int CSV_Map_Fajr {
+            get {
+                return ((int)(this["CSV_Map_Fajr"]));
+            }
+            set {
+                this["CSV_Map_Fajr"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int CSV_Map_Shuruq {
+            get {
+                return ((int)(this["CSV_Map_Shuruq"]));
+            }
+            set {
+                this["CSV_Map_Shuruq"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int CSV_Map_Dhuhr {
+            get {
+                return ((int)(this["CSV_Map_Dhuhr"]));
+            }
+            set {
+                this["CSV_Map_Dhuhr"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int CSV_Map_Asr {
+            get {
+                return ((int)(this["CSV_Map_Asr"]));
+            }
+            set {
+                this["CSV_Map_Asr"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int CSV_Map_Maghrib {
+            get {
+                return ((int)(this["CSV_Map_Maghrib"]));
+            }
+            set {
+                this["CSV_Map_Maghrib"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int CSV_Map_Isha {
+            get {
+                return ((int)(this["CSV_Map_Isha"]));
+            }
+            set {
+                this["CSV_Map_Isha"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int CSV_Map_Date {
+            get {
+                return ((int)(this["CSV_Map_Date"]));
+            }
+            set {
+                this["CSV_Map_Date"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int CSV_Map_Day {
+            get {
+                return ((int)(this["CSV_Map_Day"]));
+            }
+            set {
+                this["CSV_Map_Day"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int CSV_Map_Month {
+            get {
+                return ((int)(this["CSV_Map_Month"]));
+            }
+            set {
+                this["CSV_Map_Month"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ShortTimePattern {
+            get {
+                return ((string)(this["ShortTimePattern"]));
+            }
+            set {
+                this["ShortTimePattern"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Config_Dhuhr_StandardAdhan {
+            get {
+                return ((bool)(this["Config_Dhuhr_StandardAdhan"]));
+            }
+            set {
+                this["Config_Dhuhr_StandardAdhan"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Config_Dhuhr_AdhanFile {
+            get {
+                return ((string)(this["Config_Dhuhr_AdhanFile"]));
+            }
+            set {
+                this["Config_Dhuhr_AdhanFile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Config_Asr_StandardAdhan {
+            get {
+                return ((bool)(this["Config_Asr_StandardAdhan"]));
+            }
+            set {
+                this["Config_Asr_StandardAdhan"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Config_Asr_AdhanFile {
+            get {
+                return ((string)(this["Config_Asr_AdhanFile"]));
+            }
+            set {
+                this["Config_Asr_AdhanFile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Config_Maghrib_StandardAdhan {
+            get {
+                return ((bool)(this["Config_Maghrib_StandardAdhan"]));
+            }
+            set {
+                this["Config_Maghrib_StandardAdhan"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Config_Maghrib_AdhanFile {
+            get {
+                return ((string)(this["Config_Maghrib_AdhanFile"]));
+            }
+            set {
+                this["Config_Maghrib_AdhanFile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Config_Isha_StandardAdhan {
+            get {
+                return ((bool)(this["Config_Isha_StandardAdhan"]));
+            }
+            set {
+                this["Config_Isha_StandardAdhan"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Config_Isha_AdhanFile {
+            get {
+                return ((string)(this["Config_Isha_AdhanFile"]));
+            }
+            set {
+                this["Config_Isha_AdhanFile"] = value;
             }
         }
     }

@@ -31,10 +31,69 @@ namespace AwqatSalaat.WinUI.Views
             this.InitializeComponent();
             ViewModel.Result.PropertyChanged += Result_PropertyChanged;
             listBox.Loaded += ListBox_Loaded;
+            Loaded += CalendarPage_Loaded;
+            Unloaded += CalendarPage_Unloaded;
+        }
 
-            // Workaround for a bug https://github.com/microsoft/microsoft-ui-xaml/issues/4035
-            gregorianCombobox.RegisterPropertyChangedCallback(ComboBox.ItemsSourceProperty, OnItemsSourceChanged);
-            hijriCombobox.RegisterPropertyChangedCallback(ComboBox.ItemsSourceProperty, OnItemsSourceChanged);
+        private void CalendarPage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.PropertyChanged -= Settings_PropertyChanged;
+        }
+
+        private void CalendarPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.PropertyChanged -= Settings_PropertyChanged;
+            Properties.Settings.Default.PropertyChanged += Settings_PropertyChanged;
+
+            InvalidateService();
+        }
+
+        private void Settings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName is nameof(Properties.Settings.Service) or nameof(Properties.Settings.CSV_Range))
+            {
+                InvalidateService();
+            }
+        }
+
+        UIElement oldContent;
+
+        private void InvalidateService()
+        {
+            if (Properties.Settings.Default.Service == Data.PrayerTimesService.QCH)
+            {
+                Log.Information("Hiding content in Calendar page");
+
+                if (oldContent is null)
+                {
+                    oldContent = Content;
+                }
+
+                var template = (DataTemplate)Resources["ServiceNotSupportedNotice"];
+                Content = new ContentControl
+                {
+                    ContentTemplate = template,
+                    HorizontalContentAlignment = HorizontalAlignment.Stretch
+                };
+            }
+            else if (oldContent != null)
+            {
+                Log.Information("Showing content in Calendar page");
+                Content = oldContent;
+                oldContent = null;
+            }
+
+            bool isCSV = Properties.Settings.Default.Service == Data.PrayerTimesService.CSV;
+            bool isMonthly = Properties.Settings.Default.CSV_Range == Configurations.CsvImportRange.Month;
+
+            if (isCSV)
+            {
+                Log.Information($"Adapting Calendar page content to CSV service. (Monthly range: {isMonthly})");
+            }
+
+            hijriRadioButton.IsEnabled = !isCSV;
+            gregorianYear.IsEnabled = !isCSV;
+            gregorianMonth.IsEnabled = !isCSV || !isMonthly;
         }
 
         private void ListBox_Loaded(object sender, RoutedEventArgs e)
@@ -48,18 +107,6 @@ namespace AwqatSalaat.WinUI.Views
         {
             Log.Debug("[Calendar] Scroll changed");
             UpdateInViewDate(listBox);
-        }
-
-        // Workaround for a bug https://github.com/microsoft/microsoft-ui-xaml/issues/4035
-        private static void OnItemsSourceChanged(DependencyObject sender, DependencyProperty dp)
-        {
-            ComboBox comboBox = sender as ComboBox;
-
-            if (comboBox.ItemsSource is not null)
-            {
-                comboBox.SelectedValuePath = null;
-                comboBox.SelectedValuePath = "Id";
-            }
         }
 
         private void Result_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

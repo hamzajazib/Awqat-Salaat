@@ -8,13 +8,12 @@ using System.ComponentModel;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using AwqatSalaat.Helpers;
 
 namespace AwqatSalaat.Properties
 {
     public partial class Settings
     {
-        private static readonly string s_assemblyDirectory;
-
         private CalculationMethod _calculationMethod;
         private string _notificationSoundFilePath;
         private string _adhanSoundFilePath;
@@ -23,11 +22,7 @@ namespace AwqatSalaat.Properties
         private bool _ignorePropertyChanged;
         private readonly Dictionary<string, PrayerConfig> _prayerConfigs = new Dictionary<string, PrayerConfig>();
 
-        static Settings()
-        {
-            var assemblyPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            s_assemblyDirectory = Path.GetDirectoryName(assemblyPath);
-        }
+        public static readonly Settings Realtime = new Settings();
 
         public PrayerConfig GetPrayerConfig(string key) => _prayerConfigs[key];
 
@@ -204,7 +199,7 @@ namespace AwqatSalaat.Properties
             }
             else
             {
-                TrySetSoundFilePath(NotificationSoundFile, (s, p) => s.NotificationSoundFilePath = p);
+                NotificationSoundFilePath = FileHelper.AbsolutePath(NotificationSoundFile);
             }
         }
 
@@ -216,7 +211,7 @@ namespace AwqatSalaat.Properties
             }
             else
             {
-                TrySetSoundFilePath(AdhanSoundFile, (s, p) => s.AdhanSoundFilePath = p);
+                AdhanSoundFilePath = FileHelper.AbsolutePath(AdhanSoundFile);
             }
         }
 
@@ -228,54 +223,14 @@ namespace AwqatSalaat.Properties
             }
             else
             {
-                TrySetSoundFilePath(AdhanFajrSoundFile, (s, p) => s.AdhanFajrSoundFilePath = p);
-            }
-        }
-
-        private void TrySetSoundFilePath(string file, Action<Settings, string> pathSetter)
-        {
-            try
-            {
-                string path = null;
-
-                if (Path.IsPathRooted(file))
-                {
-                    // Use Path.GetFullPath to make sure we always have a drive letter
-                    path = Path.GetFullPath(file);
-                }
-                else
-                {
-                    // The path is relative
-                    path = Path.Combine(s_assemblyDirectory, file);
-                }
-
-                pathSetter(this, File.Exists(path) ? path : null);
-            }
-            catch (Exception ex)
-            {
-#if DEBUG
-                throw;
-#endif
+                AdhanFajrSoundFilePath = FileHelper.AbsolutePath(AdhanFajrSoundFile);
             }
         }
 
         private void InvalidateAdhanFiles()
         {
-            switch (AdhanSound)
-            {
-                case Data.AdhanSound.None:
-                    AdhanSoundFile = null;
-                    AdhanFajrSoundFile = null;
-                    break;
-                case Data.AdhanSound.Adhan1:
-                    AdhanSoundFile = @"Sounds\kholafa_13041446.mp3";
-                    AdhanFajrSoundFile = @"Sounds\kholafa_13041446_full.mp3";
-                    break;
-                case Data.AdhanSound.Adhan2:
-                    AdhanSoundFile = @"Sounds\kholafa_08041446.mp3";
-                    AdhanFajrSoundFile = @"Sounds\kholafa_08041446_full.mp3";
-                    break;
-            }
+            AdhanSoundFile = AdhanConverter.AdhanSoundToFilePath(AdhanSound, AdhanSoundFile, false);
+            AdhanFajrSoundFile = AdhanConverter.AdhanSoundToFilePath(AdhanSound, AdhanFajrSoundFile, true);
         }
 
         private void UpdatePrayerConfigs()
@@ -330,6 +285,12 @@ namespace AwqatSalaat.Properties
                             break;
                         case nameof(PrayerConfig.GlobalElapsedTime):
                             this[setting] = config.GlobalElapsedTime;
+                            break;
+                        case nameof(PrayerConfig.StandardAdhan):
+                            if (config.CanChangeAdhan) this[setting] = config.StandardAdhan;
+                            break;
+                        case nameof(PrayerConfig.AdhanFile):
+                            if (config.CanChangeAdhan) this[setting] = config.AdhanFile;
                             break;
                     }
                 }

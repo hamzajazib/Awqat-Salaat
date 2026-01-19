@@ -1,6 +1,7 @@
+using AwqatSalaat.Extensions;
 using AwqatSalaat.Helpers;
 using AwqatSalaat.ViewModels;
-using AwqatSalaat.WinUI.Controls;
+using AwqatSalaat.WinUI.Helpers;
 using AwqatSalaat.WinUI.Media;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -8,10 +9,6 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Serilog;
 using System;
 using Windows.Foundation;
-using Windows.UI.ViewManagement;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace AwqatSalaat.WinUI.Views
 {
@@ -20,11 +17,21 @@ namespace AwqatSalaat.WinUI.Views
         private const string NearNotificationTag = "NearNotification";
         private const string AdhanSoundTag = "Adhan";
 
-        private static readonly UISettings uiSettings = new UISettings();
-
 #if DEBUG
         public static WidgetSummary Current { get; private set; }
 #endif
+
+        public static readonly DependencyProperty ElementsAlignmentProperty = DependencyProperty.Register(
+            "ElementsAlignment",
+            typeof(HorizontalAlignment),
+            typeof(WidgetSummary),
+            new PropertyMetadata(HorizontalAlignment.Center));
+
+        public HorizontalAlignment ElementsAlignment
+        {
+            get => (HorizontalAlignment)GetValue(ElementsAlignmentProperty);
+            set => SetValue(ElementsAlignmentProperty, value);
+        }
 
         private bool shouldBeCompactHorizontally;
         private DisplayMode currentDisplayMode = DisplayMode.Default;
@@ -47,51 +54,84 @@ namespace AwqatSalaat.WinUI.Views
             ViewModel.WidgetSettings.Realtime.PropertyChanged += Settings_PropertyChanged;
             ViewModel.NearNotificationStarted += ViewModel_NearNotificationStarted;
             ViewModel.NearNotificationStopped += ViewModel_NearNotificationStopped;
-            ViewModel.AdhanRequested += ViewModel_AdhanRequested;
+            ViewModel.PrayerTimeEntered += ViewModel_PrayerTimeEntered;
             LocaleManager.Default.CurrentChanged += LocaleManager_CurrentChanged;
-            uiSettings.ColorValuesChanged += UISettings_ColorValuesChanged;
+            ThemeHelper.ThemeChanged += ThemeHelper_ThemeChanged;
+            Notification.NotificationManager.ShowWidgetRequested += NotificationManager_ShowWidgetRequested;
+            Notification.NotificationManager.DismissReminderRequested += NotificationManager_DismissReminderRequested;
+            Notification.NotificationManager.StopReminderSoundRequested += NotificationManager_StopReminderSoundRequested;
+            Notification.NotificationManager.StopAdhanRequested += NotificationManager_StopAdhanRequested;
 
             UpdateDirection();
             UpdateNotificationSound();
         }
 
-        private void UISettings_ColorValuesChanged(UISettings sender, object args)
+        private void NotificationManager_StopAdhanRequested()
         {
-            DispatcherQueue.TryEnqueue(UpdateThemes);
+            DispatcherQueue.TryEnqueue(() =>
+            {
+                if (currentAudioSession?.Tag == AdhanSoundTag)
+                {
+                    Log.Information("Stopping adhan sound after interacting with toast notification");
+                    currentAudioSession.End();
+                }
+            });
         }
 
-        private void UpdateThemes()
+        private void NotificationManager_StopReminderSoundRequested()
         {
-            if (SystemInfos.IsAccentColorOnTaskBar() == true)
+            DispatcherQueue.TryEnqueue(() =>
             {
-                // When accent color is used, we have to figure out the theme based on the color
-                var accent = uiSettings.GetColorValue(UIColorType.Accent);
-                Log.Information($"Accent color on taskbar: R={accent.R}, G={accent.G}, B={accent.B}");
-                bool colorIsDark = (5 * accent.G + 2 * accent.R + accent.B) <= 8 * 200;
-                this.RequestedTheme = colorIsDark ? ElementTheme.Dark : ElementTheme.Light;
-            }
-            else
-            {
-                // We use "system theme" instead of "apps theme" because the taskbar uses the former
-                this.RequestedTheme = SystemInfos.IsLightThemeUsed() == true ? ElementTheme.Light : ElementTheme.Dark;
-            }
+                if (currentAudioSession?.Tag == NearNotificationTag)
+                {
+                    Log.Information("Stopping reminder sound after interacting with toast notification");
+                    currentAudioSession.End();
+                }
+            });
+        }
 
+        private void NotificationManager_DismissReminderRequested()
+        {
+            DispatcherQueue.TryEnqueue(() =>
+            {
+                Log.Information("Dismissing reminder after interacting with toast notification");
+                ViewModel.DisplayedTime.DismissNotification.Execute(null);
+            });
+        }
+
+        private void NotificationManager_ShowWidgetRequested()
+        {
+            Log.Information("Showing widget's panel after clicking on toast notification");
+            DispatcherQueue.TryEnqueue(() => ToggleButton_Checked(toggle, null));
+        }
+
+        private void ThemeHelper_ThemeChanged()
+        {
+            DispatcherQueue.TryEnqueue(UpdateTheme);
+        }
+
+        private void UpdateTheme()
+        {
+            this.RequestedTheme = ThemeHelper.ButtonTheme;
             Log.Information($"Updated theme: {this.RequestedTheme}");
+        }
 
-            if (Parent is FrameworkElement parent)
+        private void ReloadThemes()
+        {
+            ThemeHelper.ReloadElementTheme(this, this.RequestedTheme);
+
+            var flyoutPresenter = flyout.GetPresenter();
+
+            if (flyoutPresenter?.RequestedTheme is ElementTheme currentTheme)
             {
-                // The flyouts are independent of the taskbar so they should respect "apps theme" (we get it from the parent)
-                var theme = parent.ActualTheme == this.ActualTheme ? ElementTheme.Default : parent.ActualTheme;
-                flyout.SetPresenterTheme(theme);
-                (btngrid.ContextFlyout as CustomizedMenuFlyout)?.SetPresenterTheme(theme);
-                Log.Information($"Updated flyouts theme: {theme}");
+                ThemeHelper.ReloadElementTheme(flyoutPresenter, currentTheme);
             }
         }
 
         private void WidgetSummary_Loaded(object sender, RoutedEventArgs e)
         {
             Log.Information("Widget summary loaded");
-            UpdateThemes();
+            UpdateTheme();
             UpdateDisplayMode();
         }
 
@@ -102,9 +142,13 @@ namespace AwqatSalaat.WinUI.Views
             ViewModel.WidgetSettings.Updated -= WidgetSettings_Updated;
             ViewModel.NearNotificationStarted -= ViewModel_NearNotificationStarted;
             ViewModel.NearNotificationStopped -= ViewModel_NearNotificationStopped;
-            ViewModel.AdhanRequested -= ViewModel_AdhanRequested;
+            ViewModel.PrayerTimeEntered -= ViewModel_PrayerTimeEntered;
             LocaleManager.Default.CurrentChanged -= LocaleManager_CurrentChanged;
-            uiSettings.ColorValuesChanged -= UISettings_ColorValuesChanged;
+            ThemeHelper.ThemeChanged -= ThemeHelper_ThemeChanged;
+            Notification.NotificationManager.ShowWidgetRequested -= NotificationManager_ShowWidgetRequested;
+            Notification.NotificationManager.DismissReminderRequested -= NotificationManager_DismissReminderRequested;
+            Notification.NotificationManager.StopReminderSoundRequested -= NotificationManager_StopReminderSoundRequested;
+            Notification.NotificationManager.StopAdhanRequested -= NotificationManager_StopAdhanRequested;
 
             currentAudioSession?.End();
         }
@@ -113,24 +157,46 @@ namespace AwqatSalaat.WinUI.Views
         {
             if (e.PropertyName is nameof(Properties.Settings.ShowCountdown) or nameof(Properties.Settings.UseCompactMode))
             {
+                flyout?.DisableLightDismissTemporarily();
                 UpdateDisplayMode();
+            }
+            else if (e.PropertyName is nameof(Properties.Settings.AutoAlignment) or nameof(Properties.Settings.DisplayLanguage))
+            {
+                TaskBarManager.InvalidateWidgetElementsAlignment(ViewModel.WidgetSettings.Realtime.AutoAlignment);
+            }
+            else if (e.PropertyName ==  nameof(Properties.Settings.ThemeAccent))
+            {
+                ReloadThemes();
+            }
+            else if (e.PropertyName == nameof(Properties.Settings.ShortTimePattern))
+            {
+                Bindings.Update();
             }
         }
 
-        private void ViewModel_AdhanRequested(bool isFajrTime)
+        private void ViewModel_PrayerTimeEntered(PrayerTimeViewModel prayerTime)
         {
             DispatcherQueue.TryEnqueue(() =>
             {
-                Log.Information("Adhan requested" + (isFajrTime ? " for fajr" : ""));
-                var file = isFajrTime
-                        ? ViewModel.WidgetSettings.Settings.AdhanFajrSoundFilePath
-                        : ViewModel.WidgetSettings.Settings.AdhanSoundFilePath;
-                var session = new AudioPlayerSession
+                var config = ViewModel.WidgetSettings.Settings.GetPrayerConfig(prayerTime.Key);
+                var file = config.EffectiveAdhanFile();
+                var adhanRequested = !string.IsNullOrEmpty(file);
+
+                if (adhanRequested)
                 {
-                    File = file,
-                    Tag = AdhanSoundTag,
-                };
-                PlaySound(session);
+                    Log.Information("Adhan requested for " + prayerTime.Key);
+                    var session = new AudioPlayerSession
+                    {
+                        File = file,
+                        Tag = AdhanSoundTag,
+                    };
+                    PlaySound(session); 
+                }
+
+                if (prayerTime.Key != nameof(Data.PrayerTimes.Shuruq) && ViewModel.WidgetSettings.Settings.EnablePrayerTimeToast)
+                {
+                    Notification.NotificationManager.SendTimeEnteredToast(prayerTime.Key, adhanRequested);
+                }
             });
         }
 
@@ -138,14 +204,23 @@ namespace AwqatSalaat.WinUI.Views
         {
             DispatcherQueue.TryEnqueue(() =>
             {
+                bool repeat = ViewModel.WidgetSettings.Settings.RepeatNotificationSound;
                 var file = ViewModel.WidgetSettings.Settings.NotificationSoundFilePath;
                 var session = new AudioPlayerSession
                 {
                     File = file,
-                    Loop = true,
+                    Loop = repeat,
                     Tag = NearNotificationTag,
                 };
                 PlaySound(session);
+
+                if (ViewModel.WidgetSettings.Settings.EnableReminderToast)
+                {
+                    var prayer = ViewModel.DisplayedTime.Key;
+                    var time = ViewModel.DisplayedTime.Time;
+                    var playingSound = currentAudioSession is not null;
+                    Notification.NotificationManager.SendReminderToast(prayer, time, playingSound);
+                }
             });
         }
 
@@ -190,16 +265,12 @@ namespace AwqatSalaat.WinUI.Views
         private void Flyout_Closed(object sender, object e)
         {
             Log.Information("Flyout closed");
-            var customFlyout = (CustomizedFlyout)sender;
 
-            if (!customFlyout.ClosedBecauseOfResize)
+            toggle.IsChecked = false;
+
+            if (ViewModel.WidgetSettings.IsOpen && ViewModel.WidgetSettings.Settings.IsConfigured)
             {
-                toggle.IsChecked = false;
-
-                if (ViewModel.WidgetSettings.IsOpen && ViewModel.WidgetSettings.Settings.IsConfigured)
-                {
-                    ViewModel.WidgetSettings.Cancel.Execute(null);
-                }
+                ViewModel.WidgetSettings.Cancel.Execute(null);
             }
         }
 

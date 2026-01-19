@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Dispatching;
+﻿using AwqatSalaat.WinUI.Helpers;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -9,35 +9,57 @@ namespace AwqatSalaat.WinUI.Controls
 {
     public class CustomizedFlyout : Flyout
     {
-        private XamlRoot xamlRoot;
-        private bool xamlRootHadChanges;
-        private FrameworkElement target;
-        private bool hasClosed;
         private bool isFirstTime = true;
         private Control flyoutPresenter;
-        private ElementTheme? requestedTheme;
-
-        public bool ClosedBecauseOfResize { get; private set; }
+        private Popup popup;
 
         public CustomizedFlyout()
         {
             this.Opened += CustomizedFlyout_Opened;
-            //this.Closing += CustomizedFlyout_Closing;
-            this.Closed += CustomizedFlyout_Closed;
+            this.Opening += CustomizedFlyout_Opening;
+            ThemeHelper.ThemeChanged += ThemeHelper_ThemeChanged;
         }
 
-        public void SetPresenterTheme(ElementTheme theme)
+        private void ThemeHelper_ThemeChanged()
         {
-            if (flyoutPresenter is not null)
+            if (DispatcherQueue.HasThreadAccess)
             {
-                flyoutPresenter.RequestedTheme = theme;
+                UpdateTheme();
             }
             else
             {
-                requestedTheme = theme;
+                DispatcherQueue.TryEnqueue(UpdateTheme);
             }
         }
         
+        private void UpdateTheme()
+        {
+            if (popup is not null)
+            {
+                popup.RequestedTheme = ThemeHelper.GeneralTheme;
+                flyoutPresenter.RequestedTheme = popup.ActualTheme;
+            }
+        }
+
+        public void DisableLightDismissTemporarily()
+        {
+            if (flyoutPresenter?.Parent is Popup popup)
+            {
+                popup.IsLightDismissEnabled = false;
+
+                Task.Delay(100).ContinueWith((task, state) =>
+                {
+                    if (state is CustomizedFlyout flyout)
+                    {
+                        flyout.DispatcherQueue.TryEnqueue(() => (flyout.flyoutPresenter.Parent as Popup).IsLightDismissEnabled = true);
+                    }
+                },
+                this);
+            }
+        }
+
+        public Control GetPresenter() => flyoutPresenter;
+
         protected override Control CreatePresenter()
         {
             var presenter = base.CreatePresenter();
@@ -56,92 +78,25 @@ namespace AwqatSalaat.WinUI.Controls
                 presenter.MaxWidth = maxPresenterWidth;
             }
 
-            if (requestedTheme.HasValue)
-            {
-                presenter.RequestedTheme = requestedTheme.Value;
-                requestedTheme = null;
-            }
-
             flyoutPresenter = presenter;
 
             return presenter;
         }
 
-        private void ShowAgain()
+        private void CustomizedFlyout_Opening(object sender, object e)
         {
-            var attachedFlyout = GetAttachedFlyout(target);
-
-            if (attachedFlyout is null)
-            {
-                ShowAt(target);
-            }
-            else
-            {
-                ShowAttachedFlyout(target);
-            }
+            ThemeHelper_ThemeChanged();
         }
-
-        private void CustomizedFlyout_Closed(object sender, object e)
-        {
-            hasClosed = true;
-
-            if (xamlRootHadChanges)
-            {
-                Task.Delay(200).ContinueWith(t => DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, ShowAgain));
-            }
-            else
-            {
-                target = null;
-            }
-
-            ClosedBecauseOfResize = xamlRootHadChanges;
-
-            xamlRootHadChanges = false;
-        }
-
-        // Sadly this doesn't work because Closing event is not raised when XamlRoot get changes :(
-        private void CustomizedFlyout_Closing(FlyoutBase sender, FlyoutBaseClosingEventArgs args)
-        {
-            if (xamlRootHadChanges)
-            {
-                args.Cancel = true;
-            }
-
-            xamlRootHadChanges = false;
-        }
-
+        
         private void CustomizedFlyout_Opened(object sender, object e)
         {
-            target ??= Target;
-
-            hasClosed = false;
-
-            if (xamlRoot != XamlRoot)
-            {
-                if (xamlRoot is not null)
-                {
-                    xamlRoot.Changed -= XamlRoot_Changed;
-                }
-
-                xamlRoot = XamlRoot;
-                xamlRoot.Changed += XamlRoot_Changed;
-            }
-
-            var popup = flyoutPresenter.Parent as Popup;
-
             if (isFirstTime)
             {
+                popup = flyoutPresenter.Parent as Popup;
                 popup.GotFocus += (_, _) => flyoutPresenter?.Focus(FocusState.Programmatic);
                 isFirstTime = false;
-            }
-        }
 
-        private void XamlRoot_Changed(XamlRoot sender, XamlRootChangedEventArgs args)
-        {
-            // sometimes the change happen between setting IsOpen=false and raising Closed event
-            if (IsOpen || !hasClosed)
-            {
-                xamlRootHadChanges = true;
+                ThemeHelper_ThemeChanged();
             }
         }
     }

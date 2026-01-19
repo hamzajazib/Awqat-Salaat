@@ -14,21 +14,26 @@
              xmlns:data="clr-namespace:AwqatSalaat.Data;assembly=AwqatSalaat.Common"
              xmlns:api1="clr-namespace:AwqatSalaat.Services.SalahHour;assembly=AwqatSalaat.Common"
              xmlns:api2="clr-namespace:AwqatSalaat.Services.AlAdhan;assembly=AwqatSalaat.Common"
+             xmlns:config="clr-namespace:AwqatSalaat.Configurations;assembly=AwqatSalaat.Common"
+             xmlns:qch="clr-namespace:AwqatSalaat.Services.QCH;assembly=AwqatSalaat.Common"
              mc:Ignorable="d"
-             d:DesignHeight="1200" d:DesignWidth="800" d:Background="#192025">
+             d:DesignHeight="1200" d:DesignWidth="900" d:Background="#192025">
     <d:UserControl.DataContext>
         <vm:WidgetSettingsViewModel/>
     </d:UserControl.DataContext>
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
+        <ui:ThemeDictionaryDesignTime>
+            <d:ResourceDictionary.MergedDictionaries>
                 <ui:ThemeDictionary>
-                    <d:ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary.MergedDictionaries>
                         <ResourceDictionary Source="../Themes/Dark.xaml"/>
-                    </d:ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary.MergedDictionaries>
                 </ui:ThemeDictionary>
                 <ResourceDictionary Source="../Assets/Vectors.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
+            </d:ResourceDictionary.MergedDictionaries>
+            <ui:ThemeDictionaryDesignTime.MergedDictionaries>
+                <ResourceDictionary Source="../Assets/Vectors.xaml"/>
+            </ui:ThemeDictionaryDesignTime.MergedDictionaries>
 
             <ObjectDataProvider x:Key="SalahHourMethodEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
                 <ObjectDataProvider.MethodParameters>
@@ -60,16 +65,29 @@
                     <x:Type Type="{x:Type data:AdhanSound}"/>
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
+            <ObjectDataProvider x:Key="ThemeKeyEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type Type="{x:Type config:ThemeKey}"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+            <ObjectDataProvider x:Key="ThemeAccentEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type Type="{x:Type config:ThemeAccent}"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
 
+            <sys:DateTime x:Key="SampleDate">2026-01-08T18:45</sys:DateTime>
+
+            <converters:ShortTimeConverter x:Key="ShortTimeConverter"/>
+            <converters:AdhanFileConverter x:Key="AdhanFileConverter"/>
+            <converters:ThemeAccentConverter x:Key="ThemeAccentConverter"/>
             <converters:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
+            <converters:StringEqualityConverter x:Key="StringEqualityConverter"/>
             <converters:LocalizedStringConverter x:Key="LocalizedStringConverter"/>
             <converters:BoolInverterConverter x:Key="BoolInverterConverter"/>
             <converters:BoolToVisibilityInvertedConverter x:Key="BoolToVisibilityInvertedConverter"/>
+            <converters:MultiBooleanANDConverter x:Key="MultiBooleanANDConverter"/>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-
-            <Style TargetType="controls:SettingsItem" BasedOn="{StaticResource DefaultSettingsItemStyle}">
-                <Setter Property="Margin" Value="0,16,0,0"/>
-            </Style>
 
             <DataTemplate x:Key="MethodParameterValueTemplate" DataType="methods:CalculationMethodParameter">
                 <StackPanel Orientation="Horizontal">
@@ -106,7 +124,7 @@
             <DataTemplate x:Key="CalculationMethodDisplayTemplate" DataType="methods:CalculationMethod">
                 <TextBlock Text="{Binding Name}"/>
             </DataTemplate>
-        </ResourceDictionary>
+        </ui:ThemeDictionaryDesignTime>
     </UserControl.Resources>
     <Grid>
         <TabControl x:Name="tabControl">
@@ -114,10 +132,11 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel DataContext="{Binding Realtime}" Margin="8,16,8,8">
                         <controls:SettingsItem Header="{mk:L11n UI.Settings.Language}" Description="{mk:L11n UI.Settings.LanguageDescription}" Margin="0">
-                            <StackPanel Orientation="Horizontal" DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext}" FlowDirection="LeftToRight" HorizontalAlignment="Left">
-                                <RadioButton Content="English" IsChecked="{Binding UseEnglish}" d:IsChecked="True" Margin="0,0,64,0"/>
-                                <RadioButton Content="العربية" IsChecked="{Binding UseArabic}" FlowDirection="RightToLeft"/>
-                            </StackPanel>
+                            <ComboBox SelectedValuePath="Tag" SelectedValue="{Binding DisplayLanguage}" Width="150" HorizontalAlignment="Left">
+                                <ComboBoxItem Content="العربية" Tag="ar" FlowDirection="RightToLeft"/>
+                                <ComboBoxItem Content="English" Tag="en" FlowDirection="LeftToRight"/>
+                                <ComboBoxItem Content="Türkçe" Tag="tr" FlowDirection="LeftToRight"/>
+                            </ComboBox>
                         </controls:SettingsItem>
                         <controls:SettingsItem Header="{mk:L11n UI.Settings.ShowCountdown}" Description="{mk:L11n UI.Settings.ShowCountdownDescription}">
                             <CheckBox IsChecked="{Binding ShowCountdown}"/>
@@ -133,6 +152,14 @@
                         </controls:SettingsItem>
                         <controls:SettingsItem Header="{mk:L11n UI.Settings.ElapsedPeriod}" Description="{mk:L11n UI.Settings.ElapsedPeriodDescription}">
                             <controls:NumericUpDown Value="{Binding NotificationDistanceElapsed}" Maximum="30" Width="100" HorizontalAlignment="Left"/>
+                        </controls:SettingsItem>
+                        <controls:SettingsItem Header="{mk:L11n UI.Settings.TimeFormat}" Description="{mk:L11n UI.Settings.TimeFormatDescription}">
+                            <ComboBox SelectedValue="{Binding ShortTimePattern}" SelectedValuePath="Tag" Width="150" HorizontalAlignment="Left">
+                                <ComboBoxItem Content="{mk:L11n UI.Settings.Auto_System}"/>
+                                <ComboBoxItem Content="{Binding Source={StaticResource SampleDate}, Converter={StaticResource ShortTimeConverter}, ConverterParameter='HH:mm'}" Tag="HH:mm"/>
+                                <ComboBoxItem Content="{Binding Source={StaticResource SampleDate}, Converter={StaticResource ShortTimeConverter}, ConverterParameter='hh:mm tt'}" Tag="hh:mm tt"/>
+                                <ComboBoxItem Content="{Binding Source={StaticResource SampleDate}, Converter={StaticResource ShortTimeConverter}, ConverterParameter='h:mm tt'}" Tag="h:mm tt"/>
+                            </ComboBox>
                         </controls:SettingsItem>
                         <controls:SettingsItem Header="{mk:L11n UI.Settings.Calendar}" Description="{mk:L11n UI.Settings.CalendarDescription}">
                             <StackPanel Orientation="Horizontal">
@@ -205,12 +232,26 @@
                         <controls:SettingsItem Header="{mk:L11n UI.Settings.NotificationSound}" Description="{mk:L11n UI.Settings.NotificationSoundDescription}">
                             <StackPanel>
                                 <CheckBox IsChecked="{Binding EnableNotificationSound}"/>
-                                <DockPanel Margin="8,8,0,0" IsEnabled="{Binding EnableNotificationSound}" d:IsEnabled="True">
+                                <Grid Margin="8,8,0,0" IsEnabled="{Binding EnableNotificationSound}" d:IsEnabled="True">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="8"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
                                     <TextBlock Text="{mk:L11n UI.Settings.File}" VerticalAlignment="Center"/>
-                                    <Button Content="{mk:L11n UI.Settings.Browse}" DockPanel.Dock="Right" Click="BrowseNotificationSound_Click" Margin="8,0,0,0"/>
-                                    <controls:SoundPreviewButton File="{Binding NotificationSoundFilePath}" DockPanel.Dock="Right"/>
-                                    <TextBox Text="{Binding NotificationSoundFile}" Margin="8,0" FlowDirection="LeftToRight"/>
-                                </DockPanel>
+                                    <TextBox Text="{Binding NotificationSoundFile}" Margin="8,0" FlowDirection="LeftToRight" Grid.Column="1"/>
+                                    <controls:SoundPreviewButton File="{Binding NotificationSoundFilePath}" Grid.Column="2"/>
+                                    <Button Content="{mk:L11n UI.Settings.Browse}" Click="BrowseNotificationSound_Click" Grid.Column="3" Margin="8,0,0,0"/>
+
+                                    <TextBlock Text="{mk:L11n UI.Settings.RepeatNotificationSound}" VerticalAlignment="Center" Grid.Row="2"/>
+                                    <CheckBox IsChecked="{Binding RepeatNotificationSound}" Margin="8,0" Grid.Column="1" Grid.Row="2"/>
+                                </Grid>
                             </StackPanel>
                         </controls:SettingsItem>
                         <controls:SettingsItem Header="{mk:L11n UI.Settings.EnableLogs}" Description="{mk:L11n UI.Settings.EnableLogsDescription}">
@@ -241,7 +282,7 @@
                                 <Expander Header="{Binding Key, Converter={StaticResource LocalizedStringConverter}, ConverterParameter='Data.Salaat.{0}'}" Margin="0,4" Expanded="Expander_Expanded" d:IsExpanded="True">
                                     <StackPanel Margin="8">
                                         <controls:SettingsItem Header="{mk:L11n UI.Settings.TimeAdjustment}" Description="{mk:L11n UI.Settings.TimeAdjustmentDescription}" Margin="0">
-                                            <controls:NumericUpDown Minimum="-10" Maximum="10" Value="{Binding Adjustment}" Width="100" HorizontalAlignment="Left"/>
+                                            <controls:NumericUpDown Minimum="-60" Maximum="60" Value="{Binding Adjustment}" Width="100" HorizontalAlignment="Left"/>
                                         </controls:SettingsItem>
                                         <controls:SettingsItem Header="{mk:L11n UI.Settings.ReminderOffset}" Description="{mk:L11n UI.Settings.ReminderOffsetDescription}" Visibility="{Binding IsPrincipal, Converter={StaticResource BooleanToVisibilityConverter}}">
                                             <StackPanel>
@@ -253,6 +294,32 @@
                                             <StackPanel>
                                                 <CheckBox Content="{mk:L11n UI.Settings.UseGlobal}" IsChecked="{Binding GlobalElapsedTime}"/>
                                                 <controls:NumericUpDown Value="{Binding ElapsedTime}" Maximum="30" Width="100" HorizontalAlignment="Left" Margin="0,10,0,0" IsEnabled="{Binding GlobalElapsedTime, Converter={StaticResource BoolInverterConverter}}"/>
+                                            </StackPanel>
+                                        </controls:SettingsItem>
+                                        <controls:SettingsItem Header="{mk:L11n UI.Settings.AdhanSound}" Description="{mk:L11n UI.Settings.AdhanSoundDescription}" Visibility="{Binding CanChangeAdhan, Converter={StaticResource BooleanToVisibilityConverter}}" d:Visibility="Visible">
+                                            <StackPanel>
+                                                <CheckBox Content="{mk:L11n UI.Settings.UseStandardAdhan}" IsChecked="{Binding StandardAdhan}"/>
+                                                <Grid Margin="0,10,0,0" IsEnabled="{Binding StandardAdhan, Converter={StaticResource BoolInverterConverter}}">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition/>
+                                                    </Grid.RowDefinitions>
+                                                    <ComboBox x:Name="cmb" ItemsSource="{Binding Source={StaticResource AdhanSoundEnum}}" SelectedItem="{Binding AdhanFile, Converter={StaticResource AdhanFileConverter}}" Width="200">
+                                                        <ComboBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Converter={StaticResource LocalizedStringConverter}, ConverterParameter='Data.AdhanSound.{0}'}"/>
+                                                            </DataTemplate>
+                                                        </ComboBox.ItemTemplate>
+                                                    </ComboBox>
+                                                    <TextBox Text="{Binding AdhanFile}" Margin="8,0" FlowDirection="LeftToRight" Grid.Column="1" IsEnabled="{Binding ElementName=cmb, Path=SelectedItem, Converter={StaticResource StringEqualityConverter}, ConverterParameter=Custom}"/>
+                                                    <controls:SoundPreviewButton File="{Binding AdhanFile}" Grid.Column="2"/>
+                                                    <Button Content="{mk:L11n UI.Settings.Browse}" Click="BrowseAdhanSound_Click" Grid.Column="3" Margin="8,0,0,0" IsEnabled="{Binding ElementName=cmb, Path=SelectedItem, Converter={StaticResource StringEqualityConverter}, ConverterParameter=Custom}" d:Content="Browse..."/>
+                                                </Grid>
                                             </StackPanel>
                                         </controls:SettingsItem>
                                         <controls:SettingsItem Header="{mk:L11n UI.Settings.TimeVisibility}" Description="{mk:L11n UI.Settings.TimeVisibilityDescription}" Visibility="{Binding IsPrincipal, Converter={StaticResource BoolToVisibilityInvertedConverter}}">
@@ -267,10 +334,10 @@
             </controls:TabItemEx>
             <controls:TabItemEx Header="{mk:L11n UI.Settings.Tabs.Service}">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel DataContext="{Binding Realtime}" Margin="8,16,8,8">
+                    <StackPanel Margin="8,16,8,8">
                         <controls:SettingsItem Header="{mk:L11n UI.Settings.ServiceProvider}" Description="{mk:L11n UI.Settings.ServiceProviderDescription}" Margin="0">
                             <StackPanel>
-                                <ComboBox ItemsSource="{Binding Source={StaticResource PrayerTimesServiceEnum}}" SelectedItem="{Binding Service}" Width="200" HorizontalAlignment="Left">
+                                <ComboBox ItemsSource="{Binding Source={StaticResource PrayerTimesServiceEnum}}" SelectedItem="{Binding Realtime.Service}" Width="200" HorizontalAlignment="Left">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding Converter={StaticResource LocalizedStringConverter}, ConverterParameter='Data.PrayerTimesService.{0}'}"/>
@@ -282,7 +349,7 @@
                                         <Style TargetType="StackPanel">
                                             <Setter Property="Visibility" Value="Collapsed"/>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Service}" Value="Local">
+                                                <DataTrigger Binding="{Binding Realtime.Service}" Value="Local">
                                                     <Setter Property="Visibility" Value="Visible"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
@@ -293,33 +360,176 @@
                                 </StackPanel>
                             </StackPanel>
                         </controls:SettingsItem>
-                        <controls:SettingsItem Header="{mk:L11n UI.Settings.JuristicSchool}" Description="{mk:L11n UI.Settings.JuristicSchoolDescription}">
-                            <ComboBox ItemsSource="{Binding Source={StaticResource SchoolEnum}}" SelectedItem="{Binding School}" Width="300" HorizontalAlignment="Left">
+                        <controls:SettingsItem x:Name="qchCitySetting" Header="{mk:L11n UI.Settings.QchCity}" Description="{mk:L11n UI.Settings.QchCityDescription}">
+                            <ComboBox ItemsSource="{Binding Source={x:Static qch:QchCities.Cities}}" SelectedValue="{Binding Realtime.QchCity}" SelectedValuePath="CityId" HorizontalAlignment="Left" MinWidth="300" FlowDirection="LeftToRight">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Converter={StaticResource LocalizedStringConverter}, ConverterParameter='Data.JuristicSchool.{0}'}"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Name}"/>
+                                            <TextBlock Text=", " Foreground="{DynamicResource ThemeColors.TextSecondaryBrush}"/>
+                                            <TextBlock Text="{Binding Country}" Foreground="{DynamicResource ThemeColors.TextSecondaryBrush}"/>
+                                        </StackPanel>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                         </controls:SettingsItem>
-                        <controls:SettingsItem Header="{mk:L11n UI.Settings.Method}" Description="{mk:L11n UI.Settings.MethodDescription}">
-                            <ComboBox ItemsSource="{Binding Source={x:Static methods:CalculationMethod.AvailableMethods}, Mode=OneTime}" SelectedItem="{Binding CalculationMethod}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <ContentPresenter x:Name="presenter" Content="{Binding}" ContentTemplate="{StaticResource CalculationMethodTemplate}"/>
-                                        <DataTemplate.Triggers>
-                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ComboBoxItem, AncestorLevel=1}}" Value="{x:Null}">
-                                                <Setter TargetName="presenter" Property="ContentTemplate" Value="{StaticResource CalculationMethodDisplayTemplate}" />
-                                            </DataTrigger>
-                                        </DataTemplate.Triggers>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                        </controls:SettingsItem>
+                        <StackPanel x:Name="calculationSettings" Visibility="{Binding ElementName=locationTab, Path=Visibility}">
+                            <controls:SettingsItem Header="{mk:L11n UI.Settings.JuristicSchool}" Description="{mk:L11n UI.Settings.JuristicSchoolDescription}">
+                                <ComboBox ItemsSource="{Binding Source={StaticResource SchoolEnum}}" SelectedItem="{Binding Realtime.School}" Width="300" HorizontalAlignment="Left">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Converter={StaticResource LocalizedStringConverter}, ConverterParameter='Data.JuristicSchool.{0}'}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </controls:SettingsItem>
+                            <controls:SettingsItem Header="{mk:L11n UI.Settings.Method}" Description="{mk:L11n UI.Settings.MethodDescription}">
+                                <ComboBox ItemsSource="{Binding Source={x:Static methods:CalculationMethod.AvailableMethods}, Mode=OneTime}" SelectedItem="{Binding Realtime.CalculationMethod}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <ContentPresenter x:Name="presenter" Content="{Binding}" ContentTemplate="{StaticResource CalculationMethodTemplate}"/>
+                                            <DataTemplate.Triggers>
+                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ComboBoxItem, AncestorLevel=1}}" Value="{x:Null}">
+                                                    <Setter TargetName="presenter" Property="ContentTemplate" Value="{StaticResource CalculationMethodDisplayTemplate}" />
+                                                </DataTrigger>
+                                            </DataTemplate.Triggers>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </controls:SettingsItem>
+                        </StackPanel>
+                        <Grid x:Name="csvSettings" Margin="0,16,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <controls:SettingsItem Header="{mk:L11n UI.Settings.CountryCode}" Description="{mk:L11n UI.Settings.CountryCodeDescription}" Margin="0,0,8,0">
+                                <ComboBox ItemsSource="{Binding Source={x:Static vm:WidgetSettingsViewModel.AvailableCountries}}" SelectedValue="{Binding Realtime.CountryCode}" SelectedValuePath="Code" FlowDirection="LeftToRight" Grid.Column="1">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <DockPanel>
+                                                <TextBlock Text="{Binding Code}" Foreground="{DynamicResource ThemeColors.TextSecondaryBrush}" Width="24"/>
+                                                <TextBlock Text="{Binding Name}" Margin="8,0,0,0"/>
+                                            </DockPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </controls:SettingsItem>
+                            <controls:SettingsItem Header="{mk:L11n UI.Settings.City}" Description="{mk:L11n UI.Settings.CityDescription}" Grid.Column="1" Margin="8,0,0,0">
+                                <TextBox Text="{Binding Realtime.City}" FlowDirection="LeftToRight"/>
+                            </controls:SettingsItem>
+                            <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
+                                <Rectangle Fill="{DynamicResource ThemeColors.ControlBorderBrush}" Height="1" Margin="0,16,0,0"/>
+                                <controls:SettingsItem Header="{mk:L11n UI.Settings.CsvFilePath}" Description="{mk:L11n UI.Settings.CsvFilePathDescription}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Text="{Binding Realtime.CSV_FilePath, UpdateSourceTrigger=PropertyChanged}" FlowDirection="LeftToRight"/>
+                                        <Button Content="{mk:L11n UI.Settings.Browse}" Grid.Column="1" Margin="8,0,0,0" Click="BrowseCsvFile_Click"/>
+                                    </Grid>
+                                </controls:SettingsItem>
+                                <controls:SettingsItem Header="{mk:L11n UI.Settings.CsvHasHeader}" Description="{mk:L11n UI.Settings.CsvHasHeaderDescription}">
+                                    <CheckBox IsChecked="{Binding Realtime.CSV_HasHeader}"/>
+                                </controls:SettingsItem>
+                                <controls:SettingsItem Header="{mk:L11n UI.Settings.CsvHasDateColumn}" Description="{mk:L11n UI.Settings.CsvHasDateColumnDescription}">
+                                    <CheckBox IsChecked="{Binding Realtime.CSV_HasDateColumn}"/>
+                                </controls:SettingsItem>
+                                <controls:SettingsItem Header="{mk:L11n UI.Settings.CsvDateColumnSchema}" Description="{mk:L11n UI.Settings.CsvDateColumnSchemaDescription}" IsEnabled="{Binding Realtime.CSV_HasDateColumn}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <RadioButton GroupName="csvdatecolumn" Content="{mk:L11n Config.CsvDateColumnSchema.Single}" IsChecked="{Binding CsvImporter.HasSingleDateColumn}"/>
+                                        <RadioButton GroupName="csvdatecolumn" Content="{mk:L11n Config.CsvDateColumnSchema.Dual}" IsChecked="{Binding CsvImporter.HasDualDateColumn}" Margin="32,0,0,0"/>
+                                    </StackPanel>
+                                </controls:SettingsItem>
+                                <controls:SettingsItem Header="{mk:L11n UI.Settings.CsvRange}" Description="{mk:L11n UI.Settings.CsvRangeDescription}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <RadioButton GroupName="csvperiod" Content="{mk:L11n Config.CsvRange.Year}" IsChecked="{Binding CsvImporter.RangeInYear}"/>
+                                        <RadioButton GroupName="csvperiod" Content="{mk:L11n Config.CsvRange.Month}" IsChecked="{Binding CsvImporter.RangeInMonth}" Margin="32,0,0,0"/>
+                                    </StackPanel>
+                                </controls:SettingsItem>
+                                <Button Command="{Binding CsvImporter.Load}" HorizontalAlignment="Left" Width="150" Margin="0,24,0,8" Padding="4,2">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="&#xE8E5;" FontSize="16" FontFamily="Segoe MDL2 Assets" Foreground="{DynamicResource ThemeColors.GlyphForegroundBrush}" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{mk:L11n UI.Settings.Load}" Margin="4,0,0,0"/>
+                                    </StackPanel>
+                                </Button>
+                                <controls:SettingsItem Header="{mk:L11n UI.Settings.CsvColumnsMap}" Description="{mk:L11n UI.Settings.CsvColumnsMapDescription}" IsEnabled="{Binding CsvImporter.AreColumnsLoaded}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="8"/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="8"/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="8"/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="8"/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="8"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="8"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="8"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="8"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="{mk:L11n Data.Salaat.Fajr}" Grid.Column="0"/>
+                                        <TextBlock Text="{mk:L11n Data.Salaat.Shuruq}" Grid.Column="2"/>
+                                        <TextBlock Text="{mk:L11n Data.Salaat.Dhuhr}" Grid.Column="4"/>
+                                        <TextBlock Text="{mk:L11n Data.Salaat.Asr}" Grid.Column="6"/>
+                                        <TextBlock Text="{mk:L11n Data.Salaat.Maghrib}" Grid.Column="8"/>
+                                        <TextBlock Text="{mk:L11n Data.Salaat.Isha}" Grid.Column="10"/>
+                                        <ComboBox ItemsSource="{Binding CsvImporter.Columns}" SelectedValue="{Binding Realtime.CSV_Map_Fajr}" SelectedValuePath="Key" DisplayMemberPath="Value" Grid.Column="0" Grid.Row="2"/>
+                                        <ComboBox ItemsSource="{Binding CsvImporter.Columns}" SelectedValue="{Binding Realtime.CSV_Map_Shuruq}" SelectedValuePath="Key" DisplayMemberPath="Value" Grid.Column="2" Grid.Row="2"/>
+                                        <ComboBox ItemsSource="{Binding CsvImporter.Columns}" SelectedValue="{Binding Realtime.CSV_Map_Dhuhr}" SelectedValuePath="Key" DisplayMemberPath="Value"  Grid.Column="4" Grid.Row="2"/>
+                                        <ComboBox ItemsSource="{Binding CsvImporter.Columns}" SelectedValue="{Binding Realtime.CSV_Map_Asr}" SelectedValuePath="Key" DisplayMemberPath="Value"  Grid.Column="6" Grid.Row="2"/>
+                                        <ComboBox ItemsSource="{Binding CsvImporter.Columns}" SelectedValue="{Binding Realtime.CSV_Map_Maghrib}" SelectedValuePath="Key" DisplayMemberPath="Value"  Grid.Column="8" Grid.Row="2"/>
+                                        <ComboBox ItemsSource="{Binding CsvImporter.Columns}" SelectedValue="{Binding Realtime.CSV_Map_Isha}" SelectedValuePath="Key" DisplayMemberPath="Value"  Grid.Column="10" Grid.Row="2"/>
+
+                                        <TextBlock Text="{mk:L11n UI.Settings.Date}" Grid.Row="4" Grid.Column="0"/>
+                                        <TextBlock Text="{mk:L11n UI.Settings.Day}" Grid.Row="4" Grid.Column="2"/>
+                                        <TextBlock Text="{mk:L11n UI.Settings.Month}" Grid.Row="4" Grid.Column="4"/>
+                                        <ComboBox ItemsSource="{Binding CsvImporter.Columns}" SelectedValue="{Binding Realtime.CSV_Map_Date}" SelectedValuePath="Key" DisplayMemberPath="Value"  Grid.Column="0" Grid.Row="6">
+                                            <ComboBox.IsEnabled>
+                                                <MultiBinding Converter="{StaticResource MultiBooleanANDConverter}">
+                                                    <Binding Path="Realtime.CSV_HasDateColumn"/>
+                                                    <Binding Path="CsvImporter.HasSingleDateColumn"/>
+                                                </MultiBinding>
+                                            </ComboBox.IsEnabled>
+                                        </ComboBox>
+                                        <ComboBox ItemsSource="{Binding CsvImporter.Columns}" SelectedValue="{Binding Realtime.CSV_Map_Day}" SelectedValuePath="Key" DisplayMemberPath="Value"  Grid.Column="2" Grid.Row="6">
+                                            <ComboBox.IsEnabled>
+                                                <MultiBinding Converter="{StaticResource MultiBooleanANDConverter}">
+                                                    <Binding Path="Realtime.CSV_HasDateColumn"/>
+                                                    <Binding Path="CsvImporter.HasDualDateColumn"/>
+                                                </MultiBinding>
+                                            </ComboBox.IsEnabled>
+                                        </ComboBox>
+                                        <ComboBox ItemsSource="{Binding CsvImporter.Columns}" SelectedValue="{Binding Realtime.CSV_Map_Month}" SelectedValuePath="Key" DisplayMemberPath="Value"  Grid.Column="4" Grid.Row="6">
+                                            <ComboBox.IsEnabled>
+                                                <MultiBinding Converter="{StaticResource MultiBooleanANDConverter}">
+                                                    <Binding Path="Realtime.CSV_HasDateColumn"/>
+                                                    <Binding Path="CsvImporter.HasDualDateColumn"/>
+                                                </MultiBinding>
+                                            </ComboBox.IsEnabled>
+                                        </ComboBox>
+                                    </Grid>
+                                </controls:SettingsItem>
+                            </StackPanel>
+                        </Grid>
                     </StackPanel>
                 </ScrollViewer>
             </controls:TabItemEx>
-            <controls:TabItemEx Header="{mk:L11n UI.Settings.Tabs.Location}">
+            <controls:TabItemEx x:Name="locationTab" Header="{mk:L11n UI.Settings.Tabs.Location}">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel Margin="8,16,8,8">
                         <RadioButton IsChecked="{Binding Locator.DetectByCountryCode}" VerticalContentAlignment="Top">
@@ -471,6 +681,72 @@
                                 </Grid>
                             </controls:SettingsItem>
                         </RadioButton>
+                    </StackPanel>
+                </ScrollViewer>
+            </controls:TabItemEx>
+            <controls:TabItemEx Header="{mk:L11n UI.Settings.Tabs.Appearance}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel DataContext="{Binding Realtime}" Margin="8,16,8,8">
+                        <controls:SettingsItem Header="{mk:L11n UI.Settings.Theme}" Description="{mk:L11n UI.Settings.ThemeDescription}" Margin="0">
+                            <ComboBox ItemsSource="{Binding Source={StaticResource ThemeKeyEnum}}" SelectedItem="{Binding Theme}" Width="150" HorizontalAlignment="Left">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Converter={StaticResource LocalizedStringConverter}, ConverterParameter='Config.ThemeKey.{0}'}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </controls:SettingsItem>
+                        <controls:SettingsItem Header="{mk:L11n UI.Settings.AccentColor}" Description="{mk:L11n UI.Settings.AccentColorDescription}">
+                            <ListBox ItemsSource="{Binding Source={StaticResource ThemeAccentEnum}}" SelectedItem="{Binding ThemeAccent}" Background="{x:Null}" BorderThickness="0">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Rectangle Width="20" Height="20" Fill="{Binding Converter={StaticResource ThemeAccentConverter}}" ToolTip="{Binding Converter={StaticResource LocalizedStringConverter}, ConverterParameter='Config.ThemeAccent.{0}'}"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Setter Property="Margin" Value="0,0,4,0"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ListBoxItem">
+                                                    <Border x:Name="border" BorderBrush="Transparent" BorderThickness="1">
+                                                        <Grid>
+                                                            <ContentPresenter/>
+                                                            <Ellipse x:Name="mark" Width="5" Height="5" Fill="{DynamicResource ThemeColors.TextOnAccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
+                                                        </Grid>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource ThemeColors.ControlHoverBorderBrush}"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsSelected" Value="True">
+                                                            <Setter TargetName="mark" Property="Visibility" Value="Visible"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                            </ListBox>
+                        </controls:SettingsItem>
+                        <controls:SettingsItem Header="{mk:L11n UI.Settings.NotificationIndicatorOpacity}" Description="{mk:L11n UI.Settings.NotificationIndicatorOpacityDescription}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Slider Minimum="0" Maximum="1" SmallChange="0.1" LargeChange="0.2" Value="{Binding NotificationIndicatorOpacity}" Width="200" VerticalAlignment="Center" d:Value="0.5"/>
+                                <TextBlock Text="{Binding NotificationIndicatorOpacity, StringFormat=p0}" Margin="4,0,0,0" MinWidth="50" TextAlignment="Center"/>
+                            </StackPanel>
+                        </controls:SettingsItem>
+                        <controls:SettingsItem Header="{mk:L11n UI.Settings.ShowAyah}" Description="{mk:L11n UI.Settings.ShowAyahDescription}">
+                            <CheckBox IsChecked="{Binding ShowAyah}"/>
+                        </controls:SettingsItem>
+                        <controls:SettingsItem Header="{mk:L11n UI.Settings.ShowGregorianDate}" Description="{mk:L11n UI.Settings.ShowGregorianDateDescription}">
+                            <CheckBox IsChecked="{Binding ShowGregorianDate}"/>
+                        </controls:SettingsItem>
                     </StackPanel>
                 </ScrollViewer>
             </controls:TabItemEx>

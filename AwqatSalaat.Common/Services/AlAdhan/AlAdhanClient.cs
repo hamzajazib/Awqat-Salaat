@@ -9,6 +9,8 @@ namespace AwqatSalaat.Services.AlAdhan
 {
     public class AlAdhanClient : IServiceClient
     {
+        public bool SupportMonthlyData => true;
+
         public async Task<ServiceData> GetDataAsync(IRequest request)
         {
             var req = (AlAdhanRequest)request;
