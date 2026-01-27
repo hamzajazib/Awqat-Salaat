@@ -1,0 +1,776 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Data.Salaat.Fajr" xml:space="preserve">
+    <value>بەیانی</value>
+  </data>
+  <data name="Data.Salaat.Dhuhr" xml:space="preserve">
+    <value>نیوەرۆ</value>
+  </data>
+  <data name="Data.Salaat.Asr" xml:space="preserve">
+    <value>عەسر</value>
+  </data>
+  <data name="Data.Salaat.Maghrib" xml:space="preserve">
+    <value>مەغریب</value>
+  </data>
+  <data name="Data.Salaat.Isha" xml:space="preserve">
+    <value>عیشا</value>
+  </data>
+  <data name="UI.Summary.TapToStart" xml:space="preserve">
+    <value>دەستپێکردن</value>
+  </data>
+  <data name="UI.Summary.Refreshing" xml:space="preserve">
+    <value>لە نویبوونەوە دایە...</value>
+  </data>
+  <data name="UI.Summary.ErrorOccured" xml:space="preserve">
+    <value>هەڵەیەک روویدا</value>
+  </data>
+  <data name="UI.Summary.After" xml:space="preserve">
+    <value>لەدوای</value>
+  </data>
+  <data name="UI.Panel.Refresh" xml:space="preserve">
+    <value>نوێبوونەوە</value>
+  </data>
+  <data name="UI.Panel.Settings" xml:space="preserve">
+    <value>ڕێکخستنەکان</value>
+  </data>
+  <data name="UI.Panel.CorrespondTo" xml:space="preserve">
+    <value>گونجاوە بۆ</value>
+  </data>
+  <data name="UI.Settings.Confirm" xml:space="preserve">
+    <value>دڵنیابوون</value>
+  </data>
+  <data name="UI.Settings.Cancel" xml:space="preserve">
+    <value>هەڵوەشاندنەوە</value>
+  </data>
+  <data name="UI.Settings.ShowCountdown" xml:space="preserve">
+    <value>نیشاندانی کاتی ڕوو لە کەمی</value>
+  </data>
+  <data name="UI.Settings.ShowCountdownDescription" xml:space="preserve">
+    <value>ئایا دەتەوێت کاتی ڕوو لە کەمی بۆ نوێژی داهاتوو نیشان بدەی لەسەر تاسکبار یان نا</value>
+  </data>
+  <data name="UI.Settings.ReminderOffset" xml:space="preserve">
+    <value>کاتی ئاگادارکردنەوە</value>
+  </data>
+  <data name="UI.Settings.ReminderOffsetDescription" xml:space="preserve">
+    <value>بڕی ئەو خولەکانە دیاری بکەکە ئاگانامە پێش کاتی نویژی داهاتوو دەست پێبکات، بەهای سفر ئاگانامە لەکاردەخات</value>
+  </data>
+  <data name="UI.Settings.CountryCode" xml:space="preserve">
+    <value>کۆدی ووڵات</value>
+  </data>
+  <data name="UI.Settings.CountryCodeDescription" xml:space="preserve">
+    <value>پێکدێت لە دوو پیتی ئەلف و بێ ( بۆ نموونە IQ هێمایە بۆ Iraq)</value>
+  </data>
+  <data name="UI.Settings.ZipCode" xml:space="preserve">
+    <value>زیپ کۆد</value>
+  </data>
+  <data name="UI.Settings.ZipCodeDescription" xml:space="preserve">
+    <value>زیپ کۆد بەکاردێت بۆ ناسینەوەی شار، هەر ووڵات و شێوازی جیاوازی خۆی هەیە. </value>
+  </data>
+  <data name="UI.Settings.Method" xml:space="preserve">
+    <value>ڕێگای هەژمارکردن</value>
+  </data>
+  <data name="UI.Settings.MethodDescription" xml:space="preserve">
+    <value>لە ڕێگای هەژمارکردندا هێلەکانی درێژ و پانی لاری خۆر هاوشانی ئەوانیتر بەکاردێن</value>
+  </data>
+  <data name="Data.AppName" xml:space="preserve">
+    <value>أوقات الصلاة</value>
+  </data>
+  <data name="UI.Controls.Toggle.On" xml:space="preserve">
+    <value>داگیرساندن</value>
+  </data>
+  <data name="UI.Controls.Toggle.Off" xml:space="preserve">
+    <value>کوژاندنەوە</value>
+  </data>
+  <data name="UI.Panel.Dismiss" xml:space="preserve">
+    <value>بەلاوەنان</value>
+  </data>
+  <data name="UI.Panel.Refreshing" xml:space="preserve">
+    <value>لە نوێبوونەوە دایە... </value>
+  </data>
+  <data name="UI.Panel.Error" xml:space="preserve">
+    <value>هەڵە</value>
+  </data>
+  <data name="UI.Settings.Language" xml:space="preserve">
+    <value>زمان</value>
+  </data>
+  <data name="UI.Settings.LanguageDescription" xml:space="preserve">
+    <value>ئەو زمانەی بەکاردێت بۆ نیشاندان</value>
+  </data>
+  <data name="UI.Settings.ServiceProvider" xml:space="preserve">
+    <value>خزمەتگوزاری دابینکار</value>
+  </data>
+  <data name="UI.Settings.ServiceProviderDescription" xml:space="preserve">
+    <value>ئەو خزمەتگوزارییەی زانیاریەکان دابین دەکات بۆ کاتەکانی نوێژ</value>
+  </data>
+  <data name="UI.Settings.City" xml:space="preserve">
+    <value>شار</value>
+  </data>
+  <data name="UI.Settings.CityDescription" xml:space="preserve">
+    <value>ناوی شار</value>
+  </data>
+  <data name="UI.Settings.Tabs.General" xml:space="preserve">
+    <value>گشتی </value>
+  </data>
+  <data name="UI.ContextMenu.Show" xml:space="preserve">
+    <value>نیشاندان</value>
+  </data>
+  <data name="UI.ContextMenu.Hide" xml:space="preserve">
+    <value>شاردنەوە</value>
+  </data>
+  <data name="UI.ContextMenu.Reposition" xml:space="preserve">
+    <value>شوێن گۆڕین</value>
+  </data>
+  <data name="UI.ContextMenu.Quit" xml:space="preserve">
+    <value>کۆتای پێهێنان</value>
+  </data>
+  <data name="UI.Settings.LaunchOnWindowsStartup" xml:space="preserve">
+    <value>هەڵبوون لەگەڵ دەستپێکی ویندۆز</value>
+  </data>
+  <data name="UI.Settings.LaunchOnWindowsStartupDescription" xml:space="preserve">
+    <value>ڕێگەدان بە بەرنامۆچکەکە بۆ هەڵبوون لەگەڵ دەستپێکی ویندۆز</value>
+  </data>
+  <data name="UI.Settings.MinutesShort" xml:space="preserve">
+    <value>خولەک </value>
+  </data>
+  <data name="UI.Settings.JuristicSchool" xml:space="preserve">
+    <value>قوتابخانەی یاسایی</value>
+  </data>
+  <data name="UI.Settings.JuristicSchoolDescription" xml:space="preserve">
+    <value>ڕێگای یاسایی عەسر</value>
+  </data>
+  <data name="Data.JuristicSchool.Standard" xml:space="preserve">
+    <value>پێوانەیی (شافیعی و حەنبەلی و مالیکی) </value>
+  </data>
+  <data name="Data.JuristicSchool.Hanafi" xml:space="preserve">
+    <value>حەنەفی</value>
+  </data>
+  <data name="UI.Settings.Tabs.Service" xml:space="preserve">
+    <value>خزمەتگوزاری </value>
+  </data>
+  <data name="UI.Settings.Tabs.Location" xml:space="preserve">
+    <value>شوێن</value>
+  </data>
+  <data name="UI.Settings.Latitude" xml:space="preserve">
+    <value>هێلی پانی</value>
+  </data>
+  <data name="UI.Settings.LatitudeDescription" xml:space="preserve">
+    <value>هێلی پانی شار</value>
+  </data>
+  <data name="UI.Settings.Longitude" xml:space="preserve">
+    <value>هێلی درێژی</value>
+  </data>
+  <data name="UI.Settings.LongitudeDescription" xml:space="preserve">
+    <value>هێلی درێژی شار</value>
+  </data>
+  <data name="UI.Settings.LocationByCountryCode" xml:space="preserve">
+    <value>پاریمەتەرەکان بەکاربهێنە</value>
+  </data>
+  <data name="UI.Settings.LocationByCountryCodeDescription" xml:space="preserve">
+    <value>دیاریکردنی کەمترین پارامیتەرە پێویستەکان بۆ خزمەتگوزاری دیاریکردنی شوین</value>
+  </data>
+  <data name="UI.Settings.LocationByQuery" xml:space="preserve">
+    <value>کیوری بەکاربێنە</value>
+  </data>
+  <data name="UI.Settings.LocationByQueryDescription" xml:space="preserve">
+    <value>بەدوای شوێن بگەرێ لە ڕیگای ناونیشان یان ناوی شار</value>
+  </data>
+  <data name="UI.Settings.LocationByCoordinates" xml:space="preserve">
+    <value>کۆئۆردینێتە دیاریکراوەکان</value>
+  </data>
+  <data name="UI.Settings.LocationByCoordinatesDescription" xml:space="preserve">
+    <value>دیاریکردنی شوێن بە کۆئۆردینێتی دابینکراو بە دەستی</value>
+  </data>
+  <data name="UI.Settings.PoweredBy" xml:space="preserve">
+    <value>پاڵپشتیکراوە لەلایەن</value>
+  </data>
+  <data name="UI.Settings.NoResult" xml:space="preserve">
+    <value>هیچ ئەنجامێک نییە</value>
+  </data>
+  <data name="UI.Settings.LocationByQueryHint" xml:space="preserve">
+    <value>ناوی شار یان ناونیشان</value>
+  </data>
+  <data name="UI.Settings.Searching" xml:space="preserve">
+    <value>گەڕان...</value>
+  </data>
+  <data name="UI.Settings.Checking" xml:space="preserve">
+    <value>دڵنیابوونەوە...</value>
+  </data>
+  <data name="UI.Settings.Check" xml:space="preserve">
+    <value>دڵنیابوون</value>
+  </data>
+  <data name="UI.Settings.ShowSeconds" xml:space="preserve">
+    <value>نیشاندانی چرکە</value>
+  </data>
+  <data name="UI.Settings.ShowSecondsDescription" xml:space="preserve">
+    <value>ئایا دەتەوێت چرکە لە کاتی روو لەکەمی نیشان بدرێت یان نا</value>
+  </data>
+  <data name="Data.AppDescription" xml:space="preserve">
+    <value>بەرنامۆچکەیەکی ئیسلامی ویندۆزە بۆ نیشاندانی کاتی نویژی داهاتوو هاوشانی کاتی ڕوو لەکەمی لەسەر تاسکبار</value>
+  </data>
+  <data name="UI.Settings.Tabs.About" xml:space="preserve">
+    <value>دەربارە</value>
+  </data>
+  <data name="UI.About.VisitProject" xml:space="preserve">
+    <value>سەردانی پرۆژەکە بکە</value>
+  </data>
+  <data name="UI.About.Contact" xml:space="preserve">
+    <value>پەیوەندی بکە</value>
+  </data>
+  <data name="UI.Settings.EnableCompactMode" xml:space="preserve">
+    <value>دۆخی کۆمپاکت</value>
+  </data>
+  <data name="UI.Settings.EnableCompactModeDescription" xml:space="preserve">
+    <value>بەرنامۆچکەکە وا لێبکە بچوکتربێت و بۆشایەکی کەمتر بگرێت</value>
+  </data>
+  <data name="UI.Summary.Since" xml:space="preserve">
+    <value>لەوەتەی</value>
+  </data>
+  <data name="UI.Settings.ElapsedPeriod" xml:space="preserve">
+    <value>ماوەی کاتی تێپەریو</value>
+  </data>
+  <data name="UI.Settings.ElapsedPeriodDescription" xml:space="preserve">
+    <value>بڕی ئەو خولەکانەی کە داخیل دەکرێن بۆ بەڕێوەچوونی ئاگانامە دوای کاتەکانی نویژ، بەهای سفر ئاگانامە لەکاردەخات</value>
+  </data>
+  <data name="Data.Salaat.Shuruq" xml:space="preserve">
+    <value>ڕۆژهەڵات</value>
+  </data>
+  <data name="UI.Settings.NotificationSound" xml:space="preserve">
+    <value>دەنگی ئاگانامە</value>
+  </data>
+  <data name="UI.Settings.NotificationSoundDescription" xml:space="preserve">
+    <value>کارپێکردنی دەنگ لەو کاتەی ئاگانامە چالاکە</value>
+  </data>
+  <data name="UI.Settings.File" xml:space="preserve">
+    <value>فایل</value>
+  </data>
+  <data name="UI.Settings.Browse" xml:space="preserve">
+    <value>گەڕان...</value>
+  </data>
+  <data name="Data.CalendarType.Hijri" xml:space="preserve">
+    <value>کۆچی</value>
+  </data>
+  <data name="Data.CalendarType.UmAlQura" xml:space="preserve">
+    <value>ئومول قورا</value>
+  </data>
+  <data name="UI.Settings.Calendar" xml:space="preserve">
+    <value>جۆڕی ساڵنامە</value>
+  </data>
+  <data name="UI.Settings.CalendarDescription" xml:space="preserve">
+    <value>ئەو ساڵنامەی کە بەکاردێت بۆ دیاریکردنی بەرواری کۆچی</value>
+  </data>
+  <data name="UI.Settings.HijriCalendarAdjustment" xml:space="preserve">
+    <value>هەمواربکە بەهۆی (رۆژ)</value>
+  </data>
+  <data name="UI.ContextMenu.ManualPosition" xml:space="preserve">
+    <value>دۆخی دەستی</value>
+  </data>
+  <data name="UI.About.CheckForUpdates" xml:space="preserve">
+    <value>دڵنیاکردنووە لە نوێبوونە</value>
+  </data>
+  <data name="Dialog.AppAlreadyRunning" xml:space="preserve">
+    <value>بەرنامەکە لە کارکردندایە</value>
+  </data>
+  <data name="Dialog.WidgetUpToDate" xml:space="preserve">
+    <value>بەرنامۆچکەکە نوێکراوەتەوە.</value>
+  </data>
+  <data name="Dialog.NewUpdateAvailableFormat" xml:space="preserve">
+    <value>وەشانی نوێ بەردەستە!
+وەشان {0}
+ئایا دەتەوێت سەردانی لاپەڕەی دابەزاندن بکەیت؟</value>
+  </data>
+  <data name="Dialog.CheckingUpdatesFailed" xml:space="preserve">
+    <value>ناتاوانیت دڵنیاببیتەوە لە نوێبوونەوەکان</value>
+  </data>
+  <data name="UI.Panel.ServiceDownHint" xml:space="preserve">
+    <value>ئایا خزمەتگوزاریەکە لەکارکەوتووە؟
+هەوڵبدە بگۆڕیت بۆ خزمەتگوزارییەکانی تر بە چوونە سەر</value>
+  </data>
+  <data name="UI.Settings.LocalServiceNote" xml:space="preserve">
+    <value>خزمەتگوزاری خۆجێی پێویستە بۆ کۆئۆردینێتەکان. دڵنیابە لە رێکخستنیان لە رێکخستنەکانی شوێن</value>
+  </data>
+  <data name="Data.PrayerTimesService.Local" xml:space="preserve">
+    <value>خۆجێی ( دەرهێل)</value>
+  </data>
+  <data name="Data.PrayerTimesService.AlAdhan" xml:space="preserve">
+    <value>بانگ</value>
+  </data>
+  <data name="Data.PrayerTimesService.SalahHour" xml:space="preserve">
+    <value>کاتی سەلاح</value>
+  </data>
+  <data name="UI.Settings.AdhanSound" xml:space="preserve">
+    <value>دەنگی بانگ</value>
+  </data>
+  <data name="UI.Settings.AdhanSoundDescription" xml:space="preserve">
+    <value>دەنگی بانگ کارپێدەکرێت کاتێک بانگدەدرێت</value>
+  </data>
+  <data name="UI.Settings.AdhanFileStandard" xml:space="preserve">
+    <value>فایلی بانگی پێوانەیی</value>
+  </data>
+  <data name="UI.Settings.AdhanFileFajr" xml:space="preserve">
+    <value>فایلی بانگی بەیانی</value>
+  </data>
+  <data name="Data.AdhanSound.None" xml:space="preserve">
+    <value>هیچ</value>
+  </data>
+  <data name="Data.AdhanSound.Custom" xml:space="preserve">
+    <value>تایبەت</value>
+  </data>
+  <data name="Data.AdhanSound.Adhan1" xml:space="preserve">
+    <value>بانگ ١</value>
+  </data>
+  <data name="UI.Controls.SoundPreview.ToolTipIdle" xml:space="preserve">
+    <value>کارپێکردنی پێش وەختە</value>
+  </data>
+  <data name="UI.Controls.SoundPreview.ToolTipPlaying" xml:space="preserve">
+    <value>وەستاندن</value>
+  </data>
+  <data name="UI.Panel.StopSound" xml:space="preserve">
+    <value>دەنگ بوەستێنە</value>
+  </data>
+  <data name="Data.AdhanSound.Adhan2" xml:space="preserve">
+    <value>بانگ ٢</value>
+  </data>
+  <data name="UI.Calendar.Hijri" xml:space="preserve">
+    <value>کۆچی</value>
+  </data>
+  <data name="UI.Calendar.Gregorian" xml:space="preserve">
+    <value>زایینی</value>
+  </data>
+  <data name="UI.Calendar.NoData" xml:space="preserve">
+    <value>هیچ زانیاریەکە نییە.
+ساڵنامە هەڵبژێرە و ساڵ و مانگی دڵخواز دابنێ پاشان کلیک لەسەر نوێبوونەوە بکە</value>
+  </data>
+  <data name="UI.Panel.MoreInfo" xml:space="preserve">
+    <value>زانیاری زیاتر</value>
+  </data>
+  <data name="UI.Window.Close" xml:space="preserve">
+    <value>داخستن</value>
+  </data>
+  <data name="UI.Window.Minimize" xml:space="preserve">
+    <value>بچووککردن</value>
+  </data>
+  <data name="UI.Window.Maximize" xml:space="preserve">
+    <value>گەورەکردن</value>
+  </data>
+  <data name="UI.Window.Restore" xml:space="preserve">
+    <value>گەڕاندنەوە</value>
+  </data>
+  <data name="UI.Calendar.Title" xml:space="preserve">
+    <value>ساڵنامە</value>
+  </data>
+  <data name="UI.Learn.Title" xml:space="preserve">
+    <value>کاتەکانی نوێژ فێربە</value>
+  </data>
+  <data name="UI.Settings.Tabs.Times" xml:space="preserve">
+    <value>کاتەکان</value>
+  </data>
+  <data name="UI.Settings.TimeAdjustment" xml:space="preserve">
+    <value>هەموارکردن</value>
+  </data>
+  <data name="UI.Settings.TimeAdjustmentDescription" xml:space="preserve">
+    <value>هەموارکردنی کاتەکانی نوێژب ەخولەکی دیاریکراو</value>
+  </data>
+  <data name="UI.Settings.UseGlobal" xml:space="preserve">
+    <value>باهای جیهانی بەکاربێنە</value>
+  </data>
+  <data name="UI.Settings.TimeVisibility" xml:space="preserve">
+    <value>بینین</value>
+  </data>
+  <data name="UI.Settings.TimeVisibilityDescription" xml:space="preserve">
+    <value>نیشاندانی کات لە پانیلی بەرنامۆچکە</value>
+  </data>
+  <data name="UI.Calendar.DocumentTitle" xml:space="preserve">
+    <value>ساڵنامەی کاتەکانی نوێژ</value>
+  </data>
+  <data name="UI.Calendar.GeneratedBy" xml:space="preserve">
+    <value>دروستکراوە لەلایەن</value>
+  </data>
+  <data name="UI.Calendar.Export" xml:space="preserve">
+    <value>هەناردەکردن</value>
+  </data>
+  <data name="UI.Calendar.Preview" xml:space="preserve">
+    <value>پێش نیشاندان</value>
+  </data>
+  <data name="UI.Calendar.Theme" xml:space="preserve">
+    <value>ڕووکار</value>
+  </data>
+  <data name="UI.Calendar.ExportPNG" xml:space="preserve">
+    <value>هەناردە بکە بە شێوازی PNG</value>
+  </data>
+  <data name="UI.Calendar.Print" xml:space="preserve">
+    <value>چاپ</value>
+  </data>
+  <data name="UI.Settings.EnableLogs" xml:space="preserve">
+    <value>چالاکردنی خۆتۆمارکردن</value>
+  </data>
+  <data name="UI.Settings.EnableLogsDescription" xml:space="preserve">
+    <value>ڕێگەدان بە تۆمارکردنی زانیارییەکان سەبارەت بە هەلسوکەوتی بەرنامۆچکە (بەسوودە بۆ دەسنیشانکردن) </value>
+  </data>
+  <data name="UI.Settings.EnableDebugLogs" xml:space="preserve">
+    <value>چالاککردنی ڕاستکردنەوەی تۆمارکردن</value>
+  </data>
+  <data name="UI.Settings.EnableDebugLogsDescription" xml:space="preserve">
+    <value>زانیاری وورد لە تۆمارکردندا دابنێ </value>
+  </data>
+  <data name="UI.Settings.DebugLogsNote" xml:space="preserve">
+    <value>لەوانەیە ڕاستکردنەوەی تۆمارکردنەکان زانیاری کەسی لەخۆ بگرێت وەکو شوێنی داخیل کراو </value>
+  </data>
+  <data name="UI.Settings.ShowLogsFile" xml:space="preserve">
+    <value>نیشاندانی فایلی خۆتۆمارکردن </value>
+  </data>
+  <data name="Dialog.LogsFileNotFound" xml:space="preserve">
+    <value>فایلی خۆتۆمارکردن بوونی نییە. لەوانەیە تا ئێستا دروست نەکرابێت </value>
+  </data>
+  <data name="UI.Settings.AutoAlignment" xml:space="preserve">
+    <value>خۆگونجاندن </value>
+  </data>
+  <data name="UI.Settings.AutoAlignmentDescription" xml:space="preserve">
+    <value>ڕێکخستنی توخمەکان بگۆڕە، ئەگەر هاتوو بەرنامۆچکەکە نزیکی لێواری چەپ یان ڕاستی شاشە بێت</value>
+  </data>
+  <data name="Config.WidgetPanelStyle.Default" xml:space="preserve">
+    <value>بنەڕەتی </value>
+  </data>
+  <data name="Config.WidgetPanelStyle.Alt" xml:space="preserve">
+    <value>لەجیاتی دانان</value>
+  </data>
+  <data name="UI.Settings.PanelStyle" xml:space="preserve">
+    <value>شێوازی پانێل</value>
+  </data>
+  <data name="UI.Settings.PanelStyleDescription" xml:space="preserve">
+    <value>دیزاین و شێواز لەسەر پانێڵەکە جێبەجێ دەکرێت کە کات و بەرواری نوێژ پیشان دەدات</value>
+  </data>
+  <data name="UI.Settings.Tabs.Appearance" xml:space="preserve">
+    <value>ڕووکار</value>
+  </data>
+  <data name="UI.Settings.ShowAyah" xml:space="preserve">
+    <value>نیشاندانی ئایەت </value>
+  </data>
+  <data name="UI.Settings.ShowAyahDescription" xml:space="preserve">
+    <value>چاڵاککردن و چاڵاککردنی نیشاندانی ئایەت لە پانێلی کاتەکانی نوێژ </value>
+  </data>
+  <data name="UI.Settings.AccentColor" xml:space="preserve">
+    <value>ڕەنگی تایبەت </value>
+  </data>
+  <data name="UI.Settings.AccentColorDescription" xml:space="preserve">
+    <value>دیاریکردنی ڕەنگی تایبەت بەرنامۆچکە </value>
+  </data>
+  <data name="Config.ThemeAccent.Gold" xml:space="preserve">
+    <value>زێڕی </value>
+  </data>
+  <data name="Config.ThemeAccent.Blue" xml:space="preserve">
+    <value>شین</value>
+  </data>
+  <data name="Config.ThemeAccent.Green" xml:space="preserve">
+    <value>سەوز</value>
+  </data>
+  <data name="Config.ThemeAccent.Red" xml:space="preserve">
+    <value>سوور </value>
+  </data>
+  <data name="Config.ThemeAccent.Yellow" xml:space="preserve">
+    <value>زەرد</value>
+  </data>
+  <data name="Config.ThemeAccent.Teal" xml:space="preserve">
+    <value>سەوزی کاڵ</value>
+  </data>
+  <data name="Config.ThemeAccent.Orange" xml:space="preserve">
+    <value>پرتەقاڵی </value>
+  </data>
+  <data name="Config.ThemeAccent.Purple" xml:space="preserve">
+    <value>وەنەوشەیی </value>
+  </data>
+  <data name="Config.ThemeAccent.Pink" xml:space="preserve">
+    <value>پەمەیی</value>
+  </data>
+  <data name="UI.Settings.NotificationIndicatorOpacity" xml:space="preserve">
+    <value>ناڕوونیی نیشاندەری ئاگانامە </value>
+  </data>
+  <data name="UI.Settings.NotificationIndicatorOpacityDescription" xml:space="preserve">
+    <value>ڕێکخستنی ناڕوونی نیشاندەری ئاگانامەی بەرنامۆچکە لەسەر دوگمەی تاسکبار</value>
+  </data>
+  <data name="UI.Settings.Theme" xml:space="preserve">
+    <value>ڕووکار</value>
+  </data>
+  <data name="UI.Settings.ThemeDescription" xml:space="preserve">
+    <value>ڕووکاری گشتی بەرنامۆچکە دەستنیشان بکە (لەسەر دوگمەی تاسکبار جێبەجێ ناکرێت) </value>
+  </data>
+  <data name="Config.ThemeKey.Auto" xml:space="preserve">
+    <value>خۆکارانە (سیستەم) </value>
+  </data>
+  <data name="Config.ThemeKey.Dark" xml:space="preserve">
+    <value>تاریک</value>
+  </data>
+  <data name="Config.ThemeKey.Light" xml:space="preserve">
+    <value>ڕووناک </value>
+  </data>
+  <data name="UI.Settings.ShowGregorianDate" xml:space="preserve">
+    <value>نیشاندانی بەرواری زایینی </value>
+  </data>
+  <data name="UI.Settings.ShowGregorianDateDescription" xml:space="preserve">
+    <value>چاڵاککردن و نا چاڵاککردنی نیشاندانی بەرواری زایینی لە پانێلی کاتەکانی نوێژ </value>
+  </data>
+  <data name="UI.Settings.RepeatNotificationSound" xml:space="preserve">
+    <value>دووبارە </value>
+  </data>
+  <data name="Notification.Dismiss" xml:space="preserve">
+    <value>بەلاوەنان</value>
+  </data>
+  <data name="Notification.StopSound" xml:space="preserve">
+    <value>وەستاندنی دەنگ</value>
+  </data>
+  <data name="Notification.PrayerTimeEnteredFormat" xml:space="preserve">
+    <value>ئێستا کاتی بانگدانە {0}</value>
+  </data>
+  <data name="Notification.PrayerTimeSoonFormat" xml:space="preserve">
+    <value>کاتی بانگ نزیک دەبێتەوە {0}</value>
+  </data>
+  <data name="UI.Settings.ReminderNotificationToast" xml:space="preserve">
+    <value>بیرخەرەوەی ئاگانامەی ویندۆز</value>
+  </data>
+  <data name="UI.Settings.ReminderNotificationToastDescription" xml:space="preserve">
+    <value>نیشاندانی بیرخەرەوەی ئاگانامەی ویندۆز بۆ نوێژی داهاتوو </value>
+  </data>
+  <data name="UI.Settings.PrayerTimeNotificationToast" xml:space="preserve">
+    <value>ئاگانامەی ویندۆز بۆ کاتەکانی نوێژ </value>
+  </data>
+  <data name="UI.Settings.PrayerTimeNotificationToastDescription" xml:space="preserve">
+    <value>نیشاندانی ئاگانامەی ویندۆز لەکاتی بانگدان</value>
+  </data>
+  <data name="Data.PrayerTimesService.QCH" xml:space="preserve">
+    <value>ساڵنامەی ماڵی قەتەر </value>
+  </data>
+  <data name="UI.Calendar.ServiceNotSupported" xml:space="preserve">
+    <value>خزمەتگوزاری ڕێکخراو پشتگیری لە داتاکانی مانگانە ناکات.</value>
+  </data>
+  <data name="UI.Settings.QchCity" xml:space="preserve">
+    <value>شار</value>
+  </data>
+  <data name="UI.Settings.QchCityDescription" xml:space="preserve">
+    <value>شارێک هەڵبژێرە کە لەلایەن ماڵی ساڵنامەی قەتەرەوە پشتگیری دەکرێت</value>
+  </data>
+  <data name="Data.PrayerTimesService.CSV" xml:space="preserve">
+    <value>فايلی CSV</value>
+  </data>
+  <data name="UI.Settings.Load" xml:space="preserve">
+    <value>بارکردن </value>
+  </data>
+  <data name="UI.Settings.CsvFilePath" xml:space="preserve">
+    <value>ڕێڕەوی فایل</value>
+  </data>
+  <data name="UI.Settings.CsvFilePathDescription" xml:space="preserve">
+    <value>ڕێڕەوی تەواو بۆ فایلی CSV</value>
+  </data>
+  <data name="UI.Settings.CsvHasHeader" xml:space="preserve">
+    <value>سەردێری هەیە </value>
+  </data>
+  <data name="UI.Settings.CsvHasHeaderDescription" xml:space="preserve">
+    <value>دیاری بکە ئایا فایلی CSV سەردێڕی هەیە </value>
+  </data>
+  <data name="UI.Settings.CsvHasDateColumn" xml:space="preserve">
+    <value>زانیاری ستوونی هەیە </value>
+  </data>
+  <data name="UI.Settings.CsvHasDateColumnDescription" xml:space="preserve">
+    <value>دیاری بکە ئایا فایلی CSV ستوونی هەیە </value>
+  </data>
+  <data name="UI.Settings.CsvDateColumnSchema" xml:space="preserve">
+    <value>هێلکاری ستوونی بەروار </value>
+  </data>
+  <data name="UI.Settings.CsvDateColumnSchemaDescription" xml:space="preserve">
+    <value>دیاری بکە کە چۆن بەروارەکە لە فایلە CSV دا هەڵدەگیرێت</value>
+  </data>
+  <data name="UI.Settings.CsvRange" xml:space="preserve">
+    <value>مەودای کاتەکان</value>
+  </data>
+  <data name="UI.Settings.CsvRangeDescription" xml:space="preserve">
+    <value>مەودای کات بۆ ڕیزەکان لە فایلی CSV دیاری بکە</value>
+  </data>
+  <data name="UI.Settings.CsvColumnsMap" xml:space="preserve">
+    <value>نەخشەی ستوونەکان</value>
+  </data>
+  <data name="UI.Settings.CsvColumnsMapDescription" xml:space="preserve">
+    <value>نەخشەی هەر زانیارییەک بەرامبەر ستوونەکەیەتی</value>
+  </data>
+  <data name="Config.CsvDateColumnSchema.Single" xml:space="preserve">
+    <value>تاک</value>
+  </data>
+  <data name="Config.CsvDateColumnSchema.Dual" xml:space="preserve">
+    <value>دوانە ( ستوونی مانگ + ستوونی رۆژ) </value>
+  </data>
+  <data name="Config.CsvRange.Year" xml:space="preserve">
+    <value>ئەم ساڵە</value>
+  </data>
+  <data name="Config.CsvRange.Month" xml:space="preserve">
+    <value>ئەم مانگە</value>
+  </data>
+  <data name="UI.Settings.Date" xml:space="preserve">
+    <value>بەروار </value>
+  </data>
+  <data name="UI.Settings.Day" xml:space="preserve">
+    <value>رۆژ</value>
+  </data>
+  <data name="UI.Settings.Month" xml:space="preserve">
+    <value>مانگ </value>
+  </data>
+  <data name="UI.Settings.Auto_System" xml:space="preserve">
+    <value>خۆکارانە ( سیستەم) </value>
+  </data>
+  <data name="UI.Settings.TimeFormat" xml:space="preserve">
+    <value>شێوازی کات </value>
+  </data>
+  <data name="UI.Settings.TimeFormatDescription" xml:space="preserve">
+    <value>ئەو شێوازەی کە کاتەی پێ نیشان دەدەرێت </value>
+  </data>
+  <data name="Data.AdhanSound.NasserAlQatami" xml:space="preserve">
+    <value>الشيخ ناصر القطامي</value>
+  </data>
+  <data name="Data.AdhanSound.AbdulMajeedAlSuraihi" xml:space="preserve">
+    <value>عبد المجيد السريحي</value>
+  </data>
+  <data name="UI.Settings.UseStandardAdhan" xml:space="preserve">
+    <value>دەنگی بانگدانی پێوانەی بەکاربێنە </value>
+  </data>
+  <data name="Dialog.InvalidServiceSettings" xml:space="preserve">
+    <value>هەندێک ڕێکخستنەکانی پەیوەست بە خزمەتگوزارییەکان نادروستن.</value>
+  </data>
+  <data name="Dialog.MissingZipCode" xml:space="preserve">
+    <value>زیپ کۆد وونە</value>
+  </data>
+  <data name="Dialog.MissingCity" xml:space="preserve">
+    <value>ناوی شار وونە</value>
+  </data>
+  <data name="Dialog.MissingCoordinates" xml:space="preserve">
+    <value>کۆئۆردینەتەکانی هێلی پانی و هێلی درێژی وونە</value>
+  </data>
+  <data name="Dialog.InvalidCsvFile" xml:space="preserve">
+    <value>فایلی CSV دروست نییە</value>
+  </data>
+  <data name="Dialog.MissingCsvDateColumn" xml:space="preserve">
+    <value>نەخشەی ستوونی بەروار وونە</value>
+  </data>
+  <data name="Dialog.MissingCsvDayOrMonthColumn" xml:space="preserve">
+    <value>نەخشەی ستوونی رۆژ یان مانگ وونە</value>
+  </data>
+  <data name="Dialog.MissingCsvTimeColumn" xml:space="preserve">
+    <value>نەخشەی ستوونی کاتێک یان چەند کاتێک وونە</value>
+  </data>
+  <data name="Dialog.AppNotificationInitFailed" xml:space="preserve">
+    <value>نەتوانرا ئاگانامەی ویندۆز دەست پێبکرێت .
+ دڵنیابە لەوەی کە Windows App Runtime Singleton v1.5 دامەزراوە.</value>
+  </data>
+</root>
