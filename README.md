@@ -80,7 +80,7 @@ This app brings Awqat Salaat to Windows 11 which wasn't supported in earlier ver
 
 Awqat Salaat WinUI is available on Microsoft Store.
 
-[<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>](https://apps.microsoft.com/detail/9nhh4c81fz0n?mode=full)
+[<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>](https://apps.microsoft.com/detail/9nhh4c81fz0n?mode=full&cid=AwqatSalaatReadMe)
 
 ### From GitHub
 

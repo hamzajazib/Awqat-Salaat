@@ -79,7 +79,7 @@
 
 أداة أوقات الصلاة WinUI متوفرة على متجر مايكروسوفت.
 
-<div dir="rtl"><a align="right" href="https://apps.microsoft.com/detail/9nhh4c81fz0n?mode=full"><img src="https://get.microsoft.com/images/ar%20dark.svg" width="200"/></a></div>
+<div dir="rtl"><a align="right" href="https://apps.microsoft.com/detail/9nhh4c81fz0n?mode=full&cid=AwqatSalaatReadMe"><img src="https://get.microsoft.com/images/ar%20dark.svg" width="200"/></a></div>
 
 ### من منصة GitHub
 
