@@ -134,6 +134,10 @@ namespace AwqatSalaat.Helpers
             {
                 language = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
             }
+            else if (language.ToLower() == "ku")
+            {
+                language = "ckb";
+            }
 
             CultureInfo culture = CultureInfo.GetCultureInfo(language);
 

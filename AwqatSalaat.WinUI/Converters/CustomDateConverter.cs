@@ -10,6 +10,7 @@ namespace AwqatSalaat.WinUI.Converters
     {
         public static string Format(DateTime dateTime, string format, string language)
         {
+            language = language.ToLower() == "ku" ? "ckb" : language;
             CultureInfo culture = string.IsNullOrEmpty(language) ? CultureInfo.CurrentUICulture : CultureInfo.GetCultureInfo(language);
             return dateTime.ToString(format, culture);
         }

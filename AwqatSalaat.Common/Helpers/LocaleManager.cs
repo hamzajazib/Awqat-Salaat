@@ -9,7 +9,7 @@ namespace AwqatSalaat.Helpers
 {
     public class LocaleManager : INotifyPropertyChanged
     {
-        private static readonly List<string> AvailableLocales = new List<string>() { "ar", "en", "tr" };
+        private static readonly List<string> AvailableLocales = new List<string>() { "ar", "en", "tr", "ku" };
 
         public static LocaleManager Default { get; } = new LocaleManager();
 
@@ -36,7 +36,13 @@ namespace AwqatSalaat.Helpers
             Properties.Settings.Realtime.PropertyChanged += Settings_PropertyChanged;
         }
 
-        public string Get(string key) => Properties.Resources.ResourceManager.GetString(key, Properties.Resources.Culture);
+        public string Get(string key)
+        {
+            var culture = CurrentCulture.ThreeLetterISOLanguageName == "ckb"
+                ? CultureInfo.GetCultureInfo("ku")
+                : Properties.Resources.Culture;
+            return Properties.Resources.ResourceManager.GetString(key, culture);
+        }
 
         private void SetLocale(string locale)
         {
@@ -69,7 +75,7 @@ namespace AwqatSalaat.Helpers
             }
 
             _current = locale;
-            CurrentCulture = new CultureInfo(locale);
+            CurrentCulture = new CultureInfo(locale == "ku" ? "ckb" : locale);
             Properties.Resources.Culture = CurrentCulture;
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Current)));
