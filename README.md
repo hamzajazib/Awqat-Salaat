@@ -16,7 +16,7 @@ Actually, the widget supports five services to get the prayer times based on use
 - [Al-Adhan's Prayer Times API](https://aladhan.com/prayer-times-api)
 - [Offline service based on Batoul Apps' Adhan library](https://github.com/davidpet86/Adhan-csharp)
 - [Qatar Calendar House (scraping)](https://www.qatarch.com/cal)
-- A service that imports data from a CSV file
+- A service that imports data from a CSV file. More info [here](https://github.com/Khiro95/Awqat-Salaat/wiki/CSV-Import).
 
 > [!note]
 > Very important changes are planned for the next major update (v5). You can find details in the discussion: [Future of Awqat Salaat](https://github.com/Khiro95/Awqat-Salaat/discussions/59).
@@ -80,7 +80,7 @@ This app brings Awqat Salaat to Windows 11 which wasn't supported in earlier ver
 
 Awqat Salaat WinUI is available on Microsoft Store.
 
-[<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>](https://apps.microsoft.com/detail/9nhh4c81fz0n?mode=full)
+[<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>](https://apps.microsoft.com/detail/9nhh4c81fz0n?mode=full&cid=AwqatSalaatReadMe)
 
 ### From GitHub
 

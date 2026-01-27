@@ -141,6 +141,7 @@
                                     <ComboBoxItem Content="العربية" Tag="ar" FlowDirection="RightToLeft"/>
                                     <ComboBoxItem Content="English" Tag="en" FlowDirection="LeftToRight"/>
                                     <ComboBoxItem Content="Türkçe" Tag="tr" FlowDirection="LeftToRight"/>
+                                    <ComboBoxItem Content="کوردی" Tag="ku" FlowDirection="RightToLeft"/>
                                 </ComboBox>
                             </ctrl:SettingsItem>
                             <ctrl:SettingsItem Header="{mk:L11n Key=UI.Settings.LaunchOnWindowsStartup}" Description="{mk:L11n Key=UI.Settings.LaunchOnWindowsStartupDescription}" IsEnabled="{x:Bind StartupSettings.CanSetLaunchOnStartup, Mode=OneWay}">

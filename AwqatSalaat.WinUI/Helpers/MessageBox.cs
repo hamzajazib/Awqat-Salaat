@@ -144,7 +144,11 @@ namespace AwqatSalaat.WinUI.Helpers
         {
             if (owner == IntPtr.Zero)
             {
-                owner = App.MainHandle;
+                try
+                {
+                    owner = App.MainHandle;
+                }
+                catch { }
             }
 
             var options = MessageBoxOptions.NONE;

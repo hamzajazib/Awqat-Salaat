@@ -147,4 +147,10 @@
   <ItemGroup>
     <ProjectReference Include="..\AwqatSalaat.WinUI\AwqatSalaat.WinUI.csproj" Properties="IsPackaged=true" />
   </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\ar\Resources.resw" />
+    <PRIResource Include="Strings\ku\Resources.resw" />
+    <PRIResource Include="Strings\en\Resources.resw" />
+    <PRIResource Include="Strings\tr\Resources.resw" />
+  </ItemGroup>
 </Project>

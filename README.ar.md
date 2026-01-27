@@ -17,7 +17,7 @@
 - [واجهة برمجة التطبيقات (Prayer Times API)  من طرف منصة الأذان](https://aladhan.com/prayer-times-api)
 - [خدمة بدون اتصال مبنية على مكتبة Adhan من طرف Batoul Apps](https://github.com/davidpet86/Adhan-csharp)
 - [دار التقويم القطري (جمع بيانات من الموقع)](https://www.qatarch.com/cal)
-- خدمة تستورد البيانات من ملف CSV
+- خدمة تستورد البيانات من ملف CSV. المزيد من المعلومات [هنا](https://github.com/Khiro95/Awqat-Salaat/wiki/CSV-Import).
 
 > [!note]
 > تغييرات جد مهمة تم برمجتها بخصوص التحديث الكبير القادم (v5). يمكن الاطلاع على التفاصيل في المناقشة: [Future of Awqat Salaat](https://github.com/Khiro95/Awqat-Salaat/discussions/59).
@@ -79,7 +79,7 @@
 
 أداة أوقات الصلاة WinUI متوفرة على متجر مايكروسوفت.
 
-<div dir="rtl"><a align="right" href="https://apps.microsoft.com/detail/9nhh4c81fz0n?mode=full"><img src="https://get.microsoft.com/images/ar%20dark.svg" width="200"/></a></div>
+<div dir="rtl"><a align="right" href="https://apps.microsoft.com/detail/9nhh4c81fz0n?mode=full&cid=AwqatSalaatReadMe"><img src="https://get.microsoft.com/images/ar%20dark.svg" width="200"/></a></div>
 
 ### من منصة GitHub
 

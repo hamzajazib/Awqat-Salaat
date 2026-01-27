@@ -1,3 +1,9 @@
+### v4.1.1
+
+- Add Kurdish translation.
+- Add supported languages to package manifest. (WinUI only)
+- Fix MessageBox crash before widget initialization. (WinUI only)
+
 ### v4.1
 
 - Support ARM64 architecture. (Untested!) (WinUI only)
