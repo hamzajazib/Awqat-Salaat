@@ -15,7 +15,7 @@
         Version="4.1.0.0" />
 
     <Properties>
-        <DisplayName>Awqat Salaat WinUI</DisplayName>
+        <DisplayName>ms-resource:AppDisplayName</DisplayName>
         <PublisherDisplayName>Khiro</PublisherDisplayName>
         <Logo>Images\StoreLogo.png</Logo>
     </Properties>
@@ -56,7 +56,7 @@
                 </com:Extension>
             </Extensions>
             <uap:VisualElements
-                DisplayName="Awqat Salaat WinUI"
+                DisplayName="ms-resource:AppDisplayName"
                 Description="A simple Windows widget to show the time of the next prayer alongside a countdown on the taskbar."
                 BackgroundColor="transparent"
                 Square150x150Logo="Images\MedTile.png"
