@@ -16,7 +16,7 @@ Actually, the widget supports five services to get the prayer times based on use
 - [Al-Adhan's Prayer Times API](https://aladhan.com/prayer-times-api)
 - [Offline service based on Batoul Apps' Adhan library](https://github.com/davidpet86/Adhan-csharp)
 - [Qatar Calendar House (scraping)](https://www.qatarch.com/cal)
-- A service that imports data from a CSV file
+- A service that imports data from a CSV file. More info [here](https://github.com/Khiro95/Awqat-Salaat/wiki/CSV-Import).
 
 > [!note]
 > Very important changes are planned for the next major update (v5). You can find details in the discussion: [Future of Awqat Salaat](https://github.com/Khiro95/Awqat-Salaat/discussions/59).
