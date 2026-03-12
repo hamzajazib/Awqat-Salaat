@@ -352,7 +352,10 @@
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </Popup.Resources>
-            <Grid Background="#01000000" MaxHeight="700" TextElement.FontSize="14" TextElement.Foreground="{DynamicResource ThemeColors.TextPrimaryBrush}">
+            <Grid MaxHeight="700" TextElement.FontSize="14" TextElement.Foreground="{DynamicResource ThemeColors.TextPrimaryBrush}">
+                <Grid.Background>
+                    <SolidColorBrush Opacity="0.004" Color="{DynamicResource ThemeColors.DefaultAcrylicTintColor}"/>
+                </Grid.Background>
                 <local:WidgetPanel MinWidth="200" Visibility="{Binding WidgetSettings.IsOpen, Converter={StaticResource BoolVisInvConverter}}"/>
                 <Grid DataContext="{Binding WidgetSettings}" Visibility="{Binding IsOpen, Converter={StaticResource BoolVisConverter}}" MinWidth="300" MaxWidth="800" MinHeight="300" Margin="0,8,0,0">
                     <Grid.RowDefinitions>

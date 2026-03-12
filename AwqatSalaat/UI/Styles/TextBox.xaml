@@ -73,7 +73,10 @@
                         </Border>
                         <TextBlock x:Name="placeholderTextBlock" Text="{TemplateBinding PlaceHolderText}" Foreground="{DynamicResource ThemeColors.TextTertiaryBrush}" Margin="3,1" IsHitTestVisible="False"/>
                         <controls:AcrylicPopup AllowsTransparency="True" TintColor="{DynamicResource ThemeColors.DefaultAcrylicTintColor}" TintOpacity=".8" IsOpen="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsDropDownOpen, Mode=TwoWay}" Placement="Bottom" PlacementTarget="{Binding ElementName=border}">
-                            <Grid Background="#01000000">
+                            <Grid>
+                                <Grid.Background>
+                                    <SolidColorBrush Opacity="0.004" Color="{DynamicResource ThemeColors.DefaultAcrylicTintColor}"/>
+                                </Grid.Background>
                                 <ContentPresenter Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DropDownContent}"/>
                             </Grid>
                         </controls:AcrylicPopup>
