@@ -171,11 +171,11 @@ namespace AwqatSalaat.Properties
             base.OnSettingsSaving(sender, e);
         }
 
-        private void MigrateToCalculationMethod(SalahHourMethod islamicFinderMethod)
+        private void MigrateToCalculationMethod(SalahHourMethod salahHourMethod)
         {
             var method = CalculationMethod.AvailableMethods
                 .OfType<ISalahHourMethod>()
-                .Single(m => m.SalahHourMethod == islamicFinderMethod);
+                .Single(m => m.SalahHourMethod == salahHourMethod);
 
             var calculationMethod = (CalculationMethod)method;
             MethodString = calculationMethod.Id;
