@@ -7,7 +7,7 @@ using System.Windows.Markup;
 
 namespace AwqatSalaat.Markup
 {
-    public class L11nExtension : MarkupExtension
+    public class I18nExtension : MarkupExtension
     {
         private class LocaleKeyConverter : IValueConverter
         {
@@ -31,9 +31,9 @@ namespace AwqatSalaat.Markup
 
         public string ResKey { get; }
 
-        public L11nExtension() : base() { }
+        public I18nExtension() : base() { }
 
-        public L11nExtension(string resKey)
+        public I18nExtension(string resKey)
         {
             ResKey = resKey;
         }

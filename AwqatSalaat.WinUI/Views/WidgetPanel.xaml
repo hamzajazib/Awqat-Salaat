@@ -33,11 +33,11 @@
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="{mk:L11n Key=Data.AppName}" VerticalAlignment="Center"/>
+            <TextBlock Text="{mk:I18n Key=Data.AppName}" VerticalAlignment="Center"/>
             <CommandBar x:Name="commandBar" Grid.Column="1" OverflowButtonVisibility="Collapsed" Padding="0" Margin="0,-8,-8,-8">
-                <AppBarButton IsCompact="True" Icon="Setting" Width="32" Margin="0" Command="{Binding OpenSettings}" ToolTipService.ToolTip="{mk:L11n Key=UI.Panel.Settings}"/>
-                <AppBarButton IsCompact="True" Icon="Refresh" Width="32" Margin="0" Command="{Binding Refresh}" ToolTipService.ToolTip="{mk:L11n Key=UI.Panel.Refresh}"/>
-                <AppBarButton IsCompact="True" Width="32" Margin="0" Click="MoreInfo_Click" ToolTipService.ToolTip="{mk:L11n Key=UI.Panel.MoreInfo}">
+                <AppBarButton IsCompact="True" Icon="Setting" Width="32" Margin="0" Command="{Binding OpenSettings}" ToolTipService.ToolTip="{mk:I18n Key=UI.Panel.Settings}"/>
+                <AppBarButton IsCompact="True" Icon="Refresh" Width="32" Margin="0" Command="{Binding Refresh}" ToolTipService.ToolTip="{mk:I18n Key=UI.Panel.Refresh}"/>
+                <AppBarButton IsCompact="True" Width="32" Margin="0" Click="MoreInfo_Click" ToolTipService.ToolTip="{mk:I18n Key=UI.Panel.MoreInfo}">
                     <AppBarButton.Icon>
                         <FontIcon FontSize="16" Glyph="&#xE946;" />
                     </AppBarButton.Icon>
@@ -47,7 +47,7 @@
                         <FontIcon FontSize="16" Glyph="&#xE793;" />
                     </AppBarButton.Icon>
                 </AppBarButton>
-                <AppBarButton IsCompact="True" Icon="Mute" Width="32" Margin="0" ToolTipService.ToolTip="{mk:L11n Key=UI.Panel.StopSound}" x:Name="stopSoundButton" Foreground="{ThemeResource TextHighlightBrush}" Click="StopSound_Click"/>
+                <AppBarButton IsCompact="True" Icon="Mute" Width="32" Margin="0" ToolTipService.ToolTip="{mk:I18n Key=UI.Panel.StopSound}" x:Name="stopSoundButton" Foreground="{ThemeResource TextHighlightBrush}" Click="StopSound_Click"/>
             </CommandBar>
             <controls:PrayersPanelContainer
                 x:Name="timesContainer"
@@ -57,7 +57,7 @@
                 Panel="{x:Bind ViewModel.WidgetSettings.Settings.TimesPanelStyle, Converter={StaticResource PanelStyleConverter}}"
                 PanelVisibility="{x:Bind ViewModel.IsShowingTimes}"/>
             <TextBlock
-                Text="{mk:L11n Key=UI.Panel.Refreshing}"
+                Text="{mk:I18n Key=UI.Panel.Refreshing}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Grid.Row="1"
@@ -77,15 +77,15 @@
                 </Grid.RowDefinitions>
                 <Border Margin="0,32,0,0" SizeChanged="ErrorBounds_SizeChanged"/>
                 <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="{mk:L11n Key=UI.Panel.Error}" HorizontalAlignment="Center" Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
+                    <TextBlock Text="{mk:I18n Key=UI.Panel.Error}" HorizontalAlignment="Center" Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
                     <TextBlock x:Name="errorMessage" Text="{x:Bind ViewModel.ErrorMessage}" TextAlignment="Center" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" Margin="8"/>
                 </StackPanel>
                 <StackPanel Margin="16,8" Grid.Row="1">
-                    <TextBlock Text="{mk:L11n Key=UI.Panel.ServiceDownHint}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextAlignment="Center" TextWrapping="Wrap"/>
+                    <TextBlock Text="{mk:I18n Key=UI.Panel.ServiceDownHint}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextAlignment="Center" TextWrapping="Wrap"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,8,0,0">
                         <FontIcon Glyph="&#xE713;" FontSize="16" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center"/>
                         <FontIcon Glyph="&#xE974;" FontSize="10" Foreground="{ThemeResource TextFillColorTertiaryBrush}" MirroredWhenRightToLeft="True" VerticalAlignment="Center" Margin="4,0"/>
-                        <TextBlock Text="{mk:L11n Key=UI.Settings.Tabs.Service}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center"/>
+                        <TextBlock Text="{mk:I18n Key=UI.Settings.Tabs.Service}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>

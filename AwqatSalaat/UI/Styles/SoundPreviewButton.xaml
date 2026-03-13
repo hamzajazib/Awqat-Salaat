@@ -11,7 +11,7 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="1"/>
         <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}"/>
-        <Setter Property="ToolTip" Value="{mk:L11n UI.Controls.SoundPreview.ToolTipIdle}"/>
+        <Setter Property="ToolTip" Value="{mk:I18n UI.Controls.SoundPreview.ToolTipIdle}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ctrl:SoundPreviewButton">
@@ -21,7 +21,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPlaying" Value="True">
                             <Setter TargetName="tb" Property="Text" Value="&#xE71A;"/>
-                            <Setter Property="ToolTip" Value="{mk:L11n UI.Controls.SoundPreview.ToolTipPlaying}"/>
+                            <Setter Property="ToolTip" Value="{mk:I18n UI.Controls.SoundPreview.ToolTipPlaying}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

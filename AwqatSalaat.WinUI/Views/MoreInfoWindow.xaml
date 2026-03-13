@@ -51,8 +51,8 @@
                     <Thickness x:Key="NavigationViewContentMargin">0,40,0,0</Thickness>
                 </NavigationView.Resources>
                 <NavigationView.MenuItems>
-                    <NavigationViewItem x:Name="calendarItem" Icon="Calendar" Content="{mk:L11n Key=UI.Calendar.Title}" IsSelected="True"/>
-                    <NavigationViewItem x:Name="learnItem" Content="{mk:L11n Key=UI.Learn.Title}">
+                    <NavigationViewItem x:Name="calendarItem" Icon="Calendar" Content="{mk:I18n Key=UI.Calendar.Title}" IsSelected="True"/>
+                    <NavigationViewItem x:Name="learnItem" Content="{mk:I18n Key=UI.Learn.Title}">
                         <NavigationViewItem.Icon>
                             <FontIcon Glyph="&#xE736;" />
                         </NavigationViewItem.Icon>

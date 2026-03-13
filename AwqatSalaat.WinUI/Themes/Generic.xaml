@@ -153,7 +153,7 @@
                                 <FontIcon x:Name="glyph" Glyph="&#xE823;" Foreground="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" FontSize="16"/>
                             </Border>
                             <TextBlock Text="{TemplateBinding PrayerName}" Grid.Column="1" VerticalAlignment="Center"/>
-                            <Button x:Name="dismissBtn" Style="{StaticResource TextBlockButtonStyle}" Padding="0" Content="{mk:L11n Key=UI.Panel.Dismiss}" Command="{Binding DismissCommand, RelativeSource={RelativeSource TemplatedParent}}" Margin="16,0" Grid.Column="2" Visibility="Collapsed"/>
+                            <Button x:Name="dismissBtn" Style="{StaticResource TextBlockButtonStyle}" Padding="0" Content="{mk:I18n Key=UI.Panel.Dismiss}" Command="{Binding DismissCommand, RelativeSource={RelativeSource TemplatedParent}}" Margin="16,0" Grid.Column="2" Visibility="Collapsed"/>
                             <TextBlock Text="{Binding TimeString, RelativeSource={RelativeSource TemplatedParent}}" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             <TextBlock Text="{Binding AMPMString, RelativeSource={RelativeSource TemplatedParent}}" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="ampm" Foreground="{ThemeResource TextFillColorTertiaryBrush}" Margin="4,0,0,0" MinWidth="22"/>
                         </Grid>

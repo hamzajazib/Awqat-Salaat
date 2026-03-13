@@ -56,7 +56,7 @@
                         <TextBlock x:Name="gyearSeparator" Text=" – &#xfeff;" FontSize="14" FontWeight="SemiBold" Foreground="{x:Bind SectionOverlayForeground}" VerticalAlignment="Center" Visibility="Collapsed"/>
                         <TextBlock x:Name="gyear2" Text="{x:Bind ash:GregorianDateHelper.FormatN(Source.LastDate, 'yyyy', ash:LocaleManager.Default.Current), FallbackValue=G. YEAR}" FontSize="18" FontWeight="SemiBold" Foreground="{x:Bind SectionOverlayForeground}" Visibility="Collapsed"/>
                     </StackPanel>
-                    <TextBlock Text="{mk:L11n Key=UI.Calendar.DocumentTitle}" FontSize="26" Foreground="{x:Bind SectionForeground}" HorizontalAlignment="Center" Grid.Column="1"/>
+                    <TextBlock Text="{mk:I18n Key=UI.Calendar.DocumentTitle}" FontSize="26" Foreground="{x:Bind SectionForeground}" HorizontalAlignment="Center" Grid.Column="1"/>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1">
                         <TextBlock Text="&#xE80F;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{x:Bind SectionForeground}" VerticalAlignment="Center"/>
                         <TextBlock Text="{x:Bind LocationText, FallbackValue=LOCATION}" Foreground="{x:Bind SectionForeground}" VerticalAlignment="Center" Margin="8,0,0,0"/>
@@ -97,14 +97,14 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="{mk:L11n Key=UI.Calendar.Gregorian}" Foreground="{x:Bind TableHeaderForeground}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="1"/>
-                        <TextBlock Text="{mk:L11n Key=UI.Calendar.Hijri}" Foreground="{x:Bind TableHeaderForeground}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="2"/>
-                        <TextBlock Text="{mk:L11n Key=Data.Salaat.Fajr}" Foreground="{x:Bind TableHeaderForeground}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="3"/>
-                        <TextBlock Text="{mk:L11n Key=Data.Salaat.Shuruq}" Foreground="{x:Bind TableHeaderForeground}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="4"/>
-                        <TextBlock Text="{mk:L11n Key=Data.Salaat.Dhuhr}" Foreground="{x:Bind TableHeaderForeground}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="5"/>
-                        <TextBlock Text="{mk:L11n Key=Data.Salaat.Asr}" Foreground="{x:Bind TableHeaderForeground}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="6"/>
-                        <TextBlock Text="{mk:L11n Key=Data.Salaat.Maghrib}" Foreground="{x:Bind TableHeaderForeground}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="7"/>
-                        <TextBlock Text="{mk:L11n Key=Data.Salaat.Isha}" Foreground="{x:Bind TableHeaderForeground}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="8"/>
+                        <TextBlock Text="{mk:I18n Key=UI.Calendar.Gregorian}" Foreground="{x:Bind TableHeaderForeground}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="{mk:I18n Key=UI.Calendar.Hijri}" Foreground="{x:Bind TableHeaderForeground}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="2"/>
+                        <TextBlock Text="{mk:I18n Key=Data.Salaat.Fajr}" Foreground="{x:Bind TableHeaderForeground}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="3"/>
+                        <TextBlock Text="{mk:I18n Key=Data.Salaat.Shuruq}" Foreground="{x:Bind TableHeaderForeground}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="4"/>
+                        <TextBlock Text="{mk:I18n Key=Data.Salaat.Dhuhr}" Foreground="{x:Bind TableHeaderForeground}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="5"/>
+                        <TextBlock Text="{mk:I18n Key=Data.Salaat.Asr}" Foreground="{x:Bind TableHeaderForeground}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="6"/>
+                        <TextBlock Text="{mk:I18n Key=Data.Salaat.Maghrib}" Foreground="{x:Bind TableHeaderForeground}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="7"/>
+                        <TextBlock Text="{mk:I18n Key=Data.Salaat.Isha}" Foreground="{x:Bind TableHeaderForeground}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="8"/>
                     </Grid>
                 </Border>
                 <ItemsControl Background="Transparent" ItemsSource="{x:Bind Source.PrayerTimes}" helpers:Clip.ToBounds="True">
@@ -158,8 +158,8 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="&#xEC87;" Foreground="{x:Bind SectionForeground}" FontFamily="Segoe MDL2 Assets" FontSize="16" VerticalAlignment="Center"/>
                     <TextBlock Foreground="{x:Bind SectionForeground}" VerticalAlignment="Center" Margin="8,0,0,0">
-                        <Run Text="{mk:L11n Key=UI.Calendar.GeneratedBy}"/>
-                        <Run Text="{mk:L11n Key=Data.AppName}" Foreground="{x:Bind HighlightForeground}"/>
+                        <Run Text="{mk:I18n Key=UI.Calendar.GeneratedBy}"/>
+                        <Run Text="{mk:I18n Key=Data.AppName}" Foreground="{x:Bind HighlightForeground}"/>
                     </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Grid.Column="2">

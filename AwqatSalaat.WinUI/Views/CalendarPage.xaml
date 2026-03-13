@@ -37,7 +37,7 @@
         <local:RecordContainerStyleSelector x:Key="StyleSelector" Standard="{StaticResource StandardRecordContainerStyle}" Today="{StaticResource TodayRecordContainerStyle}"/>
 
         <DataTemplate x:Key="ServiceNotSupportedNotice">
-            <TextBlock Text="{mk:L11n Key=UI.Calendar.ServiceNotSupported}" Foreground="{ThemeResource TextFillColorTertiaryBrush}" TextAlignment="Center"/>
+            <TextBlock Text="{mk:I18n Key=UI.Calendar.ServiceNotSupported}" Foreground="{ThemeResource TextFillColorTertiaryBrush}" TextAlignment="Center"/>
         </DataTemplate>
     </Page.Resources>
     <Page.DataContext>
@@ -59,7 +59,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <RadioButton Content="{mk:L11n Key=UI.Calendar.Gregorian}" IsChecked="{Binding UseGregorianCalendar, Mode=TwoWay}"/>
+            <RadioButton Content="{mk:I18n Key=UI.Calendar.Gregorian}" IsChecked="{Binding UseGregorianCalendar, Mode=TwoWay}"/>
             <StackPanel Orientation="Horizontal" Grid.Column="1">
                 <NumberBox x:Name="gregorianYear" Minimum="2000" Maximum="2070" Value="{Binding GregorianYear, Mode=TwoWay}" SpinButtonPlacementMode="Inline" Width="150" Margin="16,0,0,0" IsEnabled="{Binding UseGregorianCalendar}"/>
                 <controls:ComboBoxEx x:Name="gregorianMonth" ItemsSource="{x:Bind ash:GregorianDateHelper.GregorianMonths}" SelectedValuePath="Id" SelectedValue="{Binding GregorianMonth, Mode=TwoWay}" Width="150" Margin="16,0,0,0" IsEnabled="{Binding UseGregorianCalendar}">
@@ -73,7 +73,7 @@
                     </controls:ComboBoxEx.ItemTemplate>
                 </controls:ComboBoxEx>
             </StackPanel>
-            <RadioButton x:Name="hijriRadioButton" Content="{mk:L11n Key=UI.Calendar.Hijri}" IsChecked="{Binding UseHijriCalendar, Mode=TwoWay}" Grid.Row="2"/>
+            <RadioButton x:Name="hijriRadioButton" Content="{mk:I18n Key=UI.Calendar.Hijri}" IsChecked="{Binding UseHijriCalendar, Mode=TwoWay}" Grid.Row="2"/>
             <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
                 <NumberBox Minimum="1430" Maximum="1470" Value="{Binding HijriYear, Mode=TwoWay}" SpinButtonPlacementMode="Inline" Width="150" Margin="16,0,0,0" IsEnabled="{Binding UseHijriCalendar}"/>
                 <controls:ComboBoxEx ItemsSource="{x:Bind ash:HijriDateHelper.HijriMonths}" SelectedValuePath="Id" SelectedValue="{Binding HijriMonth, Mode=TwoWay}" Width="150" Margin="16,0,0,0" IsEnabled="{Binding UseHijriCalendar}">
@@ -90,13 +90,13 @@
             <Button Command="{Binding Refresh}" Margin="16,0" VerticalAlignment="Center" HorizontalAlignment="Left" MinWidth="94" Grid.Column="2" Grid.Row="0">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Glyph="&#xE72C;" FontSize="16" VerticalAlignment="Center"/>
-                    <TextBlock Text="{mk:L11n Key=UI.Panel.Refresh}" Margin="8,0,0,0"/>
+                    <TextBlock Text="{mk:I18n Key=UI.Panel.Refresh}" Margin="8,0,0,0"/>
                 </StackPanel>
             </Button>
             <Button Margin="16,0" VerticalAlignment="Center" HorizontalAlignment="Left" MinWidth="94" Grid.Column="2" Grid.Row="2" Click="Export_Click" IsEnabled="{x:Bind ViewModel.Result.HasData}">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Glyph="&#xEE71;" FontSize="16" VerticalAlignment="Center"/>
-                    <TextBlock Text="{mk:L11n Key=UI.Calendar.Export}" Margin="8,0,0,0"/>
+                    <TextBlock Text="{mk:I18n Key=UI.Calendar.Export}" Margin="8,0,0,0"/>
                 </StackPanel>
             </Button>
         </Grid>
@@ -125,12 +125,12 @@
                         </Grid.RowDefinitions>
                         <TextBlock Text="{x:Bind ash:GregorianDateHelper.Format(InViewDate, 'MMMM yyyy', ash:LocaleManager.Default.Current)}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="1"/>
                         <TextBlock Text="{x:Bind ash:HijriDateHelper.Format(InViewDate, 'MMMM yyyy', ash:LocaleManager.Default.Current)}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="2"/>
-                        <TextBlock Text="{mk:L11n Key=Data.Salaat.Fajr}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="3"/>
-                        <TextBlock Text="{mk:L11n Key=Data.Salaat.Shuruq}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="4"/>
-                        <TextBlock Text="{mk:L11n Key=Data.Salaat.Dhuhr}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="5"/>
-                        <TextBlock Text="{mk:L11n Key=Data.Salaat.Asr}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="6"/>
-                        <TextBlock Text="{mk:L11n Key=Data.Salaat.Maghrib}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="7"/>
-                        <TextBlock Text="{mk:L11n Key=Data.Salaat.Isha}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="8"/>
+                        <TextBlock Text="{mk:I18n Key=Data.Salaat.Fajr}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="3"/>
+                        <TextBlock Text="{mk:I18n Key=Data.Salaat.Shuruq}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="4"/>
+                        <TextBlock Text="{mk:I18n Key=Data.Salaat.Dhuhr}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="5"/>
+                        <TextBlock Text="{mk:I18n Key=Data.Salaat.Asr}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="6"/>
+                        <TextBlock Text="{mk:I18n Key=Data.Salaat.Maghrib}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="7"/>
+                        <TextBlock Text="{mk:I18n Key=Data.Salaat.Isha}" FontWeight="Medium" HorizontalAlignment="Center" Grid.Column="8"/>
                     </Grid>
                 </Border>
                 <controls:ListBoxEx x:Name="listBox"
@@ -190,7 +190,7 @@
             </Grid>
         </Border>
         <Grid Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityInvertedConverter}}">
-            <TextBlock Text="{mk:L11n Key=UI.Calendar.NoData}" Foreground="{ThemeResource TextFillColorTertiaryBrush}" TextAlignment="Center" Visibility="{Binding Result.HasData, Converter={StaticResource BooleanToVisibilityInvertedConverter}}"/>
+            <TextBlock Text="{mk:I18n Key=UI.Calendar.NoData}" Foreground="{ThemeResource TextFillColorTertiaryBrush}" TextAlignment="Center" Visibility="{Binding Result.HasData, Converter={StaticResource BooleanToVisibilityInvertedConverter}}"/>
         </Grid>
         <Grid Grid.Row="1" VerticalAlignment="Top" Margin="0,16,0,0" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}">
             <ProgressBar IsIndeterminate="True"

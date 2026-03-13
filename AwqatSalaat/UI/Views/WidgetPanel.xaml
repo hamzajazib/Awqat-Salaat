@@ -42,19 +42,19 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="{mk:L11n Data.AppName}" VerticalAlignment="Center"/>
+        <TextBlock Text="{mk:I18n Data.AppName}" VerticalAlignment="Center"/>
         <StackPanel Orientation="Horizontal" Grid.Column="1">
-            <Button Style="{DynamicResource IconButtonStyle}" Content="&#xE713;" Command="{Binding OpenSettings}" ToolTip="{mk:L11n UI.Panel.Settings}" d:IsEnabled="False"/>
-            <Button Style="{DynamicResource IconButtonStyle}" Content="&#xE72C;" Command="{Binding Refresh}" ToolTip="{mk:L11n UI.Panel.Refresh}"/>
-            <Button Style="{DynamicResource IconButtonStyle}" Content="&#xE946;" Click="MoreInfo_Click" ToolTip="{mk:L11n UI.Panel.MoreInfo}"/>
+            <Button Style="{DynamicResource IconButtonStyle}" Content="&#xE713;" Command="{Binding OpenSettings}" ToolTip="{mk:I18n UI.Panel.Settings}" d:IsEnabled="False"/>
+            <Button Style="{DynamicResource IconButtonStyle}" Content="&#xE72C;" Command="{Binding Refresh}" ToolTip="{mk:I18n UI.Panel.Refresh}"/>
+            <Button Style="{DynamicResource IconButtonStyle}" Content="&#xE946;" Click="MoreInfo_Click" ToolTip="{mk:I18n UI.Panel.MoreInfo}"/>
             <Button Style="{DynamicResource IconButtonStyle}" Content="&#xE793;" x:Name="themeBtn"/>
-            <Button Style="{DynamicResource IconButtonStyle}" Content="&#xE74F;" Foreground="{DynamicResource ThemeColors.TextHighlightBrush}" ToolTip="{mk:L11n UI.Panel.StopSound}" x:Name="stopSoundButton" Click="StopSound_Click"/>
+            <Button Style="{DynamicResource IconButtonStyle}" Content="&#xE74F;" Foreground="{DynamicResource ThemeColors.TextHighlightBrush}" ToolTip="{mk:I18n UI.Panel.StopSound}" x:Name="stopSoundButton" Click="StopSound_Click"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Height="{Binding ElementName=timesPanel, Path=DesiredHeight}">
             <views:PrayersPanel x:Name="timesPanel" Visibility="{Binding IsShowingTimes, Converter={StaticResource BoolVisConverter}}"/>
         </StackPanel>
         <TextBlock
-            Text="{mk:L11n UI.Panel.Refreshing}"
+            Text="{mk:I18n UI.Panel.Refreshing}"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Grid.Row="1"
@@ -75,7 +75,7 @@
             </Grid.RowDefinitions>
             <Border x:Name="errorBounds" Margin="0,32,0,0"/>
             <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="{mk:L11n UI.Panel.Error}" HorizontalAlignment="Center" Foreground="{DynamicResource ThemeColors.TextTertiaryBrush}"/>
+                <TextBlock Text="{mk:I18n UI.Panel.Error}" HorizontalAlignment="Center" Foreground="{DynamicResource ThemeColors.TextTertiaryBrush}"/>
                 <TextBlock Text="{Binding ErrorMessage}"
                            d:Text="Something wrong happened, please check the settings and try again"
                            TextAlignment="Center"
@@ -85,7 +85,7 @@
                            Margin="8"/>
             </StackPanel>
             <StackPanel Margin="16,8" Grid.Row="1">
-                <TextBlock Text="{mk:L11n UI.Panel.ServiceDownHint}" Foreground="{DynamicResource ThemeColors.TextSecondaryBrush}" TextAlignment="Center" TextWrapping="Wrap"/>
+                <TextBlock Text="{mk:I18n UI.Panel.ServiceDownHint}" Foreground="{DynamicResource ThemeColors.TextSecondaryBrush}" TextAlignment="Center" TextWrapping="Wrap"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" TextBlock.Foreground="{DynamicResource ThemeColors.TextSecondaryBrush}" Margin="0,8,0,0">
                     <TextBlock Text="&#xE713;" FontFamily="Segoe MDL2 Assets" FontSize="16" VerticalAlignment="Center"/>
                     <TextBlock Text="&#xE974;" FontFamily="Segoe MDL2 Assets" FontSize="10" Foreground="{DynamicResource ThemeColors.TextTertiaryBrush}" VerticalAlignment="Center" Margin="4,0">
@@ -104,7 +104,7 @@
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
-                    <TextBlock Text="{mk:L11n UI.Settings.Tabs.Service}" VerticalAlignment="Center"/>
+                    <TextBlock Text="{mk:I18n UI.Settings.Tabs.Service}" VerticalAlignment="Center"/>
                 </StackPanel>
             </StackPanel>
         </Grid>
