@@ -31,6 +31,7 @@ namespace AwqatSalaat
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3;
 
             InitLogger();
+            Log.Information($"Current locale: {LocaleManager.Default.Current}");
 
             int minHWidth = Properties.Settings.Default.UseCompactMode || !Properties.Settings.Default.ShowCountdown
                 ? CompactWidth

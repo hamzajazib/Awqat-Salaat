@@ -29,6 +29,7 @@ namespace AwqatSalaat.WinUI
         static App()
         {
             InitLogger();
+            Log.Information($"Current locale: {LocaleManager.Default.Current}");
 
             ExitIfOtherInstanceIsRunning();
 
