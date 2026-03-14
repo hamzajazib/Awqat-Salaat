@@ -367,7 +367,23 @@ namespace AwqatSalaat.ViewModels
                 }
                 else if (!serviceClient.SupportMonthlyData && apiResponse?.Times?.Count == 1)
                 {
-                    DisplayedDate = apiResponse.Times.Keys.First();
+                    var availableDataTime = apiResponse.Times.Keys.Single();
+
+                    // QCH service can't fetch fresh data until the QCH website update its content at midnight,
+                    // so during the period between Isha and midnight we recycle the data of the actual day as if it was fresh.
+                    if (WidgetSettings.Settings.Service == PrayerTimesService.QCH
+                        && displayedDate == TimeStamp.NextDate
+                        && availableDataTime == TimeStamp.Date)
+                    {
+                        var data = apiResponse.Times.Values.Single();
+                        data.Adjust(displayedDate);
+                        apiResponse.Times.Clear();
+                        apiResponse.Times[displayedDate] = data;
+                    }
+                    else
+                    {
+                        DisplayedDate = availableDataTime;
+                    }
                 }
 
                 OnDataLoaded(apiResponse);
