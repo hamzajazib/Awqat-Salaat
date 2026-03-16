@@ -57,9 +57,16 @@ namespace AwqatSalaat.Helpers
 
 
             // Init English DateTimeFormatInfo for Um Al Qura calendar
-            var enSA = new CultureInfo("en-SA");
+            CultureInfo enSA = null;
 
-            if (enSA.OptionalCalendars.Any(c =>  c is UmAlQuraCalendar))
+            // In OS versions older than Windows 10, creating en-SA culture info throws exception
+            try
+            {
+                enSA = new CultureInfo("en-SA");
+            }
+            catch { }
+
+            if (enSA != null && enSA.OptionalCalendars.Any(c =>  c is UmAlQuraCalendar))
             {
                 s_EnglishUmAlQuraDateTimeFormatInfo = enSA.DateTimeFormat;
 
@@ -91,9 +98,16 @@ namespace AwqatSalaat.Helpers
 
 
             // Init English DateTimeFormatInfo for Hijri calendar
-            enSA = new CultureInfo("en-SA");
+            enSA = null;
 
-            if (enSA.OptionalCalendars.Any(c => c is HijriCalendar))
+            // In OS versions older than Windows 10, creating en-SA culture info throws exception
+            try
+            {
+                enSA = new CultureInfo("en-SA");
+            }
+            catch { }
+
+            if (enSA != null && enSA.OptionalCalendars.Any(c => c is HijriCalendar))
             {
                 enSA.DateTimeFormat.Calendar = s_HijriCalendar;
                 s_EnglishHijriDateTimeFormatInfo = enSA.DateTimeFormat;
