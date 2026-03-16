@@ -45,7 +45,7 @@ namespace AwqatSalaat.Services.SalahHour
                 query["isha_value"] = Method.Isha.Value.ToString("F1", CultureInfo.InvariantCulture);
             }
 
-            return $"https://www.salahhour.com/index.php/api/prayer_times?{query}";
+            return $"https://www.salahhour.com/api/prayer_times?{query}";
         }
     }
 }

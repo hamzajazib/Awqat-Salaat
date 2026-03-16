@@ -50,6 +50,7 @@ namespace AwqatSalaat.Services.SalahHour
             {
                 using (HttpClient client = new HttpClient())
                 {
+                    client.DefaultRequestHeaders.Add("User-Agent", "Awqat Salaat");
                     var url = request.GetUrl();
                     Log.Debug($"[Salah-Hour] Getting data from: {url}");
                     var httpResponse = await client.GetAsync(url);
@@ -61,7 +62,7 @@ namespace AwqatSalaat.Services.SalahHour
 
                         if (string.IsNullOrEmpty(responseBody))
                         {
-                            throw new SalahHourApiException("Islamic Finder service did not respond with data.");
+                            throw new SalahHourApiException("Salah Hour service did not respond with data.");
                         }
 
                         T apiResponse = JsonConvert.DeserializeObject<T>(responseBody);

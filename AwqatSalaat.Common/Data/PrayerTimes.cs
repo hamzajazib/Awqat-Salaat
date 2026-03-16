@@ -24,7 +24,7 @@ namespace AwqatSalaat.Data
 
         public void Adjust(DateTime day)
         {
-            foreach (var time in times)
+            foreach (var time in times.ToList())
             {
                 times[time.Key] = day.Date + time.Value.TimeOfDay;
             }

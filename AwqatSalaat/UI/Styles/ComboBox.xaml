@@ -148,7 +148,10 @@
                             <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0"/>
                         </Grid.ColumnDefinitions>
                         <controls:AcrylicPopup x:Name="PART_Popup" TintColor="{DynamicResource ThemeColors.DefaultAcrylicTintColor}" TintOpacity=".8" AllowsTransparency="true" Grid.ColumnSpan="2" IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Margin="1" Placement="Bottom" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
-                            <Border x:Name="dropDownBorder" Background="#01FFFFFF" BorderThickness="0" BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}">
+                            <Border x:Name="dropDownBorder" BorderThickness="0" BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}">
+                                <Border.Background>
+                                    <SolidColorBrush Opacity="0.004" Color="{DynamicResource ThemeColors.DefaultAcrylicTintColor}"/>
+                                </Border.Background>
                                 <ScrollViewer x:Name="DropDownScrollViewer">
                                     <Grid x:Name="grid" RenderOptions.ClearTypeHint="Auto">
                                         <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">

@@ -84,10 +84,10 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="False">
-                <Setter Property="Content" Value="{mk:L11n UI.Controls.Toggle.Off}"/>
+                <Setter Property="Content" Value="{mk:I18n UI.Controls.Toggle.Off}"/>
             </Trigger>
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Content" Value="{mk:L11n UI.Controls.Toggle.On}"/>
+                <Setter Property="Content" Value="{mk:I18n UI.Controls.Toggle.On}"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{DynamicResource ThemeColors.ControlDisabledForegroundBrush}"/>

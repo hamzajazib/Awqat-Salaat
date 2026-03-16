@@ -51,11 +51,11 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Margin="16,0,8,0" MinWidth="100" Grid.Row="1">
-            <TextBlock Text="{mk:L11n UI.Settings.Tabs.Location}"/>
+            <TextBlock Text="{mk:I18n UI.Settings.Tabs.Location}"/>
             <TextBox Text="{Binding ElementName=doc, Path=LocationText}" Height="26" Margin="0,8,0,0"/>
         </StackPanel>
         <StackPanel Margin="8,0,16,0" MinWidth="100" Grid.Row="1" Grid.Column="1">
-            <TextBlock Text="{mk:L11n UI.Calendar.Theme}" />
+            <TextBlock Text="{mk:I18n UI.Calendar.Theme}" />
             <ComboBox Margin="0,8,0,0" ItemsSource="{Binding Source={StaticResource CalendarPalettes}}" SelectedItem="{Binding Palette}" HorizontalContentAlignment="Stretch" FlowDirection="LeftToRight">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -86,17 +86,17 @@
         <Button Margin="16,16,8,16" Padding="4,2" Grid.Row="2" Click="Export_Click">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="&#xEE71;" FontSize="16" FontFamily="Segoe MDL2 Assets" Foreground="{DynamicResource ThemeColors.GlyphForegroundBrush}" VerticalAlignment="Center"/>
-                <TextBlock Text="{mk:L11n UI.Calendar.ExportPNG}" Margin="4,0,0,0"/>
+                <TextBlock Text="{mk:I18n UI.Calendar.ExportPNG}" Margin="4,0,0,0"/>
             </StackPanel>
         </Button>
         <Button Margin="8,16,16,16" Padding="4,2" Grid.Row="2" Grid.Column="1" Click="Print_Click">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="&#xE749;" FontSize="16" FontFamily="Segoe MDL2 Assets" Foreground="{DynamicResource ThemeColors.GlyphForegroundBrush}" VerticalAlignment="Center"/>
-                <TextBlock Text="{mk:L11n UI.Calendar.Print}" Margin="4,0,0,0"/>
+                <TextBlock Text="{mk:I18n UI.Calendar.Print}" Margin="4,0,0,0"/>
             </StackPanel>
         </Button>
         <DockPanel Margin="16" Grid.ColumnSpan="2">
-            <TextBlock Text="{mk:L11n UI.Calendar.Preview}" DockPanel.Dock="Top"/>
+            <TextBlock Text="{mk:I18n UI.Calendar.Preview}" DockPanel.Dock="Top"/>
             <Border BorderThickness="1" BorderBrush="{DynamicResource ThemeColors.ControlBorderBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,8,0,0">
                 <Viewbox FlowDirection="LeftToRight">
                     <local:CalendarDocument x:Name="doc"

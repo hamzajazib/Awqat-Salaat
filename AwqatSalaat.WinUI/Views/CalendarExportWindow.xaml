@@ -28,11 +28,11 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Margin="16,0,8,0" MinWidth="100" Grid.Row="1">
-            <TextBlock Text="{mk:L11n Key=UI.Settings.Tabs.Location}"/>
+            <TextBlock Text="{mk:I18n Key=UI.Settings.Tabs.Location}"/>
             <TextBox Text="{x:Bind doc.LocationText, Mode=TwoWay}" Height="26" Margin="0,8,0,0"/>
         </StackPanel>
         <StackPanel Margin="8,0,16,0" MinWidth="100" Grid.Row="1" Grid.Column="1">
-            <TextBlock Text="{mk:L11n Key=UI.Calendar.Theme}" />
+            <TextBlock Text="{mk:I18n Key=UI.Calendar.Theme}" />
             <ComboBox x:Name="cb" Margin="0,8,0,0" ItemsSource="{Binding Source={StaticResource CalendarPalettes}}" SelectedItem="{x:Bind ViewModel.Palette, Mode=TwoWay}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" FlowDirection="LeftToRight">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -49,17 +49,17 @@
         <Button Margin="16,16,8,16" Padding="4,2" MinHeight="32" HorizontalAlignment="Stretch" Grid.Row="2" Click="Export_Click">
             <StackPanel Orientation="Horizontal">
                 <FontIcon Glyph="&#xEE71;" FontSize="16" VerticalAlignment="Center"/>
-                <TextBlock Text="{mk:L11n Key=UI.Calendar.ExportPNG}" Margin="8,0,0,0"/>
+                <TextBlock Text="{mk:I18n Key=UI.Calendar.ExportPNG}" Margin="8,0,0,0"/>
             </StackPanel>
         </Button>
         <Button x:Name="printButton" Margin="8,16,16,16" Padding="4,2" MinHeight="32" HorizontalAlignment="Stretch" Grid.Row="2" Grid.Column="1" Click="Print_Click">
             <StackPanel Orientation="Horizontal">
                 <FontIcon Glyph="&#xE749;" FontSize="16" VerticalAlignment="Center"/>
-                <TextBlock Text="{mk:L11n Key=UI.Calendar.Print}" Margin="8,0,0,0"/>
+                <TextBlock Text="{mk:I18n Key=UI.Calendar.Print}" Margin="8,0,0,0"/>
             </StackPanel>
         </Button>
         <StackPanel Margin="16,8,16,16" Grid.ColumnSpan="2">
-            <TextBlock Text="{mk:L11n Key=UI.Calendar.Preview}"/>
+            <TextBlock Text="{mk:I18n Key=UI.Calendar.Preview}"/>
             <Border BorderThickness="1" BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,8,0,0">
                 <Viewbox x:Name="viewbox" FlowDirection="LeftToRight">
                     <local:CalendarDocument x:Name="doc" x:DefaultBindMode="OneWay"

@@ -72,14 +72,24 @@ namespace AwqatSalaat.UI.Controls
                 {
                     // Win 7 doesn't support tinting the blur behind for specific window so we use the child background instead.
                     // Win 8/8.1 doesn't support blur behind at all.
-                    SolidColorBrush brush = new SolidColorBrush() { Color = TintColor, Opacity = 0.95 /*TintOpacity*/ }; ;
+                    Brush childBackground = null;
+
                     if (this.Child is Control ctrl)
                     {
-                        ctrl.Background = brush;
+                        childBackground = ctrl.Background;
+                    }
+                    else if (this.Child is Panel panel)
+                    {
+                        childBackground = panel.Background;
                     }
                     else if (this.Child is Border border)
                     {
-                        border.Background = brush;
+                        childBackground = border.Background;
+                    }
+
+                    if (childBackground is SolidColorBrush brush && !brush.IsFrozen)
+                    {
+                        brush.Opacity = 0.95;
                     }
                 };
             }

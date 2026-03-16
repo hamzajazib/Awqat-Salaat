@@ -39,7 +39,7 @@ namespace AwqatSalaat.WinUI.Controls
             if (textBlock is not null)
             {
                 textBlock.ClearValue(TextBlock.TextProperty);
-                var binding = Markup.L11nExtension.CreateBinding(string.Format(KeyFormat ?? "{0}", Value));
+                var binding = Markup.I18nExtension.CreateBinding(string.Format(KeyFormat ?? "{0}", Value));
                 BindingOperations.SetBinding(textBlock, TextBlock.TextProperty, binding);
             }
         }

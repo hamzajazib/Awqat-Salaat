@@ -7,7 +7,7 @@ using System;
 namespace AwqatSalaat.WinUI.Markup
 {
     [MarkupExtensionReturnType(ReturnType = typeof(string))]
-    public class L11nExtension : MarkupExtension
+    public class I18nExtension : MarkupExtension
     {
         private class LocaleKeyConverter : IValueConverter
         {
@@ -31,7 +31,7 @@ namespace AwqatSalaat.WinUI.Markup
 
         public string Key { get; set; }
 
-        public L11nExtension() : base() { }
+        public I18nExtension() : base() { }
 
         protected override object ProvideValue()
         {

@@ -5,6 +5,7 @@ using Serilog;
 using System;
 using System.Threading;
 using System.Windows.Input;
+using Windows.Globalization;
 using WinRT.Interop;
 
 namespace AwqatSalaat.WinUI
@@ -28,7 +29,20 @@ namespace AwqatSalaat.WinUI
 
         static App()
         {
+#if PACKAGED
+            try
+            {
+                // When the primary preferred language is Arabic, and the user choose Arabic as the app language,
+                // the times will be shown using eastern Arabic numbers even if OS uses western Arabic numbers.
+                // Some users didn't like that, so we override the app language to match OS display language.
+
+                ApplicationLanguages.PrimaryLanguageOverride = System.Globalization.CultureInfo.CurrentUICulture.IetfLanguageTag;
+            }
+            catch { }
+#endif
+
             InitLogger();
+            Log.Information($"Current locale: {LocaleManager.Default.Current}");
 
             ExitIfOtherInstanceIsRunning();
 

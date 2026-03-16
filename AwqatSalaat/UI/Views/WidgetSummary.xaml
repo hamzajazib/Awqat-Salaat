@@ -264,10 +264,10 @@
                             <TextBlock x:Name="afterTB" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
-                                        <Setter Property="Text" Value="{mk:L11n UI.Summary.After}"/>
+                                        <Setter Property="Text" Value="{mk:I18n UI.Summary.After}"/>
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding DisplayedTime.State}" Value="EnteredRecently">
-                                                <Setter Property="Text" Value="{mk:L11n UI.Summary.Since}"/>
+                                                <Setter Property="Text" Value="{mk:I18n UI.Summary.Since}"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -299,7 +299,7 @@
                     </Grid>
                 </Grid>
                 <TextBlock
-                    Text="{mk:L11n UI.Summary.Refreshing}"
+                    Text="{mk:I18n UI.Summary.Refreshing}"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     TextAlignment="Center"
@@ -324,7 +324,7 @@
                     Visibility="{Binding HasError, Converter={StaticResource BoolVisConverter}}"
                     d:Visibility="Visible">
                     <TextBlock x:Name="errorIco" Text="&#xE7BA;" FontFamily="Segoe MDL2 Assets" FontSize="20" Foreground="{DynamicResource ThemeColors.TextHighlightBrush}" VerticalAlignment="Center"/>
-                    <TextBlock x:Name="errorText" Text="{mk:L11n UI.Summary.ErrorOccured}" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                    <TextBlock x:Name="errorText" Text="{mk:I18n UI.Summary.ErrorOccured}" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Margin="8,0,0,0"/>
                 </DockPanel>
                 <DockPanel
                     x:Name="startPanel"
@@ -334,7 +334,7 @@
                     Visibility="{Binding WidgetSettings.Settings.IsConfigured, Converter={StaticResource BoolVisInvConverter}}"
                     d:Visibility="Visible">
                     <TextBlock Text="&#xE7BA;" FontFamily="Segoe MDL2 Assets" FontSize="20" Foreground="{DynamicResource ThemeColors.TextHighlightBrush}" VerticalAlignment="Center"/>
-                    <TextBlock x:Name="startText" Text="{mk:L11n UI.Summary.TapToStart}" VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="8,0,0,0"/>
+                    <TextBlock x:Name="startText" Text="{mk:I18n UI.Summary.TapToStart}" VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="8,0,0,0"/>
                 </DockPanel>
             </Grid>
         </ToggleButton>
@@ -352,7 +352,10 @@
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </Popup.Resources>
-            <Grid Background="#01000000" MaxHeight="700" TextElement.FontSize="14" TextElement.Foreground="{DynamicResource ThemeColors.TextPrimaryBrush}">
+            <Grid MaxHeight="700" TextElement.FontSize="14" TextElement.Foreground="{DynamicResource ThemeColors.TextPrimaryBrush}">
+                <Grid.Background>
+                    <SolidColorBrush Opacity="0.004" Color="{DynamicResource ThemeColors.DefaultAcrylicTintColor}"/>
+                </Grid.Background>
                 <local:WidgetPanel MinWidth="200" Visibility="{Binding WidgetSettings.IsOpen, Converter={StaticResource BoolVisInvConverter}}"/>
                 <Grid DataContext="{Binding WidgetSettings}" Visibility="{Binding IsOpen, Converter={StaticResource BoolVisConverter}}" MinWidth="300" MaxWidth="800" MinHeight="300" Margin="0,8,0,0">
                     <Grid.RowDefinitions>
@@ -360,10 +363,10 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <local:SettingsPanel Grid.RowSpan="2" ParentPopup="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:AcrylicPopup}}"/>
-                    <TextBlock Text="{mk:L11n UI.Panel.Settings}" Foreground="{DynamicResource ThemeColors.TextSecondaryBrush}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="8,0,0,0"/>
+                    <TextBlock Text="{mk:I18n UI.Panel.Settings}" Foreground="{DynamicResource ThemeColors.TextSecondaryBrush}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="8,0,0,0"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,8,0">
-                        <Button Style="{DynamicResource IconButtonStyle}" Content="&#xE711;" Command="{Binding Cancel}" ToolTip="{mk:L11n UI.Settings.Cancel}"/>
-                        <Button Style="{DynamicResource IconButtonStyle}" Content="&#xE8FB;" Command="{Binding Save}" ToolTip="{mk:L11n UI.Settings.Confirm}"/>
+                        <Button Style="{DynamicResource IconButtonStyle}" Content="&#xE711;" Command="{Binding Cancel}" ToolTip="{mk:I18n UI.Settings.Cancel}"/>
+                        <Button Style="{DynamicResource IconButtonStyle}" Content="&#xE8FB;" Command="{Binding Save}" ToolTip="{mk:I18n UI.Settings.Confirm}"/>
                     </StackPanel>
                 </Grid>
             </Grid>

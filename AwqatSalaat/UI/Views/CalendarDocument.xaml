@@ -64,7 +64,7 @@
                         <TextBlock x:Name="gyearSeparator" Text=" – " FontSize="14" Foreground="{Binding SectionOverlayForeground}" VerticalAlignment="Center" Visibility="Collapsed"/>
                         <TextBlock x:Name="gyear2" Text="{Binding Source.LastDate, Converter={StaticResource GregorianDateConverter}, ConverterParameter='yyyy', FallbackValue=G. YEAR}" Foreground="{Binding SectionOverlayForeground}" Visibility="Collapsed"/>
                     </StackPanel>
-                    <TextBlock Text="{mk:L11n UI.Calendar.DocumentTitle}" FontSize="26" HorizontalAlignment="Center" Grid.Column="1"/>
+                    <TextBlock Text="{mk:I18n UI.Calendar.DocumentTitle}" FontSize="26" HorizontalAlignment="Center" Grid.Column="1"/>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1">
                         <TextBlock Text="&#xE80F;" FontFamily="Segoe MDL2 Assets" FontSize="16" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding LocationText, FallbackValue=LOCATION}" VerticalAlignment="Center" Margin="8,0,0,0"/>
@@ -105,14 +105,14 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="{mk:L11n UI.Calendar.Gregorian}" HorizontalAlignment="Center" Grid.Column="1"/>
-                        <TextBlock Text="{mk:L11n UI.Calendar.Hijri}" HorizontalAlignment="Center" Grid.Column="2"/>
-                        <TextBlock Text="{mk:L11n Data.Salaat.Fajr}" HorizontalAlignment="Center" Grid.Column="3"/>
-                        <TextBlock Text="{mk:L11n Data.Salaat.Shuruq}" HorizontalAlignment="Center" Grid.Column="4"/>
-                        <TextBlock Text="{mk:L11n Data.Salaat.Dhuhr}" HorizontalAlignment="Center" Grid.Column="5"/>
-                        <TextBlock Text="{mk:L11n Data.Salaat.Asr}" HorizontalAlignment="Center" Grid.Column="6"/>
-                        <TextBlock Text="{mk:L11n Data.Salaat.Maghrib}" HorizontalAlignment="Center" Grid.Column="7"/>
-                        <TextBlock Text="{mk:L11n Data.Salaat.Isha}" HorizontalAlignment="Center" Grid.Column="8"/>
+                        <TextBlock Text="{mk:I18n UI.Calendar.Gregorian}" HorizontalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="{mk:I18n UI.Calendar.Hijri}" HorizontalAlignment="Center" Grid.Column="2"/>
+                        <TextBlock Text="{mk:I18n Data.Salaat.Fajr}" HorizontalAlignment="Center" Grid.Column="3"/>
+                        <TextBlock Text="{mk:I18n Data.Salaat.Shuruq}" HorizontalAlignment="Center" Grid.Column="4"/>
+                        <TextBlock Text="{mk:I18n Data.Salaat.Dhuhr}" HorizontalAlignment="Center" Grid.Column="5"/>
+                        <TextBlock Text="{mk:I18n Data.Salaat.Asr}" HorizontalAlignment="Center" Grid.Column="6"/>
+                        <TextBlock Text="{mk:I18n Data.Salaat.Maghrib}" HorizontalAlignment="Center" Grid.Column="7"/>
+                        <TextBlock Text="{mk:I18n Data.Salaat.Isha}" HorizontalAlignment="Center" Grid.Column="8"/>
                     </Grid>
                 </Border>
                 <ItemsControl ItemsSource="{Binding Source.PrayerTimes}" Background="Transparent" ClipToBounds="True">
@@ -161,8 +161,8 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="&#xEC87;" FontFamily="Segoe MDL2 Assets" FontSize="16" VerticalAlignment="Center"/>
                     <TextBlock VerticalAlignment="Center" Margin="8,0,0,0">
-                        <Run Text="{mk:L11n UI.Calendar.GeneratedBy}"/>
-                        <Run Text="{mk:L11n Data.AppName}" Foreground="{Binding HighlightForeground}"/>
+                        <Run Text="{mk:I18n UI.Calendar.GeneratedBy}"/>
+                        <Run Text="{mk:I18n Data.AppName}" Foreground="{Binding HighlightForeground}"/>
                         <!--<Run Text="widget"/>-->
                     </TextBlock>
                 </StackPanel>
