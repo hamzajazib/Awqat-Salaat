@@ -1,3 +1,13 @@
+### v4.1.2
+
+- Implement a workaround for QCH service to show fake data after Isha before getting fresh data at midnight.
+- Ensure early initialization of LocaleManager to show localized error messages at startup.
+- Solve the User-Agent issue in the Salah Hour service.
+- Fix crashing when failing to create en-SA culture info. Mostly on Windows 7/8/8.1.
+- Fix the pop-up transparency issue on Windows 7/8/8.1. (Deskband only)
+- Fix issue with eastern Arabic numbers when the OS uses western Arabic numbers. (WinUI through Microsoft Store only)
+- Rename L11nExtension to I18nExtension. Oops!
+
 ### v4.1.1
 
 - Add Kurdish translation.
