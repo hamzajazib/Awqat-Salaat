@@ -323,10 +323,21 @@ namespace AwqatSalaat.ViewModels
         {
             if (DisplayedDate == TimeStamp.Date)
             {
-                var ishaConfig = WidgetSettings.Settings.GetPrayerConfig(nameof(PrayerTimes.Isha));
-                var ishaTime = data[DisplayedDate].Max(t => t.Value).AddMinutes(ishaConfig.Adjustment + ishaConfig.EffectiveElapsedTime());
-                // If Isha has already entered, then we look for the next day
-                if (TimeStamp.Now > ishaTime)
+                bool shouldSwitch = false;
+
+                if (data.ContainsKey(displayedDate))
+                {
+                    var ishaConfig = WidgetSettings.Settings.GetPrayerConfig(nameof(PrayerTimes.Isha));
+                    var ishaTime = data[displayedDate].Max(t => t.Value).AddMinutes(ishaConfig.Adjustment + ishaConfig.EffectiveElapsedTime());
+                    // If Isha has already entered, then we look for the next day
+                    shouldSwitch = TimeStamp.Now > ishaTime;
+                }
+                else
+                {
+                    shouldSwitch = data.ContainsKey(TimeStamp.NextDate);
+                }
+                
+                if (shouldSwitch)
                 {
                     Log.Information("Switching to next day");
                     DisplayedDate = TimeStamp.NextDate;
@@ -356,16 +367,17 @@ namespace AwqatSalaat.ViewModels
                 var apiResponse = await serviceClient.GetDataAsync(request);
 
                 // We switch to next day when Isha has entered
-                if (serviceClient.SupportMonthlyData && SwitchToNextDay(apiResponse.Times))
+                if (SwitchToNextDay(apiResponse.Times))
                 {
-                    if (TimeStamp.Date.Month != TimeStamp.NextDate.Month)
+                    if (TimeStamp.Date.Month != TimeStamp.NextDate.Month && serviceClient.SupportMonthlyData)
                     {
                         Log.Information("Fetching data for next month");
                         request = BuildRequest(TimeStamp.NextDate, true);
                         apiResponse = await serviceClient.GetDataAsync(request);
                     }
                 }
-                else if (!serviceClient.SupportMonthlyData && apiResponse?.Times?.Count == 1)
+
+                if (!serviceClient.SupportMonthlyData && apiResponse?.Times?.Count == 1)
                 {
                     var availableDataTime = apiResponse.Times.Keys.Single();
 
