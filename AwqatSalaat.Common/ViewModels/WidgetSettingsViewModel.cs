@@ -41,11 +41,6 @@ namespace AwqatSalaat.ViewModels
             Save = new RelayCommand(SaveExecute);
             Cancel = new RelayCommand(CancelExecute, o => Settings.IsConfigured);
 
-            if (!Settings.IsConfigured)
-            {
-                Settings.Upgrade();
-            }
-
             if (string.IsNullOrEmpty(Settings.DisplayLanguage))
             {
                 Settings.DisplayLanguage = LocaleManager.Default.Current;
