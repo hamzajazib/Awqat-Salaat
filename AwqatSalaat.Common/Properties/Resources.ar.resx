@@ -768,4 +768,10 @@
     <value>تعذر تهيئة إشعارات ويندوز.
 تأكد من تثبيت Windows App Runtime Singleton نسخة 1.5.</value>
   </data>
+  <data name="UI.ContextMenu.Display" xml:space="preserve">
+    <value>شاشة العرض</value>
+  </data>
+  <data name="UI.ContextMenu.AlwaysPrimary" xml:space="preserve">
+    <value>الرئيسية دائما</value>
+  </data>
 </root>

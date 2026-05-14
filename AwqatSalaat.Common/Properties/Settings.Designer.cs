@@ -1102,5 +1102,17 @@ namespace AwqatSalaat.Properties {
                 this["Config_Isha_AdhanFile"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("PRIMARY")]
+        public string Display {
+            get {
+                return ((string)(this["Display"]));
+            }
+            set {
+                this["Display"] = value;
+            }
+        }
     }
 }

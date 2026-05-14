@@ -176,9 +176,9 @@ namespace AwqatSalaat.ViewModels
 
             foreach (SettingsProperty prop in Settings.Properties)
             {
-                if (prop.Name == nameof(Settings.CustomPosition))
+                if (prop.Name == nameof(Settings.CustomPosition) || prop.Name == nameof(Settings.Display))
                 {
-                    // we are not interested in custom position here and we should not affect it
+                    // we are not interested in custom position or display here and we should not affect them
                     continue;
                 }
 

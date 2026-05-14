@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Serilog;
 using System;
+using System.Linq;
 using Windows.Foundation;
 
 namespace AwqatSalaat.WinUI.Views
@@ -61,9 +62,21 @@ namespace AwqatSalaat.WinUI.Views
             Notification.NotificationManager.DismissReminderRequested += NotificationManager_DismissReminderRequested;
             Notification.NotificationManager.StopReminderSoundRequested += NotificationManager_StopReminderSoundRequested;
             Notification.NotificationManager.StopAdhanRequested += NotificationManager_StopAdhanRequested;
+            DisplayHelper.DisplayChanged += DisplayHelper_DisplayChanged;
 
             UpdateDirection();
             UpdateNotificationSound();
+        }
+
+        private void DisplayHelper_DisplayChanged(object sender, DisplayChangedEventArgs e)
+        {
+            if (e.Reason
+                is DisplayChangedReason.Connected
+                or DisplayChangedReason.Disconnected
+                or DisplayChangedReason.PrimaryDisplay)
+            {
+                DispatcherQueue.TryEnqueue(UpdateDisplayMenu);
+            }
         }
 
         private void NotificationManager_StopAdhanRequested()
@@ -102,7 +115,8 @@ namespace AwqatSalaat.WinUI.Views
         private void NotificationManager_ShowWidgetRequested()
         {
             Log.Information("Showing widget's panel after clicking on toast notification");
-            DispatcherQueue.TryEnqueue(() => ToggleButton_Checked(toggle, null));
+            //DispatcherQueue.TryEnqueue(() => ToggleButton_Checked(toggle, null));
+            DispatcherQueue.TryEnqueue(() => toggle.IsChecked = true);
         }
 
         private void ThemeHelper_ThemeChanged()
@@ -133,6 +147,7 @@ namespace AwqatSalaat.WinUI.Views
             Log.Information("Widget summary loaded");
             UpdateTheme();
             UpdateDisplayMode();
+            UpdateDisplayMenu();
         }
 
         private void WidgetSummary_Unloaded(object sender, RoutedEventArgs e)
@@ -149,6 +164,7 @@ namespace AwqatSalaat.WinUI.Views
             Notification.NotificationManager.DismissReminderRequested -= NotificationManager_DismissReminderRequested;
             Notification.NotificationManager.StopReminderSoundRequested -= NotificationManager_StopReminderSoundRequested;
             Notification.NotificationManager.StopAdhanRequested -= NotificationManager_StopAdhanRequested;
+            DisplayHelper.DisplayChanged -= DisplayHelper_DisplayChanged;
 
             currentAudioSession?.End();
         }
@@ -360,6 +376,49 @@ namespace AwqatSalaat.WinUI.Views
             var dir = LocaleManager.Default.CurrentCulture.TextInfo.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
             btngrid.FlowDirection = dir;
             flyoutContent.FlowDirection = dir;
+        }
+
+        private void UpdateDisplayMenu()
+        {
+            Log.Information("Updating Display context-menu");
+            int count = 0;
+            var primaryItem = displayFlyoutSubItem.Items[0] as RadioMenuFlyoutItem;
+
+            // Using displayFlyoutSubItem.Items.Clear() then calling displayFlyoutSubItem.Items.Add(primaryItem) causes crash
+            // So primaryItem need to stay in the list all the time
+            foreach (var item in displayFlyoutSubItem.Items.ToArray())
+            {
+                if (ReferenceEquals(item, primaryItem))
+                    continue;
+
+                displayFlyoutSubItem.Items.Remove(item);
+            }
+
+            primaryItem.IsChecked = ViewModel.WidgetSettings.Settings.Display == "PRIMARY";
+
+            foreach (var display in DisplayHelper.AvailableDisplays)
+            {
+                var item = new RadioMenuFlyoutItem()
+                {
+                    Text = display.Summary,
+                    GroupName = "DisplayGroup",
+                    Command = TaskBarManager.SetDisplay,
+                    CommandParameter = display.Display.DevicePath,
+                    IsChecked = ViewModel.WidgetSettings.Settings.Display == display.Display.DevicePath,
+                };
+                displayFlyoutSubItem.Items.Add(item);
+                count++;
+            }
+
+            Log.Information($"Added {count} sub-item's");
+
+            foreach (var item in displayFlyoutSubItem.Items.OfType<RadioMenuFlyoutItem>())
+            {
+                // avoid interacting with an already selected option
+                item.IsHitTestVisible = item.IsTabStop = !item.IsChecked;
+            }
+
+            displayFlyoutSubItem.Visibility = count > 1 ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)

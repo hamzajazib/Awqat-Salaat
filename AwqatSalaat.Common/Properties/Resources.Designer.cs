@@ -732,6 +732,24 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Always Primary.
+        /// </summary>
+        public static string UI_ContextMenu_AlwaysPrimary {
+            get {
+                return ResourceManager.GetString("UI.ContextMenu.AlwaysPrimary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display.
+        /// </summary>
+        public static string UI_ContextMenu_Display {
+            get {
+                return ResourceManager.GetString("UI.ContextMenu.Display", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hide.
         /// </summary>
         public static string UI_ContextMenu_Hide {
