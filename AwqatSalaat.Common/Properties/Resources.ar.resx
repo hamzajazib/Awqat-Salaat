@@ -774,4 +774,19 @@
   <data name="UI.ContextMenu.AlwaysPrimary" xml:space="preserve">
     <value>الرئيسية دائما</value>
   </data>
+  <data name="UI.Settings.Color" xml:space="preserve">
+    <value>اللون</value>
+  </data>
+  <data name="Config.WidgetButtonBackgroundType.None" xml:space="preserve">
+    <value>لا شيء</value>
+  </data>
+  <data name="Config.WidgetButtonBackgroundType.SolidColor" xml:space="preserve">
+    <value>لون موحد</value>
+  </data>
+  <data name="UI.Settings.TaskbarButtonBackground" xml:space="preserve">
+    <value>خلفية زر شريط المهام</value>
+  </data>
+  <data name="UI.Settings.TaskbarButtonBackgroundDescription" xml:space="preserve">
+    <value>الخلفية الخاصة بزر الأداة على شريط المهام</value>
+  </data>
 </root>

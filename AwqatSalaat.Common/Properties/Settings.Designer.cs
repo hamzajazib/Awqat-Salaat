@@ -1114,5 +1114,29 @@ namespace AwqatSalaat.Properties {
                 this["Display"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public global::AwqatSalaat.Configurations.WidgetButtonBackgroundType TaskbarButtonBackgroundType {
+            get {
+                return ((global::AwqatSalaat.Configurations.WidgetButtonBackgroundType)(this["TaskbarButtonBackgroundType"]));
+            }
+            set {
+                this["TaskbarButtonBackgroundType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#7F7F7F7F")]
+        public string TaskbarButtonBackgroundSolidColor {
+            get {
+                return ((string)(this["TaskbarButtonBackgroundSolidColor"]));
+            }
+            set {
+                this["TaskbarButtonBackgroundSolidColor"] = value;
+            }
+        }
     }
 }

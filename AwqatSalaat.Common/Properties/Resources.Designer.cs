@@ -205,6 +205,24 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        public static string Config_WidgetButtonBackgroundType_None {
+            get {
+                return ResourceManager.GetString("Config.WidgetButtonBackgroundType.None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Solid Color.
+        /// </summary>
+        public static string Config_WidgetButtonBackgroundType_SolidColor {
+            get {
+                return ResourceManager.GetString("Config.WidgetButtonBackgroundType.SolidColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Alternative.
         /// </summary>
         public static string Config_WidgetPanelStyle_Alt {
@@ -1075,6 +1093,15 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Color.
+        /// </summary>
+        public static string UI_Settings_Color {
+            get {
+                return ResourceManager.GetString("UI.Settings.Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm.
         /// </summary>
         public static string UI_Settings_Confirm {
@@ -1845,6 +1872,24 @@ namespace AwqatSalaat.Properties {
         public static string UI_Settings_Tabs_Times {
             get {
                 return ResourceManager.GetString("UI.Settings.Tabs.Times", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Taskbar button background.
+        /// </summary>
+        public static string UI_Settings_TaskbarButtonBackground {
+            get {
+                return ResourceManager.GetString("UI.Settings.TaskbarButtonBackground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The background of the widget&apos;s button on the taskbar.
+        /// </summary>
+        public static string UI_Settings_TaskbarButtonBackgroundDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.TaskbarButtonBackgroundDescription", resourceCulture);
             }
         }
         

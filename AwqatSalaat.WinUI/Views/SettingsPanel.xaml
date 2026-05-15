@@ -42,7 +42,6 @@
             <converters:ThemeAccentConverter x:Key="ThemeAccentConverter"/>
             <converters:DecimalConverter x:Key="DecimalConverter"/>
             <converters:EnumEqualityConverter x:Key="EnumEqualityConverter"/>
-            <converters:EnumEqualityToVisibilityConverter x:Key="EnumEqualityToVisibilityConverter"/>
             <converters:PercentageConverter x:Key="PercentageConverter"/>
             <converters:NullToIntConverter x:Key="NullToIntConverter"/>
 
@@ -193,7 +192,7 @@
                             </ctrl:SettingsItem>
                             <ctrl:SettingsItem Header="{mk:I18n Key=UI.Settings.Calendar}" Description="{mk:I18n Key=UI.Settings.CalendarDescription}">
                                 <StackPanel Orientation="Horizontal">
-                                    <ComboBox ItemsSource="{mk:Enums Type=dt:CalendarType}" SelectedItem="{Binding Realtime.CalendarType, Mode=TwoWay}" Width="280">
+                                    <ComboBox ItemsSource="{mk:Enums Type=dt:CalendarType}" SelectedItem="{Binding Realtime.CalendarType, Mode=TwoWay}" Width="200">
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate>
                                                 <ctrl:LocalizedStringPresenter Value="{Binding}" KeyFormat="Data.CalendarType.{0}"/>
@@ -710,6 +709,38 @@
                                         </Style>
                                     </ListBox.ItemContainerStyle>
                                 </ListBox>
+                            </ctrl:SettingsItem>
+                            <ctrl:SettingsItem Header="{mk:I18n Key=UI.Settings.TaskbarButtonBackground}" Description="{mk:I18n Key=UI.Settings.TaskbarButtonBackgroundDescription}">
+                                <StackPanel Orientation="Horizontal">
+                                    <ComboBox ItemsSource="{mk:Enums Type=cfg:WidgetButtonBackgroundType}" SelectedItem="{Binding Realtime.TaskbarButtonBackgroundType, Mode=TwoWay}" Width="150">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <ctrl:LocalizedStringPresenter Value="{Binding}" KeyFormat="Config.WidgetButtonBackgroundType.{0}"/>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                    <StackPanel Orientation="Horizontal" Visibility="{x:Bind ViewModel.Realtime.TaskbarButtonBackgroundType, Converter={StaticResource EnumEqualityToVisibilityConverter}, ConverterParameter=SolidColor, Mode=OneWay}" Margin="16,0,0,0">
+                                        <TextBlock Text="{mk:I18n Key=UI.Settings.Color}" VerticalAlignment="Center"/>
+                                        <Button Padding="5" Margin="8,0,0,0">
+                                            <Button.Content>
+                                                <Rectangle Fill="{x:Bind ViewModel.Realtime.TaskbarButtonBackgroundSolidColor, Converter={StaticResource ColorHexConverter}, Mode=OneWay}"
+                                                       Width="20" Height="20"
+                                                       RadiusX="2" RadiusY="2"/>
+                                            </Button.Content>
+                                            <Button.Flyout>
+                                                <Flyout ShouldConstrainToRootBounds="False">
+                                                    <ColorPicker IsMoreButtonVisible="True"
+                                                             IsAlphaEnabled="True"
+                                                             IsAlphaSliderVisible="True"
+                                                             IsAlphaTextInputVisible="True"
+                                                             IsColorChannelTextInputVisible="True"
+                                                             IsHexInputVisible="True"
+                                                             Color="{x:Bind ViewModel.Realtime.TaskbarButtonBackgroundSolidColor, Converter={StaticResource ColorHexConverter}}"/>
+                                                </Flyout>
+                                            </Button.Flyout>
+                                        </Button>
+                                    </StackPanel>
+                                </StackPanel>
                             </ctrl:SettingsItem>
                             <ctrl:SettingsItem Header="{mk:I18n Key=UI.Settings.NotificationIndicatorOpacity}" Description="{mk:I18n Key=UI.Settings.NotificationIndicatorOpacityDescription}">
                                 <Slider Minimum="0" Maximum="1" SmallChange="0.1" LargeChange="0.2" SnapsTo="StepValues" StepFrequency="0.1"
