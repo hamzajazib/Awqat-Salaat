@@ -1138,5 +1138,17 @@ namespace AwqatSalaat.Properties {
                 this["TaskbarButtonBackgroundSolidColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowLocation {
+            get {
+                return ((bool)(this["ShowLocation"]));
+            }
+            set {
+                this["ShowLocation"] = value;
+            }
+        }
     }
 }

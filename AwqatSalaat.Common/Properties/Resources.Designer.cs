@@ -1795,6 +1795,24 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show location.
+        /// </summary>
+        public static string UI_Settings_ShowLocation {
+            get {
+                return ResourceManager.GetString("UI.Settings.ShowLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable or disable the visibility of the location in prayers panel.
+        /// </summary>
+        public static string UI_Settings_ShowLocationDescription {
+            get {
+                return ResourceManager.GetString("UI.Settings.ShowLocationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show logs file.
         /// </summary>
         public static string UI_Settings_ShowLogsFile {

@@ -745,6 +745,9 @@
                         <controls:SettingsItem Header="{mk:I18n UI.Settings.ShowAyah}" Description="{mk:I18n UI.Settings.ShowAyahDescription}">
                             <CheckBox IsChecked="{Binding ShowAyah}"/>
                         </controls:SettingsItem>
+                        <controls:SettingsItem Header="{mk:I18n UI.Settings.ShowLocation}" Description="{mk:I18n UI.Settings.ShowLocationDescription}">
+                            <CheckBox IsChecked="{Binding ShowLocation}"/>
+                        </controls:SettingsItem>
                         <controls:SettingsItem Header="{mk:I18n UI.Settings.ShowGregorianDate}" Description="{mk:I18n UI.Settings.ShowGregorianDateDescription}">
                             <CheckBox IsChecked="{Binding ShowGregorianDate}"/>
                         </controls:SettingsItem>

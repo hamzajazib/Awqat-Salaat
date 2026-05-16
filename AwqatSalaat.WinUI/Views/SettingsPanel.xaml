@@ -751,6 +751,9 @@
                             <ctrl:SettingsItem Header="{mk:I18n Key=UI.Settings.ShowAyah}" Description="{mk:I18n Key=UI.Settings.ShowAyahDescription}">
                                 <ToggleSwitch IsOn="{x:Bind ViewModel.Realtime.ShowAyah}" OnContent="{mk:I18n Key=UI.Controls.Toggle.On}" OffContent="{mk:I18n Key=UI.Controls.Toggle.Off}"/>
                             </ctrl:SettingsItem>
+                            <ctrl:SettingsItem Header="{mk:I18n Key=UI.Settings.ShowLocation}" Description="{mk:I18n Key=UI.Settings.ShowLocationDescription}">
+                                <ToggleSwitch IsOn="{x:Bind ViewModel.Realtime.ShowLocation}" OnContent="{mk:I18n Key=UI.Controls.Toggle.On}" OffContent="{mk:I18n Key=UI.Controls.Toggle.Off}"/>
+                            </ctrl:SettingsItem>
                             <ctrl:SettingsItem Header="{mk:I18n Key=UI.Settings.ShowGregorianDate}" Description="{mk:I18n Key=UI.Settings.ShowGregorianDateDescription}">
                                 <ToggleSwitch IsOn="{x:Bind ViewModel.Realtime.ShowGregorianDate}" OnContent="{mk:I18n Key=UI.Controls.Toggle.On}" OffContent="{mk:I18n Key=UI.Controls.Toggle.Off}"/>
                             </ctrl:SettingsItem>

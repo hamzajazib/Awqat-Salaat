@@ -789,4 +789,10 @@
   <data name="UI.Settings.TaskbarButtonBackgroundDescription" xml:space="preserve">
     <value>الخلفية الخاصة بزر الأداة على شريط المهام</value>
   </data>
+  <data name="UI.Settings.ShowLocation" xml:space="preserve">
+    <value>إظهار الموقع</value>
+  </data>
+  <data name="UI.Settings.ShowLocationDescription" xml:space="preserve">
+    <value>تمكين أو تعطيل إظهار الموقع في لوحة الصلوات</value>
+  </data>
 </root>
