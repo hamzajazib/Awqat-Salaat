@@ -795,4 +795,7 @@
   <data name="UI.Settings.ShowLocationDescription" xml:space="preserve">
     <value>تمكين أو تعطيل إظهار الموقع في لوحة الصلوات</value>
   </data>
+  <data name="Notification.WidgetStillRunning" xml:space="preserve">
+    <value>الأداة لا تزال قيد التشغيل. استخدم أيقونة درج النظام لإظهارها مجددا.</value>
+  </data>
 </root>

@@ -48,7 +48,7 @@ namespace AwqatSalaat.WinUI
             HideWidget = new RelayCommand(static o =>
             {
                 Log.Information("Clicked on Hide");
-                HideWidgetExecute();
+                HideWidgetExecute(showNotification: true);
             });
             RepositionWidget = new RelayCommand(static o =>
             {
@@ -192,7 +192,7 @@ namespace AwqatSalaat.WinUI
                 hideItem = new PopupMenuItem("Hide", (_, _) =>
                 {
                     Log.Information("Clicked on Hide from tray icon");
-                    dispatcher.TryEnqueue(HideWidgetExecute);
+                    dispatcher.TryEnqueue(() => HideWidgetExecute(showNotification: true));
                 });
                 repositionItem = new PopupMenuItem("Re-position", (_, _) =>
                 {
@@ -355,7 +355,7 @@ namespace AwqatSalaat.WinUI
             }
         }
 
-        private static void HideWidgetExecute()
+        private static void HideWidgetExecute(bool showNotification = false)
         {
             Log.Information("Hiding widget");
 
@@ -366,6 +366,11 @@ namespace AwqatSalaat.WinUI
                     Log.Information("Destroying widget");
                     taskBarWidget.Destroy();
                     isPurposelyHidden = true;
+                }
+
+                if (showNotification)
+                {
+                    Notification.NotificationManager.SendWidgetStillRunningToast();
                 }
             }
         }

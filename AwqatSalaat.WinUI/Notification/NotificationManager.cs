@@ -123,6 +123,27 @@ namespace AwqatSalaat.WinUI.Notification
 
             return appNotification.Id != 0;
         }
+        public static bool SendWidgetStillRunningToast()
+        {
+            if (!m_isRegistered)
+                return false;
+
+            Log.Information("Sending toast notification about tray icon");
+
+            var appNotificationBuilder = new AppNotificationBuilder()
+                .SetTag("widgetstillrunning")
+                .SetScenario(AppNotificationScenario.Default)
+                .AddText(LocaleManager.Default.Get("Data.AppName"))
+                .AddText(LocaleManager.Default.Get("Notification.WidgetStillRunning"));
+
+            var appNotification = appNotificationBuilder.BuildNotification();
+
+            AppNotificationManager.Default.Show(appNotification);
+
+            Log.Information($"Notification ID: {appNotification.Id}");
+
+            return appNotification.Id != 0;
+        }
 
         private static void OnNotificationInvoked(AppNotificationManager sender, AppNotificationActivatedEventArgs args)
         {

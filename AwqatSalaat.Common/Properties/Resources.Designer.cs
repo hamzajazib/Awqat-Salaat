@@ -614,6 +614,15 @@ namespace AwqatSalaat.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The widget is still running. Use system tray icon to show it again..
+        /// </summary>
+        public static string Notification_WidgetStillRunning {
+            get {
+                return ResourceManager.GetString("Notification.WidgetStillRunning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check for Updates.
         /// </summary>
         public static string UI_About_CheckForUpdates {
