@@ -58,14 +58,9 @@ namespace AwqatSalaat.Helpers
         {
             Log.Information($"Setting locale: {locale}");
 
-            if (locale == _current)
+            if (string.IsNullOrEmpty(locale) || locale.Equals(_current, StringComparison.OrdinalIgnoreCase))
             {
                 return;
-            }
-
-            if (locale is null)
-            {
-                throw new ArgumentNullException(nameof(locale));
             }
 
             if (locale.Length != 2 || locale.ToLower().Any(c => c < 'a' || c > 'z'))
