@@ -156,7 +156,7 @@ namespace AwqatSalaat.WinUI.Views
             UpdateDisplayMode();
             UpdateDisplayMenu();
 #if PACKAGED
-            InvalidateLockScreenTimer();
+            DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, UpdateLockScreen);
 #endif
         }
 
