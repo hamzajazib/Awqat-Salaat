@@ -1,7 +1,11 @@
-﻿### نسخة v4.2.1
+﻿### نسخة v4.2.2
+
+- تطبيق حل لخلل re-rentrancy الناتج من TileNotification في حدث Loaded الخاص بزر الأداة. (نسخة WinUI من خلال متجر مايكروسوفت فقط)
+
+### نسخة v4.2.1
 
 - تجنب مشكلة استنزاف المنافذ (port exhaustion) في الخدمات.
-- تطبيق حل لخلل re-rentrancy الناتج من TileNotification في حدث Loaded الخاص بزر الأداة. (نسخة WinUI من خلال متجر مايكروسوفت فقط)
+- تطبيق حل لخلل re-rentrancy الناتج من TileNotification في حدث ~~Loaded~~ *settings updated* الخاص بزر الأداة. (نسخة WinUI من خلال متجر مايكروسوفت فقط)
 
 ### نسخة v4.2
 
